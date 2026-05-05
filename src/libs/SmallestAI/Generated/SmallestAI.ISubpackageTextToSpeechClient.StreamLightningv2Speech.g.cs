@@ -61,7 +61,7 @@ namespace SmallestAI
         /// </param>
         /// <param name="consistency">
         /// This parameter controls word repetition and skipping. Decrease it to prevent skipped words, and increase it to prevent repetition.<br/>
-        /// Default Value: 0.5
+        /// Default Value: 0.5F
         /// </param>
         /// <param name="similarity">
         /// This parameter controls the similarity between the generated speech and the reference audio. Increase it to make the speech more similar to the reference audio.<br/>
