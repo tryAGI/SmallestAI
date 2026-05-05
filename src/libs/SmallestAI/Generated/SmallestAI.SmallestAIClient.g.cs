@@ -42,7 +42,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public SubpackagePronunciationDictionariesClient SubpackagePronunciationDictionaries => new SubpackagePronunciationDictionariesClient(HttpClient, authorizations: Authorizations, options: Options)
+        public SubpackagePronunciationDictionariesClient SubpackagePronunciationDictionaries => new SubpackagePronunciationDictionariesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -51,7 +51,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public SubpackageSpeechToTextClient SubpackageSpeechToText => new SubpackageSpeechToTextClient(HttpClient, authorizations: Authorizations, options: Options)
+        public SubpackageSpeechToTextClient SubpackageSpeechToText => new SubpackageSpeechToTextClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -60,7 +60,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public SubpackageTextToSpeechClient SubpackageTextToSpeech => new SubpackageTextToSpeechClient(HttpClient, authorizations: Authorizations, options: Options)
+        public SubpackageTextToSpeechClient SubpackageTextToSpeech => new SubpackageTextToSpeechClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -69,7 +69,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public SubpackageVoiceCloningClient SubpackageVoiceCloning => new SubpackageVoiceCloningClient(HttpClient, authorizations: Authorizations, options: Options)
+        public SubpackageVoiceCloningClient SubpackageVoiceCloning => new SubpackageVoiceCloningClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -78,7 +78,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public SubpackageVoicesClient SubpackageVoices => new SubpackageVoicesClient(HttpClient, authorizations: Authorizations, options: Options)
+        public SubpackageVoicesClient SubpackageVoices => new SubpackageVoicesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -117,10 +117,10 @@ namespace SmallestAI
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
         public SmallestAIClient(
-            global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null,
-            global::System.Collections.Generic.List<global::SmallestAI.EndPointAuthorization>? authorizations = null,
-            global::SmallestAI.AutoSDKClientOptions? options = null,
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Uri? baseUri,
+            global::System.Collections.Generic.List<global::SmallestAI.EndPointAuthorization>? authorizations,
+            global::SmallestAI.AutoSDKClientOptions? options,
             bool disposeHttpClient = true)
         {
 

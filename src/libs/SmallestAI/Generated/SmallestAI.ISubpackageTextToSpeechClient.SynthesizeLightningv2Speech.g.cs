@@ -21,6 +21,32 @@ namespace SmallestAI
         /// Lightning v2<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::SmallestAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> SynthesizeLightningv2SpeechAsStreamAsync(
+
+            global::SmallestAI.Lightningv2Request request,
+            global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Lightning v2<br/>
+        /// Get speech for given text using the Waves API
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::SmallestAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<byte[]>> SynthesizeLightningv2SpeechAsResponseAsync(
+
+            global::SmallestAI.Lightningv2Request request,
+            global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Lightning v2<br/>
+        /// Get speech for given text using the Waves API
+        /// </summary>
         /// <param name="text">
         /// The text to convert to speech.<br/>
         /// Default Value: Hey i am your a text to speech model
