@@ -46,6 +46,58 @@ namespace SmallestAI
         /// <param name="accept">
         /// Default Value: audio/wav
         /// </param>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::SmallestAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> SynthesizeLightningV31SpeechAsStreamAsync(
+
+            global::SmallestAI.LightningV31Request request,
+            global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept accept = global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept.AudioWav,
+            global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Lightning v3.1<br/>
+        /// Get speech for given text using the Lightning v3.1 model<br/>
+        /// ## Overview<br/>
+        /// Lightning v3.1 is a 44 kHz text-to-speech model that delivers natural, expressive, and realistic speech synthesis.<br/>
+        /// ## Key Features<br/>
+        /// * **Voice Cloning Support**: Compatible with cloned voices<br/>
+        /// * **Ultra-Low Latency**: Optimized for real-time applications<br/>
+        /// * **Multi-Language**: Supports English (en) and Hindi (hi)<br/>
+        /// * **Multiple Output Formats**: PCM, MP3, WAV, and mulaw<br/>
+        /// * **Flexible Sample Rates**: 8000 Hz to 44100 Hz<br/>
+        /// * **Speed Control**: Adjustable from 0.5x to 2x speed
+        /// </summary>
+        /// <param name="accept">
+        /// Default Value: audio/wav
+        /// </param>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::SmallestAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<byte[]>> SynthesizeLightningV31SpeechAsResponseAsync(
+
+            global::SmallestAI.LightningV31Request request,
+            global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept accept = global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept.AudioWav,
+            global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Lightning v3.1<br/>
+        /// Get speech for given text using the Lightning v3.1 model<br/>
+        /// ## Overview<br/>
+        /// Lightning v3.1 is a 44 kHz text-to-speech model that delivers natural, expressive, and realistic speech synthesis.<br/>
+        /// ## Key Features<br/>
+        /// * **Voice Cloning Support**: Compatible with cloned voices<br/>
+        /// * **Ultra-Low Latency**: Optimized for real-time applications<br/>
+        /// * **Multi-Language**: Supports English (en) and Hindi (hi)<br/>
+        /// * **Multiple Output Formats**: PCM, MP3, WAV, and mulaw<br/>
+        /// * **Flexible Sample Rates**: 8000 Hz to 44100 Hz<br/>
+        /// * **Speed Control**: Adjustable from 0.5x to 2x speed
+        /// </summary>
+        /// <param name="accept">
+        /// Default Value: audio/wav
+        /// </param>
         /// <param name="text">
         /// The text to convert to speech.<br/>
         /// Default Value: Hey i am your a text to speech model
