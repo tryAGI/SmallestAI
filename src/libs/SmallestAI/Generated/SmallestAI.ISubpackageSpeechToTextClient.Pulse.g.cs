@@ -23,9 +23,6 @@ namespace SmallestAI
         /// <param name="diarize">
         /// Default Value: false
         /// </param>
-        /// <param name="ageDetection">
-        /// Default Value: false
-        /// </param>
         /// <param name="genderDetection">
         /// Default Value: false
         /// </param>
@@ -53,7 +50,6 @@ namespace SmallestAI
             string? webhookExtra = default,
             bool? wordTimestamps = default,
             bool? diarize = default,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection? ageDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection? emotionDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersFormat? format = default,
@@ -78,9 +74,6 @@ namespace SmallestAI
         /// Default Value: false
         /// </param>
         /// <param name="diarize">
-        /// Default Value: false
-        /// </param>
-        /// <param name="ageDetection">
         /// Default Value: false
         /// </param>
         /// <param name="genderDetection">
@@ -110,7 +103,6 @@ namespace SmallestAI
             string? webhookExtra = default,
             bool? wordTimestamps = default,
             bool? diarize = default,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection? ageDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection? emotionDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersFormat? format = default,

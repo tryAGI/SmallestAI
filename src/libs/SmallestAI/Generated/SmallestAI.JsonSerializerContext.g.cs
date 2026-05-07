@@ -41,10 +41,6 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersLanguageNullableJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersAgeDetectionJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersAgeDetectionNullableJsonConverter),
-
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersGenderDetectionJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersGenderDetectionNullableJsonConverter),
@@ -64,10 +60,6 @@ namespace SmallestAI
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersCapitalizeJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersCapitalizeNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAgeJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAgeNullableJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGenderJsonConverter),
 
@@ -129,7 +121,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestUnauthorizedError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestInternalServerError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersLanguage2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersAgeDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersGenderDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersEmotionDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersFormat), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersFormat2")]
@@ -137,7 +128,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersCapitalize2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAge), TypeInfoPropertyName = "WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAge2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender), TypeInfoPropertyName = "WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaEmotions))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaMetadata))]

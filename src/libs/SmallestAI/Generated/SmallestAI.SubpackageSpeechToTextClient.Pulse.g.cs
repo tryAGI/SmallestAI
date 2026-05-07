@@ -32,7 +32,6 @@ namespace SmallestAI
             ref string? webhookExtra,
             ref bool? wordTimestamps,
             ref bool? diarize,
-            ref global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection? ageDetection,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection? genderDetection,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection? emotionDetection,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersFormat? format,
@@ -47,7 +46,6 @@ namespace SmallestAI
             string? webhookExtra,
             bool? wordTimestamps,
             bool? diarize,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection? ageDetection,
             global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection? genderDetection,
             global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection? emotionDetection,
             global::SmallestAI.WavesV1PulseGetTextPostParametersFormat? format,
@@ -82,9 +80,6 @@ namespace SmallestAI
         /// <param name="diarize">
         /// Default Value: false
         /// </param>
-        /// <param name="ageDetection">
-        /// Default Value: false
-        /// </param>
         /// <param name="genderDetection">
         /// Default Value: false
         /// </param>
@@ -112,7 +107,6 @@ namespace SmallestAI
             string? webhookExtra = default,
             bool? wordTimestamps = default,
             bool? diarize = default,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection? ageDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection? emotionDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersFormat? format = default,
@@ -129,7 +123,6 @@ namespace SmallestAI
                 webhookExtra: webhookExtra,
                 wordTimestamps: wordTimestamps,
                 diarize: diarize,
-                ageDetection: ageDetection,
                 genderDetection: genderDetection,
                 emotionDetection: emotionDetection,
                 format: format,
@@ -160,9 +153,6 @@ namespace SmallestAI
         /// <param name="diarize">
         /// Default Value: false
         /// </param>
-        /// <param name="ageDetection">
-        /// Default Value: false
-        /// </param>
         /// <param name="genderDetection">
         /// Default Value: false
         /// </param>
@@ -190,7 +180,6 @@ namespace SmallestAI
             string? webhookExtra = default,
             bool? wordTimestamps = default,
             bool? diarize = default,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersAgeDetection? ageDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection? emotionDetection = default,
             global::SmallestAI.WavesV1PulseGetTextPostParametersFormat? format = default,
@@ -210,7 +199,6 @@ namespace SmallestAI
                 webhookExtra: ref webhookExtra,
                 wordTimestamps: ref wordTimestamps,
                 diarize: ref diarize,
-                ageDetection: ref ageDetection,
                 genderDetection: ref genderDetection,
                 emotionDetection: ref emotionDetection,
                 format: ref format,
@@ -250,7 +238,6 @@ namespace SmallestAI
                                 .AddOptionalParameter("webhook_extra", webhookExtra)
                                 .AddOptionalParameter("word_timestamps", wordTimestamps?.ToString().ToLowerInvariant())
                                 .AddOptionalParameter("diarize", diarize?.ToString().ToLowerInvariant())
-                                .AddOptionalParameter("age_detection", ageDetection?.ToValueString())
                                 .AddOptionalParameter("gender_detection", genderDetection?.ToValueString())
                                 .AddOptionalParameter("emotion_detection", emotionDetection?.ToValueString())
                                 .AddOptionalParameter("format", format?.ToValueString())
@@ -306,7 +293,6 @@ namespace SmallestAI
                     webhookExtra: webhookExtra,
                     wordTimestamps: wordTimestamps,
                     diarize: diarize,
-                    ageDetection: ageDetection,
                     genderDetection: genderDetection,
                     emotionDetection: emotionDetection,
                     format: format,

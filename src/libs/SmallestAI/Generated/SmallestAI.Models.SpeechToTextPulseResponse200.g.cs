@@ -39,13 +39,6 @@ namespace SmallestAI
         public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems>? Utterances { get; set; }
 
         /// <summary>
-        /// Predicted age group of the speaker (e.g., infant, teenager, adult, old)
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("age")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAgeJsonConverter))]
-        public global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAge? Age { get; set; }
-
-        /// <summary>
         /// Predicted gender of the speaker if requested
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("gender")]
@@ -88,9 +81,6 @@ namespace SmallestAI
         /// <param name="utterances">
         /// List of utterances with start and end times
         /// </param>
-        /// <param name="age">
-        /// Predicted age group of the speaker (e.g., infant, teenager, adult, old)
-        /// </param>
         /// <param name="gender">
         /// Predicted gender of the speaker if requested
         /// </param>
@@ -109,7 +99,6 @@ namespace SmallestAI
             double? audioLength,
             global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems>? words,
             global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems>? utterances,
-            global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaAge? age,
             global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender? gender,
             global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaEmotions? emotions,
             global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaMetadata? metadata)
@@ -119,7 +108,6 @@ namespace SmallestAI
             this.AudioLength = audioLength;
             this.Words = words;
             this.Utterances = utterances;
-            this.Age = age;
             this.Gender = gender;
             this.Emotions = emotions;
             this.Metadata = metadata;

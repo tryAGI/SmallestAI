@@ -4,7 +4,7 @@ set -euo pipefail
 dotnet tool install --global autosdk.cli --prerelease
 rm -rf Generated
 curl --fail --silent --show-error --location \
-  "https://docs.smallest.ai/api/fern-docs/openapi?api=c3b800f0-a025-4c0f-b701-02c936c869e7" \
+  "https://docs.smallest.ai/openapi.json?api=83b7e6c4-8306-484d-a331-a044530e8f0a" \
   -o openapi.yaml
 
 autosdk generate openapi.yaml \
