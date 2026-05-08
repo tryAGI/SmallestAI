@@ -19,6 +19,10 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
+        x44100,
+        /// <summary>
+        /// 
+        /// </summary>
         x8000,
     }
 
@@ -36,6 +40,7 @@ namespace SmallestAI
             {
                 LightningV31RequestSampleRate.x16000 => "16000",
                 LightningV31RequestSampleRate.x24000 => "24000",
+                LightningV31RequestSampleRate.x44100 => "44100",
                 LightningV31RequestSampleRate.x8000 => "8000",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -49,6 +54,7 @@ namespace SmallestAI
             {
                 "16000" => LightningV31RequestSampleRate.x16000,
                 "24000" => LightningV31RequestSampleRate.x24000,
+                "44100" => LightningV31RequestSampleRate.x44100,
                 "8000" => LightningV31RequestSampleRate.x8000,
                 _ => null,
             };

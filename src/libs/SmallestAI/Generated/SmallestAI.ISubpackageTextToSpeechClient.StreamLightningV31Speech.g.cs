@@ -90,7 +90,15 @@ namespace SmallestAI
         /// Default Value: 1
         /// </param>
         /// <param name="language">
-        /// Determines how numbers are spelled out. If set to 'en', numbers will be read in English. If set to 'hi', numbers will be read in Hindi.<br/>
+        /// Language code for synthesis. Influences pronunciation, number/date<br/>
+        /// normalization, and phoneme selection.<br/>
+        /// - **Indian:** `en`, `hi`, `mr` (Marathi), `kn` (Kannada), `ta` (Tamil),<br/>
+        ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
+        ///   `pa` (Punjabi), `or` (Odia)<br/>
+        /// - **European:** `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `sv` (Swedish),<br/>
+        ///   `pt` (Portuguese)<br/>
+        /// - **MENA:** `ar` (Arabic), `he` (Hebrew)<br/>
+        /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
         /// Default Value: en
         /// </param>
         /// <param name="outputFormat">

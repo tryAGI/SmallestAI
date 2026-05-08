@@ -41,6 +41,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersLanguageNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersEncodingJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersEncodingNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersGenderDetectionJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersGenderDetectionNullableJsonConverter),
@@ -121,6 +125,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestUnauthorizedError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestInternalServerError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersEncoding2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersGenderDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersEmotionDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersFormat), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersFormat2")]

@@ -28,6 +28,7 @@ namespace SmallestAI
         partial void PreparePulseArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language,
+            ref global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding,
             ref string? webhookUrl,
             ref string? webhookExtra,
             ref bool? wordTimestamps,
@@ -42,6 +43,7 @@ namespace SmallestAI
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language,
+            global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding,
             string? webhookUrl,
             string? webhookExtra,
             bool? wordTimestamps,
@@ -72,6 +74,7 @@ namespace SmallestAI
         /// <param name="language">
         /// Default Value: multi-eu
         /// </param>
+        /// <param name="encoding"></param>
         /// <param name="webhookUrl"></param>
         /// <param name="webhookExtra"></param>
         /// <param name="wordTimestamps">
@@ -103,6 +106,7 @@ namespace SmallestAI
 
             byte[] request,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding = default,
             string? webhookUrl = default,
             string? webhookExtra = default,
             bool? wordTimestamps = default,
@@ -119,6 +123,7 @@ namespace SmallestAI
 
                 request: request,
                 language: language,
+                encoding: encoding,
                 webhookUrl: webhookUrl,
                 webhookExtra: webhookExtra,
                 wordTimestamps: wordTimestamps,
@@ -145,6 +150,7 @@ namespace SmallestAI
         /// <param name="language">
         /// Default Value: multi-eu
         /// </param>
+        /// <param name="encoding"></param>
         /// <param name="webhookUrl"></param>
         /// <param name="webhookExtra"></param>
         /// <param name="wordTimestamps">
@@ -176,6 +182,7 @@ namespace SmallestAI
 
             byte[] request,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding = default,
             string? webhookUrl = default,
             string? webhookExtra = default,
             bool? wordTimestamps = default,
@@ -195,6 +202,7 @@ namespace SmallestAI
             PreparePulseArguments(
                 httpClient: HttpClient,
                 language: ref language,
+                encoding: ref encoding,
                 webhookUrl: ref webhookUrl,
                 webhookExtra: ref webhookExtra,
                 wordTimestamps: ref wordTimestamps,
@@ -234,6 +242,7 @@ namespace SmallestAI
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddOptionalParameter("language", language?.ToValueString())
+                                .AddOptionalParameter("encoding", encoding?.ToValueString())
                                 .AddOptionalParameter("webhook_url", webhookUrl)
                                 .AddOptionalParameter("webhook_extra", webhookExtra)
                                 .AddOptionalParameter("word_timestamps", wordTimestamps?.ToString().ToLowerInvariant())
@@ -289,6 +298,7 @@ namespace SmallestAI
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     language: language,
+                    encoding: encoding,
                     webhookUrl: webhookUrl,
                     webhookExtra: webhookExtra,
                     wordTimestamps: wordTimestamps,

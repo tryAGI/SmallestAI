@@ -15,6 +15,7 @@ namespace SmallestAI
         /// <param name="language">
         /// Default Value: multi-eu
         /// </param>
+        /// <param name="encoding"></param>
         /// <param name="webhookUrl"></param>
         /// <param name="webhookExtra"></param>
         /// <param name="wordTimestamps">
@@ -46,6 +47,7 @@ namespace SmallestAI
 
             byte[] request,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding = default,
             string? webhookUrl = default,
             string? webhookExtra = default,
             bool? wordTimestamps = default,
@@ -68,6 +70,7 @@ namespace SmallestAI
         /// <param name="language">
         /// Default Value: multi-eu
         /// </param>
+        /// <param name="encoding"></param>
         /// <param name="webhookUrl"></param>
         /// <param name="webhookExtra"></param>
         /// <param name="wordTimestamps">
@@ -99,6 +102,7 @@ namespace SmallestAI
 
             byte[] request,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding = default,
             string? webhookUrl = default,
             string? webhookExtra = default,
             bool? wordTimestamps = default,

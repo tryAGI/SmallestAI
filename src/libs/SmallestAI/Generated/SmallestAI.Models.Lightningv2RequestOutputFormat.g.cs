@@ -12,15 +12,19 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
+        Alaw,
+        /// <summary>
+        /// 
+        /// </summary>
         Mp3,
         /// <summary>
         /// 
         /// </summary>
-        Mulaw,
+        Pcm,
         /// <summary>
         /// 
         /// </summary>
-        Pcm,
+        Ulaw,
         /// <summary>
         /// 
         /// </summary>
@@ -39,9 +43,10 @@ namespace SmallestAI
         {
             return value switch
             {
+                Lightningv2RequestOutputFormat.Alaw => "alaw",
                 Lightningv2RequestOutputFormat.Mp3 => "mp3",
-                Lightningv2RequestOutputFormat.Mulaw => "mulaw",
                 Lightningv2RequestOutputFormat.Pcm => "pcm",
+                Lightningv2RequestOutputFormat.Ulaw => "ulaw",
                 Lightningv2RequestOutputFormat.Wav => "wav",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -53,9 +58,10 @@ namespace SmallestAI
         {
             return value switch
             {
+                "alaw" => Lightningv2RequestOutputFormat.Alaw,
                 "mp3" => Lightningv2RequestOutputFormat.Mp3,
-                "mulaw" => Lightningv2RequestOutputFormat.Mulaw,
                 "pcm" => Lightningv2RequestOutputFormat.Pcm,
+                "ulaw" => Lightningv2RequestOutputFormat.Ulaw,
                 "wav" => Lightningv2RequestOutputFormat.Wav,
                 _ => null,
             };
