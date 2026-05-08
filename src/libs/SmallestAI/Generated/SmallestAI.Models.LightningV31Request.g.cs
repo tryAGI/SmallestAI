@@ -47,9 +47,7 @@ namespace SmallestAI
         /// - **Indian:** `en`, `hi`, `mr` (Marathi), `kn` (Kannada), `ta` (Tamil),<br/>
         ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
         ///   `pa` (Punjabi), `or` (Odia)<br/>
-        /// - **European:** `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `sv` (Swedish),<br/>
-        ///   `pt` (Portuguese)<br/>
-        /// - **MENA:** `ar` (Arabic), `he` (Hebrew)<br/>
+        /// - **European:** `es` (Spanish)<br/>
         /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
         /// Default Value: en
         /// </summary>
@@ -118,9 +116,7 @@ namespace SmallestAI
         /// - **Indian:** `en`, `hi`, `mr` (Marathi), `kn` (Kannada), `ta` (Tamil),<br/>
         ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
         ///   `pa` (Punjabi), `or` (Odia)<br/>
-        /// - **European:** `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `sv` (Swedish),<br/>
-        ///   `pt` (Portuguese)<br/>
-        /// - **MENA:** `ar` (Arabic), `he` (Hebrew)<br/>
+        /// - **European:** `es` (Spanish)<br/>
         /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
         /// Default Value: en
         /// </param>
