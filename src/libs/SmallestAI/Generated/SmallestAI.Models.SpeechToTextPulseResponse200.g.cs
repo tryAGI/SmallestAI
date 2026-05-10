@@ -119,5 +119,6 @@ namespace SmallestAI
         public SpeechToTextPulseResponse200()
         {
         }
+
     }
 }

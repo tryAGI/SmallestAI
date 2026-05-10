@@ -63,5 +63,6 @@ namespace SmallestAI
         public WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags()
         {
         }
+
     }
 }

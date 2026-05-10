@@ -109,5 +109,6 @@ namespace SmallestAI
         public WavesV1LightningLargeGetClonedVoicesGetResponsesContentApplicationJsonSchemaVoicesItems()
         {
         }
+
     }
 }

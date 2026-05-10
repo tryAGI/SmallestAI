@@ -54,5 +54,6 @@ namespace SmallestAI
         public DeletePronunciationDictResponse()
         {
         }
+
     }
 }

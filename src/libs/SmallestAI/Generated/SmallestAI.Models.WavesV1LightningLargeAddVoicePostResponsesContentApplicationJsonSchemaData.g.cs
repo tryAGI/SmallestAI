@@ -66,5 +66,6 @@ namespace SmallestAI
         public WavesV1LightningLargeAddVoicePostResponsesContentApplicationJsonSchemaData()
         {
         }
+
     }
 }
