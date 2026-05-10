@@ -168,5 +168,6 @@ namespace SmallestAI
         public LightningV31Request()
         {
         }
+
     }
 }

@@ -164,5 +164,6 @@ namespace SmallestAI
         public Lightningv2Request()
         {
         }
+
     }
 }

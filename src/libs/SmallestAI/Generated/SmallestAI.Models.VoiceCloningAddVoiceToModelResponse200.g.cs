@@ -50,5 +50,6 @@ namespace SmallestAI
         public VoiceCloningAddVoiceToModelResponse200()
         {
         }
+
     }
 }

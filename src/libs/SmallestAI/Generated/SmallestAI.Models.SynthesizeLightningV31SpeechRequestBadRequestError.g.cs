@@ -52,5 +52,6 @@ namespace SmallestAI
         public SynthesizeLightningV31SpeechRequestBadRequestError()
         {
         }
+
     }
 }

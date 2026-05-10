@@ -52,5 +52,6 @@ namespace SmallestAI
         public StreamLightningV31SpeechRequestUnauthorizedError()
         {
         }
+
     }
 }
