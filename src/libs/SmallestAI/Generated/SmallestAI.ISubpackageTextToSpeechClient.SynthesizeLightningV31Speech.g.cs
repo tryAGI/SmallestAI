@@ -6,16 +6,76 @@ namespace SmallestAI
     {
         /// <summary>
         /// Lightning v3.1<br/>
-        /// Get speech for given text using the Lightning v3.1 model<br/>
-        /// ## Overview<br/>
-        /// Lightning v3.1 is a 44 kHz text-to-speech model that delivers natural, expressive, and realistic speech synthesis.<br/>
-        /// ## Key Features<br/>
-        /// * **Voice Cloning Support**: Compatible with cloned voices<br/>
-        /// * **Ultra-Low Latency**: Optimized for real-time applications<br/>
-        /// * **Multi-Language**: Supports English (en) and Hindi (hi)<br/>
-        /// * **Multiple Output Formats**: PCM, MP3, WAV, ulaw, and alaw<br/>
-        /// * **Flexible Sample Rates**: 8000 Hz to 44100 Hz<br/>
-        /// * **Speed Control**: Adjustable from 0.5x to 2x speed
+        /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
+        /// - **Use the SSE streaming endpoint** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
+        /// - **Use the WebSocket endpoint** when text arrives incrementally (LLM token streams, live captioning).<br/>
+        /// ## Key features<br/>
+        /// - 44 kHz natural, expressive synthesis<br/>
+        /// - Cloned voice IDs (`voice_*`) work — same param as catalog voices<br/>
+        /// - 12 documented languages — see the model card for the full list<br/>
+        /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
+        /// - Sample rates: 8 kHz – 44.1 kHz<br/>
+        /// - Speed: 0.5× – 2×<br/>
+        /// - Per-call pronunciation dictionaries via `pronunciation_dicts`<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Hello from Lightning v3.1.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("speech.wav", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_lightning_v31(<br/>
+        ///         text="Hello from Lightning v3.1.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="wav",<br/>
+        ///         # Optional: cloned voice support<br/>
+        ///         # voice_id="voice_FlPKRWI7DX",<br/>
+        ///         # Optional: pin pronunciations for specific words<br/>
+        ///         # pronunciation_dicts=["&lt;your dict id&gt;"],<br/>
+        ///     ):<br/>
+        ///         f.write(chunk)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch`)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///     Accept: "audio/wav",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Hello from Lightning v3.1.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "wav",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const audio = Buffer.from(await res.arrayBuffer());<br/>
+        /// require("node:fs").writeFileSync("speech.wav", audio);<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
+        /// - **Cloned voices** (`voice_*` from `add_voice`) work on this endpoint and support `pronunciation_dicts`.<br/>
+        /// - **`pronunciation_dicts` validates IDs at request time.** Passing an unknown ID returns `Invalid input data` — create the dict first via the pronunciation-dicts endpoint and save the returned `id`.<br/>
+        /// - **Pronunciation matching is case-sensitive.** Add both `Synopsis` and `synopsis` if your text uses both casings.<br/>
+        /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` or `axios` as shown above.
         /// </summary>
         /// <param name="accept">
         /// Default Value: audio/wav
@@ -32,16 +92,76 @@ namespace SmallestAI
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Lightning v3.1<br/>
-        /// Get speech for given text using the Lightning v3.1 model<br/>
-        /// ## Overview<br/>
-        /// Lightning v3.1 is a 44 kHz text-to-speech model that delivers natural, expressive, and realistic speech synthesis.<br/>
-        /// ## Key Features<br/>
-        /// * **Voice Cloning Support**: Compatible with cloned voices<br/>
-        /// * **Ultra-Low Latency**: Optimized for real-time applications<br/>
-        /// * **Multi-Language**: Supports English (en) and Hindi (hi)<br/>
-        /// * **Multiple Output Formats**: PCM, MP3, WAV, ulaw, and alaw<br/>
-        /// * **Flexible Sample Rates**: 8000 Hz to 44100 Hz<br/>
-        /// * **Speed Control**: Adjustable from 0.5x to 2x speed
+        /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
+        /// - **Use the SSE streaming endpoint** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
+        /// - **Use the WebSocket endpoint** when text arrives incrementally (LLM token streams, live captioning).<br/>
+        /// ## Key features<br/>
+        /// - 44 kHz natural, expressive synthesis<br/>
+        /// - Cloned voice IDs (`voice_*`) work — same param as catalog voices<br/>
+        /// - 12 documented languages — see the model card for the full list<br/>
+        /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
+        /// - Sample rates: 8 kHz – 44.1 kHz<br/>
+        /// - Speed: 0.5× – 2×<br/>
+        /// - Per-call pronunciation dictionaries via `pronunciation_dicts`<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Hello from Lightning v3.1.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("speech.wav", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_lightning_v31(<br/>
+        ///         text="Hello from Lightning v3.1.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="wav",<br/>
+        ///         # Optional: cloned voice support<br/>
+        ///         # voice_id="voice_FlPKRWI7DX",<br/>
+        ///         # Optional: pin pronunciations for specific words<br/>
+        ///         # pronunciation_dicts=["&lt;your dict id&gt;"],<br/>
+        ///     ):<br/>
+        ///         f.write(chunk)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch`)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///     Accept: "audio/wav",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Hello from Lightning v3.1.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "wav",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const audio = Buffer.from(await res.arrayBuffer());<br/>
+        /// require("node:fs").writeFileSync("speech.wav", audio);<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
+        /// - **Cloned voices** (`voice_*` from `add_voice`) work on this endpoint and support `pronunciation_dicts`.<br/>
+        /// - **`pronunciation_dicts` validates IDs at request time.** Passing an unknown ID returns `Invalid input data` — create the dict first via the pronunciation-dicts endpoint and save the returned `id`.<br/>
+        /// - **Pronunciation matching is case-sensitive.** Add both `Synopsis` and `synopsis` if your text uses both casings.<br/>
+        /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` or `axios` as shown above.
         /// </summary>
         /// <param name="accept">
         /// Default Value: audio/wav
@@ -58,16 +178,76 @@ namespace SmallestAI
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Lightning v3.1<br/>
-        /// Get speech for given text using the Lightning v3.1 model<br/>
-        /// ## Overview<br/>
-        /// Lightning v3.1 is a 44 kHz text-to-speech model that delivers natural, expressive, and realistic speech synthesis.<br/>
-        /// ## Key Features<br/>
-        /// * **Voice Cloning Support**: Compatible with cloned voices<br/>
-        /// * **Ultra-Low Latency**: Optimized for real-time applications<br/>
-        /// * **Multi-Language**: Supports English (en) and Hindi (hi)<br/>
-        /// * **Multiple Output Formats**: PCM, MP3, WAV, ulaw, and alaw<br/>
-        /// * **Flexible Sample Rates**: 8000 Hz to 44100 Hz<br/>
-        /// * **Speed Control**: Adjustable from 0.5x to 2x speed
+        /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
+        /// - **Use the SSE streaming endpoint** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
+        /// - **Use the WebSocket endpoint** when text arrives incrementally (LLM token streams, live captioning).<br/>
+        /// ## Key features<br/>
+        /// - 44 kHz natural, expressive synthesis<br/>
+        /// - Cloned voice IDs (`voice_*`) work — same param as catalog voices<br/>
+        /// - 12 documented languages — see the model card for the full list<br/>
+        /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
+        /// - Sample rates: 8 kHz – 44.1 kHz<br/>
+        /// - Speed: 0.5× – 2×<br/>
+        /// - Per-call pronunciation dictionaries via `pronunciation_dicts`<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Hello from Lightning v3.1.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("speech.wav", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_lightning_v31(<br/>
+        ///         text="Hello from Lightning v3.1.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="wav",<br/>
+        ///         # Optional: cloned voice support<br/>
+        ///         # voice_id="voice_FlPKRWI7DX",<br/>
+        ///         # Optional: pin pronunciations for specific words<br/>
+        ///         # pronunciation_dicts=["&lt;your dict id&gt;"],<br/>
+        ///     ):<br/>
+        ///         f.write(chunk)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch`)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///     Accept: "audio/wav",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Hello from Lightning v3.1.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "wav",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const audio = Buffer.from(await res.arrayBuffer());<br/>
+        /// require("node:fs").writeFileSync("speech.wav", audio);<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
+        /// - **Cloned voices** (`voice_*` from `add_voice`) work on this endpoint and support `pronunciation_dicts`.<br/>
+        /// - **`pronunciation_dicts` validates IDs at request time.** Passing an unknown ID returns `Invalid input data` — create the dict first via the pronunciation-dicts endpoint and save the returned `id`.<br/>
+        /// - **Pronunciation matching is case-sensitive.** Add both `Synopsis` and `synopsis` if your text uses both casings.<br/>
+        /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` or `axios` as shown above.
         /// </summary>
         /// <param name="accept">
         /// Default Value: audio/wav
@@ -84,16 +264,76 @@ namespace SmallestAI
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Lightning v3.1<br/>
-        /// Get speech for given text using the Lightning v3.1 model<br/>
-        /// ## Overview<br/>
-        /// Lightning v3.1 is a 44 kHz text-to-speech model that delivers natural, expressive, and realistic speech synthesis.<br/>
-        /// ## Key Features<br/>
-        /// * **Voice Cloning Support**: Compatible with cloned voices<br/>
-        /// * **Ultra-Low Latency**: Optimized for real-time applications<br/>
-        /// * **Multi-Language**: Supports English (en) and Hindi (hi)<br/>
-        /// * **Multiple Output Formats**: PCM, MP3, WAV, ulaw, and alaw<br/>
-        /// * **Flexible Sample Rates**: 8000 Hz to 44100 Hz<br/>
-        /// * **Speed Control**: Adjustable from 0.5x to 2x speed
+        /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
+        /// - **Use the SSE streaming endpoint** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
+        /// - **Use the WebSocket endpoint** when text arrives incrementally (LLM token streams, live captioning).<br/>
+        /// ## Key features<br/>
+        /// - 44 kHz natural, expressive synthesis<br/>
+        /// - Cloned voice IDs (`voice_*`) work — same param as catalog voices<br/>
+        /// - 12 documented languages — see the model card for the full list<br/>
+        /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
+        /// - Sample rates: 8 kHz – 44.1 kHz<br/>
+        /// - Speed: 0.5× – 2×<br/>
+        /// - Per-call pronunciation dictionaries via `pronunciation_dicts`<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Hello from Lightning v3.1.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("speech.wav", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_lightning_v31(<br/>
+        ///         text="Hello from Lightning v3.1.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="wav",<br/>
+        ///         # Optional: cloned voice support<br/>
+        ///         # voice_id="voice_FlPKRWI7DX",<br/>
+        ///         # Optional: pin pronunciations for specific words<br/>
+        ///         # pronunciation_dicts=["&lt;your dict id&gt;"],<br/>
+        ///     ):<br/>
+        ///         f.write(chunk)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch`)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/get_speech", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///     Accept: "audio/wav",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Hello from Lightning v3.1.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "wav",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const audio = Buffer.from(await res.arrayBuffer());<br/>
+        /// require("node:fs").writeFileSync("speech.wav", audio);<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
+        /// - **Cloned voices** (`voice_*` from `add_voice`) work on this endpoint and support `pronunciation_dicts`.<br/>
+        /// - **`pronunciation_dicts` validates IDs at request time.** Passing an unknown ID returns `Invalid input data` — create the dict first via the pronunciation-dicts endpoint and save the returned `id`.<br/>
+        /// - **Pronunciation matching is case-sensitive.** Add both `Synopsis` and `synopsis` if your text uses both casings.<br/>
+        /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` or `axios` as shown above.
         /// </summary>
         /// <param name="accept">
         /// Default Value: audio/wav

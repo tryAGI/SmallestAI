@@ -136,7 +136,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender), TypeInfoPropertyName = "WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaEmotions))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaMetadata))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextPulseResponse200))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ErrorResponseStatus), TypeInfoPropertyName = "ErrorResponseStatus2")]

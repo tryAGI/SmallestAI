@@ -7,7 +7,7 @@ namespace SmallestAI
     {
 
 
-        private static readonly global::SmallestAI.EndPointSecurityRequirement s_PulseSecurityRequirement0 =
+        private static readonly global::SmallestAI.EndPointSecurityRequirement s_PulseSpeechToTextSecurityRequirement0 =
             new global::SmallestAI.EndPointSecurityRequirement
             {
                 Authorizations = new global::SmallestAI.EndPointAuthorizationRequirement[]
@@ -21,11 +21,11 @@ namespace SmallestAI
                     },
                 },
             };
-        private static readonly global::SmallestAI.EndPointSecurityRequirement[] s_PulseSecurityRequirements =
+        private static readonly global::SmallestAI.EndPointSecurityRequirement[] s_PulseSpeechToTextSecurityRequirements =
             new global::SmallestAI.EndPointSecurityRequirement[]
-            {                s_PulseSecurityRequirement0,
+            {                s_PulseSpeechToTextSecurityRequirement0,
             };
-        partial void PreparePulseArguments(
+        partial void PreparePulseSpeechToTextArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding? encoding,
@@ -39,7 +39,7 @@ namespace SmallestAI
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersPunctuate? punctuate,
             ref global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize? capitalize,
             byte[] request);
-        partial void PreparePulseRequest(
+        partial void PreparePulseSpeechToTextRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language,
@@ -54,22 +54,76 @@ namespace SmallestAI
             global::SmallestAI.WavesV1PulseGetTextPostParametersPunctuate? punctuate,
             global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize? capitalize,
             byte[] request);
-        partial void ProcessPulseResponse(
+        partial void ProcessPulseSpeechToTextResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessPulseResponseContent(
+        partial void ProcessPulseSpeechToTextResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref string content);
 
         /// <summary>
         /// Pulse (Pre-Recorded)<br/>
-        /// Convert speech to text using file upload with the Pulse STT POST API<br/>
-        /// The STT POST API allows you to convert speech to text using two different input methods:<br/>
-        /// 1. **Raw Audio Bytes** (`application/octet-stream`) - Send raw audio data with all parameters as query parameters<br/>
-        /// 2. **Audio URL** (`application/json`) - Provide only a URL to an audio file in the JSON body, with all other parameters as query parameters<br/>
-        /// Both methods use our Pulse STT model with automatic language detection across 30+ languages.
+        /// Transcribe an audio file to text using the Pulse model. The fastest way to get a transcript when you already have a recording — pass either the raw bytes or a URL.<br/>
+        /// ## When to use this<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WSS /waves/v1/pulse/get_text`) instead.<br/>
+        /// ## Input methods<br/>
+        /// Send the audio in one of two ways:<br/>
+        /// 1. **Raw bytes** — `Content-Type: application/octet-stream` with the audio in the body. All knobs (`language`, `word_timestamps`, etc.) are query parameters.<br/>
+        /// 2. **URL** — `Content-Type: application/json` with `{"url": "..."}` in the body. Useful when the audio already lives in object storage. Same query parameters apply.<br/>
+        /// Pulse autodetects the language across 30+ supported locales. Pass `language` explicitly when you already know it — detection is fast but skipping it is faster.<br/>
+        /// ## Examples<br/>
+        /// **cURL** (raw bytes)<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/pulse/get_text?language=en&amp;word_timestamps=true" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/octet-stream" \<br/>
+        ///   --data-binary "@./call.wav"<br/>
+        /// ```<br/>
+        /// **cURL** (URL)<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/pulse/get_text?language=en" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{"url": "https://your-bucket.s3.amazonaws.com/call.wav"}'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("./call.wav", "rb") as f:<br/>
+        ///     result = client.waves.transcribe_pulse(<br/>
+        ///         request=f.read(),<br/>
+        ///         language="en",<br/>
+        ///         word_timestamps=True,<br/>
+        ///         diarize=True,<br/>
+        ///     )<br/>
+        /// print(result.status)         # "success"<br/>
+        /// print(result.transcription)  # the transcript string<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch`)<br/>
+        /// ```typescript<br/>
+        /// import { readFileSync } from "node:fs";<br/>
+        /// const audio = readFileSync("./call.wav");<br/>
+        /// const params = new URLSearchParams({ language: "en", word_timestamps: "true", diarize: "true" });<br/>
+        /// const res = await fetch(`https://api.smallest.ai/waves/v1/pulse/get_text?${params}`, {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/octet-stream",<br/>
+        ///   },<br/>
+        ///   body: audio,<br/>
+        /// });<br/>
+        /// const result = await res.json();<br/>
+        /// console.log(result.transcription);<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Max file size is 25 MB.** Larger files return HTTP `413`. Compress to mono 16 kHz PCM if you're close to the limit; quality is unaffected.<br/>
+        /// - **Formatting flags (`format`, `punctuate`, `capitalize`)** are accepted at the wire level and exposed in the Python SDK as of `smallestai&gt;=4.4.0`. Today they currently return the same transcript regardless of value — pass them in your integration so it works as the behavior changes.<br/>
+        /// - **Webhook-driven flow**: pass `webhook_url` to receive the transcript asynchronously. The endpoint returns immediately; the transcript hits your webhook when ready. Useful for long files where you don't want to hold an HTTP connection open.<br/>
+        /// - **Speaker diarization** (`diarize=true`) adds latency. Skip it if you only need the words.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates the Pulse model, so call this endpoint with `fetch` or `axios` as shown above.
         /// </summary>
         /// <param name="language">
         /// Default Value: multi-eu
@@ -102,7 +156,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextPulseResponse200> PulseAsync(
+        public async global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200> PulseSpeechToTextAsync(
 
             byte[] request,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language = default,
@@ -119,7 +173,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await PulseAsResponseAsync(
+            var __response = await PulseSpeechToTextAsResponseAsync(
 
                 request: request,
                 language: language,
@@ -141,11 +195,65 @@ namespace SmallestAI
         }
         /// <summary>
         /// Pulse (Pre-Recorded)<br/>
-        /// Convert speech to text using file upload with the Pulse STT POST API<br/>
-        /// The STT POST API allows you to convert speech to text using two different input methods:<br/>
-        /// 1. **Raw Audio Bytes** (`application/octet-stream`) - Send raw audio data with all parameters as query parameters<br/>
-        /// 2. **Audio URL** (`application/json`) - Provide only a URL to an audio file in the JSON body, with all other parameters as query parameters<br/>
-        /// Both methods use our Pulse STT model with automatic language detection across 30+ languages.
+        /// Transcribe an audio file to text using the Pulse model. The fastest way to get a transcript when you already have a recording — pass either the raw bytes or a URL.<br/>
+        /// ## When to use this<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WSS /waves/v1/pulse/get_text`) instead.<br/>
+        /// ## Input methods<br/>
+        /// Send the audio in one of two ways:<br/>
+        /// 1. **Raw bytes** — `Content-Type: application/octet-stream` with the audio in the body. All knobs (`language`, `word_timestamps`, etc.) are query parameters.<br/>
+        /// 2. **URL** — `Content-Type: application/json` with `{"url": "..."}` in the body. Useful when the audio already lives in object storage. Same query parameters apply.<br/>
+        /// Pulse autodetects the language across 30+ supported locales. Pass `language` explicitly when you already know it — detection is fast but skipping it is faster.<br/>
+        /// ## Examples<br/>
+        /// **cURL** (raw bytes)<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/pulse/get_text?language=en&amp;word_timestamps=true" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/octet-stream" \<br/>
+        ///   --data-binary "@./call.wav"<br/>
+        /// ```<br/>
+        /// **cURL** (URL)<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/pulse/get_text?language=en" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{"url": "https://your-bucket.s3.amazonaws.com/call.wav"}'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("./call.wav", "rb") as f:<br/>
+        ///     result = client.waves.transcribe_pulse(<br/>
+        ///         request=f.read(),<br/>
+        ///         language="en",<br/>
+        ///         word_timestamps=True,<br/>
+        ///         diarize=True,<br/>
+        ///     )<br/>
+        /// print(result.status)         # "success"<br/>
+        /// print(result.transcription)  # the transcript string<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch`)<br/>
+        /// ```typescript<br/>
+        /// import { readFileSync } from "node:fs";<br/>
+        /// const audio = readFileSync("./call.wav");<br/>
+        /// const params = new URLSearchParams({ language: "en", word_timestamps: "true", diarize: "true" });<br/>
+        /// const res = await fetch(`https://api.smallest.ai/waves/v1/pulse/get_text?${params}`, {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/octet-stream",<br/>
+        ///   },<br/>
+        ///   body: audio,<br/>
+        /// });<br/>
+        /// const result = await res.json();<br/>
+        /// console.log(result.transcription);<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Max file size is 25 MB.** Larger files return HTTP `413`. Compress to mono 16 kHz PCM if you're close to the limit; quality is unaffected.<br/>
+        /// - **Formatting flags (`format`, `punctuate`, `capitalize`)** are accepted at the wire level and exposed in the Python SDK as of `smallestai&gt;=4.4.0`. Today they currently return the same transcript regardless of value — pass them in your integration so it works as the behavior changes.<br/>
+        /// - **Webhook-driven flow**: pass `webhook_url` to receive the transcript asynchronously. The endpoint returns immediately; the transcript hits your webhook when ready. Useful for long files where you don't want to hold an HTTP connection open.<br/>
+        /// - **Speaker diarization** (`diarize=true`) adds latency. Skip it if you only need the words.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates the Pulse model, so call this endpoint with `fetch` or `axios` as shown above.
         /// </summary>
         /// <param name="language">
         /// Default Value: multi-eu
@@ -178,7 +286,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextPulseResponse200>> PulseAsResponseAsync(
+        public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200>> PulseSpeechToTextAsResponseAsync(
 
             byte[] request,
             global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage? language = default,
@@ -199,7 +307,7 @@ namespace SmallestAI
 
             PrepareArguments(
                 client: HttpClient);
-            PreparePulseArguments(
+            PreparePulseSpeechToTextArguments(
                 httpClient: HttpClient,
                 language: ref language,
                 encoding: ref encoding,
@@ -217,8 +325,8 @@ namespace SmallestAI
 
             var __authorizations = global::SmallestAI.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_PulseSecurityRequirements,
-                operationName: "PulseAsync");
+                securityRequirements: s_PulseSpeechToTextSecurityRequirements,
+                operationName: "PulseSpeechToTextAsync");
 
             using var __timeoutCancellationTokenSource = global::SmallestAI.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -294,7 +402,7 @@ namespace SmallestAI
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PreparePulseRequest(
+                PreparePulseSpeechToTextRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     language: language,
@@ -325,8 +433,8 @@ namespace SmallestAI
                     await global::SmallestAI.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "Pulse",
-                                methodName: "PulseAsync",
+                                operationId: "PulseSpeechToText",
+                                methodName: "PulseSpeechToTextAsync",
                                 pathTemplate: "\"/waves/v1/pulse/get_text\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -359,8 +467,8 @@ namespace SmallestAI
                         await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "Pulse",
-                                methodName: "PulseAsync",
+                                operationId: "PulseSpeechToText",
+                                methodName: "PulseSpeechToTextAsync",
                                 pathTemplate: "\"/waves/v1/pulse/get_text\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -400,8 +508,8 @@ namespace SmallestAI
                         await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "Pulse",
-                                methodName: "PulseAsync",
+                                operationId: "PulseSpeechToText",
+                                methodName: "PulseSpeechToTextAsync",
                                 pathTemplate: "\"/waves/v1/pulse/get_text\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -440,7 +548,7 @@ namespace SmallestAI
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessPulseResponse(
+                ProcessPulseSpeechToTextResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -448,8 +556,8 @@ namespace SmallestAI
                     await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "Pulse",
-                                methodName: "PulseAsync",
+                                operationId: "PulseSpeechToText",
+                                methodName: "PulseSpeechToTextAsync",
                                 pathTemplate: "\"/waves/v1/pulse/get_text\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -470,8 +578,8 @@ namespace SmallestAI
                     await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "Pulse",
-                                methodName: "PulseAsync",
+                                operationId: "PulseSpeechToText",
+                                methodName: "PulseSpeechToTextAsync",
                                 pathTemplate: "\"/waves/v1/pulse/get_text\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -690,7 +798,7 @@ namespace SmallestAI
                                     client: HttpClient,
                                     response: __response,
                                     content: ref __content);
-                                ProcessPulseResponseContent(
+                                ProcessPulseSpeechToTextResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -699,9 +807,9 @@ namespace SmallestAI
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    var __value = global::SmallestAI.SpeechToTextPulseResponse200.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
-                                    return new global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextPulseResponse200>(
+                                    return new global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200>(
                                         statusCode: __response.StatusCode,
                                         headers: global::SmallestAI.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
@@ -733,9 +841,9 @@ namespace SmallestAI
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    var __value = await global::SmallestAI.SpeechToTextPulseResponse200.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
-                                    return new global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextPulseResponse200>(
+                                    return new global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200>(
                                         statusCode: __response.StatusCode,
                                         headers: global::SmallestAI.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
