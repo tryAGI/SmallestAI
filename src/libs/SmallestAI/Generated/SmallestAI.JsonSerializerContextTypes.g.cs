@@ -172,7 +172,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SpeechToTextPulseResponse200? Type36 { get; set; }
+        public global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200? Type36 { get; set; }
         /// <summary>
         /// 
         /// </summary>

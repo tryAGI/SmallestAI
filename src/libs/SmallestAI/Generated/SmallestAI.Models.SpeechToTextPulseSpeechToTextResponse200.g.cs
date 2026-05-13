@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class SpeechToTextPulseResponse200
+    public sealed partial class SpeechToTextPulseSpeechToTextResponse200
     {
         /// <summary>
         /// Status of the transcription request
@@ -64,7 +64,7 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeechToTextPulseResponse200" /> class.
+        /// Initializes a new instance of the <see cref="SpeechToTextPulseSpeechToTextResponse200" /> class.
         /// </summary>
         /// <param name="status">
         /// Status of the transcription request
@@ -93,7 +93,7 @@ namespace SmallestAI
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public SpeechToTextPulseResponse200(
+        public SpeechToTextPulseSpeechToTextResponse200(
             string? status,
             string? transcription,
             double? audioLength,
@@ -114,9 +114,9 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeechToTextPulseResponse200" /> class.
+        /// Initializes a new instance of the <see cref="SpeechToTextPulseSpeechToTextResponse200" /> class.
         /// </summary>
-        public SpeechToTextPulseResponse200()
+        public SpeechToTextPulseSpeechToTextResponse200()
         {
         }
 
