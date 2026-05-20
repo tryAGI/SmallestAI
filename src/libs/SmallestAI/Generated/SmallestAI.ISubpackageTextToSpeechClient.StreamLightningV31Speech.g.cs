@@ -5,7 +5,8 @@ namespace SmallestAI
     public partial interface ISubpackageTextToSpeechClient
     {
         /// <summary>
-        /// Lightning v3.1 SSE<br/>
+        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
@@ -102,7 +103,8 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1 SSE<br/>
+        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
@@ -199,7 +201,8 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1 SSE<br/>
+        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
@@ -294,6 +297,17 @@ namespace SmallestAI
         /// The voice identifier to use for speech generation.<br/>
         /// Default Value: daniel
         /// </param>
+        /// <param name="model">
+        /// TTS model to route the request to.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
+        ///   voice catalog. See the<br/>
+        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
+        /// New integrations should use the unified<br/>
+        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
+        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// Default Value: lightning_v3.1
+        /// </param>
         /// <param name="sampleRate">
         /// The sample rate for the generated audio.<br/>
         /// Default Value: 44100
@@ -335,6 +349,7 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<string> StreamLightningV31SpeechAsync(
             string text = "Hey i am your a text to speech model",
             string voiceId = "daniel",
+            global::SmallestAI.LightningV31RequestModel? model = default,
             global::SmallestAI.LightningV31RequestSampleRate? sampleRate = default,
             double? speed = default,
             global::SmallestAI.LightningV31RequestLanguage? language = default,

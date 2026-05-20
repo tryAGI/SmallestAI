@@ -23,7 +23,7 @@ namespace SmallestAI
         public required string DisplayName { get; set; }
 
         /// <summary>
-        /// List of tags associated with the voice.
+        /// Tag metadata used to identify the voice's characteristics. Filter on these fields to find voices for a target language, accent, or use case.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tags")]
         public global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags? Tags { get; set; }
@@ -44,7 +44,7 @@ namespace SmallestAI
         /// Display name for the voice.
         /// </param>
         /// <param name="tags">
-        /// List of tags associated with the voice.
+        /// Tag metadata used to identify the voice's characteristics. Filter on these fields to find voices for a target language, accent, or use case.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -6,48 +6,49 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class LightningV31Request
+    public sealed partial class TtsRequest
     {
         /// <summary>
         /// The text to convert to speech.<br/>
-        /// Default Value: Hey i am your a text to speech model
+        /// Default Value: Hello from Waves TTS.
         /// </summary>
-        /// <default>"Hey i am your a text to speech model"</default>
+        /// <default>"Hello from Waves TTS."</default>
         [global::System.Text.Json.Serialization.JsonPropertyName("text")]
         [global::System.Text.Json.Serialization.JsonRequired]
-        public required string Text { get; set; } = "Hey i am your a text to speech model";
+        public required string Text { get; set; } = "Hello from Waves TTS.";
 
         /// <summary>
-        /// The voice identifier to use for speech generation.<br/>
-        /// Default Value: daniel
+        /// The voice identifier to use for speech generation. See the model card for available voices per model.<br/>
+        /// Default Value: magnus
         /// </summary>
-        /// <default>"daniel"</default>
+        /// <default>"magnus"</default>
         [global::System.Text.Json.Serialization.JsonPropertyName("voice_id")]
         [global::System.Text.Json.Serialization.JsonRequired]
-        public required string VoiceId { get; set; } = "daniel";
+        public required string VoiceId { get; set; } = "magnus";
 
         /// <summary>
-        /// TTS model to route the request to.<br/>
-        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
-        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
-        ///   voice catalog. See the<br/>
-        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
-        /// New integrations should use the unified<br/>
-        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
-        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// TTS model to route the request to. Controls which model pool serves<br/>
+        /// this synthesis.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
+        ///   quality and naturalness, with a curated voice catalog. See the<br/>
+        ///   [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+        ///   for supported voice IDs.<br/>
+        /// Same concurrency and latency profile across both. Other request<br/>
+        /// parameters behave identically.<br/>
         /// Default Value: lightning_v3.1
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("model")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.LightningV31RequestModelJsonConverter))]
-        public global::SmallestAI.LightningV31RequestModel? Model { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.TtsRequestModelJsonConverter))]
+        public global::SmallestAI.TtsRequestModel? Model { get; set; }
 
         /// <summary>
         /// The sample rate for the generated audio.<br/>
         /// Default Value: 44100
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("sample_rate")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.LightningV31RequestSampleRateJsonConverter))]
-        public global::SmallestAI.LightningV31RequestSampleRate? SampleRate { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.TtsRequestSampleRateJsonConverter))]
+        public global::SmallestAI.TtsRequestSampleRate? SampleRate { get; set; }
 
         /// <summary>
         /// The speed of the generated speech.<br/>
@@ -59,16 +60,19 @@ namespace SmallestAI
         /// <summary>
         /// Language code for synthesis. Influences pronunciation, number/date<br/>
         /// normalization, and phoneme selection.<br/>
-        /// - **Indian:** `en`, `hi`, `mr` (Marathi), `kn` (Kannada), `ta` (Tamil),<br/>
-        ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
-        ///   `pa` (Punjabi), `or` (Odia)<br/>
-        /// - **European:** `es` (Spanish)<br/>
-        /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
+        /// Each voice has its own `tags.language` set in the voice catalog —<br/>
+        /// query `GET /waves/v1/lightning-v3.1/get_voices`. Pass a language<br/>
+        /// the voice was trained on; passing other codes is accepted by the<br/>
+        /// API but produces English-pronounced output.<br/>
+        /// On `lightning_v3.1`, the full 12-language catalog applies. On<br/>
+        /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi` (with<br/>
+        /// `auto` for code-switching); British and American voices speak<br/>
+        /// English only.<br/>
         /// Default Value: en
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.LightningV31RequestLanguageJsonConverter))]
-        public global::SmallestAI.LightningV31RequestLanguage? Language { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.TtsRequestLanguageJsonConverter))]
+        public global::SmallestAI.TtsRequestLanguage? Language { get; set; }
 
         /// <summary>
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
@@ -79,11 +83,11 @@ namespace SmallestAI
         /// Default Value: pcm
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("output_format")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.LightningV31RequestOutputFormatJsonConverter))]
-        public global::SmallestAI.LightningV31RequestOutputFormat? OutputFormat { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatJsonConverter))]
+        public global::SmallestAI.TtsRequestOutputFormat? OutputFormat { get; set; }
 
         /// <summary>
-        /// The IDs of the pronunciation dictionaries to use for speech generation.
+        /// The IDs of the pronunciation dictionaries to use for speech generation. Available on both `lightning_v3.1` and `lightning_v3.1_pro`.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("pronunciation_dicts")]
         public global::System.Collections.Generic.IList<string>? PronunciationDicts { get; set; }
@@ -107,25 +111,26 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LightningV31Request" /> class.
+        /// Initializes a new instance of the <see cref="TtsRequest" /> class.
         /// </summary>
         /// <param name="text">
         /// The text to convert to speech.<br/>
-        /// Default Value: Hey i am your a text to speech model
+        /// Default Value: Hello from Waves TTS.
         /// </param>
         /// <param name="voiceId">
-        /// The voice identifier to use for speech generation.<br/>
-        /// Default Value: daniel
+        /// The voice identifier to use for speech generation. See the model card for available voices per model.<br/>
+        /// Default Value: magnus
         /// </param>
         /// <param name="model">
-        /// TTS model to route the request to.<br/>
-        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
-        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
-        ///   voice catalog. See the<br/>
-        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
-        /// New integrations should use the unified<br/>
-        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
-        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// TTS model to route the request to. Controls which model pool serves<br/>
+        /// this synthesis.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
+        ///   quality and naturalness, with a curated voice catalog. See the<br/>
+        ///   [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+        ///   for supported voice IDs.<br/>
+        /// Same concurrency and latency profile across both. Other request<br/>
+        /// parameters behave identically.<br/>
         /// Default Value: lightning_v3.1
         /// </param>
         /// <param name="sampleRate">
@@ -139,11 +144,14 @@ namespace SmallestAI
         /// <param name="language">
         /// Language code for synthesis. Influences pronunciation, number/date<br/>
         /// normalization, and phoneme selection.<br/>
-        /// - **Indian:** `en`, `hi`, `mr` (Marathi), `kn` (Kannada), `ta` (Tamil),<br/>
-        ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
-        ///   `pa` (Punjabi), `or` (Odia)<br/>
-        /// - **European:** `es` (Spanish)<br/>
-        /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
+        /// Each voice has its own `tags.language` set in the voice catalog —<br/>
+        /// query `GET /waves/v1/lightning-v3.1/get_voices`. Pass a language<br/>
+        /// the voice was trained on; passing other codes is accepted by the<br/>
+        /// API but produces English-pronounced output.<br/>
+        /// On `lightning_v3.1`, the full 12-language catalog applies. On<br/>
+        /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi` (with<br/>
+        /// `auto` for code-switching); British and American voices speak<br/>
+        /// English only.<br/>
         /// Default Value: en
         /// </param>
         /// <param name="outputFormat">
@@ -155,7 +163,7 @@ namespace SmallestAI
         /// Default Value: pcm
         /// </param>
         /// <param name="pronunciationDicts">
-        /// The IDs of the pronunciation dictionaries to use for speech generation.
+        /// The IDs of the pronunciation dictionaries to use for speech generation. Available on both `lightning_v3.1` and `lightning_v3.1_pro`.
         /// </param>
         /// <param name="sessionId">
         /// Optional client-provided session identifier for correlation. Only alphanumeric characters, hyphens, underscores, and dots are allowed. Max 128 characters. Echoed back in response headers as `X-External-Session-Id`.
@@ -166,14 +174,14 @@ namespace SmallestAI
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public LightningV31Request(
+        public TtsRequest(
             string text,
             string voiceId,
-            global::SmallestAI.LightningV31RequestModel? model,
-            global::SmallestAI.LightningV31RequestSampleRate? sampleRate,
+            global::SmallestAI.TtsRequestModel? model,
+            global::SmallestAI.TtsRequestSampleRate? sampleRate,
             double? speed,
-            global::SmallestAI.LightningV31RequestLanguage? language,
-            global::SmallestAI.LightningV31RequestOutputFormat? outputFormat,
+            global::SmallestAI.TtsRequestLanguage? language,
+            global::SmallestAI.TtsRequestOutputFormat? outputFormat,
             global::System.Collections.Generic.IList<string>? pronunciationDicts,
             string? sessionId,
             string? requestId)
@@ -191,9 +199,9 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LightningV31Request" /> class.
+        /// Initializes a new instance of the <see cref="TtsRequest" /> class.
         /// </summary>
-        public LightningV31Request()
+        public TtsRequest()
         {
         }
 

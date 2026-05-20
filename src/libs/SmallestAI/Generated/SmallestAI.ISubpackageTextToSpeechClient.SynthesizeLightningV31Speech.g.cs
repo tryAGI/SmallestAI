@@ -5,7 +5,8 @@ namespace SmallestAI
     public partial interface ISubpackageTextToSpeechClient
     {
         /// <summary>
-        /// Lightning v3.1<br/>
+        /// Lightning v3.1 (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts`](/waves/api-reference/api-reference/text-to-speech/synthesize-speech) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -91,7 +92,8 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1<br/>
+        /// Lightning v3.1 (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts`](/waves/api-reference/api-reference/text-to-speech/synthesize-speech) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -177,7 +179,8 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1<br/>
+        /// Lightning v3.1 (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts`](/waves/api-reference/api-reference/text-to-speech/synthesize-speech) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -263,7 +266,8 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1<br/>
+        /// Lightning v3.1 (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts`](/waves/api-reference/api-reference/text-to-speech/synthesize-speech) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech from text in a single request. The simplest way to get audio when you have the full text up front — pass `text` + `voice_id`, get back binary audio.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -346,6 +350,17 @@ namespace SmallestAI
         /// The voice identifier to use for speech generation.<br/>
         /// Default Value: daniel
         /// </param>
+        /// <param name="model">
+        /// TTS model to route the request to.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
+        ///   voice catalog. See the<br/>
+        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
+        /// New integrations should use the unified<br/>
+        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
+        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// Default Value: lightning_v3.1
+        /// </param>
         /// <param name="sampleRate">
         /// The sample rate for the generated audio.<br/>
         /// Default Value: 44100
@@ -388,6 +403,7 @@ namespace SmallestAI
             global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept accept = global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept.AudioWav,
             string text = "Hey i am your a text to speech model",
             string voiceId = "daniel",
+            global::SmallestAI.LightningV31RequestModel? model = default,
             global::SmallestAI.LightningV31RequestSampleRate? sampleRate = default,
             double? speed = default,
             global::SmallestAI.LightningV31RequestLanguage? language = default,
