@@ -13,9 +13,33 @@ namespace SmallestAI
         DefaultIgnoreCondition = global::System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         Converters = new global::System.Type[]
         {
+            typeof(global::SmallestAI.JsonConverters.WavesV1TtsPostParametersAcceptJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1TtsPostParametersAcceptNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestModelJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestModelNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestSampleRateJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestSampleRateNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestLanguageJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestLanguageNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.WavesV1LightningV31GetSpeechPostParametersAcceptJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1LightningV31GetSpeechPostParametersAcceptNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.LightningV31RequestModelJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.LightningV31RequestModelNullableJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.LightningV31RequestSampleRateJsonConverter),
 
@@ -100,14 +124,22 @@ namespace SmallestAI
             typeof(global::SmallestAI.JsonConverters.UnixTimestampJsonConverter),
         })]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.JsonSerializerContextTypes))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsPostParametersAccept), TypeInfoPropertyName = "WavesV1TtsPostParametersAccept2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestModel), TypeInfoPropertyName = "TtsRequestModel2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestSampleRate), TypeInfoPropertyName = "TtsRequestSampleRate2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestLanguage), TypeInfoPropertyName = "TtsRequestLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestOutputFormat), TypeInfoPropertyName = "TtsRequestOutputFormat2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<string>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept), TypeInfoPropertyName = "WavesV1LightningV31GetSpeechPostParametersAccept2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestModel), TypeInfoPropertyName = "LightningV31RequestModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestSampleRate), TypeInfoPropertyName = "LightningV31RequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestLanguage), TypeInfoPropertyName = "LightningV31RequestLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestOutputFormat), TypeInfoPropertyName = "LightningV31RequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31Request))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<string>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestBadRequestError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestUnauthorizedError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestInternalServerError))]
