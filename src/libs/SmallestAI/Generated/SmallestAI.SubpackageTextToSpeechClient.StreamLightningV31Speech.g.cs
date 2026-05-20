@@ -72,7 +72,7 @@ namespace SmallestAI
         /// from smallestai import SmallestAI<br/>
         /// client = SmallestAI(token="YOUR_API_KEY")<br/>
         /// with open("stream.pcm", "wb") as f:<br/>
-        ///     for chunk in client.waves.synthesize_sse_lightning_v31(<br/>
+        ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
         ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
         ///         voice_id="magnus",<br/>
         ///         sample_rate=24000,<br/>
@@ -179,7 +179,7 @@ namespace SmallestAI
         /// from smallestai import SmallestAI<br/>
         /// client = SmallestAI(token="YOUR_API_KEY")<br/>
         /// with open("stream.pcm", "wb") as f:<br/>
-        ///     for chunk in client.waves.synthesize_sse_lightning_v31(<br/>
+        ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
         ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
         ///         voice_id="magnus",<br/>
         ///         sample_rate=24000,<br/>
@@ -746,7 +746,7 @@ namespace SmallestAI
         /// from smallestai import SmallestAI<br/>
         /// client = SmallestAI(token="YOUR_API_KEY")<br/>
         /// with open("stream.pcm", "wb") as f:<br/>
-        ///     for chunk in client.waves.synthesize_sse_lightning_v31(<br/>
+        ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
         ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
         ///         voice_id="magnus",<br/>
         ///         sample_rate=24000,<br/>
