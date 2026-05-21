@@ -12,7 +12,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public const string DefaultBaseUrl = "https://api.smallest.ai/";
+        public const string DefaultBaseUrl = "https://host.com/";
 
         private bool _disposeHttpClient = true;
 

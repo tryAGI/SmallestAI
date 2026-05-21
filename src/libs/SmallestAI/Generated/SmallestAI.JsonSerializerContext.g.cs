@@ -93,10 +93,6 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGenderNullableJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.ErrorResponseStatusJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.ErrorResponseStatusNullableJsonConverter),
-
             typeof(global::SmallestAI.JsonConverters.WavesV1ModelGetVoicesGetParametersModelJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1ModelGetVoicesGetParametersModelNullableJsonConverter),
@@ -171,8 +167,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ErrorResponseStatus), TypeInfoPropertyName = "ErrorResponseStatus2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ErrorResponseError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ErrorResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetParametersModel), TypeInfoPropertyName = "WavesV1ModelGetVoicesGetParametersModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags))]
