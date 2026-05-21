@@ -27,6 +27,21 @@ namespace SmallestAI
         public required string VoiceId { get; set; } = "daniel";
 
         /// <summary>
+        /// TTS model to route the request to.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
+        ///   voice catalog. See the<br/>
+        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
+        /// New integrations should use the unified<br/>
+        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
+        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// Default Value: lightning_v3.1
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("model")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.LightningV31RequestModelJsonConverter))]
+        public global::SmallestAI.LightningV31RequestModel? Model { get; set; }
+
+        /// <summary>
         /// The sample rate for the generated audio.<br/>
         /// Default Value: 44100
         /// </summary>
@@ -102,6 +117,17 @@ namespace SmallestAI
         /// The voice identifier to use for speech generation.<br/>
         /// Default Value: daniel
         /// </param>
+        /// <param name="model">
+        /// TTS model to route the request to.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
+        ///   voice catalog. See the<br/>
+        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
+        /// New integrations should use the unified<br/>
+        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
+        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// Default Value: lightning_v3.1
+        /// </param>
         /// <param name="sampleRate">
         /// The sample rate for the generated audio.<br/>
         /// Default Value: 44100
@@ -143,6 +169,7 @@ namespace SmallestAI
         public LightningV31Request(
             string text,
             string voiceId,
+            global::SmallestAI.LightningV31RequestModel? model,
             global::SmallestAI.LightningV31RequestSampleRate? sampleRate,
             double? speed,
             global::SmallestAI.LightningV31RequestLanguage? language,
@@ -153,6 +180,7 @@ namespace SmallestAI
         {
             this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
             this.VoiceId = voiceId ?? throw new global::System.ArgumentNullException(nameof(voiceId));
+            this.Model = model;
             this.SampleRate = sampleRate;
             this.Speed = speed;
             this.Language = language;
@@ -168,5 +196,6 @@ namespace SmallestAI
         public LightningV31Request()
         {
         }
+
     }
 }

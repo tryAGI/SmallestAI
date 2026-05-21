@@ -118,5 +118,6 @@ namespace SmallestAI
         public WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaData()
         {
         }
+
     }
 }

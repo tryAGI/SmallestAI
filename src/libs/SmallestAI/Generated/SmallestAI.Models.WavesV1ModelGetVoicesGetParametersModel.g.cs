@@ -11,18 +11,6 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        Lightning,
-        /// <summary>
-        /// 
-        /// </summary>
-        LightningLarge,
-        /// <summary>
-        /// 
-        /// </summary>
-        LightningV2,
-        /// <summary>
-        /// 
-        /// </summary>
         LightningV31,
     }
 
@@ -38,9 +26,6 @@ namespace SmallestAI
         {
             return value switch
             {
-                WavesV1ModelGetVoicesGetParametersModel.Lightning => "lightning",
-                WavesV1ModelGetVoicesGetParametersModel.LightningLarge => "lightning-large",
-                WavesV1ModelGetVoicesGetParametersModel.LightningV2 => "lightning-v2",
                 WavesV1ModelGetVoicesGetParametersModel.LightningV31 => "lightning-v3.1",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -52,9 +37,6 @@ namespace SmallestAI
         {
             return value switch
             {
-                "lightning" => WavesV1ModelGetVoicesGetParametersModel.Lightning,
-                "lightning-large" => WavesV1ModelGetVoicesGetParametersModel.LightningLarge,
-                "lightning-v2" => WavesV1ModelGetVoicesGetParametersModel.LightningV2,
                 "lightning-v3.1" => WavesV1ModelGetVoicesGetParametersModel.LightningV31,
                 _ => null,
             };

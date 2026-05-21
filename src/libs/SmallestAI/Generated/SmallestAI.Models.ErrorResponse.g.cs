@@ -49,5 +49,6 @@ namespace SmallestAI
         public ErrorResponse()
         {
         }
+
     }
 }

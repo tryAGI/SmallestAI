@@ -41,5 +41,6 @@ namespace SmallestAI
         public VoicesGetWavesVoicesResponse200()
         {
         }
+
     }
 }

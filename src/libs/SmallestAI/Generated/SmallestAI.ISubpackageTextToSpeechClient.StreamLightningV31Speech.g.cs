@@ -5,21 +5,93 @@ namespace SmallestAI
     public partial interface ISubpackageTextToSpeechClient
     {
         /// <summary>
-        /// Lightning v3.1 SSE<br/>
-        /// Stream speech for given text using the Lightning v3.1 SSE API<br/>
-        /// ## Overview<br/>
-        /// The Lightning v3.1 SSE API provides real-time text-to-speech streaming capabilities with natural, expressive voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.<br/>
-        /// Lightning v3.1 is a 44 kHz model that produces natural, expressive, and realistic speech, with support for voice cloning.<br/>
-        /// ## When to Use<br/>
-        /// * **Interactive Applications**: Perfect for chatbots, virtual assistants, and other applications requiring immediate voice responses<br/>
-        /// * **Long-Form Content**: Efficiently stream audio for articles, stories, or other long-form content without buffering delays<br/>
-        /// * **Voice User Interfaces**: Create natural-sounding voice interfaces with minimal perceived latency<br/>
-        /// * **Accessibility Solutions**: Provide real-time audio versions of written content for users with visual impairments<br/>
-        /// ## How It Works<br/>
-        /// 1. **Make a POST Request**: Send your text and voice settings to the API endpoint<br/>
-        /// 2. **Receive Audio Chunks**: The API processes your text and streams audio back as base64-encoded chunks with 1024 byte size<br/>
-        /// 3. **Process the Stream**: Handle the SSE events to decode and play audio chunks sequentially<br/>
-        /// 4. **End of Stream**: The API sends a completion event when all audio has been delivered
+        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
+        /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
+        /// - **Use sync `/get_speech`** when total latency doesn't matter and you'd rather get one buffer.<br/>
+        /// - **Use the WebSocket endpoint** when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.<br/>
+        /// ## How it works<br/>
+        /// 1. POST your text + voice settings — same payload as `/get_speech`.<br/>
+        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;"}\n\n`.<br/>
+        /// 3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).<br/>
+        /// 4. A final `data: {"done": true}\n\n` frame marks end of stream.<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -N -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/stream" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "pcm"<br/>
+        ///   }'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// import base64<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("stream.pcm", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
+        ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="pcm",<br/>
+        ///     ):<br/>
+        ///         # Each chunk is `{"audio": "&lt;base64-encoded PCM&gt;"}`.<br/>
+        ///         # Decode and pipe to your audio pipeline.<br/>
+        ///         if chunk.get("audio"):<br/>
+        ///             f.write(base64.b64decode(chunk["audio"]))<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch` + a reader)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/stream", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "pcm",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const reader = res.body!.getReader();<br/>
+        /// const decoder = new TextDecoder();<br/>
+        /// let buf = "";<br/>
+        /// let finished = false;<br/>
+        /// while (!finished) {<br/>
+        ///   const { value, done } = await reader.read();<br/>
+        ///   if (done) break;<br/>
+        ///   buf += decoder.decode(value);<br/>
+        ///   const events = buf.split("\n\n");<br/>
+        ///   buf = events.pop() ?? "";<br/>
+        ///   for (const ev of events) {<br/>
+        ///     // SSE frames are "event: audio\ndata: {json}" or just "data: {json}".<br/>
+        ///     // We only care about the data line — pull it out and parse.<br/>
+        ///     const dataLine = ev.split("\n").find((l) =&gt; l.startsWith("data:"));<br/>
+        ///     if (!dataLine) continue;<br/>
+        ///     const payload = JSON.parse(dataLine.slice(5).trim());<br/>
+        ///     if (payload.done) { finished = true; break; }<br/>
+        ///     if (payload.audio) {<br/>
+        ///       const pcm = Buffer.from(payload.audio, "base64");<br/>
+        ///       // … hand pcm to your audio pipeline<br/>
+        ///     }<br/>
+        ///   }<br/>
+        /// }<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Use a streaming-friendly client.** `curl -N`, Python `iter_lines`, or a `fetch` `ReadableStream` reader. Buffering clients will hide the latency win.<br/>
+        /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
+        /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.<br/>
+        /// - **First-chunk latency** depends on model warm-up + network distance. Use `output_format=pcm` and a streaming-friendly client to minimize what you can control.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` as shown above.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -31,21 +103,93 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1 SSE<br/>
-        /// Stream speech for given text using the Lightning v3.1 SSE API<br/>
-        /// ## Overview<br/>
-        /// The Lightning v3.1 SSE API provides real-time text-to-speech streaming capabilities with natural, expressive voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.<br/>
-        /// Lightning v3.1 is a 44 kHz model that produces natural, expressive, and realistic speech, with support for voice cloning.<br/>
-        /// ## When to Use<br/>
-        /// * **Interactive Applications**: Perfect for chatbots, virtual assistants, and other applications requiring immediate voice responses<br/>
-        /// * **Long-Form Content**: Efficiently stream audio for articles, stories, or other long-form content without buffering delays<br/>
-        /// * **Voice User Interfaces**: Create natural-sounding voice interfaces with minimal perceived latency<br/>
-        /// * **Accessibility Solutions**: Provide real-time audio versions of written content for users with visual impairments<br/>
-        /// ## How It Works<br/>
-        /// 1. **Make a POST Request**: Send your text and voice settings to the API endpoint<br/>
-        /// 2. **Receive Audio Chunks**: The API processes your text and streams audio back as base64-encoded chunks with 1024 byte size<br/>
-        /// 3. **Process the Stream**: Handle the SSE events to decode and play audio chunks sequentially<br/>
-        /// 4. **End of Stream**: The API sends a completion event when all audio has been delivered
+        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
+        /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
+        /// - **Use sync `/get_speech`** when total latency doesn't matter and you'd rather get one buffer.<br/>
+        /// - **Use the WebSocket endpoint** when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.<br/>
+        /// ## How it works<br/>
+        /// 1. POST your text + voice settings — same payload as `/get_speech`.<br/>
+        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;"}\n\n`.<br/>
+        /// 3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).<br/>
+        /// 4. A final `data: {"done": true}\n\n` frame marks end of stream.<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -N -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/stream" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "pcm"<br/>
+        ///   }'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// import base64<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("stream.pcm", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
+        ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="pcm",<br/>
+        ///     ):<br/>
+        ///         # Each chunk is `{"audio": "&lt;base64-encoded PCM&gt;"}`.<br/>
+        ///         # Decode and pipe to your audio pipeline.<br/>
+        ///         if chunk.get("audio"):<br/>
+        ///             f.write(base64.b64decode(chunk["audio"]))<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch` + a reader)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/stream", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "pcm",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const reader = res.body!.getReader();<br/>
+        /// const decoder = new TextDecoder();<br/>
+        /// let buf = "";<br/>
+        /// let finished = false;<br/>
+        /// while (!finished) {<br/>
+        ///   const { value, done } = await reader.read();<br/>
+        ///   if (done) break;<br/>
+        ///   buf += decoder.decode(value);<br/>
+        ///   const events = buf.split("\n\n");<br/>
+        ///   buf = events.pop() ?? "";<br/>
+        ///   for (const ev of events) {<br/>
+        ///     // SSE frames are "event: audio\ndata: {json}" or just "data: {json}".<br/>
+        ///     // We only care about the data line — pull it out and parse.<br/>
+        ///     const dataLine = ev.split("\n").find((l) =&gt; l.startsWith("data:"));<br/>
+        ///     if (!dataLine) continue;<br/>
+        ///     const payload = JSON.parse(dataLine.slice(5).trim());<br/>
+        ///     if (payload.done) { finished = true; break; }<br/>
+        ///     if (payload.audio) {<br/>
+        ///       const pcm = Buffer.from(payload.audio, "base64");<br/>
+        ///       // … hand pcm to your audio pipeline<br/>
+        ///     }<br/>
+        ///   }<br/>
+        /// }<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Use a streaming-friendly client.** `curl -N`, Python `iter_lines`, or a `fetch` `ReadableStream` reader. Buffering clients will hide the latency win.<br/>
+        /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
+        /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.<br/>
+        /// - **First-chunk latency** depends on model warm-up + network distance. Use `output_format=pcm` and a streaming-friendly client to minimize what you can control.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` as shown above.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -57,21 +201,93 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1 SSE<br/>
-        /// Stream speech for given text using the Lightning v3.1 SSE API<br/>
-        /// ## Overview<br/>
-        /// The Lightning v3.1 SSE API provides real-time text-to-speech streaming capabilities with natural, expressive voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.<br/>
-        /// Lightning v3.1 is a 44 kHz model that produces natural, expressive, and realistic speech, with support for voice cloning.<br/>
-        /// ## When to Use<br/>
-        /// * **Interactive Applications**: Perfect for chatbots, virtual assistants, and other applications requiring immediate voice responses<br/>
-        /// * **Long-Form Content**: Efficiently stream audio for articles, stories, or other long-form content without buffering delays<br/>
-        /// * **Voice User Interfaces**: Create natural-sounding voice interfaces with minimal perceived latency<br/>
-        /// * **Accessibility Solutions**: Provide real-time audio versions of written content for users with visual impairments<br/>
-        /// ## How It Works<br/>
-        /// 1. **Make a POST Request**: Send your text and voice settings to the API endpoint<br/>
-        /// 2. **Receive Audio Chunks**: The API processes your text and streams audio back as base64-encoded chunks with 1024 byte size<br/>
-        /// 3. **Process the Stream**: Handle the SSE events to decode and play audio chunks sequentially<br/>
-        /// 4. **End of Stream**: The API sends a completion event when all audio has been delivered
+        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
+        /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
+        /// - **Use sync `/get_speech`** when total latency doesn't matter and you'd rather get one buffer.<br/>
+        /// - **Use the WebSocket endpoint** when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.<br/>
+        /// ## How it works<br/>
+        /// 1. POST your text + voice settings — same payload as `/get_speech`.<br/>
+        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;"}\n\n`.<br/>
+        /// 3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).<br/>
+        /// 4. A final `data: {"done": true}\n\n` frame marks end of stream.<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -N -X POST "https://api.smallest.ai/waves/v1/lightning-v3.1/stream" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "pcm"<br/>
+        ///   }'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
+        /// ```python<br/>
+        /// import base64<br/>
+        /// from smallestai import SmallestAI<br/>
+        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// with open("stream.pcm", "wb") as f:<br/>
+        ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
+        ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///         voice_id="magnus",<br/>
+        ///         sample_rate=24000,<br/>
+        ///         output_format="pcm",<br/>
+        ///     ):<br/>
+        ///         # Each chunk is `{"audio": "&lt;base64-encoded PCM&gt;"}`.<br/>
+        ///         # Decode and pipe to your audio pipeline.<br/>
+        ///         if chunk.get("audio"):<br/>
+        ///             f.write(base64.b64decode(chunk["audio"]))<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (using `fetch` + a reader)<br/>
+        /// ```typescript<br/>
+        /// const res = await fetch("https://api.smallest.ai/waves/v1/lightning-v3.1/stream", {<br/>
+        ///   method: "POST",<br/>
+        ///   headers: {<br/>
+        ///     Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`,<br/>
+        ///     "Content-Type": "application/json",<br/>
+        ///   },<br/>
+        ///   body: JSON.stringify({<br/>
+        ///     text: "Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
+        ///     voice_id: "magnus",<br/>
+        ///     sample_rate: 24000,<br/>
+        ///     output_format: "pcm",<br/>
+        ///   }),<br/>
+        /// });<br/>
+        /// const reader = res.body!.getReader();<br/>
+        /// const decoder = new TextDecoder();<br/>
+        /// let buf = "";<br/>
+        /// let finished = false;<br/>
+        /// while (!finished) {<br/>
+        ///   const { value, done } = await reader.read();<br/>
+        ///   if (done) break;<br/>
+        ///   buf += decoder.decode(value);<br/>
+        ///   const events = buf.split("\n\n");<br/>
+        ///   buf = events.pop() ?? "";<br/>
+        ///   for (const ev of events) {<br/>
+        ///     // SSE frames are "event: audio\ndata: {json}" or just "data: {json}".<br/>
+        ///     // We only care about the data line — pull it out and parse.<br/>
+        ///     const dataLine = ev.split("\n").find((l) =&gt; l.startsWith("data:"));<br/>
+        ///     if (!dataLine) continue;<br/>
+        ///     const payload = JSON.parse(dataLine.slice(5).trim());<br/>
+        ///     if (payload.done) { finished = true; break; }<br/>
+        ///     if (payload.audio) {<br/>
+        ///       const pcm = Buffer.from(payload.audio, "base64");<br/>
+        ///       // … hand pcm to your audio pipeline<br/>
+        ///     }<br/>
+        ///   }<br/>
+        /// }<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Use a streaming-friendly client.** `curl -N`, Python `iter_lines`, or a `fetch` `ReadableStream` reader. Buffering clients will hide the latency win.<br/>
+        /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
+        /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.<br/>
+        /// - **First-chunk latency** depends on model warm-up + network distance. Use `output_format=pcm` and a streaming-friendly client to minimize what you can control.<br/>
+        /// - **JavaScript / TypeScript**: the official `smallestai` npm package predates Lightning v3.1, so call this endpoint with `fetch` as shown above.
         /// </summary>
         /// <param name="text">
         /// The text to convert to speech.<br/>
@@ -80,6 +296,17 @@ namespace SmallestAI
         /// <param name="voiceId">
         /// The voice identifier to use for speech generation.<br/>
         /// Default Value: daniel
+        /// </param>
+        /// <param name="model">
+        /// TTS model to route the request to.<br/>
+        /// - `lightning_v3.1` (default) — standard Lightning v3.1 pool.<br/>
+        /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool with a curated<br/>
+        ///   voice catalog. See the<br/>
+        ///   [Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro).<br/>
+        /// New integrations should use the unified<br/>
+        /// `/waves/v1/tts` route instead of this endpoint, but the `model`<br/>
+        /// field is supported here for backwards-compatible Pro opt-in.<br/>
+        /// Default Value: lightning_v3.1
         /// </param>
         /// <param name="sampleRate">
         /// The sample rate for the generated audio.<br/>
@@ -122,6 +349,7 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<string> StreamLightningV31SpeechAsync(
             string text = "Hey i am your a text to speech model",
             string voiceId = "daniel",
+            global::SmallestAI.LightningV31RequestModel? model = default,
             global::SmallestAI.LightningV31RequestSampleRate? sampleRate = default,
             double? speed = default,
             global::SmallestAI.LightningV31RequestLanguage? language = default,
