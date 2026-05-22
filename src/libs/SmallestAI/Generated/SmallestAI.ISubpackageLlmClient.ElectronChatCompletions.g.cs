@@ -7,7 +7,8 @@ namespace SmallestAI
         /// <summary>
         /// Chat Completions (Electron)<br/>
         /// Generate a chat completion with Electron. OpenAI-compatible<br/>
-        /// request/response shape.<br/>
+        /// request/response shape — point any OpenAI SDK at<br/>
+        /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
         /// carries the `usage` block so token accounting is exact even on<br/>
@@ -16,7 +17,70 @@ namespace SmallestAI
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
         /// `tool_calls` — see the [Tool Calling guide](/waves/documentation/llm-electron/tool-calling)<br/>
-        /// for the voice-agent pattern.
+        /// for the voice-agent pattern.<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/chat/completions" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{<br/>
+        ///     "model": "electron",<br/>
+        ///     "messages": [<br/>
+        ///       {"role": "user", "content": "Write one sentence about why the sky is blue."}<br/>
+        ///     ]<br/>
+        ///   }'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install openai`)<br/>
+        /// ```python<br/>
+        /// import os<br/>
+        /// from openai import OpenAI<br/>
+        /// client = OpenAI(<br/>
+        ///     base_url="https://api.smallest.ai/waves/v1",<br/>
+        ///     api_key=os.environ["SMALLEST_API_KEY"],<br/>
+        /// )<br/>
+        /// response = client.chat.completions.create(<br/>
+        ///     model="electron",<br/>
+        ///     messages=[<br/>
+        ///         {"role": "user", "content": "Write one sentence about why the sky is blue."}<br/>
+        ///     ],<br/>
+        /// )<br/>
+        /// print(response.choices[0].message.content)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (`npm install openai`)<br/>
+        /// ```typescript<br/>
+        /// import OpenAI from "openai";<br/>
+        /// const client = new OpenAI({<br/>
+        ///   baseURL: "https://api.smallest.ai/waves/v1",<br/>
+        ///   apiKey: process.env.SMALLEST_API_KEY,<br/>
+        /// });<br/>
+        /// const response = await client.chat.completions.create({<br/>
+        ///   model: "electron",<br/>
+        ///   messages: [<br/>
+        ///     { role: "user", content: "Write one sentence about why the sky is blue." },<br/>
+        ///   ],<br/>
+        /// });<br/>
+        /// console.log(response.choices[0].message.content);<br/>
+        /// ```<br/>
+        /// **Streaming with usage** (Python)<br/>
+        /// ```python<br/>
+        /// stream = client.chat.completions.create(<br/>
+        ///     model="electron",<br/>
+        ///     messages=[{"role": "user", "content": "Tell me a one-sentence fun fact."}],<br/>
+        ///     stream=True,<br/>
+        ///     stream_options={"include_usage": True},<br/>
+        /// )<br/>
+        /// for chunk in stream:<br/>
+        ///     if chunk.choices and chunk.choices[0].delta.content:<br/>
+        ///         print(chunk.choices[0].delta.content, end="", flush=True)<br/>
+        ///     if chunk.usage:<br/>
+        ///         print(f"\n\nTokens: {chunk.usage.total_tokens}")<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.<br/>
+        /// - **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.<br/>
+        /// - **`n &gt; 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.<br/>
+        /// - **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).
         /// </summary>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -30,7 +94,8 @@ namespace SmallestAI
         /// <summary>
         /// Chat Completions (Electron)<br/>
         /// Generate a chat completion with Electron. OpenAI-compatible<br/>
-        /// request/response shape.<br/>
+        /// request/response shape — point any OpenAI SDK at<br/>
+        /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
         /// carries the `usage` block so token accounting is exact even on<br/>
@@ -39,7 +104,70 @@ namespace SmallestAI
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
         /// `tool_calls` — see the [Tool Calling guide](/waves/documentation/llm-electron/tool-calling)<br/>
-        /// for the voice-agent pattern.
+        /// for the voice-agent pattern.<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/chat/completions" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{<br/>
+        ///     "model": "electron",<br/>
+        ///     "messages": [<br/>
+        ///       {"role": "user", "content": "Write one sentence about why the sky is blue."}<br/>
+        ///     ]<br/>
+        ///   }'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install openai`)<br/>
+        /// ```python<br/>
+        /// import os<br/>
+        /// from openai import OpenAI<br/>
+        /// client = OpenAI(<br/>
+        ///     base_url="https://api.smallest.ai/waves/v1",<br/>
+        ///     api_key=os.environ["SMALLEST_API_KEY"],<br/>
+        /// )<br/>
+        /// response = client.chat.completions.create(<br/>
+        ///     model="electron",<br/>
+        ///     messages=[<br/>
+        ///         {"role": "user", "content": "Write one sentence about why the sky is blue."}<br/>
+        ///     ],<br/>
+        /// )<br/>
+        /// print(response.choices[0].message.content)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (`npm install openai`)<br/>
+        /// ```typescript<br/>
+        /// import OpenAI from "openai";<br/>
+        /// const client = new OpenAI({<br/>
+        ///   baseURL: "https://api.smallest.ai/waves/v1",<br/>
+        ///   apiKey: process.env.SMALLEST_API_KEY,<br/>
+        /// });<br/>
+        /// const response = await client.chat.completions.create({<br/>
+        ///   model: "electron",<br/>
+        ///   messages: [<br/>
+        ///     { role: "user", content: "Write one sentence about why the sky is blue." },<br/>
+        ///   ],<br/>
+        /// });<br/>
+        /// console.log(response.choices[0].message.content);<br/>
+        /// ```<br/>
+        /// **Streaming with usage** (Python)<br/>
+        /// ```python<br/>
+        /// stream = client.chat.completions.create(<br/>
+        ///     model="electron",<br/>
+        ///     messages=[{"role": "user", "content": "Tell me a one-sentence fun fact."}],<br/>
+        ///     stream=True,<br/>
+        ///     stream_options={"include_usage": True},<br/>
+        /// )<br/>
+        /// for chunk in stream:<br/>
+        ///     if chunk.choices and chunk.choices[0].delta.content:<br/>
+        ///         print(chunk.choices[0].delta.content, end="", flush=True)<br/>
+        ///     if chunk.usage:<br/>
+        ///         print(f"\n\nTokens: {chunk.usage.total_tokens}")<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.<br/>
+        /// - **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.<br/>
+        /// - **`n &gt; 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.<br/>
+        /// - **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).
         /// </summary>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -53,7 +181,8 @@ namespace SmallestAI
         /// <summary>
         /// Chat Completions (Electron)<br/>
         /// Generate a chat completion with Electron. OpenAI-compatible<br/>
-        /// request/response shape.<br/>
+        /// request/response shape — point any OpenAI SDK at<br/>
+        /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
         /// carries the `usage` block so token accounting is exact even on<br/>
@@ -62,7 +191,70 @@ namespace SmallestAI
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
         /// `tool_calls` — see the [Tool Calling guide](/waves/documentation/llm-electron/tool-calling)<br/>
-        /// for the voice-agent pattern.
+        /// for the voice-agent pattern.<br/>
+        /// ## Examples<br/>
+        /// **cURL**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/chat/completions" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -d '{<br/>
+        ///     "model": "electron",<br/>
+        ///     "messages": [<br/>
+        ///       {"role": "user", "content": "Write one sentence about why the sky is blue."}<br/>
+        ///     ]<br/>
+        ///   }'<br/>
+        /// ```<br/>
+        /// **Python** (`pip install openai`)<br/>
+        /// ```python<br/>
+        /// import os<br/>
+        /// from openai import OpenAI<br/>
+        /// client = OpenAI(<br/>
+        ///     base_url="https://api.smallest.ai/waves/v1",<br/>
+        ///     api_key=os.environ["SMALLEST_API_KEY"],<br/>
+        /// )<br/>
+        /// response = client.chat.completions.create(<br/>
+        ///     model="electron",<br/>
+        ///     messages=[<br/>
+        ///         {"role": "user", "content": "Write one sentence about why the sky is blue."}<br/>
+        ///     ],<br/>
+        /// )<br/>
+        /// print(response.choices[0].message.content)<br/>
+        /// ```<br/>
+        /// **JavaScript / TypeScript** (`npm install openai`)<br/>
+        /// ```typescript<br/>
+        /// import OpenAI from "openai";<br/>
+        /// const client = new OpenAI({<br/>
+        ///   baseURL: "https://api.smallest.ai/waves/v1",<br/>
+        ///   apiKey: process.env.SMALLEST_API_KEY,<br/>
+        /// });<br/>
+        /// const response = await client.chat.completions.create({<br/>
+        ///   model: "electron",<br/>
+        ///   messages: [<br/>
+        ///     { role: "user", content: "Write one sentence about why the sky is blue." },<br/>
+        ///   ],<br/>
+        /// });<br/>
+        /// console.log(response.choices[0].message.content);<br/>
+        /// ```<br/>
+        /// **Streaming with usage** (Python)<br/>
+        /// ```python<br/>
+        /// stream = client.chat.completions.create(<br/>
+        ///     model="electron",<br/>
+        ///     messages=[{"role": "user", "content": "Tell me a one-sentence fun fact."}],<br/>
+        ///     stream=True,<br/>
+        ///     stream_options={"include_usage": True},<br/>
+        /// )<br/>
+        /// for chunk in stream:<br/>
+        ///     if chunk.choices and chunk.choices[0].delta.content:<br/>
+        ///         print(chunk.choices[0].delta.content, end="", flush=True)<br/>
+        ///     if chunk.usage:<br/>
+        ///         print(f"\n\nTokens: {chunk.usage.total_tokens}")<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.<br/>
+        /// - **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.<br/>
+        /// - **`n &gt; 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.<br/>
+        /// - **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).
         /// </summary>
         /// <param name="model">
         /// Model ID. Currently only `"electron"`.

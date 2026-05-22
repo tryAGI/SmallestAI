@@ -5,7 +5,7 @@ namespace SmallestAI
     public partial interface ISubpackageTextToSpeechClient
     {
         /// <summary>
-        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// Lightning v3.1 SSE (endpoint will be deprecated)<br/>
         /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// ## When to use this<br/>
@@ -103,7 +103,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// Lightning v3.1 SSE (endpoint will be deprecated)<br/>
         /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// ## When to use this<br/>
@@ -201,7 +201,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v3.1 SSE (Endpoint Deprecated)<br/>
+        /// Lightning v3.1 SSE (endpoint will be deprecated)<br/>
         /// &lt;Warning&gt;**Endpoint scheduled for retirement.** This URL will stop accepting requests **60 days from the Lightning v3.1 Pro launch (2026-05-15)** — i.e. on **2026-07-14**. The Lightning v3.1 model itself is current and stays. Migrate to [`POST /waves/v1/tts/live`](/waves/api-reference/api-reference/text-to-speech/stream-speech-sse) and select Lightning v3.1 via the `model` body field (default).&lt;/Warning&gt;<br/>
         /// Synthesize speech and stream the audio back over Server-Sent Events. The body and parameters are identical to the sync `/get_speech` endpoint — the difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// ## When to use this<br/>
