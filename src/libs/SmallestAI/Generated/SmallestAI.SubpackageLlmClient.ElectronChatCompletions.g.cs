@@ -510,18 +510,17 @@ namespace SmallestAI
                                     __exception_400 = __ex;
                                 }
 
-                                throw new global::SmallestAI.ApiException<global::SmallestAI.Error>(
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_400,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_400,
-                                    ResponseObject = __value_400,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_400,
+                                    responseObject: __value_400,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Missing or invalid API key.
                             if ((int)__response.StatusCode == 401)
@@ -548,18 +547,17 @@ namespace SmallestAI
                                     __exception_401 = __ex;
                                 }
 
-                                throw new global::SmallestAI.ApiException<global::SmallestAI.Error>(
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_401 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_401,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_401,
-                                    ResponseObject = __value_401,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_401,
+                                    responseObject: __value_401,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // API key valid but no access to Electron on this plan.
                             if ((int)__response.StatusCode == 403)
@@ -586,18 +584,17 @@ namespace SmallestAI
                                     __exception_403 = __ex;
                                 }
 
-                                throw new global::SmallestAI.ApiException<global::SmallestAI.Error>(
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_403,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_403,
-                                    ResponseObject = __value_403,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_403,
+                                    responseObject: __value_403,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Rate limit (RPM) or concurrency cap hit. See [Concurrency and Limits](/waves/api-reference/api-references/concurrency-and-limits). 
                             if ((int)__response.StatusCode == 429)
@@ -624,18 +621,17 @@ namespace SmallestAI
                                     __exception_429 = __ex;
                                 }
 
-                                throw new global::SmallestAI.ApiException<global::SmallestAI.Error>(
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_429 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_429,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_429,
-                                    ResponseObject = __value_429,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_429,
+                                    responseObject: __value_429,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Upstream model unavailable. Retry with backoff.
                             if ((int)__response.StatusCode == 502)
@@ -662,18 +658,17 @@ namespace SmallestAI
                                     __exception_502 = __ex;
                                 }
 
-                                throw new global::SmallestAI.ApiException<global::SmallestAI.Error>(
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_502 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_502,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_502,
-                                    ResponseObject = __value_502,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_502,
+                                    responseObject: __value_502,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Endpoint temporarily disabled, or upstream model overloaded.
                             if ((int)__response.StatusCode == 503)
@@ -700,18 +695,17 @@ namespace SmallestAI
                                     __exception_503 = __ex;
                                 }
 
-                                throw new global::SmallestAI.ApiException<global::SmallestAI.Error>(
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_503 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_503,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_503,
-                                    ResponseObject = __value_503,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_503,
+                                    responseObject: __value_503,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
 
                             if (__effectiveReadResponseAsString)
@@ -745,17 +739,15 @@ namespace SmallestAI
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    throw new global::SmallestAI.ApiException(
+                                    throw global::SmallestAI.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
                             else
@@ -792,17 +784,15 @@ namespace SmallestAI
                                     {
                                     }
 
-                                    throw new global::SmallestAI.ApiException(
+                                    throw global::SmallestAI.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
 
