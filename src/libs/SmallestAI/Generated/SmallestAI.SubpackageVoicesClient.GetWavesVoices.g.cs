@@ -109,7 +109,7 @@ namespace SmallestAI
             {
 
                             var __pathBuilder = new global::SmallestAI.PathBuilder(
-                                path: $"/waves/v1/{model}/get_voices",
+                                path: $"/waves/v1/{(global::System.Uri.EscapeDataString(model.ToValueString()))}/get_voices",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::SmallestAI.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -170,7 +170,7 @@ namespace SmallestAI
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "GetWavesVoices",
                                 methodName: "GetWavesVoicesAsync",
-                                pathTemplate: "$\"/waves/v1/{model}/get_voices\"",
+                                pathTemplate: "$\"/waves/v1/{(global::System.Uri.EscapeDataString(model.ToValueString()))}/get_voices\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -204,7 +204,7 @@ namespace SmallestAI
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "GetWavesVoices",
                                 methodName: "GetWavesVoicesAsync",
-                                pathTemplate: "$\"/waves/v1/{model}/get_voices\"",
+                                pathTemplate: "$\"/waves/v1/{(global::System.Uri.EscapeDataString(model.ToValueString()))}/get_voices\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -245,7 +245,7 @@ namespace SmallestAI
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "GetWavesVoices",
                                 methodName: "GetWavesVoicesAsync",
-                                pathTemplate: "$\"/waves/v1/{model}/get_voices\"",
+                                pathTemplate: "$\"/waves/v1/{(global::System.Uri.EscapeDataString(model.ToValueString()))}/get_voices\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -293,7 +293,7 @@ namespace SmallestAI
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "GetWavesVoices",
                                 methodName: "GetWavesVoicesAsync",
-                                pathTemplate: "$\"/waves/v1/{model}/get_voices\"",
+                                pathTemplate: "$\"/waves/v1/{(global::System.Uri.EscapeDataString(model.ToValueString()))}/get_voices\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -315,7 +315,7 @@ namespace SmallestAI
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "GetWavesVoices",
                                 methodName: "GetWavesVoicesAsync",
-                                pathTemplate: "$\"/waves/v1/{model}/get_voices\"",
+                                pathTemplate: "$\"/waves/v1/{(global::System.Uri.EscapeDataString(model.ToValueString()))}/get_voices\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
