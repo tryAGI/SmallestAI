@@ -60,7 +60,7 @@ namespace SmallestAI
 
         /// <summary>
         /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/waves/documentation/llm-electron/tool-calling).
+        /// See [Tool Calling](/waves/documentation/llm-electron/tool-function-calling).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tools")]
         public global::System.Collections.Generic.IList<global::SmallestAI.Tool>? Tools { get; set; }
@@ -162,7 +162,7 @@ namespace SmallestAI
         /// <param name="streamOptions"></param>
         /// <param name="tools">
         /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/waves/documentation/llm-electron/tool-calling).
+        /// See [Tool Calling](/waves/documentation/llm-electron/tool-function-calling).
         /// </param>
         /// <param name="toolChoice"></param>
         /// <param name="responseFormat">
