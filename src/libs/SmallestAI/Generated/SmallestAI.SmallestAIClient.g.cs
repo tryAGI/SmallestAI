@@ -42,6 +42,15 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
+        public SubpackageLlmClient SubpackageLlm => new SubpackageLlmClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        {
+            ReadResponseAsString = ReadResponseAsString,
+            JsonSerializerContext = JsonSerializerContext,
+        };
+
+        /// <summary>
+        /// 
+        /// </summary>
         public SubpackagePronunciationDictionariesClient SubpackagePronunciationDictionaries => new SubpackagePronunciationDictionariesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,

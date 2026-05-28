@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from urllib.parse import urljoin
 
 
 def download(url: str, output: Path) -> None:
@@ -47,14 +48,23 @@ def main() -> int:
         download(index_url, index_path)
 
         html = index_path.read_text(encoding="utf-8")
-        api_ids = list(dict.fromkeys(re.findall(r"\?api=([0-9a-fA-F-]{36})", html)))
-        if not api_ids:
+        candidate_urls = []
+
+        for api_id in re.findall(r"\?api=([0-9a-fA-F-]{36})", html):
+            candidate_urls.append((api_id, f"{index_url}?api={api_id}"))
+
+        for href in re.findall(r'href=["\']([^"\']*openapi/[0-9a-fA-F-]{36}\.json)["\']', html):
+            api_id = Path(href).stem
+            candidate_urls.append((api_id, urljoin(index_url, href)))
+
+        candidate_urls = list(dict.fromkeys(candidate_urls))
+        if not candidate_urls:
             print(f"No Fern API IDs found in {index_url}", file=sys.stderr)
             return 1
 
-        for api_id in api_ids:
+        for api_id, spec_url in candidate_urls:
             candidate = tmp_path / f"{api_id}.json"
-            download(f"{index_url}?api={api_id}", candidate)
+            download(spec_url, candidate)
 
             with candidate.open(encoding="utf-8") as file:
                 spec = json.load(file)

@@ -47,6 +47,11 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
+        public SubpackageLlmClient SubpackageLlm { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public SubpackagePronunciationDictionariesClient SubpackagePronunciationDictionaries { get; }
 
         /// <summary>

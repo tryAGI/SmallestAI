@@ -6,8 +6,14 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class ErrorResponseError
+    public sealed partial class ErrorErrorDetailsItems
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("code")]
+        public string? Code { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -17,8 +23,8 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("code")]
-        public string? Code { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("path")]
+        public global::System.Collections.Generic.IList<string>? Path { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -27,25 +33,28 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorResponseError" /> class.
+        /// Initializes a new instance of the <see cref="ErrorErrorDetailsItems" /> class.
         /// </summary>
-        /// <param name="message"></param>
         /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <param name="path"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public ErrorResponseError(
+        public ErrorErrorDetailsItems(
+            string? code,
             string? message,
-            string? code)
+            global::System.Collections.Generic.IList<string>? path)
         {
-            this.Message = message;
             this.Code = code;
+            this.Message = message;
+            this.Path = path;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorResponseError" /> class.
+        /// Initializes a new instance of the <see cref="ErrorErrorDetailsItems" /> class.
         /// </summary>
-        public ErrorResponseError()
+        public ErrorErrorDetailsItems()
         {
         }
 

@@ -41,7 +41,7 @@ namespace SmallestAI
         /// Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// Pick the model with the `model` body parameter, same as the sync route.<br/>
         /// &lt;Note&gt;<br/>
-        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/waves/api-reference/api-reference/text-to-speech/live-tts-web-socket).<br/>
+        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/waves/api-reference/api-reference/text-to-speech/tts).<br/>
         /// &lt;/Note&gt;<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
@@ -359,17 +359,15 @@ namespace SmallestAI
                                 {
                                 }
 
-                                throw new global::SmallestAI.ApiException(
+                                throw global::SmallestAI.ApiException.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __ex,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
 
                             using var __stream = await __response.Content.ReadAsStreamAsync(
@@ -388,16 +386,15 @@ namespace SmallestAI
                                 }
 
                                 var __streamedResponse = (string?)global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(string), JsonSerializerContext) ??
-                                                       throw new global::SmallestAI.ApiException(
+                                                       throw global::SmallestAI.ApiException.Create(
+                                                           statusCode: __response.StatusCode,
                                                            message: $"Response deserialization failed for \"{__content}\" ",
-                                                           statusCode: __response.StatusCode)
-                                                       {
-                                                           ResponseBody = __content,
-                                                           ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                                           innerException: null,
+                                                           responseBody: __content,
+                                                           responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                                                __response.Headers,
                                                                h => h.Key,
-                                                               h => h.Value),
-                                                       };
+                                                               h => h.Value));
 
                                 yield return __streamedResponse;
                             }
@@ -414,7 +411,7 @@ namespace SmallestAI
         /// Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// Pick the model with the `model` body parameter, same as the sync route.<br/>
         /// &lt;Note&gt;<br/>
-        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/waves/api-reference/api-reference/text-to-speech/live-tts-web-socket).<br/>
+        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/waves/api-reference/api-reference/text-to-speech/tts).<br/>
         /// &lt;/Note&gt;<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
