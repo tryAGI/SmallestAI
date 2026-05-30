@@ -3,10 +3,10 @@
 namespace SmallestAI.JsonConverters
 {
     /// <inheritdoc />
-    public sealed class WavesV1PulseGetTextPostParametersCapitalizeJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize>
+    public sealed class WavesV1SttPostParametersWebhookMethodNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::SmallestAI.WavesV1SttPostParametersWebhookMethod?>
     {
         /// <inheritdoc />
-        public override global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize Read(
+        public override global::SmallestAI.WavesV1SttPostParametersWebhookMethod? Read(
             ref global::System.Text.Json.Utf8JsonReader reader,
             global::System.Type typeToConvert,
             global::System.Text.Json.JsonSerializerOptions options)
@@ -18,7 +18,7 @@ namespace SmallestAI.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalizeExtensions.ToEnum(stringValue) ?? default;
+                        return global::SmallestAI.WavesV1SttPostParametersWebhookMethodExtensions.ToEnum(stringValue);
                     }
                     
                     break;
@@ -26,11 +26,11 @@ namespace SmallestAI.JsonConverters
                 case global::System.Text.Json.JsonTokenType.Number:
                 {
                     var numValue = reader.GetInt32();
-                    return (global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize)numValue;
+                    return (global::SmallestAI.WavesV1SttPostParametersWebhookMethod)numValue;
                 }
                 case global::System.Text.Json.JsonTokenType.Null:
                 {
-                    return default(global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize);
+                    return default(global::SmallestAI.WavesV1SttPostParametersWebhookMethod?);
                 }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
@@ -42,12 +42,19 @@ namespace SmallestAI.JsonConverters
         /// <inheritdoc />
         public override void Write(
             global::System.Text.Json.Utf8JsonWriter writer,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize value,
+            global::SmallestAI.WavesV1SttPostParametersWebhookMethod? value,
             global::System.Text.Json.JsonSerializerOptions options)
         {
             writer = writer ?? throw new global::System.ArgumentNullException(nameof(writer));
 
-            writer.WriteStringValue(global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalizeExtensions.ToValueString(value));
+            if (value == null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                writer.WriteStringValue(global::SmallestAI.WavesV1SttPostParametersWebhookMethodExtensions.ToValueString(value.Value));
+            }
         }
     }
 }

@@ -4,46 +4,46 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Default Value: false
+    /// Default Value: POST
     /// </summary>
-    public enum WavesV1PulseGetTextPostParametersGenderDetection
+    public enum WavesV1SttPostParametersWebhookMethod
     {
         /// <summary>
         /// 
         /// </summary>
-        False,
+        Get,
         /// <summary>
         /// 
         /// </summary>
-        True,
+        Post,
     }
 
     /// <summary>
     /// Enum extensions to do fast conversions without the reflection.
     /// </summary>
-    public static class WavesV1PulseGetTextPostParametersGenderDetectionExtensions
+    public static class WavesV1SttPostParametersWebhookMethodExtensions
     {
         /// <summary>
         /// Converts an enum to a string.
         /// </summary>
-        public static string ToValueString(this WavesV1PulseGetTextPostParametersGenderDetection value)
+        public static string ToValueString(this WavesV1SttPostParametersWebhookMethod value)
         {
             return value switch
             {
-                WavesV1PulseGetTextPostParametersGenderDetection.False => "false",
-                WavesV1PulseGetTextPostParametersGenderDetection.True => "true",
+                WavesV1SttPostParametersWebhookMethod.Get => "GET",
+                WavesV1SttPostParametersWebhookMethod.Post => "POST",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
         /// <summary>
         /// Converts an string to a enum.
         /// </summary>
-        public static WavesV1PulseGetTextPostParametersGenderDetection? ToEnum(string value)
+        public static WavesV1SttPostParametersWebhookMethod? ToEnum(string value)
         {
             return value switch
             {
-                "false" => WavesV1PulseGetTextPostParametersGenderDetection.False,
-                "true" => WavesV1PulseGetTextPostParametersGenderDetection.True,
+                "GET" => WavesV1SttPostParametersWebhookMethod.Get,
+                "POST" => WavesV1SttPostParametersWebhookMethod.Post,
                 _ => null,
             };
         }

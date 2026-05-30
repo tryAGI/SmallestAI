@@ -57,6 +57,10 @@ def main() -> int:
             api_id = Path(href).stem
             candidate_urls.append((api_id, urljoin(index_url, href)))
 
+        for href in re.findall(r'href=["\']([^"\']*openapi/[^"\']+\.json)["\']', html):
+            api_id = Path(href).stem
+            candidate_urls.append((api_id, urljoin(index_url, href)))
+
         candidate_urls = list(dict.fromkeys(candidate_urls))
         if not candidate_urls:
             print(f"No Fern API IDs found in {index_url}", file=sys.stderr)

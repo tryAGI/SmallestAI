@@ -85,37 +85,13 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItemsCloningTypeNullableJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersLanguageJsonConverter),
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersModelJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersLanguageNullableJsonConverter),
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersModelNullableJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersEncodingJsonConverter),
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWebhookMethodJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersEncodingNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersGenderDetectionJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersGenderDetectionNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersEmotionDetectionJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersEmotionDetectionNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersFormatJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersFormatNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersPunctuateJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersPunctuateNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersCapitalizeJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostParametersCapitalizeNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGenderJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGenderNullableJsonConverter),
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWebhookMethodNullableJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.ChatCompletionRequestToolChoice0JsonConverter),
 
@@ -136,6 +112,8 @@ namespace SmallestAI
             typeof(global::SmallestAI.JsonConverters.ChatCompletionChoicesItemsFinishReasonJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.ChatCompletionChoicesItemsFinishReasonNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.SpeechToTextTranscribeResponse200JsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.ChatCompletionRequestToolChoiceJsonConverter),
 
@@ -219,30 +197,22 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.PronunciationItem))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.PronunciationDict))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.PronunciationItem>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ErrorResponseErrorsItems))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ErrorResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseErrorsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.CreatePronunciationDictRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.UpdatePronunciationDictRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.UpdatePronunciationDictResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeletePronunciationDictRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeletePronunciationDictResponse))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersLanguage), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersLanguage2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersEncoding), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersEncoding2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersGenderDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersGenderDetection2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersEmotionDetection), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersEmotionDetection2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersFormat), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersFormat2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersPunctuate), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersPunctuate2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize), TypeInfoPropertyName = "WavesV1PulseGetTextPostParametersCapitalize2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender), TypeInfoPropertyName = "WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaGender2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaEmotions))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaMetadata))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextPulseSpeechToTextResponse200))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronMessage))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersModel), TypeInfoPropertyName = "WavesV1SttPostParametersModel2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod), TypeInfoPropertyName = "WavesV1SttPostParametersWebhookMethod2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TranscriptionResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<object>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(object))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AsyncAccepted))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextTranscribeResponse200), TypeInfoPropertyName = "SpeechToTextTranscribeResponse2002")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronMessage))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionRequestStreamOptions))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Tool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionRequestToolChoice0), TypeInfoPropertyName = "ChatCompletionRequestToolChoice02")]
@@ -278,8 +248,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1LightningLargeGetClonedVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.PronunciationItem>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaWordsItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1PulseGetTextPostResponsesContentApplicationJsonSchemaUtterancesItems>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ErrorResponseErrorsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<object>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ElectronMessage>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.Tool>))]

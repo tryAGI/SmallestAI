@@ -16,11 +16,23 @@ namespace SmallestAI
         public required object Type { get; set; }
 
         /// <summary>
-        /// Reference to ToolFunction
+        /// 
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("function")]
+        [global::System.Text.Json.Serialization.JsonPropertyName("name")]
         [global::System.Text.Json.Serialization.JsonRequired]
-        public required object Function { get; set; }
+        public required string Name { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("description")]
+        public string? Description { get; set; }
+
+        /// <summary>
+        /// JSON Schema for the tool's parameters.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("parameters")]
+        public object? Parameters { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -34,18 +46,24 @@ namespace SmallestAI
         /// <param name="type">
         /// Reference to ToolType
         /// </param>
-        /// <param name="function">
-        /// Reference to ToolFunction
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="parameters">
+        /// JSON Schema for the tool's parameters.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public Tool(
             object type,
-            object function)
+            string name,
+            string? description,
+            object? parameters)
         {
             this.Type = type ?? throw new global::System.ArgumentNullException(nameof(type));
-            this.Function = function ?? throw new global::System.ArgumentNullException(nameof(function));
+            this.Name = name ?? throw new global::System.ArgumentNullException(nameof(name));
+            this.Description = description;
+            this.Parameters = parameters;
         }
 
         /// <summary>

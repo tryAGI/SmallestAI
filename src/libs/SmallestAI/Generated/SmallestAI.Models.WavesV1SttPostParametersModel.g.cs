@@ -4,46 +4,46 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Default Value: true
+    /// 
     /// </summary>
-    public enum WavesV1PulseGetTextPostParametersCapitalize
+    public enum WavesV1SttPostParametersModel
     {
         /// <summary>
         /// 
         /// </summary>
-        False,
+        Pulse,
         /// <summary>
         /// 
         /// </summary>
-        True,
+        PulsePro,
     }
 
     /// <summary>
     /// Enum extensions to do fast conversions without the reflection.
     /// </summary>
-    public static class WavesV1PulseGetTextPostParametersCapitalizeExtensions
+    public static class WavesV1SttPostParametersModelExtensions
     {
         /// <summary>
         /// Converts an enum to a string.
         /// </summary>
-        public static string ToValueString(this WavesV1PulseGetTextPostParametersCapitalize value)
+        public static string ToValueString(this WavesV1SttPostParametersModel value)
         {
             return value switch
             {
-                WavesV1PulseGetTextPostParametersCapitalize.False => "false",
-                WavesV1PulseGetTextPostParametersCapitalize.True => "true",
+                WavesV1SttPostParametersModel.Pulse => "pulse",
+                WavesV1SttPostParametersModel.PulsePro => "pulse-pro",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
         /// <summary>
         /// Converts an string to a enum.
         /// </summary>
-        public static WavesV1PulseGetTextPostParametersCapitalize? ToEnum(string value)
+        public static WavesV1SttPostParametersModel? ToEnum(string value)
         {
             return value switch
             {
-                "false" => WavesV1PulseGetTextPostParametersCapitalize.False,
-                "true" => WavesV1PulseGetTextPostParametersCapitalize.True,
+                "pulse" => WavesV1SttPostParametersModel.Pulse,
+                "pulse-pro" => WavesV1SttPostParametersModel.PulsePro,
                 _ => null,
             };
         }

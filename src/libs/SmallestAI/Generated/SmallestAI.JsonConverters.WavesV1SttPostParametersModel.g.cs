@@ -3,10 +3,10 @@
 namespace SmallestAI.JsonConverters
 {
     /// <inheritdoc />
-    public sealed class WavesV1PulseGetTextPostParametersCapitalizeNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize?>
+    public sealed class WavesV1SttPostParametersModelJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::SmallestAI.WavesV1SttPostParametersModel>
     {
         /// <inheritdoc />
-        public override global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize? Read(
+        public override global::SmallestAI.WavesV1SttPostParametersModel Read(
             ref global::System.Text.Json.Utf8JsonReader reader,
             global::System.Type typeToConvert,
             global::System.Text.Json.JsonSerializerOptions options)
@@ -18,7 +18,7 @@ namespace SmallestAI.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalizeExtensions.ToEnum(stringValue);
+                        return global::SmallestAI.WavesV1SttPostParametersModelExtensions.ToEnum(stringValue) ?? default;
                     }
                     
                     break;
@@ -26,11 +26,11 @@ namespace SmallestAI.JsonConverters
                 case global::System.Text.Json.JsonTokenType.Number:
                 {
                     var numValue = reader.GetInt32();
-                    return (global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize)numValue;
+                    return (global::SmallestAI.WavesV1SttPostParametersModel)numValue;
                 }
                 case global::System.Text.Json.JsonTokenType.Null:
                 {
-                    return default(global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize?);
+                    return default(global::SmallestAI.WavesV1SttPostParametersModel);
                 }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
@@ -42,19 +42,12 @@ namespace SmallestAI.JsonConverters
         /// <inheritdoc />
         public override void Write(
             global::System.Text.Json.Utf8JsonWriter writer,
-            global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalize? value,
+            global::SmallestAI.WavesV1SttPostParametersModel value,
             global::System.Text.Json.JsonSerializerOptions options)
         {
             writer = writer ?? throw new global::System.ArgumentNullException(nameof(writer));
 
-            if (value == null)
-            {
-                writer.WriteNullValue();
-            }
-            else
-            {
-                writer.WriteStringValue(global::SmallestAI.WavesV1PulseGetTextPostParametersCapitalizeExtensions.ToValueString(value.Value));
-            }
+            writer.WriteStringValue(global::SmallestAI.WavesV1SttPostParametersModelExtensions.ToValueString(value));
         }
     }
 }

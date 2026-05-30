@@ -10,7 +10,6 @@ python3 scripts/select-fern-openapi.py \
   --output openapi.yaml \
   --required-path /waves/v1/lightning-v3.1/get_speech \
   --required-path /waves/v1/lightning-v3.1/stream \
-  --required-path /waves/v1/pulse/get_text \
   --required-path /waves/v1/pronunciation-dicts \
   --required-path /waves/v1/voice-cloning
 

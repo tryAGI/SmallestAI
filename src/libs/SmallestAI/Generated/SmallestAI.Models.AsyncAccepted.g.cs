@@ -4,9 +4,9 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    /// Returned by Pulse Pro when `webhook_url` is set. The transcription arrives on the webhook when ready.
     /// </summary>
-    public sealed partial class ErrorResponse
+    public sealed partial class AsyncAccepted
     {
         /// <summary>
         /// 
@@ -18,15 +18,9 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("message")]
+        [global::System.Text.Json.Serialization.JsonPropertyName("request_id")]
         [global::System.Text.Json.Serialization.JsonRequired]
-        public required string Message { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("errors")]
-        public global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseErrorsItems>? Errors { get; set; }
+        public required string RequestId { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -35,28 +29,25 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorResponse" /> class.
+        /// Initializes a new instance of the <see cref="AsyncAccepted" /> class.
         /// </summary>
         /// <param name="status"></param>
-        /// <param name="message"></param>
-        /// <param name="errors"></param>
+        /// <param name="requestId"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public ErrorResponse(
+        public AsyncAccepted(
             string status,
-            string message,
-            global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseErrorsItems>? errors)
+            string requestId)
         {
             this.Status = status ?? throw new global::System.ArgumentNullException(nameof(status));
-            this.Message = message ?? throw new global::System.ArgumentNullException(nameof(message));
-            this.Errors = errors;
+            this.RequestId = requestId ?? throw new global::System.ArgumentNullException(nameof(requestId));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorResponse" /> class.
+        /// Initializes a new instance of the <see cref="AsyncAccepted" /> class.
         /// </summary>
-        public ErrorResponse()
+        public AsyncAccepted()
         {
         }
 
