@@ -64,199 +64,199 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.TtsError? Type9 { get; set; }
+        public bool? Type9 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept? Type10 { get; set; }
+        public global::SmallestAI.TtsError? Type10 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.LightningV31RequestModel? Type11 { get; set; }
+        public global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept? Type11 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.LightningV31RequestSampleRate? Type12 { get; set; }
+        public global::SmallestAI.LightningV31RequestModel? Type12 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.LightningV31RequestLanguage? Type13 { get; set; }
+        public global::SmallestAI.LightningV31RequestSampleRate? Type13 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.LightningV31RequestOutputFormat? Type14 { get; set; }
+        public global::SmallestAI.LightningV31RequestLanguage? Type14 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.LightningV31Request? Type15 { get; set; }
+        public global::SmallestAI.LightningV31RequestOutputFormat? Type15 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SynthesizeLightningV31SpeechRequestBadRequestError? Type16 { get; set; }
+        public global::SmallestAI.LightningV31Request? Type16 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SynthesizeLightningV31SpeechRequestUnauthorizedError? Type17 { get; set; }
+        public global::SmallestAI.SynthesizeLightningV31SpeechRequestBadRequestError? Type17 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SynthesizeLightningV31SpeechRequestInternalServerError? Type18 { get; set; }
+        public global::SmallestAI.SynthesizeLightningV31SpeechRequestUnauthorizedError? Type18 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.StreamLightningV31SpeechRequestBadRequestError? Type19 { get; set; }
+        public global::SmallestAI.SynthesizeLightningV31SpeechRequestInternalServerError? Type19 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.StreamLightningV31SpeechRequestUnauthorizedError? Type20 { get; set; }
+        public global::SmallestAI.StreamLightningV31SpeechRequestBadRequestError? Type20 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.StreamLightningV31SpeechRequestInternalServerError? Type21 { get; set; }
+        public global::SmallestAI.StreamLightningV31SpeechRequestUnauthorizedError? Type21 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.Lightningv2RequestLanguage? Type22 { get; set; }
+        public global::SmallestAI.StreamLightningV31SpeechRequestInternalServerError? Type22 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.Lightningv2RequestOutputFormat? Type23 { get; set; }
+        public global::SmallestAI.Lightningv2RequestLanguage? Type23 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.Lightningv2Request? Type24 { get; set; }
+        public global::SmallestAI.Lightningv2RequestOutputFormat? Type24 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int? Type25 { get; set; }
+        public global::SmallestAI.Lightningv2Request? Type25 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SynthesizeLightningv2SpeechRequestBadRequestError? Type26 { get; set; }
+        public int? Type26 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SynthesizeLightningv2SpeechRequestUnauthorizedError? Type27 { get; set; }
+        public global::SmallestAI.SynthesizeLightningv2SpeechRequestBadRequestError? Type27 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.SynthesizeLightningv2SpeechRequestInternalServerError? Type28 { get; set; }
+        public global::SmallestAI.SynthesizeLightningv2SpeechRequestUnauthorizedError? Type28 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.StreamLightningv2SpeechRequestBadRequestError? Type29 { get; set; }
+        public global::SmallestAI.SynthesizeLightningv2SpeechRequestInternalServerError? Type29 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.StreamLightningv2SpeechRequestUnauthorizedError? Type30 { get; set; }
+        public global::SmallestAI.StreamLightningv2SpeechRequestBadRequestError? Type30 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.StreamLightningv2SpeechRequestInternalServerError? Type31 { get; set; }
+        public global::SmallestAI.StreamLightningv2SpeechRequestUnauthorizedError? Type31 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1ModelGetVoicesGetParametersModel? Type32 { get; set; }
+        public global::SmallestAI.StreamLightningv2SpeechRequestInternalServerError? Type32 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags? Type33 { get; set; }
+        public global::SmallestAI.WavesV1ModelGetVoicesGetParametersModel? Type33 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems? Type34 { get; set; }
+        public global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags? Type34 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.VoicesGetWavesVoicesResponse200? Type35 { get; set; }
+        public global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems? Type35 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>? Type36 { get; set; }
+        public global::SmallestAI.VoicesGetWavesVoicesResponse200? Type36 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.GetWavesVoicesRequestBadRequestError? Type37 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>? Type37 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.GetWavesVoicesRequestUnauthorizedError? Type38 { get; set; }
+        public global::SmallestAI.GetWavesVoicesRequestBadRequestError? Type38 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.GetWavesVoicesRequestInternalServerError? Type39 { get; set; }
+        public global::SmallestAI.GetWavesVoicesRequestUnauthorizedError? Type39 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel? Type40 { get; set; }
+        public global::SmallestAI.GetWavesVoicesRequestInternalServerError? Type40 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataStatus? Type41 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel? Type41 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems? Type42 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataStatus? Type42 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaData? Type43 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems? Type43 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.DateTime? Type44 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaData? Type44 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems>? Type45 { get; set; }
+        public global::System.DateTime? Type45 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200? Type46 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems>? Type46 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.CreateVoiceCloneRequestBadRequestError? Type47 { get; set; }
+        public global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200? Type47 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.CreateVoiceCloneRequestUnauthorizedError? Type48 { get; set; }
+        public global::SmallestAI.CreateVoiceCloneRequestBadRequestError? Type48 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaErrorCode? Type49 { get; set; }
+        public global::SmallestAI.CreateVoiceCloneRequestUnauthorizedError? Type49 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.CreateVoiceCloneRequestInternalServerError? Type50 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaErrorCode? Type50 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItemsStatus? Type51 { get; set; }
+        public global::SmallestAI.CreateVoiceCloneRequestInternalServerError? Type51 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItemsCloningType? Type52 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItemsStatus? Type52 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems? Type53 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItemsCloningType? Type53 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.VoiceCloningListVoiceClonesResponse200? Type54 { get; set; }
+        public global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems? Type54 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems>? Type55 { get; set; }
+        public global::SmallestAI.VoiceCloningListVoiceClonesResponse200? Type55 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.VoiceCloningDeleteVoiceCloneResponse200? Type56 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems>? Type56 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public bool? Type57 { get; set; }
+        public global::SmallestAI.VoiceCloningDeleteVoiceCloneResponse200? Type57 { get; set; }
         /// <summary>
         /// 
         /// </summary>
