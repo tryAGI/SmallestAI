@@ -53,6 +53,18 @@ namespace SmallestAI
         public string? RequestId { get; set; }
 
         /// <summary>
+        /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("gender")]
+        public string? Gender { get; set; }
+
+        /// <summary>
+        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("emotions")]
+        public global::System.Collections.Generic.Dictionary<string, double>? Emotions { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -72,6 +84,12 @@ namespace SmallestAI
         /// Reference to TranscriptionResponseMetadata
         /// </param>
         /// <param name="requestId"></param>
+        /// <param name="gender">
+        /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
+        /// </param>
+        /// <param name="emotions">
+        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -82,7 +100,9 @@ namespace SmallestAI
             global::System.Collections.Generic.IList<object>? utterances,
             string? language,
             object? metadata,
-            string? requestId)
+            string? requestId,
+            string? gender,
+            global::System.Collections.Generic.Dictionary<string, double>? emotions)
         {
             this.Status = status ?? throw new global::System.ArgumentNullException(nameof(status));
             this.Transcription = transcription ?? throw new global::System.ArgumentNullException(nameof(transcription));
@@ -91,6 +111,8 @@ namespace SmallestAI
             this.Language = language;
             this.Metadata = metadata;
             this.RequestId = requestId;
+            this.Gender = gender;
+            this.Emotions = emotions;
         }
 
         /// <summary>

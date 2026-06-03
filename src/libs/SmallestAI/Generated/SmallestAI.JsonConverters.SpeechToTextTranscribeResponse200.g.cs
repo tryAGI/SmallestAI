@@ -28,6 +28,8 @@ namespace SmallestAI.JsonConverters
             }
 
             var __score0 = 0;
+            if (__jsonProps.Contains("emotions")) __score0++;
+            if (__jsonProps.Contains("gender")) __score0++;
             if (__jsonProps.Contains("language")) __score0++;
             if (__jsonProps.Contains("metadata")) __score0++;
             if (__jsonProps.Contains("request_id")) __score0++;
