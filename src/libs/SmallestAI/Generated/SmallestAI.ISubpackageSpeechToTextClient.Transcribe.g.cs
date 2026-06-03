@@ -84,6 +84,18 @@ namespace SmallestAI
         /// Default Value: POST
         /// </param>
         /// <param name="webhookExtra"></param>
+        /// <param name="redactPii">
+        /// Default Value: false
+        /// </param>
+        /// <param name="redactPci">
+        /// Default Value: false
+        /// </param>
+        /// <param name="emotionDetection">
+        /// Default Value: false
+        /// </param>
+        /// <param name="genderDetection">
+        /// Default Value: false
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -98,6 +110,10 @@ namespace SmallestAI
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
             string? webhookExtra = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPii? redactPii = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci = default,
+            global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection = default,
+            global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -180,6 +196,18 @@ namespace SmallestAI
         /// Default Value: POST
         /// </param>
         /// <param name="webhookExtra"></param>
+        /// <param name="redactPii">
+        /// Default Value: false
+        /// </param>
+        /// <param name="redactPci">
+        /// Default Value: false
+        /// </param>
+        /// <param name="emotionDetection">
+        /// Default Value: false
+        /// </param>
+        /// <param name="genderDetection">
+        /// Default Value: false
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -194,6 +222,10 @@ namespace SmallestAI
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
             string? webhookExtra = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPii? redactPii = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci = default,
+            global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection = default,
+            global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
