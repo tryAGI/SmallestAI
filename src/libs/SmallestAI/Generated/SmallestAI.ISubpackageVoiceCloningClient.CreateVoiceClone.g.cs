@@ -62,10 +62,9 @@ namespace SmallestAI
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
         /// **strongly recommended** — set it to the language of your<br/>
-        /// reference audio. When a TTS request later uses<br/>
-        /// `language: "auto"`, the server falls back to this value, so<br/>
-        /// setting it now avoids silent language mismatches at inference<br/>
-        /// time.<br/>
+        /// reference audio. The TTS request's `language` should also<br/>
+        /// match this code; setting it now avoids silent language<br/>
+        /// mismatches at inference time.<br/>
         /// Must be one of the languages supported by `lightning-v3.1`<br/>
         /// (e.g. `en`, `hi`, `multi`). The server validates and rejects<br/>
         /// unsupported codes with a 400.
@@ -124,10 +123,9 @@ namespace SmallestAI
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
         /// **strongly recommended** — set it to the language of your<br/>
-        /// reference audio. When a TTS request later uses<br/>
-        /// `language: "auto"`, the server falls back to this value, so<br/>
-        /// setting it now avoids silent language mismatches at inference<br/>
-        /// time.<br/>
+        /// reference audio. The TTS request's `language` should also<br/>
+        /// match this code; setting it now avoids silent language<br/>
+        /// mismatches at inference time.<br/>
         /// Must be one of the languages supported by `lightning-v3.1`<br/>
         /// (e.g. `en`, `hi`, `multi`). The server validates and rejects<br/>
         /// unsupported codes with a 400.
@@ -185,10 +183,9 @@ namespace SmallestAI
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
         /// **strongly recommended** — set it to the language of your<br/>
-        /// reference audio. When a TTS request later uses<br/>
-        /// `language: "auto"`, the server falls back to this value, so<br/>
-        /// setting it now avoids silent language mismatches at inference<br/>
-        /// time.<br/>
+        /// reference audio. The TTS request's `language` should also<br/>
+        /// match this code; setting it now avoids silent language<br/>
+        /// mismatches at inference time.<br/>
         /// Must be one of the languages supported by `lightning-v3.1`<br/>
         /// (e.g. `en`, `hi`, `multi`). The server validates and rejects<br/>
         /// unsupported codes with a 400.

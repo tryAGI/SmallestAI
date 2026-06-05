@@ -833,7 +833,6 @@ namespace SmallestAI
         ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
         ///   `pa` (Punjabi), `or` (Odia)<br/>
         /// - **European:** `es` (Spanish)<br/>
-        /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
         /// Default Value: en
         /// </param>
         /// <param name="outputFormat">

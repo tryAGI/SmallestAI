@@ -11,17 +11,12 @@ namespace SmallestAI
     /// the voice was trained on; passing other codes is accepted by the<br/>
     /// API but produces English-pronounced output.<br/>
     /// On `lightning_v3.1`, the full 12-language catalog applies. On<br/>
-    /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi` (with<br/>
-    /// `auto` for code-switching); British and American voices speak<br/>
-    /// English only.<br/>
+    /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi`; British<br/>
+    /// and American voices speak English only.<br/>
     /// Default Value: en
     /// </summary>
     public enum TtsRequestLanguage
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        Auto,
         /// <summary>
         /// 
         /// </summary>
@@ -84,7 +79,6 @@ namespace SmallestAI
         {
             return value switch
             {
-                TtsRequestLanguage.Auto => "auto",
                 TtsRequestLanguage.Bn => "bn",
                 TtsRequestLanguage.En => "en",
                 TtsRequestLanguage.Es => "es",
@@ -107,7 +101,6 @@ namespace SmallestAI
         {
             return value switch
             {
-                "auto" => TtsRequestLanguage.Auto,
                 "bn" => TtsRequestLanguage.Bn,
                 "en" => TtsRequestLanguage.En,
                 "es" => TtsRequestLanguage.Es,
