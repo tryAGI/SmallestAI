@@ -10,15 +10,10 @@ namespace SmallestAI
     ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
     ///   `pa` (Punjabi), `or` (Odia)<br/>
     /// - **European:** `es` (Spanish)<br/>
-    /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
     /// Default Value: en
     /// </summary>
     public enum LightningV31RequestLanguage
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        Auto,
         /// <summary>
         /// 
         /// </summary>
@@ -81,7 +76,6 @@ namespace SmallestAI
         {
             return value switch
             {
-                LightningV31RequestLanguage.Auto => "auto",
                 LightningV31RequestLanguage.Bn => "bn",
                 LightningV31RequestLanguage.En => "en",
                 LightningV31RequestLanguage.Es => "es",
@@ -104,7 +98,6 @@ namespace SmallestAI
         {
             return value switch
             {
-                "auto" => LightningV31RequestLanguage.Auto,
                 "bn" => LightningV31RequestLanguage.Bn,
                 "en" => LightningV31RequestLanguage.En,
                 "es" => LightningV31RequestLanguage.Es,
