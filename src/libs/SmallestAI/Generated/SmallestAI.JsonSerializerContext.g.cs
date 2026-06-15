@@ -89,6 +89,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersModelNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersLanguageJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersLanguageNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWebhookMethodJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWebhookMethodNullableJsonConverter),
@@ -222,6 +226,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeletePronunciationDictRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeletePronunciationDictResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersModel), TypeInfoPropertyName = "WavesV1SttPostParametersModel2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersLanguage), TypeInfoPropertyName = "WavesV1SttPostParametersLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod), TypeInfoPropertyName = "WavesV1SttPostParametersWebhookMethod2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPii), TypeInfoPropertyName = "WavesV1SttPostParametersRedactPii2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPci), TypeInfoPropertyName = "WavesV1SttPostParametersRedactPci2")]

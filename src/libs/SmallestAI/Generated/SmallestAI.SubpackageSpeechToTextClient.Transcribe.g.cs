@@ -28,7 +28,7 @@ namespace SmallestAI
         partial void PrepareTranscribeArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::SmallestAI.WavesV1SttPostParametersModel model,
-            ref string language,
+            ref global::SmallestAI.WavesV1SttPostParametersLanguage language,
             ref bool? wordTimestamps,
             ref bool? diarize,
             ref string? webhookUrl,
@@ -43,7 +43,7 @@ namespace SmallestAI
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
             bool? wordTimestamps,
             bool? diarize,
             string? webhookUrl,
@@ -161,7 +161,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             byte[] request,
             bool? wordTimestamps = default,
@@ -294,7 +294,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextTranscribeResponse200>> TranscribeAsResponseAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             byte[] request,
             bool? wordTimestamps = default,
@@ -356,7 +356,7 @@ namespace SmallestAI
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddRequiredParameter("model", model.ToValueString())
-                                .AddRequiredParameter("language", language)
+                                .AddRequiredParameter("language", language.ToValueString())
                                 .AddOptionalParameter("word_timestamps", wordTimestamps?.ToString().ToLowerInvariant())
                                 .AddOptionalParameter("diarize", diarize?.ToString().ToLowerInvariant())
                                 .AddOptionalParameter("webhook_url", webhookUrl)

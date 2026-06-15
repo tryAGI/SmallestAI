@@ -34,7 +34,7 @@ namespace SmallestAI
         /// ```python<br/>
         /// import base64<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("stream.pcm", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
         ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
@@ -132,7 +132,7 @@ namespace SmallestAI
         /// ```python<br/>
         /// import base64<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("stream.pcm", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
         ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
@@ -230,7 +230,7 @@ namespace SmallestAI
         /// ```python<br/>
         /// import base64<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("stream.pcm", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_sse_lightning_v3_1(<br/>
         ///         text="Streaming this paragraph chunk by chunk so playback can start sooner.",<br/>
