@@ -102,7 +102,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             byte[] request,
             bool? wordTimestamps = default,
@@ -214,7 +214,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextTranscribeResponse200>> TranscribeAsResponseAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             byte[] request,
             bool? wordTimestamps = default,
