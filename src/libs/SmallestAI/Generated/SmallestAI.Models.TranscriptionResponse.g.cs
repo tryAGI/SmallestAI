@@ -26,13 +26,13 @@ namespace SmallestAI
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("words")]
-        public global::System.Collections.Generic.IList<object>? Words { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.Word>? Words { get; set; }
 
         /// <summary>
         /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("utterances")]
-        public global::System.Collections.Generic.IList<object>? Utterances { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? Utterances { get; set; }
 
         /// <summary>
         /// 
@@ -41,10 +41,10 @@ namespace SmallestAI
         public string? Language { get; set; }
 
         /// <summary>
-        /// Reference to TranscriptionResponseMetadata
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
-        public object? Metadata { get; set; }
+        public global::SmallestAI.TranscriptionResponseMetadata? Metadata { get; set; }
 
         /// <summary>
         /// 
@@ -80,9 +80,7 @@ namespace SmallestAI
         /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field.
         /// </param>
         /// <param name="language"></param>
-        /// <param name="metadata">
-        /// Reference to TranscriptionResponseMetadata
-        /// </param>
+        /// <param name="metadata"></param>
         /// <param name="requestId"></param>
         /// <param name="gender">
         /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
@@ -96,10 +94,10 @@ namespace SmallestAI
         public TranscriptionResponse(
             string status,
             string transcription,
-            global::System.Collections.Generic.IList<object>? words,
-            global::System.Collections.Generic.IList<object>? utterances,
+            global::System.Collections.Generic.IList<global::SmallestAI.Word>? words,
+            global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? utterances,
             string? language,
-            object? metadata,
+            global::SmallestAI.TranscriptionResponseMetadata? metadata,
             string? requestId,
             string? gender,
             global::System.Collections.Generic.Dictionary<string, double>? emotions)

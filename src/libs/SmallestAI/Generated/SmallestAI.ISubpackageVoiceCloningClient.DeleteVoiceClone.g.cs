@@ -5,7 +5,7 @@ namespace SmallestAI
     public partial interface ISubpackageVoiceCloningClient
     {
         /// <summary>
-        /// Delete a Voice Clone<br/>
+        /// Delete a Voice Clone (Deprecated)<br/>
         /// Delete a voice clone by `voiceId`. Despite the `/lightning-large/`<br/>
         /// path, this endpoint deletes any voice clone on the organization,<br/>
         /// including clones created via `POST /waves/v1/voice-cloning`.
@@ -20,7 +20,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete a Voice Clone<br/>
+        /// Delete a Voice Clone (Deprecated)<br/>
         /// Delete a voice clone by `voiceId`. Despite the `/lightning-large/`<br/>
         /// path, this endpoint deletes any voice clone on the organization,<br/>
         /// including clones created via `POST /waves/v1/voice-cloning`.
@@ -35,7 +35,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete a Voice Clone<br/>
+        /// Delete a Voice Clone (Deprecated)<br/>
         /// Delete a voice clone by `voiceId`. Despite the `/lightning-large/`<br/>
         /// path, this endpoint deletes any voice clone on the organization,<br/>
         /// including clones created via `POST /waves/v1/voice-cloning`.
