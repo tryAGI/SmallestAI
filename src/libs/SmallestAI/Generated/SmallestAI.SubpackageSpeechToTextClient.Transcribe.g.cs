@@ -28,23 +28,31 @@ namespace SmallestAI
         partial void PrepareTranscribeArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::SmallestAI.WavesV1SttPostParametersModel model,
-            ref string language,
+            ref global::SmallestAI.WavesV1SttPostParametersLanguage language,
             ref bool? wordTimestamps,
             ref bool? diarize,
             ref string? webhookUrl,
             ref global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod,
             ref string? webhookExtra,
+            ref global::SmallestAI.WavesV1SttPostParametersRedactPii? redactPii,
+            ref global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci,
+            ref global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection,
+            ref global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection,
             byte[] request);
         partial void PrepareTranscribeRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
             bool? wordTimestamps,
             bool? diarize,
             string? webhookUrl,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod,
             string? webhookExtra,
+            global::SmallestAI.WavesV1SttPostParametersRedactPii? redactPii,
+            global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci,
+            global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection,
+            global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection,
             byte[] request);
         partial void ProcessTranscribeResponse(
             global::System.Net.Http.HttpClient httpClient,
@@ -135,13 +143,25 @@ namespace SmallestAI
         /// Default Value: POST
         /// </param>
         /// <param name="webhookExtra"></param>
+        /// <param name="redactPii">
+        /// Default Value: false
+        /// </param>
+        /// <param name="redactPci">
+        /// Default Value: false
+        /// </param>
+        /// <param name="emotionDetection">
+        /// Default Value: false
+        /// </param>
+        /// <param name="genderDetection">
+        /// Default Value: false
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             byte[] request,
             bool? wordTimestamps = default,
@@ -149,6 +169,10 @@ namespace SmallestAI
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
             string? webhookExtra = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPii? redactPii = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci = default,
+            global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection = default,
+            global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -162,6 +186,10 @@ namespace SmallestAI
                 webhookUrl: webhookUrl,
                 webhookMethod: webhookMethod,
                 webhookExtra: webhookExtra,
+                redactPii: redactPii,
+                redactPci: redactPci,
+                emotionDetection: emotionDetection,
+                genderDetection: genderDetection,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -248,13 +276,25 @@ namespace SmallestAI
         /// Default Value: POST
         /// </param>
         /// <param name="webhookExtra"></param>
+        /// <param name="redactPii">
+        /// Default Value: false
+        /// </param>
+        /// <param name="redactPci">
+        /// Default Value: false
+        /// </param>
+        /// <param name="emotionDetection">
+        /// Default Value: false
+        /// </param>
+        /// <param name="genderDetection">
+        /// Default Value: false
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextTranscribeResponse200>> TranscribeAsResponseAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            string language,
+            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             byte[] request,
             bool? wordTimestamps = default,
@@ -262,6 +302,10 @@ namespace SmallestAI
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
             string? webhookExtra = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPii? redactPii = default,
+            global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci = default,
+            global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection = default,
+            global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -278,6 +322,10 @@ namespace SmallestAI
                 webhookUrl: ref webhookUrl,
                 webhookMethod: ref webhookMethod,
                 webhookExtra: ref webhookExtra,
+                redactPii: ref redactPii,
+                redactPci: ref redactPci,
+                emotionDetection: ref emotionDetection,
+                genderDetection: ref genderDetection,
                 request: request);
 
 
@@ -308,12 +356,16 @@ namespace SmallestAI
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddRequiredParameter("model", model.ToValueString())
-                                .AddRequiredParameter("language", language)
+                                .AddRequiredParameter("language", language.ToValueString())
                                 .AddOptionalParameter("word_timestamps", wordTimestamps?.ToString().ToLowerInvariant())
                                 .AddOptionalParameter("diarize", diarize?.ToString().ToLowerInvariant())
                                 .AddOptionalParameter("webhook_url", webhookUrl)
                                 .AddOptionalParameter("webhook_method", webhookMethod?.ToValueString())
                                 .AddOptionalParameter("webhook_extra", webhookExtra)
+                                .AddOptionalParameter("redact_pii", redactPii?.ToValueString())
+                                .AddOptionalParameter("redact_pci", redactPci?.ToValueString())
+                                .AddOptionalParameter("emotion_detection", emotionDetection?.ToValueString())
+                                .AddOptionalParameter("gender_detection", genderDetection?.ToValueString())
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::SmallestAI.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -366,6 +418,10 @@ namespace SmallestAI
                     webhookUrl: webhookUrl,
                     webhookMethod: webhookMethod,
                     webhookExtra: webhookExtra,
+                    redactPii: redactPii,
+                    redactPci: redactPci,
+                    emotionDetection: emotionDetection,
+                    genderDetection: genderDetection,
                     request: request);
 
                 return __httpRequest;

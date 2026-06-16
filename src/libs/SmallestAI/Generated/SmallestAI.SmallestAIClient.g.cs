@@ -10,7 +10,7 @@ namespace SmallestAI
     public sealed partial class SmallestAIClient : global::SmallestAI.ISmallestAIClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        /// waves
         /// </summary>
         public const string DefaultBaseUrl = "https://api.smallest.ai/";
 

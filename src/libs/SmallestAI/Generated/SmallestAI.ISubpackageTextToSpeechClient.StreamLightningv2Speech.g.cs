@@ -5,7 +5,7 @@ namespace SmallestAI
     public partial interface ISubpackageTextToSpeechClient
     {
         /// <summary>
-        /// Lightning v2 SSE<br/>
+        /// Lightning v2 SSE (Deprecated)<br/>
         /// The Lightning v2 SSE API provides real-time text-to-speech streaming capabilities with high-quality voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.<br/>
         /// For an end-to-end example of how to use the Lightning v2 SSE API, check out [Text to Speech (SSE) Example](https://github.com/smallest-inc/waves-examples/blob/main/lightning_v2/http_streaming/http_streaming_api.py)<br/>
         /// ## When to Use<br/>
@@ -29,7 +29,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v2 SSE<br/>
+        /// Lightning v2 SSE (Deprecated)<br/>
         /// The Lightning v2 SSE API provides real-time text-to-speech streaming capabilities with high-quality voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.<br/>
         /// For an end-to-end example of how to use the Lightning v2 SSE API, check out [Text to Speech (SSE) Example](https://github.com/smallest-inc/waves-examples/blob/main/lightning_v2/http_streaming/http_streaming_api.py)<br/>
         /// ## When to Use<br/>
@@ -53,7 +53,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v2 SSE<br/>
+        /// Lightning v2 SSE (Deprecated)<br/>
         /// The Lightning v2 SSE API provides real-time text-to-speech streaming capabilities with high-quality voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.<br/>
         /// For an end-to-end example of how to use the Lightning v2 SSE API, check out [Text to Speech (SSE) Example](https://github.com/smallest-inc/waves-examples/blob/main/lightning_v2/http_streaming/http_streaming_api.py)<br/>
         /// ## When to Use<br/>

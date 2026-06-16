@@ -76,7 +76,7 @@ namespace SmallestAI
         /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
         /// ```python<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("speech.wav", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_lightning_v3_1(<br/>
         ///         text="Hello from Lightning v3.1.",<br/>
@@ -174,7 +174,7 @@ namespace SmallestAI
         /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
         /// ```python<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("speech.wav", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_lightning_v3_1(<br/>
         ///         text="Hello from Lightning v3.1.",<br/>
@@ -688,7 +688,7 @@ namespace SmallestAI
         /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
         /// ```python<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("speech.wav", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_lightning_v3_1(<br/>
         ///         text="Hello from Lightning v3.1.",<br/>
@@ -1239,7 +1239,7 @@ namespace SmallestAI
         /// **Python** (`pip install smallestai&gt;=4.4.0`)<br/>
         /// ```python<br/>
         /// from smallestai import SmallestAI<br/>
-        /// client = SmallestAI(token="YOUR_API_KEY")<br/>
+        /// client = SmallestAI(api_key="YOUR_API_KEY")<br/>
         /// with open("speech.wav", "wb") as f:<br/>
         ///     for chunk in client.waves.synthesize_lightning_v3_1(<br/>
         ///         text="Hello from Lightning v3.1.",<br/>
@@ -1317,7 +1317,6 @@ namespace SmallestAI
         ///   `bn` (Bengali), `gu` (Gujarati), `te` (Telugu), `ml` (Malayalam),<br/>
         ///   `pa` (Punjabi), `or` (Odia)<br/>
         /// - **European:** `es` (Spanish)<br/>
-        /// - `auto` — auto-detect from input text (recommended for code-switching)<br/>
         /// Default Value: en
         /// </param>
         /// <param name="outputFormat">

@@ -286,9 +286,8 @@ namespace SmallestAI
         /// the voice was trained on; passing other codes is accepted by the<br/>
         /// API but produces English-pronounced output.<br/>
         /// On `lightning_v3.1`, the full 12-language catalog applies. On<br/>
-        /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi` (with<br/>
-        /// `auto` for code-switching); British and American voices speak<br/>
-        /// English only.<br/>
+        /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi`; British<br/>
+        /// and American voices speak English only.<br/>
         /// Default Value: en
         /// </param>
         /// <param name="outputFormat">
@@ -301,6 +300,10 @@ namespace SmallestAI
         /// </param>
         /// <param name="pronunciationDicts">
         /// The IDs of the pronunciation dictionaries to use for speech generation. Available on both `lightning_v3.1` and `lightning_v3.1_pro`.
+        /// </param>
+        /// <param name="wordTimestamps">
+        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/waves/documentation/text-to-speech-lightning/word-timestamps).<br/>
+        /// Default Value: false
         /// </param>
         /// <param name="sessionId">
         /// Optional client-provided session identifier for correlation. Only alphanumeric characters, hyphens, underscores, and dots are allowed. Max 128 characters. Echoed back in response headers as `X-External-Session-Id`.
@@ -321,6 +324,7 @@ namespace SmallestAI
             global::SmallestAI.TtsRequestLanguage? language = default,
             global::SmallestAI.TtsRequestOutputFormat? outputFormat = default,
             global::System.Collections.Generic.IList<string>? pronunciationDicts = default,
+            bool? wordTimestamps = default,
             string? sessionId = default,
             string? requestId = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,

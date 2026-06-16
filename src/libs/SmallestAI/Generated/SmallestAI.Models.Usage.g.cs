@@ -27,10 +27,10 @@ namespace SmallestAI
         public int? TotalTokens { get; set; }
 
         /// <summary>
-        /// Reference to UsagePromptTokensDetails
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("prompt_tokens_details")]
-        public object? PromptTokensDetails { get; set; }
+        public global::SmallestAI.UsagePromptTokensDetails? PromptTokensDetails { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -46,9 +46,7 @@ namespace SmallestAI
         /// </param>
         /// <param name="completionTokens"></param>
         /// <param name="totalTokens"></param>
-        /// <param name="promptTokensDetails">
-        /// Reference to UsagePromptTokensDetails
-        /// </param>
+        /// <param name="promptTokensDetails"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -56,7 +54,7 @@ namespace SmallestAI
             int? promptTokens,
             int? completionTokens,
             int? totalTokens,
-            object? promptTokensDetails)
+            global::SmallestAI.UsagePromptTokensDetails? promptTokensDetails)
         {
             this.PromptTokens = promptTokens;
             this.CompletionTokens = completionTokens;

@@ -26,13 +26,13 @@ namespace SmallestAI
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("words")]
-        public global::System.Collections.Generic.IList<object>? Words { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.Word>? Words { get; set; }
 
         /// <summary>
         /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("utterances")]
-        public global::System.Collections.Generic.IList<object>? Utterances { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? Utterances { get; set; }
 
         /// <summary>
         /// 
@@ -41,16 +41,28 @@ namespace SmallestAI
         public string? Language { get; set; }
 
         /// <summary>
-        /// Reference to TranscriptionResponseMetadata
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
-        public object? Metadata { get; set; }
+        public global::SmallestAI.TranscriptionResponseMetadata? Metadata { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("request_id")]
         public string? RequestId { get; set; }
+
+        /// <summary>
+        /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("gender")]
+        public string? Gender { get; set; }
+
+        /// <summary>
+        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("emotions")]
+        public global::System.Collections.Generic.Dictionary<string, double>? Emotions { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -68,21 +80,27 @@ namespace SmallestAI
         /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field.
         /// </param>
         /// <param name="language"></param>
-        /// <param name="metadata">
-        /// Reference to TranscriptionResponseMetadata
-        /// </param>
+        /// <param name="metadata"></param>
         /// <param name="requestId"></param>
+        /// <param name="gender">
+        /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
+        /// </param>
+        /// <param name="emotions">
+        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public TranscriptionResponse(
             string status,
             string transcription,
-            global::System.Collections.Generic.IList<object>? words,
-            global::System.Collections.Generic.IList<object>? utterances,
+            global::System.Collections.Generic.IList<global::SmallestAI.Word>? words,
+            global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? utterances,
             string? language,
-            object? metadata,
-            string? requestId)
+            global::SmallestAI.TranscriptionResponseMetadata? metadata,
+            string? requestId,
+            string? gender,
+            global::System.Collections.Generic.Dictionary<string, double>? emotions)
         {
             this.Status = status ?? throw new global::System.ArgumentNullException(nameof(status));
             this.Transcription = transcription ?? throw new global::System.ArgumentNullException(nameof(transcription));
@@ -91,6 +109,8 @@ namespace SmallestAI
             this.Language = language;
             this.Metadata = metadata;
             this.RequestId = requestId;
+            this.Gender = gender;
+            this.Emotions = emotions;
         }
 
         /// <summary>

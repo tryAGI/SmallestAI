@@ -4,9 +4,9 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Reference to Utterance
+    /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
     /// </summary>
-    public sealed partial class TranscriptionResponseUtterance
+    public sealed partial class TranscriptionResponseEmotions
     {
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace SmallestAI
     public sealed partial class SubpackagePronunciationDictionariesClient : global::SmallestAI.ISubpackagePronunciationDictionariesClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        /// waves
         /// </summary>
         public const string DefaultBaseUrl = "https://api.smallest.ai/";
 

@@ -5,7 +5,7 @@ namespace SmallestAI
     public partial interface ISubpackageTextToSpeechClient
     {
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="request"></param>
@@ -18,7 +18,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="request"></param>
@@ -31,7 +31,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="request"></param>
@@ -44,7 +44,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="text">

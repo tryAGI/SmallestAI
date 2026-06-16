@@ -4,16 +4,42 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Reference to ToolType
+    /// 
     /// </summary>
-    public sealed partial class ToolType
+    public enum ToolType
     {
-
         /// <summary>
-        /// Additional properties that are not explicitly defined in the schema
+        /// 
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonExtensionData]
-        public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
+        Function,
+    }
 
+    /// <summary>
+    /// Enum extensions to do fast conversions without the reflection.
+    /// </summary>
+    public static class ToolTypeExtensions
+    {
+        /// <summary>
+        /// Converts an enum to a string.
+        /// </summary>
+        public static string ToValueString(this ToolType value)
+        {
+            return value switch
+            {
+                ToolType.Function => "function",
+                _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
+            };
+        }
+        /// <summary>
+        /// Converts an string to a enum.
+        /// </summary>
+        public static ToolType? ToEnum(string value)
+        {
+            return value switch
+            {
+                "function" => ToolType.Function,
+                _ => null,
+            };
+        }
     }
 }

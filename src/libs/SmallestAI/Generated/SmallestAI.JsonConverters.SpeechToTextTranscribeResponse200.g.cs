@@ -23,13 +23,28 @@ namespace SmallestAI.JsonConverters
                 foreach (var __jsonProp in __jsonDocument.RootElement.EnumerateObject())
                 {
                     __jsonProps.Add(__jsonProp.Name);
+                    if (__jsonProp.Value.ValueKind == global::System.Text.Json.JsonValueKind.Object)
+                    {
+                        foreach (var __nestedJsonProp in __jsonProp.Value.EnumerateObject())
+                        {
+                            __jsonProps.Add(__jsonProp.Name + "." + __nestedJsonProp.Name);
+                        }
+                    }
 
                 }
             }
 
             var __score0 = 0;
+            if (__jsonProps.Contains("emotions")) __score0++;
+            if (__jsonProps.Contains("gender")) __score0++;
             if (__jsonProps.Contains("language")) __score0++;
             if (__jsonProps.Contains("metadata")) __score0++;
+            if (__jsonProps.Contains("metadata.duration")) __score0++;
+            if (__jsonProps.Contains("metadata.fileSize")) __score0++;
+            if (__jsonProps.Contains("metadata.filename")) __score0++;
+            if (__jsonProps.Contains("metadata.num_chunks")) __score0++;
+            if (__jsonProps.Contains("metadata.processing_time_ms")) __score0++;
+            if (__jsonProps.Contains("metadata.rtfx")) __score0++;
             if (__jsonProps.Contains("request_id")) __score0++;
             if (__jsonProps.Contains("status")) __score0++;
             if (__jsonProps.Contains("transcription")) __score0++;
