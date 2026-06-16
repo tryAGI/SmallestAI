@@ -26,7 +26,7 @@ namespace SmallestAI
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tool_calls")]
-        public global::System.Collections.Generic.IList<object>? ToolCalls { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.ToolCall>? ToolCalls { get; set; }
 
         /// <summary>
         /// Required when `role` is `"tool"`.
@@ -60,7 +60,7 @@ namespace SmallestAI
         public ElectronMessage(
             string role,
             string? content,
-            global::System.Collections.Generic.IList<object>? toolCalls,
+            global::System.Collections.Generic.IList<global::SmallestAI.ToolCall>? toolCalls,
             string? toolCallId)
         {
             this.Role = role ?? throw new global::System.ArgumentNullException(nameof(role));

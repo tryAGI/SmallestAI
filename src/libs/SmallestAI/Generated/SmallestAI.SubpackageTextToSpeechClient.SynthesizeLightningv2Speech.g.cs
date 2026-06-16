@@ -42,7 +42,7 @@ namespace SmallestAI
             ref byte[] content);
 
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="request"></param>
@@ -65,7 +65,7 @@ namespace SmallestAI
             return __response.Body;
         }
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="request"></param>
@@ -500,7 +500,7 @@ namespace SmallestAI
             }
         }
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="request"></param>
@@ -972,7 +972,7 @@ namespace SmallestAI
             }
         }
         /// <summary>
-        /// Lightning v2<br/>
+        /// Lightning v2 (Deprecated)<br/>
         /// Get speech for given text using the Waves API
         /// </summary>
         /// <param name="text">

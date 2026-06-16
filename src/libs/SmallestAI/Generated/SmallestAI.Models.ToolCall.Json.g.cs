@@ -2,7 +2,7 @@
 
 namespace SmallestAI
 {
-    public sealed partial class TranscriptionResponseWord
+    public sealed partial class ToolCall
     {
         /// <summary>
         /// Serializes the current instance to a JSON string using the provided JsonSerializerContext.
@@ -34,14 +34,14 @@ namespace SmallestAI
         /// <summary>
         /// Deserializes a JSON string using the provided JsonSerializerContext.
         /// </summary>
-        public static global::SmallestAI.TranscriptionResponseWord? FromJson(
+        public static global::SmallestAI.ToolCall? FromJson(
             string json,
             global::System.Text.Json.Serialization.JsonSerializerContext jsonSerializerContext)
         {
             return global::System.Text.Json.JsonSerializer.Deserialize(
                 json,
-                typeof(global::SmallestAI.TranscriptionResponseWord),
-                jsonSerializerContext) as global::SmallestAI.TranscriptionResponseWord;
+                typeof(global::SmallestAI.ToolCall),
+                jsonSerializerContext) as global::SmallestAI.ToolCall;
         }
 
         /// <summary>
@@ -51,11 +51,11 @@ namespace SmallestAI
         [global::System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.")]
         [global::System.Diagnostics.CodeAnalysis.RequiresDynamicCode("JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.")]
 #endif
-        public static global::SmallestAI.TranscriptionResponseWord? FromJson(
+        public static global::SmallestAI.ToolCall? FromJson(
             string json,
             global::System.Text.Json.JsonSerializerOptions? jsonSerializerOptions = null)
         {
-            return global::System.Text.Json.JsonSerializer.Deserialize<global::SmallestAI.TranscriptionResponseWord>(
+            return global::System.Text.Json.JsonSerializer.Deserialize<global::SmallestAI.ToolCall>(
                 json,
                 jsonSerializerOptions);
         }
@@ -63,14 +63,14 @@ namespace SmallestAI
         /// <summary>
         /// Deserializes a JSON stream using the provided JsonSerializerContext.
         /// </summary>
-        public static async global::System.Threading.Tasks.ValueTask<global::SmallestAI.TranscriptionResponseWord?> FromJsonStreamAsync(
+        public static async global::System.Threading.Tasks.ValueTask<global::SmallestAI.ToolCall?> FromJsonStreamAsync(
             global::System.IO.Stream jsonStream,
             global::System.Text.Json.Serialization.JsonSerializerContext jsonSerializerContext)
         {
             return (await global::System.Text.Json.JsonSerializer.DeserializeAsync(
                 jsonStream,
-                typeof(global::SmallestAI.TranscriptionResponseWord),
-                jsonSerializerContext).ConfigureAwait(false)) as global::SmallestAI.TranscriptionResponseWord;
+                typeof(global::SmallestAI.ToolCall),
+                jsonSerializerContext).ConfigureAwait(false)) as global::SmallestAI.ToolCall;
         }
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace SmallestAI
         [global::System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.")]
         [global::System.Diagnostics.CodeAnalysis.RequiresDynamicCode("JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.")]
 #endif
-        public static global::System.Threading.Tasks.ValueTask<global::SmallestAI.TranscriptionResponseWord?> FromJsonStreamAsync(
+        public static global::System.Threading.Tasks.ValueTask<global::SmallestAI.ToolCall?> FromJsonStreamAsync(
             global::System.IO.Stream jsonStream,
             global::System.Text.Json.JsonSerializerOptions? jsonSerializerOptions = null)
         {
-            return global::System.Text.Json.JsonSerializer.DeserializeAsync<global::SmallestAI.TranscriptionResponseWord?>(
+            return global::System.Text.Json.JsonSerializer.DeserializeAsync<global::SmallestAI.ToolCall?>(
                 jsonStream,
                 jsonSerializerOptions);
         }
