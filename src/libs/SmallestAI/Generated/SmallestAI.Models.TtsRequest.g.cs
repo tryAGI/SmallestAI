@@ -64,9 +64,11 @@ namespace SmallestAI
         /// query `GET /waves/v1/lightning-v3.1/get_voices`. Pass a language<br/>
         /// the voice was trained on; passing other codes is accepted by the<br/>
         /// API but produces English-pronounced output.<br/>
-        /// On `lightning_v3.1`, the full 12-language catalog applies. On<br/>
-        /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi`; British<br/>
-        /// and American voices speak English only.<br/>
+        /// **On `lightning_v3.1`**, the full 12-language catalog applies.<br/>
+        /// **On `lightning_v3.1_pro`**:<br/>
+        /// - Pass `en` → UK + American accented English.<br/>
+        /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
+        /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage).<br/>
         /// Default Value: en
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
@@ -154,9 +156,11 @@ namespace SmallestAI
         /// query `GET /waves/v1/lightning-v3.1/get_voices`. Pass a language<br/>
         /// the voice was trained on; passing other codes is accepted by the<br/>
         /// API but produces English-pronounced output.<br/>
-        /// On `lightning_v3.1`, the full 12-language catalog applies. On<br/>
-        /// `lightning_v3.1_pro`, Indian voices speak `en` and `hi`; British<br/>
-        /// and American voices speak English only.<br/>
+        /// **On `lightning_v3.1`**, the full 12-language catalog applies.<br/>
+        /// **On `lightning_v3.1_pro`**:<br/>
+        /// - Pass `en` → UK + American accented English.<br/>
+        /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
+        /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage).<br/>
         /// Default Value: en
         /// </param>
         /// <param name="outputFormat">
