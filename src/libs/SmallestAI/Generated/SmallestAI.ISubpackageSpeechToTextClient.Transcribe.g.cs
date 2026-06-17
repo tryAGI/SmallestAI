@@ -8,7 +8,7 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (38 languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (17 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
         /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
         /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
@@ -120,7 +120,7 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (38 languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (17 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
         /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
         /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
