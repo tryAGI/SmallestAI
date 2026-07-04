@@ -7,7 +7,7 @@ namespace SmallestAI
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
-    public partial interface ISmallestAIClient : global::System.IDisposable
+    public partial interface ITextToSpeechClient : global::System.IDisposable
     {
         /// <summary>
         /// The HttpClient instance.
@@ -43,36 +43,6 @@ namespace SmallestAI
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LlmClient Llm { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PronunciationDictionariesClient PronunciationDictionaries { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public SpeechToTextClient SpeechToText { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public TextToSpeechClient TextToSpeech { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public VoiceCloningClient VoiceCloning { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public VoicesClient Voices { get; }
 
     }
 }
