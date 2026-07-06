@@ -68,6 +68,7 @@ namespace SmallestAI
         /// **On `lightning_v3.1_pro`**:<br/>
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
+        /// - Pass the ISO 639-1 code of any other Pro language (e.g. `ta`, `de`, `ja`) with a matching Pro voice — 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) have dedicated Pro voices.<br/>
         /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
@@ -159,6 +160,7 @@ namespace SmallestAI
         /// **On `lightning_v3.1_pro`**:<br/>
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
+        /// - Pass the ISO 639-1 code of any other Pro language (e.g. `ta`, `de`, `ja`) with a matching Pro voice — 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) have dedicated Pro voices.<br/>
         /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage).
         /// </param>
         /// <param name="outputFormat">

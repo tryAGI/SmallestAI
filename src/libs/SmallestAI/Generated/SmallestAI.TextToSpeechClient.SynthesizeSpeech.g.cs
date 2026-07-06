@@ -47,7 +47,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). The Pro pool also supports 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) — pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language; see the [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -56,7 +56,7 @@ namespace SmallestAI
         /// - 44 kHz natural, expressive synthesis<br/>
         /// - Model selectable per request via `model` body parameter<br/>
         /// - Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices<br/>
-        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`.<br/>
+        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`; plus 27 additional languages via dedicated Pro voices (pass the ISO 639-1 code, e.g. `ta`, `de`, `ja`).<br/>
         /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
         /// - Sample rates: 8 kHz – 44.1 kHz<br/>
         /// - Speed: 0.5× – 2×<br/>
@@ -153,7 +153,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). The Pro pool also supports 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) — pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language; see the [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -162,7 +162,7 @@ namespace SmallestAI
         /// - 44 kHz natural, expressive synthesis<br/>
         /// - Model selectable per request via `model` body parameter<br/>
         /// - Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices<br/>
-        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`.<br/>
+        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`; plus 27 additional languages via dedicated Pro voices (pass the ISO 639-1 code, e.g. `ta`, `de`, `ja`).<br/>
         /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
         /// - Sample rates: 8 kHz – 44.1 kHz<br/>
         /// - Speed: 0.5× – 2×<br/>
@@ -675,7 +675,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). The Pro pool also supports 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) — pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language; see the [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -684,7 +684,7 @@ namespace SmallestAI
         /// - 44 kHz natural, expressive synthesis<br/>
         /// - Model selectable per request via `model` body parameter<br/>
         /// - Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices<br/>
-        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`.<br/>
+        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`; plus 27 additional languages via dedicated Pro voices (pass the ISO 639-1 code, e.g. `ta`, `de`, `ja`).<br/>
         /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
         /// - Sample rates: 8 kHz – 44.1 kHz<br/>
         /// - Speed: 0.5× – 2×<br/>
@@ -1234,7 +1234,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). The Pro pool also supports 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) — pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language; see the [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the full 12-language catalog applies (see voice catalog).<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -1243,7 +1243,7 @@ namespace SmallestAI
         /// - 44 kHz natural, expressive synthesis<br/>
         /// - Model selectable per request via `model` body parameter<br/>
         /// - Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices<br/>
-        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`.<br/>
+        /// - 12 documented languages on `lightning_v3.1`. On `lightning_v3.1_pro`: `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`; plus 27 additional languages via dedicated Pro voices (pass the ISO 639-1 code, e.g. `ta`, `de`, `ja`).<br/>
         /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
         /// - Sample rates: 8 kHz – 44.1 kHz<br/>
         /// - Speed: 0.5× – 2×<br/>
@@ -1354,6 +1354,7 @@ namespace SmallestAI
         /// **On `lightning_v3.1_pro`**:<br/>
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
+        /// - Pass the ISO 639-1 code of any other Pro language (e.g. `ta`, `de`, `ja`) with a matching Pro voice — 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) have dedicated Pro voices.<br/>
         /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage).
         /// </param>
         /// <param name="outputFormat">
