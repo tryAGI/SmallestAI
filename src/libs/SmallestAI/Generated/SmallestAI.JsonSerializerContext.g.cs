@@ -29,6 +29,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestLanguageNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.TtsRequestNumberPronunciationLanguageJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestNumberPronunciationLanguageNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatNullableJsonConverter),
@@ -48,6 +52,10 @@ namespace SmallestAI
             typeof(global::SmallestAI.JsonConverters.LightningV31RequestLanguageJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.LightningV31RequestLanguageNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.LightningV31RequestNumberPronunciationLanguageJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.LightningV31RequestNumberPronunciationLanguageNullableJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.LightningV31RequestOutputFormatJsonConverter),
 
@@ -154,6 +162,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestModel), TypeInfoPropertyName = "TtsRequestModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestSampleRate), TypeInfoPropertyName = "TtsRequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestLanguage), TypeInfoPropertyName = "TtsRequestLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage), TypeInfoPropertyName = "TtsRequestNumberPronunciationLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestOutputFormat), TypeInfoPropertyName = "TtsRequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
@@ -165,6 +174,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestModel), TypeInfoPropertyName = "LightningV31RequestModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestSampleRate), TypeInfoPropertyName = "LightningV31RequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestLanguage), TypeInfoPropertyName = "LightningV31RequestLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestNumberPronunciationLanguage), TypeInfoPropertyName = "LightningV31RequestNumberPronunciationLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestOutputFormat), TypeInfoPropertyName = "LightningV31RequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31Request))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestBadRequestError))]

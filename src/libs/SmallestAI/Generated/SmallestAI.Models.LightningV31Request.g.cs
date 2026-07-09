@@ -70,6 +70,24 @@ namespace SmallestAI
         public global::SmallestAI.LightningV31RequestLanguage? Language { get; set; }
 
         /// <summary>
+        /// Optional. Sets the language used to read out numbers, dates, and<br/>
+        /// other text — the text-normalization language — independently of<br/>
+        /// the synthesis voice.<br/>
+        /// - If you **omit `language`**, this value also becomes the<br/>
+        ///   synthesis language: model selection and voice routing follow it.<br/>
+        /// - If you **set `language` explicitly**, `language` always wins for<br/>
+        ///   synthesis and `number_pronunciation_language` only changes how<br/>
+        ///   numbers and text are normalized (for example, read digits in<br/>
+        ///   Hindi while an English voice speaks the surrounding words).<br/>
+        /// - Omit this field to keep the existing behaviour — normalization<br/>
+        ///   follows `language`.<br/>
+        /// Accepts the same language codes as `language`.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("number_pronunciation_language")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.LightningV31RequestNumberPronunciationLanguageJsonConverter))]
+        public global::SmallestAI.LightningV31RequestNumberPronunciationLanguage? NumberPronunciationLanguage { get; set; }
+
+        /// <summary>
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
         /// playable in browsers and most media players. The server default<br/>
@@ -144,6 +162,20 @@ namespace SmallestAI
         /// - **European:** `es` (Spanish)<br/>
         /// Default Value: en
         /// </param>
+        /// <param name="numberPronunciationLanguage">
+        /// Optional. Sets the language used to read out numbers, dates, and<br/>
+        /// other text — the text-normalization language — independently of<br/>
+        /// the synthesis voice.<br/>
+        /// - If you **omit `language`**, this value also becomes the<br/>
+        ///   synthesis language: model selection and voice routing follow it.<br/>
+        /// - If you **set `language` explicitly**, `language` always wins for<br/>
+        ///   synthesis and `number_pronunciation_language` only changes how<br/>
+        ///   numbers and text are normalized (for example, read digits in<br/>
+        ///   Hindi while an English voice speaks the surrounding words).<br/>
+        /// - Omit this field to keep the existing behaviour — normalization<br/>
+        ///   follows `language`.<br/>
+        /// Accepts the same language codes as `language`.
+        /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
@@ -171,6 +203,7 @@ namespace SmallestAI
             global::SmallestAI.LightningV31RequestSampleRate? sampleRate,
             double? speed,
             global::SmallestAI.LightningV31RequestLanguage? language,
+            global::SmallestAI.LightningV31RequestNumberPronunciationLanguage? numberPronunciationLanguage,
             global::SmallestAI.LightningV31RequestOutputFormat? outputFormat,
             global::System.Collections.Generic.IList<string>? pronunciationDicts,
             string? sessionId,
@@ -182,6 +215,7 @@ namespace SmallestAI
             this.SampleRate = sampleRate;
             this.Speed = speed;
             this.Language = language;
+            this.NumberPronunciationLanguage = numberPronunciationLanguage;
             this.OutputFormat = outputFormat;
             this.PronunciationDicts = pronunciationDicts;
             this.SessionId = sessionId;

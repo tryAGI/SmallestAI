@@ -1319,6 +1319,20 @@ namespace SmallestAI
         /// - **European:** `es` (Spanish)<br/>
         /// Default Value: en
         /// </param>
+        /// <param name="numberPronunciationLanguage">
+        /// Optional. Sets the language used to read out numbers, dates, and<br/>
+        /// other text — the text-normalization language — independently of<br/>
+        /// the synthesis voice.<br/>
+        /// - If you **omit `language`**, this value also becomes the<br/>
+        ///   synthesis language: model selection and voice routing follow it.<br/>
+        /// - If you **set `language` explicitly**, `language` always wins for<br/>
+        ///   synthesis and `number_pronunciation_language` only changes how<br/>
+        ///   numbers and text are normalized (for example, read digits in<br/>
+        ///   Hindi while an English voice speaks the surrounding words).<br/>
+        /// - Omit this field to keep the existing behaviour — normalization<br/>
+        ///   follows `language`.<br/>
+        /// Accepts the same language codes as `language`.
+        /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
@@ -1347,6 +1361,7 @@ namespace SmallestAI
             global::SmallestAI.LightningV31RequestSampleRate? sampleRate = default,
             double? speed = default,
             global::SmallestAI.LightningV31RequestLanguage? language = default,
+            global::SmallestAI.LightningV31RequestNumberPronunciationLanguage? numberPronunciationLanguage = default,
             global::SmallestAI.LightningV31RequestOutputFormat? outputFormat = default,
             global::System.Collections.Generic.IList<string>? pronunciationDicts = default,
             string? sessionId = default,
@@ -1362,6 +1377,7 @@ namespace SmallestAI
                 SampleRate = sampleRate,
                 Speed = speed,
                 Language = language,
+                NumberPronunciationLanguage = numberPronunciationLanguage,
                 OutputFormat = outputFormat,
                 PronunciationDicts = pronunciationDicts,
                 SessionId = sessionId,

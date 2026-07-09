@@ -27,7 +27,7 @@ namespace SmallestAI
         public double? End { get; set; }
 
         /// <summary>
-        /// 
+        /// Per-word confidence score, from 0.0 to 1.0.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("confidence")]
         public double? Confidence { get; set; }
@@ -50,7 +50,9 @@ namespace SmallestAI
         /// <param name="word1"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        /// <param name="confidence"></param>
+        /// <param name="confidence">
+        /// Per-word confidence score, from 0.0 to 1.0.
+        /// </param>
         /// <param name="speaker">
         /// Present when `diarize=true`.
         /// </param>
