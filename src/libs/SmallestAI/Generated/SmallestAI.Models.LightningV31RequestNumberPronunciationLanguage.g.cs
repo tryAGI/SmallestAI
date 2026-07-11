@@ -4,17 +4,23 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Optional. Sets the language used to read out numbers, dates, and<br/>
-    /// other text — the text-normalization language — independently of<br/>
-    /// the synthesis voice.<br/>
+    /// Optional. Sets the language used to read out numeric content —<br/>
+    /// numbers, currency amounts, times, and the numeric parts of dates<br/>
+    /// and years — independently of the synthesis voice. Ordinary words<br/>
+    /// are not translated.<br/>
     /// - If you **omit `language`**, this value also becomes the<br/>
     ///   synthesis language: model selection and voice routing follow it.<br/>
     /// - If you **set `language` explicitly**, `language` always wins for<br/>
     ///   synthesis and `number_pronunciation_language` only changes how<br/>
-    ///   numbers and text are normalized (for example, read digits in<br/>
-    ///   Hindi while an English voice speaks the surrounding words).<br/>
+    ///   numeric content is normalized. It works both ways — read numbers<br/>
+    ///   in Hindi under an English voice, or in English under a Hindi<br/>
+    ///   voice (tuned for Indian, often mixed-script, use cases).<br/>
     /// - Omit this field to keep the existing behaviour — normalization<br/>
     ///   follows `language`.<br/>
+    /// Note: only numeric tokens are re-spoken; the words around them<br/>
+    /// stay in the text language. On a cross-language request names may<br/>
+    /// also render in the target script (e.g. "Smith" → "स्मिथ"), which<br/>
+    /// is generally the desired reading for native-language voices.<br/>
     /// Accepts the same language codes as `language`.
     /// </summary>
     public enum LightningV31RequestNumberPronunciationLanguage
@@ -24,7 +30,7 @@ namespace SmallestAI
         /// </summary>
         Bn,
         /// <summary>
-        /// 
+        /// only numeric tokens are re-spoken; the words around them
         /// </summary>
         En,
         /// <summary>
@@ -52,7 +58,7 @@ namespace SmallestAI
         /// </summary>
         Mr,
         /// <summary>
-        /// 
+        /// only numeric tokens are re-spoken; the words around them
         /// </summary>
         Or,
         /// <summary>
@@ -64,7 +70,7 @@ namespace SmallestAI
         /// </summary>
         Ta,
         /// <summary>
-        /// 
+        /// only numeric tokens are re-spoken; the words around them
         /// </summary>
         Te,
     }
