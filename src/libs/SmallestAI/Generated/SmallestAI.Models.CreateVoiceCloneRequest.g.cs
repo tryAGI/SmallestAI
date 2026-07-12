@@ -61,7 +61,7 @@ namespace SmallestAI
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
         /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`, `multi`). The server validates and rejects<br/>
+        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
         /// unsupported codes with a 400.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
@@ -119,7 +119,7 @@ namespace SmallestAI
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
         /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`, `multi`). The server validates and rejects<br/>
+        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
         /// unsupported codes with a 400.
         /// </param>
         /// <param name="model">
