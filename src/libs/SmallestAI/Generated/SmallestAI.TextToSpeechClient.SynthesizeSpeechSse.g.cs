@@ -471,6 +471,9 @@ namespace SmallestAI
         /// <param name="language">
         /// Language code for synthesis. Influences pronunciation, number/date<br/>
         /// normalization, and phoneme selection.<br/>
+        /// **Default on `lightning_v3.1_pro`:** when `language` is omitted, the<br/>
+        /// Pro pool defaults to **`en + hi`** (mixed Indian + Western English<br/>
+        /// coverage, auto-detected from the input text).<br/>
         /// Each voice has its own `tags.language` set in the voice catalog —<br/>
         /// query `GET /waves/v1/lightning-v3.1/get_voices`. Pass a language<br/>
         /// the voice was trained on; passing other codes is accepted by the<br/>
@@ -480,7 +483,7 @@ namespace SmallestAI
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
         /// - Pass the ISO 639-1 code of any other Pro language (e.g. `ta`, `de`, `ja`) with a matching Pro voice — 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) have dedicated Pro voices.<br/>
-        /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage).
+        /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).
         /// </param>
         /// <param name="numberPronunciationLanguage">
         /// Optional. Sets the language used to read out numeric content —<br/>
