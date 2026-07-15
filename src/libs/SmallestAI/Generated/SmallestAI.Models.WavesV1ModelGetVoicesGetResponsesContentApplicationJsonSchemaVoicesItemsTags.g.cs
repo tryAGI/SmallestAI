@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Tag metadata used to identify the voice's characteristics. Filter on these fields to find voices for a target language, accent, or use case.
+    /// Tag metadata used to identify the voice's characteristics. Filter on these fields to find voices for a target language, accent, or use case. Fields may be empty on some voices.
     /// </summary>
     public sealed partial class WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags
     {
@@ -27,13 +27,13 @@ namespace SmallestAI
         public string? Gender { get; set; }
 
         /// <summary>
-        /// Age range of the voice (e.g., `young`, `middle-aged`, `senior`).
+        /// Age range of the voice (e.g., `young`, `middle aged`, `senior`).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("age")]
         public string? Age { get; set; }
 
         /// <summary>
-        /// Emotional ranges the voice supports.
+        /// Emotional ranges the voice supports. May be empty.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("emotions")]
         public global::System.Collections.Generic.IList<string>? Emotions { get; set; }
@@ -63,10 +63,10 @@ namespace SmallestAI
         /// Gender of the voice (`male` or `female`).
         /// </param>
         /// <param name="age">
-        /// Age range of the voice (e.g., `young`, `middle-aged`, `senior`).
+        /// Age range of the voice (e.g., `young`, `middle aged`, `senior`).
         /// </param>
         /// <param name="emotions">
-        /// Emotional ranges the voice supports.
+        /// Emotional ranges the voice supports. May be empty.
         /// </param>
         /// <param name="usecases">
         /// Recommended use cases for the voice (e.g., `conversational`, `narration`).

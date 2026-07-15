@@ -87,6 +87,10 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
+        MultiIndic,
+        /// <summary>
+        /// 
+        /// </summary>
         Nl,
         /// <summary>
         /// 
@@ -153,6 +157,7 @@ namespace SmallestAI
                 WavesV1SttPostParametersLanguage.Mt => "mt",
                 WavesV1SttPostParametersLanguage.MultiAsian => "multi-asian",
                 WavesV1SttPostParametersLanguage.MultiEu => "multi-eu",
+                WavesV1SttPostParametersLanguage.MultiIndic => "multi-indic",
                 WavesV1SttPostParametersLanguage.Nl => "nl",
                 WavesV1SttPostParametersLanguage.Pl => "pl",
                 WavesV1SttPostParametersLanguage.Pt => "pt",
@@ -191,6 +196,7 @@ namespace SmallestAI
                 "mt" => WavesV1SttPostParametersLanguage.Mt,
                 "multi-asian" => WavesV1SttPostParametersLanguage.MultiAsian,
                 "multi-eu" => WavesV1SttPostParametersLanguage.MultiEu,
+                "multi-indic" => WavesV1SttPostParametersLanguage.MultiIndic,
                 "nl" => WavesV1SttPostParametersLanguage.Nl,
                 "pl" => WavesV1SttPostParametersLanguage.Pl,
                 "pt" => WavesV1SttPostParametersLanguage.Pt,
