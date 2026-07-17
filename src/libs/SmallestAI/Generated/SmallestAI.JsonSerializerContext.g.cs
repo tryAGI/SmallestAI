@@ -37,38 +37,6 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatNullableJsonConverter),
 
-            typeof(global::SmallestAI.JsonConverters.WavesV1LightningV31GetSpeechPostParametersAcceptJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.WavesV1LightningV31GetSpeechPostParametersAcceptNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestModelJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestModelNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestSampleRateJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestSampleRateNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestLanguageJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestLanguageNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestNumberPronunciationLanguageJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestNumberPronunciationLanguageNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestOutputFormatJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.LightningV31RequestOutputFormatNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.Lightningv2RequestLanguageJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.Lightningv2RequestLanguageNullableJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.Lightningv2RequestOutputFormatJsonConverter),
-
-            typeof(global::SmallestAI.JsonConverters.Lightningv2RequestOutputFormatNullableJsonConverter),
-
             typeof(global::SmallestAI.JsonConverters.WavesV1ModelGetVoicesGetParametersModelJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1ModelGetVoicesGetParametersModelNullableJsonConverter),
@@ -170,29 +138,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<string>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1LightningV31GetSpeechPostParametersAccept), TypeInfoPropertyName = "WavesV1LightningV31GetSpeechPostParametersAccept2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestModel), TypeInfoPropertyName = "LightningV31RequestModel2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestSampleRate), TypeInfoPropertyName = "LightningV31RequestSampleRate2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestLanguage), TypeInfoPropertyName = "LightningV31RequestLanguage2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestNumberPronunciationLanguage), TypeInfoPropertyName = "LightningV31RequestNumberPronunciationLanguage2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31RequestOutputFormat), TypeInfoPropertyName = "LightningV31RequestOutputFormat2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.LightningV31Request))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningV31SpeechRequestInternalServerError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningV31SpeechRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningV31SpeechRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningV31SpeechRequestInternalServerError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Lightningv2RequestLanguage), TypeInfoPropertyName = "Lightningv2RequestLanguage2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Lightningv2RequestOutputFormat), TypeInfoPropertyName = "Lightningv2RequestOutputFormat2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Lightningv2Request))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningv2SpeechRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningv2SpeechRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SynthesizeLightningv2SpeechRequestInternalServerError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.StreamLightningv2SpeechRequestInternalServerError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetParametersModel), TypeInfoPropertyName = "WavesV1ModelGetVoicesGetParametersModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems))]
@@ -217,21 +162,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.VoiceCloningListVoiceClonesResponse200))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.VoiceCloningDeleteVoiceCloneResponse200))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeleteVoiceCloneRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeleteVoiceCloneRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeleteVoiceCloneRequestInternalServerError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1LightningLargeAddVoicePostResponsesContentApplicationJsonSchemaData))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.VoiceCloningAddVoiceToModelResponse200))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AddVoiceToModelRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AddVoiceToModelRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AddVoiceToModelRequestInternalServerError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1LightningLargeGetClonedVoicesGetResponsesContentApplicationJsonSchemaVoicesItems))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.VoiceCloningGetClonedVoicesResponse200))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1LightningLargeGetClonedVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.GetClonedVoicesRequestBadRequestError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.GetClonedVoicesRequestUnauthorizedError))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.GetClonedVoicesRequestInternalServerError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.PronunciationItem))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.PronunciationDict))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.PronunciationItem>))]
@@ -278,6 +208,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionRequestStop), TypeInfoPropertyName = "ChatCompletionRequestStop2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.ElectronMessage>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.Tool>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionObject), TypeInfoPropertyName = "ChatCompletionObject2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionChoicesItemsFinishReason), TypeInfoPropertyName = "ChatCompletionChoicesItemsFinishReason2")]
@@ -292,15 +223,12 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Error))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.CreateVoiceCloneRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeleteVoiceCloneRequest))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AddVoiceToModelRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(object))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.PronunciationDict>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1LightningLargeGetClonedVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.PronunciationItem>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ErrorResponseErrorsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.Word>))]

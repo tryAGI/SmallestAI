@@ -12,8 +12,8 @@ fern_index_url="https://docs.smallest.ai/openapi.json"
 python3 scripts/select-fern-openapi.py \
   --index-url "$fern_index_url" \
   --output openapi.yaml \
-  --required-path /waves/v1/lightning-v3.1/get_speech \
-  --required-path /waves/v1/lightning-v3.1/stream \
+  --required-path /waves/v1/tts \
+  --required-path /waves/v1/tts/live \
   --required-path /waves/v1/pronunciation-dicts \
   --required-path /waves/v1/voice-cloning
 
