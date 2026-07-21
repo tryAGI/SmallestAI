@@ -9,7 +9,7 @@ namespace SmallestAI
         /// Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// Pick the model with the `model` body parameter, same as the sync route.<br/>
         /// &lt;Note&gt;<br/>
-        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/waves/api-reference/api-reference/text-to-speech/tts).<br/>
+        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/models/api-reference/text-to-speech/stream-speech-web-socket).<br/>
         /// &lt;/Note&gt;<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
@@ -52,7 +52,7 @@ namespace SmallestAI
         /// Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.<br/>
         /// Pick the model with the `model` body parameter, same as the sync route.<br/>
         /// &lt;Note&gt;<br/>
-        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/waves/api-reference/api-reference/text-to-speech/tts).<br/>
+        ///   **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/models/api-reference/text-to-speech/stream-speech-web-socket).<br/>
         /// &lt;/Note&gt;<br/>
         /// ## When to use this<br/>
         /// - **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.<br/>
@@ -95,7 +95,7 @@ namespace SmallestAI
         /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
-        ///   [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+        ///   [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
         ///   for supported voice IDs.<br/>
         /// Same concurrency and latency profile across both. Other request<br/>
         /// parameters behave identically.<br/>
@@ -119,11 +119,20 @@ namespace SmallestAI
         /// query `GET /waves/v1/lightning-v3.1/get_voices`. Pass a language<br/>
         /// the voice was trained on; passing other codes is accepted by the<br/>
         /// API but produces English-pronounced output.<br/>
-        /// **On `lightning_v3.1`**, the full 12-language catalog applies.<br/>
-        /// **On `lightning_v3.1_pro`**:<br/>
+        /// **`auto` (recommended for cross-language use cases):** routes internally<br/>
+        /// based on the input text. Any English or Hindi voice can be used<br/>
+        /// across all supported languages when `auto` is set; the platform<br/>
+        /// handles language-appropriate routing without needing a code per<br/>
+        /// call.<br/>
+        /// **On `lightning_v3.1`** — 20 supported languages:<br/>
+        /// - 10 European: English, Spanish, French, German, Italian, Dutch, Swedish, Portuguese, Polish, Russian<br/>
+        /// - 10 Indic: Hindi, Marathi, Gujarati, Punjabi, Bengali, Odia, Tamil, Telugu, Kannada, Malayalam<br/>
+        /// **On `lightning_v3.1_pro`** — 31 supported languages (adds 11 over base):<br/>
+        /// - 13 European: base 10 plus Greek, Finnish, Norwegian<br/>
+        /// - 8 Asian &amp; Middle Eastern: Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Turkish, Arabic<br/>
+        /// - 10 Indic: same as base<br/>
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
-        /// - Pass the ISO 639-1 code of any other Pro language (e.g. `ta`, `de`, `ja`) with a matching Pro voice — 27 additional languages (9 Indian, 8 Asian &amp; Middle Eastern, 10 European) have dedicated Pro voices.<br/>
         /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).
         /// </param>
         /// <param name="numberPronunciationLanguage">
@@ -144,7 +153,8 @@ namespace SmallestAI
         /// stay in the text language. On a cross-language request names may<br/>
         /// also render in the target script (e.g. "Smith" → "स्मिथ"), which<br/>
         /// is generally the desired reading for native-language voices.<br/>
-        /// Accepts the same language codes as `language`.
+        /// Accepts the same language codes as `language` (including `auto`,<br/>
+        /// `nl`, `sv`).
         /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
@@ -158,7 +168,7 @@ namespace SmallestAI
         /// The IDs of the pronunciation dictionaries to use for speech generation. Available on both `lightning_v3.1` and `lightning_v3.1_pro`.
         /// </param>
         /// <param name="wordTimestamps">
-        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/waves/documentation/text-to-speech-lightning/word-timestamps).<br/>
+        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/documentation/text-to-speech-lightning/word-timestamps).<br/>
         /// Default Value: false
         /// </param>
         /// <param name="sessionId">

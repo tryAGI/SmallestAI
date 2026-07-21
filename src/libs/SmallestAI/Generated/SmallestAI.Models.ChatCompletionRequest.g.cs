@@ -46,7 +46,7 @@ namespace SmallestAI
 
         /// <summary>
         /// When true, response is `text/event-stream`. See the<br/>
-        /// [Streaming guide](/waves/documentation/llm-electron/streaming).<br/>
+        /// [Streaming guide](/models/documentation/llm-electron/streaming).<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("stream")]
@@ -60,7 +60,7 @@ namespace SmallestAI
 
         /// <summary>
         /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/waves/documentation/llm-electron/tool-function-calling).
+        /// See [Tool Calling](/models/documentation/llm-electron/tool-function-calling).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tools")]
         public global::System.Collections.Generic.IList<global::SmallestAI.Tool>? Tools { get; set; }
@@ -156,13 +156,13 @@ namespace SmallestAI
         /// </param>
         /// <param name="stream">
         /// When true, response is `text/event-stream`. See the<br/>
-        /// [Streaming guide](/waves/documentation/llm-electron/streaming).<br/>
+        /// [Streaming guide](/models/documentation/llm-electron/streaming).<br/>
         /// Default Value: false
         /// </param>
         /// <param name="streamOptions"></param>
         /// <param name="tools">
         /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/waves/documentation/llm-electron/tool-function-calling).
+        /// See [Tool Calling](/models/documentation/llm-electron/tool-function-calling).
         /// </param>
         /// <param name="toolChoice"></param>
         /// <param name="responseFormat">
