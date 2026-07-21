@@ -21,7 +21,8 @@ namespace SmallestAI
     /// stay in the text language. On a cross-language request names may<br/>
     /// also render in the target script (e.g. "Smith" → "स्मिथ"), which<br/>
     /// is generally the desired reading for native-language voices.<br/>
-    /// Accepts the same language codes as `language`.
+    /// Accepts the same language codes as `language` (including `auto`,<br/>
+    /// `nl`, `sv`).
     /// </summary>
     public enum TtsRequestNumberPronunciationLanguage
     {
@@ -29,6 +30,10 @@ namespace SmallestAI
         /// only numeric tokens are re-spoken; the words around them
         /// </summary>
         Ar,
+        /// <summary>
+        /// 
+        /// </summary>
+        Auto,
         /// <summary>
         /// 
         /// </summary>
@@ -98,6 +103,10 @@ namespace SmallestAI
         /// </summary>
         Ms,
         /// <summary>
+        /// only numeric tokens are re-spoken; the words around them
+        /// </summary>
+        Nl,
+        /// <summary>
         /// 
         /// </summary>
         No,
@@ -121,6 +130,10 @@ namespace SmallestAI
         /// 
         /// </summary>
         Ru,
+        /// <summary>
+        /// 
+        /// </summary>
+        Sv,
         /// <summary>
         /// 
         /// </summary>
@@ -156,6 +169,7 @@ namespace SmallestAI
             return value switch
             {
                 TtsRequestNumberPronunciationLanguage.Ar => "ar",
+                TtsRequestNumberPronunciationLanguage.Auto => "auto",
                 TtsRequestNumberPronunciationLanguage.Bn => "bn",
                 TtsRequestNumberPronunciationLanguage.De => "de",
                 TtsRequestNumberPronunciationLanguage.El => "el",
@@ -173,12 +187,14 @@ namespace SmallestAI
                 TtsRequestNumberPronunciationLanguage.Ml => "ml",
                 TtsRequestNumberPronunciationLanguage.Mr => "mr",
                 TtsRequestNumberPronunciationLanguage.Ms => "ms",
+                TtsRequestNumberPronunciationLanguage.Nl => "nl",
                 TtsRequestNumberPronunciationLanguage.No => "no",
                 TtsRequestNumberPronunciationLanguage.Or => "or",
                 TtsRequestNumberPronunciationLanguage.Pa => "pa",
                 TtsRequestNumberPronunciationLanguage.Pl => "pl",
                 TtsRequestNumberPronunciationLanguage.Pt => "pt",
                 TtsRequestNumberPronunciationLanguage.Ru => "ru",
+                TtsRequestNumberPronunciationLanguage.Sv => "sv",
                 TtsRequestNumberPronunciationLanguage.Ta => "ta",
                 TtsRequestNumberPronunciationLanguage.Te => "te",
                 TtsRequestNumberPronunciationLanguage.Tr => "tr",
@@ -195,6 +211,7 @@ namespace SmallestAI
             return value switch
             {
                 "ar" => TtsRequestNumberPronunciationLanguage.Ar,
+                "auto" => TtsRequestNumberPronunciationLanguage.Auto,
                 "bn" => TtsRequestNumberPronunciationLanguage.Bn,
                 "de" => TtsRequestNumberPronunciationLanguage.De,
                 "el" => TtsRequestNumberPronunciationLanguage.El,
@@ -212,12 +229,14 @@ namespace SmallestAI
                 "ml" => TtsRequestNumberPronunciationLanguage.Ml,
                 "mr" => TtsRequestNumberPronunciationLanguage.Mr,
                 "ms" => TtsRequestNumberPronunciationLanguage.Ms,
+                "nl" => TtsRequestNumberPronunciationLanguage.Nl,
                 "no" => TtsRequestNumberPronunciationLanguage.No,
                 "or" => TtsRequestNumberPronunciationLanguage.Or,
                 "pa" => TtsRequestNumberPronunciationLanguage.Pa,
                 "pl" => TtsRequestNumberPronunciationLanguage.Pl,
                 "pt" => TtsRequestNumberPronunciationLanguage.Pt,
                 "ru" => TtsRequestNumberPronunciationLanguage.Ru,
+                "sv" => TtsRequestNumberPronunciationLanguage.Sv,
                 "ta" => TtsRequestNumberPronunciationLanguage.Ta,
                 "te" => TtsRequestNumberPronunciationLanguage.Te,
                 "tr" => TtsRequestNumberPronunciationLanguage.Tr,

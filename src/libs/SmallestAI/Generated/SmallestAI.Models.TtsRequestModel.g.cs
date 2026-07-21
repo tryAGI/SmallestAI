@@ -9,7 +9,7 @@ namespace SmallestAI
     /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
     /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
     ///   quality and naturalness, with a curated voice catalog. See the<br/>
-    ///   [Lightning v3.1 Pro model card](/waves/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+    ///   [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
     ///   for supported voice IDs.<br/>
     /// Same concurrency and latency profile across both. Other request<br/>
     /// parameters behave identically.<br/>
