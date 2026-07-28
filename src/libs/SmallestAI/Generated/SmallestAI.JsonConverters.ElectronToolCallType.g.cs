@@ -3,10 +3,10 @@
 namespace SmallestAI.JsonConverters
 {
     /// <inheritdoc />
-    public sealed class ToolTypeNullableJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::SmallestAI.ToolType?>
+    public sealed class ElectronToolCallTypeJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::SmallestAI.ElectronToolCallType>
     {
         /// <inheritdoc />
-        public override global::SmallestAI.ToolType? Read(
+        public override global::SmallestAI.ElectronToolCallType Read(
             ref global::System.Text.Json.Utf8JsonReader reader,
             global::System.Type typeToConvert,
             global::System.Text.Json.JsonSerializerOptions options)
@@ -18,7 +18,7 @@ namespace SmallestAI.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::SmallestAI.ToolTypeExtensions.ToEnum(stringValue);
+                        return global::SmallestAI.ElectronToolCallTypeExtensions.ToEnum(stringValue) ?? default;
                     }
                     
                     break;
@@ -26,11 +26,11 @@ namespace SmallestAI.JsonConverters
                 case global::System.Text.Json.JsonTokenType.Number:
                 {
                     var numValue = reader.GetInt32();
-                    return (global::SmallestAI.ToolType)numValue;
+                    return (global::SmallestAI.ElectronToolCallType)numValue;
                 }
                 case global::System.Text.Json.JsonTokenType.Null:
                 {
-                    return default(global::SmallestAI.ToolType?);
+                    return default(global::SmallestAI.ElectronToolCallType);
                 }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
@@ -42,19 +42,12 @@ namespace SmallestAI.JsonConverters
         /// <inheritdoc />
         public override void Write(
             global::System.Text.Json.Utf8JsonWriter writer,
-            global::SmallestAI.ToolType? value,
+            global::SmallestAI.ElectronToolCallType value,
             global::System.Text.Json.JsonSerializerOptions options)
         {
             writer = writer ?? throw new global::System.ArgumentNullException(nameof(writer));
 
-            if (value == null)
-            {
-                writer.WriteNullValue();
-            }
-            else
-            {
-                writer.WriteStringValue(global::SmallestAI.ToolTypeExtensions.ToValueString(value.Value));
-            }
+            writer.WriteStringValue(global::SmallestAI.ElectronToolCallTypeExtensions.ToValueString(value));
         }
     }
 }

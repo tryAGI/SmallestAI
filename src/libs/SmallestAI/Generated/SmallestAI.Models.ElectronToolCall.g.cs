@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class ToolCall
+    public sealed partial class ElectronToolCall
     {
         /// <summary>
         /// 
@@ -19,15 +19,15 @@ namespace SmallestAI
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("type")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.ToolCallTypeJsonConverter))]
-        public global::SmallestAI.ToolCallType Type { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.ElectronToolCallTypeJsonConverter))]
+        public global::SmallestAI.ElectronToolCallType Type { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("function")]
         [global::System.Text.Json.Serialization.JsonRequired]
-        public required global::SmallestAI.ToolCallFunction Function { get; set; }
+        public required global::SmallestAI.ElectronToolCallFunction Function { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -36,7 +36,7 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolCall" /> class.
+        /// Initializes a new instance of the <see cref="ElectronToolCall" /> class.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="function"></param>
@@ -44,10 +44,10 @@ namespace SmallestAI
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public ToolCall(
+        public ElectronToolCall(
             string id,
-            global::SmallestAI.ToolCallFunction function,
-            global::SmallestAI.ToolCallType type)
+            global::SmallestAI.ElectronToolCallFunction function,
+            global::SmallestAI.ElectronToolCallType type)
         {
             this.Id = id ?? throw new global::System.ArgumentNullException(nameof(id));
             this.Type = type;
@@ -55,9 +55,9 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolCall" /> class.
+        /// Initializes a new instance of the <see cref="ElectronToolCall" /> class.
         /// </summary>
-        public ToolCall()
+        public ElectronToolCall()
         {
         }
 

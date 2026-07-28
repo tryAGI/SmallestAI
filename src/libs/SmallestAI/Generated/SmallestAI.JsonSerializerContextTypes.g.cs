@@ -184,7 +184,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ErrorResponseErrorsItems? Type39 { get; set; }
+        public global::SmallestAI.ErrorResponseDetailsItems? Type39 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -192,7 +192,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseErrorsItems>? Type41 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseDetailsItems>? Type41 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -280,39 +280,39 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ToolCallType? Type63 { get; set; }
+        public global::SmallestAI.SttErrorResponseDetailsItems? Type63 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ToolCallFunction? Type64 { get; set; }
+        public global::SmallestAI.SttErrorResponse? Type64 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ToolCall? Type65 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseDetailsItems>? Type65 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ElectronMessage? Type66 { get; set; }
+        public global::SmallestAI.ElectronToolCallType? Type66 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.ToolCall>? Type67 { get; set; }
+        public global::SmallestAI.ElectronToolCallFunction? Type67 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ChatCompletionRequestStreamOptions? Type68 { get; set; }
+        public global::SmallestAI.ElectronToolCall? Type68 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ToolType? Type69 { get; set; }
+        public global::SmallestAI.ElectronMessage? Type69 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ToolParameters? Type70 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.ElectronToolCall>? Type70 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.Tool? Type71 { get; set; }
+        public global::SmallestAI.ChatCompletionRequestStreamOptions? Type71 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -360,63 +360,63 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.Tool>? Type83 { get; set; }
+        public global::System.Collections.Generic.IList<object>? Type83 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ChatCompletionObject? Type84 { get; set; }
+        public object? Type84 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ChatCompletionChoicesItemsFinishReason? Type85 { get; set; }
+        public global::SmallestAI.ChatCompletionObject? Type85 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ChatCompletionChoicesItems? Type86 { get; set; }
+        public global::SmallestAI.ChatCompletionChoicesItemsFinishReason? Type86 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.UsagePromptTokensDetails? Type87 { get; set; }
+        public global::SmallestAI.ChatCompletionChoicesItems? Type87 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.Usage? Type88 { get; set; }
+        public global::SmallestAI.UsagePromptTokensDetails? Type88 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ChatCompletion? Type89 { get; set; }
+        public global::SmallestAI.Usage? Type89 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.ChatCompletionChoicesItems>? Type90 { get; set; }
+        public global::SmallestAI.ChatCompletion? Type90 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ErrorErrorDetailsItems? Type91 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.ChatCompletionChoicesItems>? Type91 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.ErrorError? Type92 { get; set; }
+        public global::SmallestAI.ErrorErrorDetailsItems? Type92 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.ErrorErrorDetailsItems>? Type93 { get; set; }
+        public global::SmallestAI.ErrorError? Type93 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.Error? Type94 { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.ErrorErrorDetailsItems>? Type94 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::SmallestAI.CreateVoiceCloneRequest? Type95 { get; set; }
+        public global::SmallestAI.Error? Type95 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public byte[]? Type96 { get; set; }
+        public global::SmallestAI.CreateVoiceCloneRequest? Type96 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public object? Type97 { get; set; }
+        public byte[]? Type97 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -445,7 +445,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.ErrorResponseErrorsItems>? ListType5 { get; set; }
+        public global::System.Collections.Generic.List<global::SmallestAI.ErrorResponseDetailsItems>? ListType5 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -457,26 +457,30 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.ToolCall>? ListType8 { get; set; }
+        public global::System.Collections.Generic.List<global::SmallestAI.SttErrorResponseDetailsItems>? ListType8 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.ElectronMessage>? ListType9 { get; set; }
+        public global::System.Collections.Generic.List<global::SmallestAI.ElectronToolCall>? ListType9 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.Tool>? ListType10 { get; set; }
+        public global::System.Collections.Generic.List<global::SmallestAI.ElectronMessage>? ListType10 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.ChatCompletionChoicesItems>? ListType11 { get; set; }
+        public global::System.Collections.Generic.List<object>? ListType11 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.ErrorErrorDetailsItems>? ListType12 { get; set; }
+        public global::System.Collections.Generic.List<global::SmallestAI.ChatCompletionChoicesItems>? ListType12 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.PronunciationDict>? ListType13 { get; set; }
+        public global::System.Collections.Generic.List<global::SmallestAI.ErrorErrorDetailsItems>? ListType13 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.List<global::SmallestAI.PronunciationDict>? ListType14 { get; set; }
     }
 }

@@ -606,19 +606,19 @@ namespace SmallestAI
                             {
                                 string? __content_400 = null;
                                 global::System.Exception? __exception_400 = null;
-                                global::SmallestAI.ErrorResponse? __value_400 = null;
+                                global::SmallestAI.SttErrorResponse? __value_400 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_400 = global::SmallestAI.ErrorResponse.FromJson(__content_400, JsonSerializerContext);
+                                        __value_400 = global::SmallestAI.SttErrorResponse.FromJson(__content_400, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_400 = global::SmallestAI.ErrorResponse.FromJson(__content_400, JsonSerializerContext);
+                                        __value_400 = global::SmallestAI.SttErrorResponse.FromJson(__content_400, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -627,7 +627,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.ErrorResponse>.Create(
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_400,
@@ -643,19 +643,19 @@ namespace SmallestAI
                             {
                                 string? __content_401 = null;
                                 global::System.Exception? __exception_401 = null;
-                                global::SmallestAI.ErrorResponse? __value_401 = null;
+                                global::SmallestAI.SttErrorResponse? __value_401 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_401 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_401 = global::SmallestAI.ErrorResponse.FromJson(__content_401, JsonSerializerContext);
+                                        __value_401 = global::SmallestAI.SttErrorResponse.FromJson(__content_401, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_401 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_401 = global::SmallestAI.ErrorResponse.FromJson(__content_401, JsonSerializerContext);
+                                        __value_401 = global::SmallestAI.SttErrorResponse.FromJson(__content_401, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -664,7 +664,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.ErrorResponse>.Create(
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_401 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_401,
@@ -680,19 +680,19 @@ namespace SmallestAI
                             {
                                 string? __content_403 = null;
                                 global::System.Exception? __exception_403 = null;
-                                global::SmallestAI.ErrorResponse? __value_403 = null;
+                                global::SmallestAI.SttErrorResponse? __value_403 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_403 = global::SmallestAI.ErrorResponse.FromJson(__content_403, JsonSerializerContext);
+                                        __value_403 = global::SmallestAI.SttErrorResponse.FromJson(__content_403, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_403 = global::SmallestAI.ErrorResponse.FromJson(__content_403, JsonSerializerContext);
+                                        __value_403 = global::SmallestAI.SttErrorResponse.FromJson(__content_403, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -701,7 +701,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.ErrorResponse>.Create(
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_403,
@@ -717,19 +717,19 @@ namespace SmallestAI
                             {
                                 string? __content_413 = null;
                                 global::System.Exception? __exception_413 = null;
-                                global::SmallestAI.ErrorResponse? __value_413 = null;
+                                global::SmallestAI.SttErrorResponse? __value_413 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_413 = global::SmallestAI.ErrorResponse.FromJson(__content_413, JsonSerializerContext);
+                                        __value_413 = global::SmallestAI.SttErrorResponse.FromJson(__content_413, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_413 = global::SmallestAI.ErrorResponse.FromJson(__content_413, JsonSerializerContext);
+                                        __value_413 = global::SmallestAI.SttErrorResponse.FromJson(__content_413, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -738,7 +738,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.ErrorResponse>.Create(
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_413 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_413,
@@ -754,19 +754,19 @@ namespace SmallestAI
                             {
                                 string? __content_429 = null;
                                 global::System.Exception? __exception_429 = null;
-                                global::SmallestAI.ErrorResponse? __value_429 = null;
+                                global::SmallestAI.SttErrorResponse? __value_429 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_429 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_429 = global::SmallestAI.ErrorResponse.FromJson(__content_429, JsonSerializerContext);
+                                        __value_429 = global::SmallestAI.SttErrorResponse.FromJson(__content_429, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_429 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_429 = global::SmallestAI.ErrorResponse.FromJson(__content_429, JsonSerializerContext);
+                                        __value_429 = global::SmallestAI.SttErrorResponse.FromJson(__content_429, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -775,7 +775,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.ErrorResponse>.Create(
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_429 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_429,
@@ -791,19 +791,19 @@ namespace SmallestAI
                             {
                                 string? __content_503 = null;
                                 global::System.Exception? __exception_503 = null;
-                                global::SmallestAI.ErrorResponse? __value_503 = null;
+                                global::SmallestAI.SttErrorResponse? __value_503 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_503 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_503 = global::SmallestAI.ErrorResponse.FromJson(__content_503, JsonSerializerContext);
+                                        __value_503 = global::SmallestAI.SttErrorResponse.FromJson(__content_503, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_503 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_503 = global::SmallestAI.ErrorResponse.FromJson(__content_503, JsonSerializerContext);
+                                        __value_503 = global::SmallestAI.SttErrorResponse.FromJson(__content_503, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -812,7 +812,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.ErrorResponse>.Create(
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_503 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_503,

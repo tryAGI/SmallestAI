@@ -42,7 +42,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public LlmClient Llm => new LlmClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        public ElectronClient Electron => new ElectronClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,

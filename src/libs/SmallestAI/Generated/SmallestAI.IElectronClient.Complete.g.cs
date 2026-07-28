@@ -2,7 +2,7 @@
 
 namespace SmallestAI
 {
-    public partial interface ILlmClient
+    public partial interface IElectronClient
     {
         /// <summary>
         /// Chat Completions (Electron)<br/>
@@ -86,7 +86,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> ElectronChatCompletionsAsync(
+        global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> CompleteAsync(
 
             global::SmallestAI.ChatCompletionRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
@@ -173,7 +173,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.ChatCompletion>> ElectronChatCompletionsAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.ChatCompletion>> CompleteAsResponseAsync(
 
             global::SmallestAI.ChatCompletionRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
@@ -281,8 +281,13 @@ namespace SmallestAI
         /// </param>
         /// <param name="streamOptions"></param>
         /// <param name="tools">
-        /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/models/documentation/llm-electron/tool-function-calling).
+        /// Tool / function calling definitions. Forwarded verbatim to the<br/>
+        /// OpenAI-compatible upstream, so the standard OpenAI shape<br/>
+        /// (`{type: "function", function: {name, description, parameters}}`)<br/>
+        /// is the recommended form and is what the examples below use.<br/>
+        /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// for details.
         /// </param>
         /// <param name="toolChoice"></param>
         /// <param name="responseFormat">
@@ -309,7 +314,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
-        global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> ElectronChatCompletionsAsync(
+        global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> CompleteAsync(
             string model,
             global::System.Collections.Generic.IList<global::SmallestAI.ElectronMessage> messages,
             double? temperature = default,
@@ -317,7 +322,7 @@ namespace SmallestAI
             int? maxTokens = default,
             bool? stream = default,
             global::SmallestAI.ChatCompletionRequestStreamOptions? streamOptions = default,
-            global::System.Collections.Generic.IList<global::SmallestAI.Tool>? tools = default,
+            global::System.Collections.Generic.IList<object>? tools = default,
             global::SmallestAI.ChatCompletionRequestToolChoice? toolChoice = default,
             global::SmallestAI.ChatCompletionRequestResponseFormat? responseFormat = default,
             global::SmallestAI.ChatCompletionRequestStop? stop = default,
