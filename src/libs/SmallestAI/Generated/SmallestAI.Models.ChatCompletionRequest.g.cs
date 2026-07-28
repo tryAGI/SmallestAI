@@ -59,11 +59,16 @@ namespace SmallestAI
         public global::SmallestAI.ChatCompletionRequestStreamOptions? StreamOptions { get; set; }
 
         /// <summary>
-        /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/models/documentation/llm-electron/tool-function-calling).
+        /// Tool / function calling definitions. Forwarded verbatim to the<br/>
+        /// OpenAI-compatible upstream, so the standard OpenAI shape<br/>
+        /// (`{type: "function", function: {name, description, parameters}}`)<br/>
+        /// is the recommended form and is what the examples below use.<br/>
+        /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// for details.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tools")]
-        public global::System.Collections.Generic.IList<global::SmallestAI.Tool>? Tools { get; set; }
+        public global::System.Collections.Generic.IList<object>? Tools { get; set; }
 
         /// <summary>
         /// 
@@ -161,8 +166,13 @@ namespace SmallestAI
         /// </param>
         /// <param name="streamOptions"></param>
         /// <param name="tools">
-        /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/models/documentation/llm-electron/tool-function-calling).
+        /// Tool / function calling definitions. Forwarded verbatim to the<br/>
+        /// OpenAI-compatible upstream, so the standard OpenAI shape<br/>
+        /// (`{type: "function", function: {name, description, parameters}}`)<br/>
+        /// is the recommended form and is what the examples below use.<br/>
+        /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// for details.
         /// </param>
         /// <param name="toolChoice"></param>
         /// <param name="responseFormat">
@@ -197,7 +207,7 @@ namespace SmallestAI
             int? maxTokens,
             bool? stream,
             global::SmallestAI.ChatCompletionRequestStreamOptions? streamOptions,
-            global::System.Collections.Generic.IList<global::SmallestAI.Tool>? tools,
+            global::System.Collections.Generic.IList<object>? tools,
             global::SmallestAI.ChatCompletionRequestToolChoice? toolChoice,
             global::SmallestAI.ChatCompletionRequestResponseFormat? responseFormat,
             global::SmallestAI.ChatCompletionRequestStop? stop,

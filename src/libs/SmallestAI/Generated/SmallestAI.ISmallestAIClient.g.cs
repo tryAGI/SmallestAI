@@ -47,7 +47,7 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public LlmClient Llm { get; }
+        public ElectronClient Electron { get; }
 
         /// <summary>
         /// 

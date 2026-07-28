@@ -6,20 +6,26 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class ErrorResponse
+    public sealed partial class SttErrorResponse
     {
         /// <summary>
-        /// Error message
+        /// Error message.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("error")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string Error { get; set; }
 
         /// <summary>
-        /// Additional error details (validation errors)
+        /// Correlation ID for support / logs
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("request_id")]
+        public string? RequestId { get; set; }
+
+        /// <summary>
+        /// Additional error details (validation errors).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("details")]
-        public global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseDetailsItems>? Details { get; set; }
+        public global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseDetailsItems>? Details { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -28,29 +34,34 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorResponse" /> class.
+        /// Initializes a new instance of the <see cref="SttErrorResponse" /> class.
         /// </summary>
         /// <param name="error">
-        /// Error message
+        /// Error message.
+        /// </param>
+        /// <param name="requestId">
+        /// Correlation ID for support / logs
         /// </param>
         /// <param name="details">
-        /// Additional error details (validation errors)
+        /// Additional error details (validation errors).
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public ErrorResponse(
+        public SttErrorResponse(
             string error,
-            global::System.Collections.Generic.IList<global::SmallestAI.ErrorResponseDetailsItems>? details)
+            string? requestId,
+            global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseDetailsItems>? details)
         {
             this.Error = error ?? throw new global::System.ArgumentNullException(nameof(error));
+            this.RequestId = requestId;
             this.Details = details;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorResponse" /> class.
+        /// Initializes a new instance of the <see cref="SttErrorResponse" /> class.
         /// </summary>
-        public ErrorResponse()
+        public SttErrorResponse()
         {
         }
 

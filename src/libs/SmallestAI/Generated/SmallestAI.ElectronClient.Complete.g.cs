@@ -3,11 +3,11 @@
 
 namespace SmallestAI
 {
-    public partial class LlmClient
+    public partial class ElectronClient
     {
 
 
-        private static readonly global::SmallestAI.EndPointSecurityRequirement s_ElectronChatCompletionsSecurityRequirement0 =
+        private static readonly global::SmallestAI.EndPointSecurityRequirement s_CompleteSecurityRequirement0 =
             new global::SmallestAI.EndPointSecurityRequirement
             {
                 Authorizations = new global::SmallestAI.EndPointAuthorizationRequirement[]
@@ -21,22 +21,22 @@ namespace SmallestAI
                     },
                 },
             };
-        private static readonly global::SmallestAI.EndPointSecurityRequirement[] s_ElectronChatCompletionsSecurityRequirements =
+        private static readonly global::SmallestAI.EndPointSecurityRequirement[] s_CompleteSecurityRequirements =
             new global::SmallestAI.EndPointSecurityRequirement[]
-            {                s_ElectronChatCompletionsSecurityRequirement0,
+            {                s_CompleteSecurityRequirement0,
             };
-        partial void PrepareElectronChatCompletionsArguments(
+        partial void PrepareCompleteArguments(
             global::System.Net.Http.HttpClient httpClient,
             global::SmallestAI.ChatCompletionRequest request);
-        partial void PrepareElectronChatCompletionsRequest(
+        partial void PrepareCompleteRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.ChatCompletionRequest request);
-        partial void ProcessElectronChatCompletionsResponse(
+        partial void ProcessCompleteResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessElectronChatCompletionsResponseContent(
+        partial void ProcessCompleteResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref string content);
@@ -123,13 +123,13 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> ElectronChatCompletionsAsync(
+        public async global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> CompleteAsync(
 
             global::SmallestAI.ChatCompletionRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await ElectronChatCompletionsAsResponseAsync(
+            var __response = await CompleteAsResponseAsync(
 
                 request: request,
                 requestOptions: requestOptions,
@@ -220,7 +220,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.ChatCompletion>> ElectronChatCompletionsAsResponseAsync(
+        public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.ChatCompletion>> CompleteAsResponseAsync(
 
             global::SmallestAI.ChatCompletionRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
@@ -230,15 +230,15 @@ namespace SmallestAI
 
             PrepareArguments(
                 client: HttpClient);
-            PrepareElectronChatCompletionsArguments(
+            PrepareCompleteArguments(
                 httpClient: HttpClient,
                 request: request);
 
 
             var __authorizations = global::SmallestAI.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_ElectronChatCompletionsSecurityRequirements,
-                operationName: "ElectronChatCompletionsAsync");
+                securityRequirements: s_CompleteSecurityRequirements,
+                operationName: "CompleteAsync");
 
             using var __timeoutCancellationTokenSource = global::SmallestAI.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -303,7 +303,7 @@ namespace SmallestAI
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareElectronChatCompletionsRequest(
+                PrepareCompleteRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     request: request);
@@ -323,8 +323,8 @@ namespace SmallestAI
                     await global::SmallestAI.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ElectronChatCompletions",
-                                methodName: "ElectronChatCompletionsAsync",
+                                operationId: "Complete",
+                                methodName: "CompleteAsync",
                                 pathTemplate: "\"/waves/v1/chat/completions\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -357,8 +357,8 @@ namespace SmallestAI
                         await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ElectronChatCompletions",
-                                methodName: "ElectronChatCompletionsAsync",
+                                operationId: "Complete",
+                                methodName: "CompleteAsync",
                                 pathTemplate: "\"/waves/v1/chat/completions\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -398,8 +398,8 @@ namespace SmallestAI
                         await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ElectronChatCompletions",
-                                methodName: "ElectronChatCompletionsAsync",
+                                operationId: "Complete",
+                                methodName: "CompleteAsync",
                                 pathTemplate: "\"/waves/v1/chat/completions\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -438,7 +438,7 @@ namespace SmallestAI
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessElectronChatCompletionsResponse(
+                ProcessCompleteResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -446,8 +446,8 @@ namespace SmallestAI
                     await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ElectronChatCompletions",
-                                methodName: "ElectronChatCompletionsAsync",
+                                operationId: "Complete",
+                                methodName: "CompleteAsync",
                                 pathTemplate: "\"/waves/v1/chat/completions\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -468,8 +468,8 @@ namespace SmallestAI
                     await global::SmallestAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::SmallestAI.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ElectronChatCompletions",
-                                methodName: "ElectronChatCompletionsAsync",
+                                operationId: "Complete",
+                                methodName: "CompleteAsync",
                                 pathTemplate: "\"/waves/v1/chat/completions\"",
                                 httpMethod: "POST",
                                 baseUri: BaseUri,
@@ -720,7 +720,7 @@ namespace SmallestAI
                                     client: HttpClient,
                                     response: __response,
                                     content: ref __content);
-                                ProcessElectronChatCompletionsResponseContent(
+                                ProcessCompleteResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -906,8 +906,13 @@ namespace SmallestAI
         /// </param>
         /// <param name="streamOptions"></param>
         /// <param name="tools">
-        /// Tool / function calling definitions. Standard OpenAI shape.<br/>
-        /// See [Tool Calling](/models/documentation/llm-electron/tool-function-calling).
+        /// Tool / function calling definitions. Forwarded verbatim to the<br/>
+        /// OpenAI-compatible upstream, so the standard OpenAI shape<br/>
+        /// (`{type: "function", function: {name, description, parameters}}`)<br/>
+        /// is the recommended form and is what the examples below use.<br/>
+        /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// for details.
         /// </param>
         /// <param name="toolChoice"></param>
         /// <param name="responseFormat">
@@ -934,7 +939,7 @@ namespace SmallestAI
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
-        public async global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> ElectronChatCompletionsAsync(
+        public async global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> CompleteAsync(
             string model,
             global::System.Collections.Generic.IList<global::SmallestAI.ElectronMessage> messages,
             double? temperature = default,
@@ -942,7 +947,7 @@ namespace SmallestAI
             int? maxTokens = default,
             bool? stream = default,
             global::SmallestAI.ChatCompletionRequestStreamOptions? streamOptions = default,
-            global::System.Collections.Generic.IList<global::SmallestAI.Tool>? tools = default,
+            global::System.Collections.Generic.IList<object>? tools = default,
             global::SmallestAI.ChatCompletionRequestToolChoice? toolChoice = default,
             global::SmallestAI.ChatCompletionRequestResponseFormat? responseFormat = default,
             global::SmallestAI.ChatCompletionRequestStop? stop = default,
@@ -978,7 +983,7 @@ namespace SmallestAI
                 User = user,
             };
 
-            return await ElectronChatCompletionsAsync(
+            return await CompleteAsync(
                 request: __request,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken).ConfigureAwait(false);

@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class ErrorResponseErrorsItems
+    public sealed partial class ChatCompletionRequestTool
     {
 
         /// <summary>

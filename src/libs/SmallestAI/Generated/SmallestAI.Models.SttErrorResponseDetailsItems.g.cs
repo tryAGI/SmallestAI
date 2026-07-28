@@ -4,9 +4,9 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// JSON Schema for the tool's parameters.
+    /// 
     /// </summary>
-    public sealed partial class ToolParameters
+    public sealed partial class SttErrorResponseDetailsItems
     {
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class ToolCallFunction
+    public sealed partial class ElectronToolCallFunction
     {
         /// <summary>
         /// 
@@ -29,7 +29,7 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolCallFunction" /> class.
+        /// Initializes a new instance of the <see cref="ElectronToolCallFunction" /> class.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="arguments">
@@ -38,7 +38,7 @@ namespace SmallestAI
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public ToolCallFunction(
+        public ElectronToolCallFunction(
             string name,
             string arguments)
         {
@@ -47,9 +47,9 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolCallFunction" /> class.
+        /// Initializes a new instance of the <see cref="ElectronToolCallFunction" /> class.
         /// </summary>
-        public ToolCallFunction()
+        public ElectronToolCallFunction()
         {
         }
 

@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     /// 
     /// </summary>
-    public enum ToolCallType
+    public enum ElectronToolCallType
     {
         /// <summary>
         /// 
@@ -17,27 +17,27 @@ namespace SmallestAI
     /// <summary>
     /// Enum extensions to do fast conversions without the reflection.
     /// </summary>
-    public static class ToolCallTypeExtensions
+    public static class ElectronToolCallTypeExtensions
     {
         /// <summary>
         /// Converts an enum to a string.
         /// </summary>
-        public static string ToValueString(this ToolCallType value)
+        public static string ToValueString(this ElectronToolCallType value)
         {
             return value switch
             {
-                ToolCallType.Function => "function",
+                ElectronToolCallType.Function => "function",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
         /// <summary>
         /// Converts an string to a enum.
         /// </summary>
-        public static ToolCallType? ToEnum(string value)
+        public static ElectronToolCallType? ToEnum(string value)
         {
             return value switch
             {
-                "function" => ToolCallType.Function,
+                "function" => ElectronToolCallType.Function,
                 _ => null,
             };
         }
