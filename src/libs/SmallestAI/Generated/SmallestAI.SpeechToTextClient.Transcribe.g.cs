@@ -38,6 +38,7 @@ namespace SmallestAI
             ref global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci,
             ref global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection,
             ref global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection,
+            ref global::SmallestAI.WavesV1SttPostParametersXExpireContent? xExpireContent,
             byte[] request);
         partial void PrepareTranscribeRequest(
             global::System.Net.Http.HttpClient httpClient,
@@ -53,6 +54,7 @@ namespace SmallestAI
             global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci,
             global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection,
             global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection,
+            global::SmallestAI.WavesV1SttPostParametersXExpireContent? xExpireContent,
             byte[] request);
         partial void ProcessTranscribeResponse(
             global::System.Net.Http.HttpClient httpClient,
@@ -155,6 +157,7 @@ namespace SmallestAI
         /// <param name="genderDetection">
         /// Default Value: false
         /// </param>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -173,6 +176,7 @@ namespace SmallestAI
             global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci = default,
             global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection = default,
             global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection = default,
+            global::SmallestAI.WavesV1SttPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -190,6 +194,7 @@ namespace SmallestAI
                 redactPci: redactPci,
                 emotionDetection: emotionDetection,
                 genderDetection: genderDetection,
+                xExpireContent: xExpireContent,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -288,6 +293,7 @@ namespace SmallestAI
         /// <param name="genderDetection">
         /// Default Value: false
         /// </param>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -306,6 +312,7 @@ namespace SmallestAI
             global::SmallestAI.WavesV1SttPostParametersRedactPci? redactPci = default,
             global::SmallestAI.WavesV1SttPostParametersEmotionDetection? emotionDetection = default,
             global::SmallestAI.WavesV1SttPostParametersGenderDetection? genderDetection = default,
+            global::SmallestAI.WavesV1SttPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -326,6 +333,7 @@ namespace SmallestAI
                 redactPci: ref redactPci,
                 emotionDetection: ref emotionDetection,
                 genderDetection: ref genderDetection,
+                xExpireContent: ref xExpireContent,
                 request: request);
 
 
@@ -397,6 +405,12 @@ namespace SmallestAI
                 } 
             }
 
+            if (xExpireContent != default)
+            {
+                __httpRequest.Headers.TryAddWithoutValidation("x-expire-content", xExpireContent?.ToValueString() ?? string.Empty);
+            }
+
+
                             var __httpRequestContent = new global::System.Net.Http.ByteArrayContent(request);
                             __httpRequestContent.Headers.ContentType = new global::System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
                             __httpRequest.Content = __httpRequestContent;
@@ -422,6 +436,7 @@ namespace SmallestAI
                     redactPci: redactPci,
                     emotionDetection: emotionDetection,
                     genderDetection: genderDetection,
+                    xExpireContent: xExpireContent,
                     request: request);
 
                 return __httpRequest;
