@@ -27,10 +27,12 @@ namespace SmallestAI
             };
         partial void PrepareSynthesizeSpeechSseArguments(
             global::System.Net.Http.HttpClient httpClient,
+            ref global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent? xExpireContent,
             global::SmallestAI.TtsRequest request);
         partial void PrepareSynthesizeSpeechSseRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
+            global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent? xExpireContent,
             global::SmallestAI.TtsRequest request);
         partial void ProcessSynthesizeSpeechSseResponse(
             global::System.Net.Http.HttpClient httpClient,
@@ -70,6 +72,7 @@ namespace SmallestAI
         /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
         /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -77,6 +80,7 @@ namespace SmallestAI
         public async global::System.Collections.Generic.IAsyncEnumerable<string> SynthesizeSpeechSseAsync(
 
             global::SmallestAI.TtsRequest request,
+            global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             [global::System.Runtime.CompilerServices.EnumeratorCancellation] global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -86,6 +90,7 @@ namespace SmallestAI
                 client: HttpClient);
             PrepareSynthesizeSpeechSseArguments(
                 httpClient: HttpClient,
+                xExpireContent: ref xExpireContent,
                 request: request);
 
 
@@ -143,6 +148,12 @@ namespace SmallestAI
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
+
+            if (xExpireContent != default)
+            {
+                __httpRequest.Headers.TryAddWithoutValidation("x-expire-content", xExpireContent?.ToValueString() ?? string.Empty);
+            }
+
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
                                 content: __httpRequestContentBody,
@@ -160,6 +171,7 @@ namespace SmallestAI
                 PrepareSynthesizeSpeechSseRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
+                    xExpireContent: xExpireContent,
                     request: request);
 
                 return __httpRequest;
@@ -440,6 +452,7 @@ namespace SmallestAI
         /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
         /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="text">
         /// The text to convert to speech.<br/>
         /// Default Value: Hello from Waves TTS.
@@ -540,6 +553,7 @@ namespace SmallestAI
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         public async global::System.Collections.Generic.IAsyncEnumerable<string> SynthesizeSpeechSseAsync(
+            global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent? xExpireContent = default,
             string text = "Hello from Waves TTS.",
             string voiceId = "magnus",
             global::SmallestAI.TtsRequestModel? model = default,
@@ -572,6 +586,7 @@ namespace SmallestAI
             };
 
             var __enumerable = SynthesizeSpeechSseAsync(
+                xExpireContent: xExpireContent,
                 request: __request,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken);

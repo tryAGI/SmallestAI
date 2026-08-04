@@ -28,11 +28,13 @@ namespace SmallestAI
         partial void PrepareSynthesizeSpeechArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::SmallestAI.WavesV1TtsPostParametersAccept accept,
+            ref global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent,
             global::SmallestAI.TtsRequest request);
         partial void PrepareSynthesizeSpeechRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.WavesV1TtsPostParametersAccept accept,
+            global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent,
             global::SmallestAI.TtsRequest request);
         partial void ProcessSynthesizeSpeechResponse(
             global::System.Net.Http.HttpClient httpClient,
@@ -128,6 +130,7 @@ namespace SmallestAI
         /// <param name="accept">
         /// Default Value: audio/wav
         /// </param>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -136,6 +139,7 @@ namespace SmallestAI
 
             global::SmallestAI.TtsRequest request,
             global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -143,6 +147,7 @@ namespace SmallestAI
 
                 request: request,
                 accept: accept,
+                xExpireContent: xExpireContent,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -234,6 +239,7 @@ namespace SmallestAI
         /// <param name="accept">
         /// Default Value: audio/wav
         /// </param>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -242,6 +248,7 @@ namespace SmallestAI
 
             global::SmallestAI.TtsRequest request,
             global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -252,6 +259,7 @@ namespace SmallestAI
             PrepareSynthesizeSpeechArguments(
                 httpClient: HttpClient,
                 accept: ref accept,
+                xExpireContent: ref xExpireContent,
                 request: request);
 
 
@@ -311,6 +319,10 @@ namespace SmallestAI
             }
 
                 __httpRequest.Headers.TryAddWithoutValidation("Accept", accept.ToValueString());
+            if (xExpireContent != default)
+            {
+                __httpRequest.Headers.TryAddWithoutValidation("x-expire-content", xExpireContent?.ToValueString() ?? string.Empty);
+            }
 
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
@@ -330,6 +342,7 @@ namespace SmallestAI
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     accept: accept!,
+                    xExpireContent: xExpireContent,
                     request: request);
 
                 return __httpRequest;
@@ -756,6 +769,7 @@ namespace SmallestAI
         /// <param name="accept">
         /// Default Value: audio/wav
         /// </param>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -764,6 +778,7 @@ namespace SmallestAI
 
             global::SmallestAI.TtsRequest request,
             global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -774,6 +789,7 @@ namespace SmallestAI
             PrepareSynthesizeSpeechArguments(
                 httpClient: HttpClient,
                 accept: ref accept,
+                xExpireContent: ref xExpireContent,
                 request: request);
 
 
@@ -833,6 +849,10 @@ namespace SmallestAI
             }
 
                 __httpRequest.Headers.TryAddWithoutValidation("Accept", accept.ToValueString());
+            if (xExpireContent != default)
+            {
+                __httpRequest.Headers.TryAddWithoutValidation("x-expire-content", xExpireContent?.ToValueString() ?? string.Empty);
+            }
 
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
@@ -852,6 +872,7 @@ namespace SmallestAI
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     accept: accept!,
+                    xExpireContent: xExpireContent,
                     request: request);
 
                 return __httpRequest;
@@ -1315,6 +1336,7 @@ namespace SmallestAI
         /// <param name="accept">
         /// Default Value: audio/wav
         /// </param>
+        /// <param name="xExpireContent"></param>
         /// <param name="text">
         /// The text to convert to speech.<br/>
         /// Default Value: Hello from Waves TTS.
@@ -1416,6 +1438,7 @@ namespace SmallestAI
         /// <exception cref="global::System.InvalidOperationException"></exception>
         public async global::System.Threading.Tasks.Task<byte[]> SynthesizeSpeechAsync(
             global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             string text = "Hello from Waves TTS.",
             string voiceId = "magnus",
             global::SmallestAI.TtsRequestModel? model = default,
@@ -1449,6 +1472,7 @@ namespace SmallestAI
 
             return await SynthesizeSpeechAsync(
                 accept: accept,
+                xExpireContent: xExpireContent,
                 request: __request,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken).ConfigureAwait(false);

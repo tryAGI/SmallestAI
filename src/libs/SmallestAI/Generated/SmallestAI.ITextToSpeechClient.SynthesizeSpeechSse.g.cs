@@ -38,6 +38,7 @@ namespace SmallestAI
         /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
         /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -45,6 +46,7 @@ namespace SmallestAI
         global::System.Collections.Generic.IAsyncEnumerable<string> SynthesizeSpeechSseAsync(
 
             global::SmallestAI.TtsRequest request,
+            global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -81,6 +83,7 @@ namespace SmallestAI
         /// - **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.<br/>
         /// - **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="text">
         /// The text to convert to speech.<br/>
         /// Default Value: Hello from Waves TTS.
@@ -181,6 +184,7 @@ namespace SmallestAI
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Collections.Generic.IAsyncEnumerable<string> SynthesizeSpeechSseAsync(
+            global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent? xExpireContent = default,
             string text = "Hello from Waves TTS.",
             string voiceId = "magnus",
             global::SmallestAI.TtsRequestModel? model = default,
