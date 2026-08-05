@@ -17,9 +17,9 @@ namespace SmallestAI
         /// - **Use `/waves/v1/tts/live`** (WebSocket) when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.<br/>
         /// ## How it works<br/>
         /// 1. POST your text + voice settings — same payload as `/waves/v1/tts`, plus optional `model`.<br/>
-        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;"}\n\n`.<br/>
+        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;", "done": false, "status": "206"}\n\n`.<br/>
         /// 3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).<br/>
-        /// 4. A final `data: {"done": true}\n\n` frame marks end of stream.<br/>
+        /// 4. A final `data: {"status": "200", "done": true}\n\n` frame marks end of stream. Detect the terminator with `done == true`; every chunk frame also carries `done: false`, so `"done" in msg` matches every frame.<br/>
         /// ## Examples<br/>
         /// **cURL**<br/>
         /// ```bash<br/>
@@ -62,9 +62,9 @@ namespace SmallestAI
         /// - **Use `/waves/v1/tts/live`** (WebSocket) when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.<br/>
         /// ## How it works<br/>
         /// 1. POST your text + voice settings — same payload as `/waves/v1/tts`, plus optional `model`.<br/>
-        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;"}\n\n`.<br/>
+        /// 2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\n` followed by `data: {"audio": "&lt;base64-pcm&gt;", "done": false, "status": "206"}\n\n`.<br/>
         /// 3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).<br/>
-        /// 4. A final `data: {"done": true}\n\n` frame marks end of stream.<br/>
+        /// 4. A final `data: {"status": "200", "done": true}\n\n` frame marks end of stream. Detect the terminator with `done == true`; every chunk frame also carries `done: false`, so `"done" in msg` matches every frame.<br/>
         /// ## Examples<br/>
         /// **cURL**<br/>
         /// ```bash<br/>
