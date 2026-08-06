@@ -159,6 +159,38 @@ namespace SmallestAI
         /// Accepts the same language codes as `language` (including `auto`,<br/>
         /// `nl`, `sv`).
         /// </param>
+        /// <param name="mathNotation">
+        /// Opt-in flag that reads digit-flanked math operators (`5 x 3`,<br/>
+        /// `2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the<br/>
+        /// default number reader. Off by default because in real traffic<br/>
+        /// digit-flanked `NxN` is more often a product dimension, the<br/>
+        /// `24x7` idiom, or a vehicle-registration code than an actual<br/>
+        /// multiplication.<br/>
+        /// When `true`, the normalizer replaces the operator with the<br/>
+        /// spoken word matched to `number_pronunciation_language`:<br/>
+        /// | Glyphs | en (default / fallback) | hi | mr |<br/>
+        /// |---|---|---|---|<br/>
+        /// | `×` `x` `X` `*` | times | गुणा | गुणिले |<br/>
+        /// | `÷` and spaced `/` | divided by | बटा | भागिले |<br/>
+        /// | `+` | plus | प्लस | अधिक |<br/>
+        /// | spaced `-` `–` `−` | minus | माइनस | वजा |<br/>
+        /// | `=` | equals | बराबर | बरोबर |<br/>
+        /// | `^` `**` | to the power of | की घात | ची घात |<br/>
+        /// Localized only for `hi` and `mr`; every other language falls<br/>
+        /// back to the English words. The operator word follows<br/>
+        /// `number_pronunciation_language`, not the synthesis<br/>
+        /// `language`, so `language=en, number_pronunciation_language=hi`<br/>
+        /// reads `6 x 7` as "छः गुणा सात".<br/>
+        /// Matching rules: unambiguous glyphs (`× ÷ * ^ ** = +` and the<br/>
+        /// wrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).<br/>
+        /// The ambiguous `-` `–` `−` and `/` fire only when<br/>
+        /// space-padded, so `5-3` stays a range and `1/2` stays a<br/>
+        /// fraction. See [Math notation](/models/documentation/text-to-speech-lightning/math-notation)<br/>
+        /// for the full lexicon, known limitations (product dimensions,<br/>
+        /// `24x7` idiom, vehicle-reg codes), and EU-language<br/>
+        /// localizations.<br/>
+        /// Default Value: false
+        /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
@@ -192,6 +224,7 @@ namespace SmallestAI
             double? speed = default,
             global::SmallestAI.TtsRequestLanguage? language = default,
             global::SmallestAI.TtsRequestNumberPronunciationLanguage? numberPronunciationLanguage = default,
+            bool? mathNotation = default,
             global::SmallestAI.TtsRequestOutputFormat? outputFormat = default,
             global::System.Collections.Generic.IList<string>? pronunciationDicts = default,
             bool? wordTimestamps = default,

@@ -68,11 +68,11 @@ namespace SmallestAI
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<string>? Type10 { get; set; }
+        public bool? Type10 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public bool? Type11 { get; set; }
+        public global::System.Collections.Generic.IList<string>? Type11 { get; set; }
         /// <summary>
         /// 
         /// </summary>
