@@ -23,13 +23,13 @@ namespace SmallestAI
         public required string Transcription { get; set; }
 
         /// <summary>
-        /// 
+        /// Per-word timestamps. **Empty unless the request sets `word_timestamps=true`.** Each entry carries `word`, `start`, `end`, `confidence` (0.0–1.0), and `speaker` when `diarize=true` is also set.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("words")]
         public global::System.Collections.Generic.IList<global::SmallestAI.Word>? Words { get; set; }
 
         /// <summary>
-        /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field.
+        /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field. **Empty unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("utterances")]
         public global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? Utterances { get; set; }
@@ -75,9 +75,11 @@ namespace SmallestAI
         /// </summary>
         /// <param name="status"></param>
         /// <param name="transcription"></param>
-        /// <param name="words"></param>
+        /// <param name="words">
+        /// Per-word timestamps. **Empty unless the request sets `word_timestamps=true`.** Each entry carries `word`, `start`, `end`, `confidence` (0.0–1.0), and `speaker` when `diarize=true` is also set.
+        /// </param>
         /// <param name="utterances">
-        /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field.
+        /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field. **Empty unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
         /// </param>
         /// <param name="language"></param>
         /// <param name="metadata"></param>
