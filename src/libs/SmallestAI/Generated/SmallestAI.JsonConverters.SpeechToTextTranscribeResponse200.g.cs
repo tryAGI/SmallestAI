@@ -41,12 +41,12 @@ namespace SmallestAI.JsonConverters
             if (__jsonProps.Contains("metadata")) __score0++;
             if (__jsonProps.Contains("metadata.duration")) __score0++;
             if (__jsonProps.Contains("metadata.fileSize")) __score0++;
-            if (__jsonProps.Contains("metadata.filename")) __score0++;
             if (__jsonProps.Contains("metadata.num_chunks")) __score0++;
             if (__jsonProps.Contains("metadata.processing_time_ms")) __score0++;
             if (__jsonProps.Contains("metadata.rtfx")) __score0++;
             if (__jsonProps.Contains("request_id")) __score0++;
             if (__jsonProps.Contains("status")) __score0++;
+            if (__jsonProps.Contains("totalBytes")) __score0++;
             if (__jsonProps.Contains("transcription")) __score0++;
             if (__jsonProps.Contains("utterances")) __score0++;
             if (__jsonProps.Contains("words")) __score0++;

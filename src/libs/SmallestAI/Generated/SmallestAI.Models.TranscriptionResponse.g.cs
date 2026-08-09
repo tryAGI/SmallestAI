@@ -23,34 +23,40 @@ namespace SmallestAI
         public required string Transcription { get; set; }
 
         /// <summary>
-        /// Per-word timestamps. **Empty unless the request sets `word_timestamps=true`.** Each entry carries `word`, `start`, `end`, `confidence` (0.0–1.0), and `speaker` when `diarize=true` is also set.
+        /// Per-word timestamps. **Empty unless the request sets `word_timestamps=true`.** Each entry carries `word`, `start`, `end`, and `confidence` (0.0–1.0). Pulse responses with `diarize=true` also include `speaker` and `speaker_confidence`.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("words")]
         public global::System.Collections.Generic.IList<global::SmallestAI.Word>? Words { get; set; }
 
         /// <summary>
-        /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field. **Empty unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
+        /// Sentence-level segments. Returned by `?model=pulse` only; Pulse Pro responses omit this field entirely. **Empty on Pulse unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("utterances")]
         public global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? Utterances { get; set; }
 
         /// <summary>
-        /// 
+        /// Language of the transcription. Present on Pulse Pro responses; Pulse responses omit this field.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
         public string? Language { get; set; }
 
         /// <summary>
-        /// 
+        /// Response metadata. Pulse responses carry `duration` and `fileSize`. Pulse Pro responses carry `duration`, `processing_time_ms`, `rtfx`, and `num_chunks`.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
         public global::SmallestAI.TranscriptionResponseMetadata? Metadata { get; set; }
 
         /// <summary>
-        /// 
+        /// Server-assigned request identifier. Present on Pulse Pro responses; Pulse responses omit this field.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("request_id")]
         public string? RequestId { get; set; }
+
+        /// <summary>
+        /// Bytes received. Pulse Pro only.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("totalBytes")]
+        public double? TotalBytes { get; set; }
 
         /// <summary>
         /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
@@ -76,14 +82,23 @@ namespace SmallestAI
         /// <param name="status"></param>
         /// <param name="transcription"></param>
         /// <param name="words">
-        /// Per-word timestamps. **Empty unless the request sets `word_timestamps=true`.** Each entry carries `word`, `start`, `end`, `confidence` (0.0–1.0), and `speaker` when `diarize=true` is also set.
+        /// Per-word timestamps. **Empty unless the request sets `word_timestamps=true`.** Each entry carries `word`, `start`, `end`, and `confidence` (0.0–1.0). Pulse responses with `diarize=true` also include `speaker` and `speaker_confidence`.
         /// </param>
         /// <param name="utterances">
-        /// Sentence-level segments with optional speaker labels. Returned by `?model=pulse` only; Pulse Pro responses omit this field. **Empty unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
+        /// Sentence-level segments. Returned by `?model=pulse` only; Pulse Pro responses omit this field entirely. **Empty on Pulse unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
         /// </param>
-        /// <param name="language"></param>
-        /// <param name="metadata"></param>
-        /// <param name="requestId"></param>
+        /// <param name="language">
+        /// Language of the transcription. Present on Pulse Pro responses; Pulse responses omit this field.
+        /// </param>
+        /// <param name="metadata">
+        /// Response metadata. Pulse responses carry `duration` and `fileSize`. Pulse Pro responses carry `duration`, `processing_time_ms`, `rtfx`, and `num_chunks`.
+        /// </param>
+        /// <param name="requestId">
+        /// Server-assigned request identifier. Present on Pulse Pro responses; Pulse responses omit this field.
+        /// </param>
+        /// <param name="totalBytes">
+        /// Bytes received. Pulse Pro only.
+        /// </param>
         /// <param name="gender">
         /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
         /// </param>
@@ -101,6 +116,7 @@ namespace SmallestAI
             string? language,
             global::SmallestAI.TranscriptionResponseMetadata? metadata,
             string? requestId,
+            double? totalBytes,
             string? gender,
             global::System.Collections.Generic.Dictionary<string, double>? emotions)
         {
@@ -111,6 +127,7 @@ namespace SmallestAI
             this.Language = language;
             this.Metadata = metadata;
             this.RequestId = requestId;
+            this.TotalBytes = totalBytes;
             this.Gender = gender;
             this.Emotions = emotions;
         }

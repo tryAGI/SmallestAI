@@ -27,10 +27,10 @@ namespace SmallestAI
         public double? End { get; set; }
 
         /// <summary>
-        /// 
+        /// Zero-indexed speaker label. Present when `diarize=true` was set on the request.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("speaker")]
-        public string? Speaker { get; set; }
+        public int? Speaker { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -44,7 +44,9 @@ namespace SmallestAI
         /// <param name="text"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        /// <param name="speaker"></param>
+        /// <param name="speaker">
+        /// Zero-indexed speaker label. Present when `diarize=true` was set on the request.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -52,7 +54,7 @@ namespace SmallestAI
             string? text,
             double? start,
             double? end,
-            string? speaker)
+            int? speaker)
         {
             this.Text = text;
             this.Start = start;
