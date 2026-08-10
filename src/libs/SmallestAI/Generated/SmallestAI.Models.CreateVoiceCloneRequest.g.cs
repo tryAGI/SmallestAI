@@ -69,8 +69,9 @@ namespace SmallestAI
 
         /// <summary>
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated — the server returns 400 with<br/>
+        /// reasons but is deprecated - the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </summary>
@@ -124,8 +125,9 @@ namespace SmallestAI
         /// </param>
         /// <param name="model">
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated — the server returns 400 with<br/>
+        /// reasons but is deprecated - the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </param>
