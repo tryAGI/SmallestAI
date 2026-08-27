@@ -37,7 +37,7 @@ namespace SmallestAI
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::SmallestAI.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {
@@ -47,7 +47,7 @@ namespace SmallestAI
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ElectronClient Electron => new ElectronClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -56,7 +56,7 @@ namespace SmallestAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public PronunciationDictionariesClient PronunciationDictionaries => new PronunciationDictionariesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -65,7 +65,7 @@ namespace SmallestAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechToTextClient SpeechToText => new SpeechToTextClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -74,7 +74,7 @@ namespace SmallestAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TextToSpeechClient TextToSpeech => new TextToSpeechClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -83,7 +83,7 @@ namespace SmallestAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VoiceCloningClient VoiceCloning => new VoiceCloningClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -92,7 +92,7 @@ namespace SmallestAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VoicesClient Voices => new VoicesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {

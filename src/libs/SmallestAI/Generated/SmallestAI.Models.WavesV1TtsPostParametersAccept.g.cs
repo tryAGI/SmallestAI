@@ -9,7 +9,7 @@ namespace SmallestAI
     public enum WavesV1TtsPostParametersAccept
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AudioWav,
     }

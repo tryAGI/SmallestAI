@@ -39,38 +39,38 @@ namespace SmallestAI
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ElectronClient Electron { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public PronunciationDictionariesClient PronunciationDictionaries { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechToTextClient SpeechToText { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TextToSpeechClient TextToSpeech { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VoiceCloningClient VoiceCloning { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VoicesClient Voices { get; }
 

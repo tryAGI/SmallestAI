@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class Usage
     {
@@ -15,19 +15,19 @@ namespace SmallestAI
         public int? PromptTokens { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("completion_tokens")]
         public int? CompletionTokens { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("total_tokens")]
         public int? TotalTokens { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("prompt_tokens_details")]
         public global::SmallestAI.UsagePromptTokensDetails? PromptTokensDetails { get; set; }

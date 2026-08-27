@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ElectronMessage
     {
@@ -23,7 +23,7 @@ namespace SmallestAI
         public string? Content { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tool_calls")]
         public global::System.Collections.Generic.IList<global::SmallestAI.ElectronToolCall>? ToolCalls { get; set; }

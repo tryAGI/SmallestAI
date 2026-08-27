@@ -14,11 +14,11 @@ namespace SmallestAI
     public enum WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LightningV31,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LightningV31Pro,
     }

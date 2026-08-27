@@ -4,12 +4,12 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ChatCompletionObject
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ChatCompletion,
     }

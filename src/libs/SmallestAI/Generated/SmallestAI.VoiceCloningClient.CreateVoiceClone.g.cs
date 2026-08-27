@@ -139,7 +139,7 @@ namespace SmallestAI
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
 
                             var __httpRequestContent = new global::System.Net.Http.MultipartFormDataContent();
@@ -418,7 +418,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated). 
+                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -839,7 +839,7 @@ namespace SmallestAI
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
 
                             var __httpRequestContent = new global::System.Net.Http.MultipartFormDataContent();
@@ -1118,7 +1118,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated). 
+                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -1451,7 +1451,7 @@ namespace SmallestAI
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
 
                             var __httpRequestContent = new global::System.Net.Http.MultipartFormDataContent();
@@ -1730,7 +1730,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated). 
+                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;

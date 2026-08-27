@@ -53,7 +53,7 @@ namespace SmallestAI
         public bool? Stream { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("stream_options")]
         public global::SmallestAI.ChatCompletionRequestStreamOptions? StreamOptions { get; set; }
@@ -71,7 +71,7 @@ namespace SmallestAI
         public global::System.Collections.Generic.IList<object>? Tools { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tool_choice")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.ChatCompletionRequestToolChoiceJsonConverter))]
@@ -84,7 +84,7 @@ namespace SmallestAI
         public global::SmallestAI.ChatCompletionRequestResponseFormat? ResponseFormat { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("stop")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.ChatCompletionRequestStopJsonConverter))]
@@ -97,7 +97,7 @@ namespace SmallestAI
         public int? Seed { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("logit_bias")]
         public global::System.Collections.Generic.Dictionary<string, double>? LogitBias { get; set; }
@@ -109,7 +109,7 @@ namespace SmallestAI
         public bool? Logprobs { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("top_logprobs")]
         public int? TopLogprobs { get; set; }

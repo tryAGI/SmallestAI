@@ -9,19 +9,19 @@ namespace SmallestAI
     public enum TtsRequestSampleRate
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x16000,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x24000,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x44100,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x8000,
     }

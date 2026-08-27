@@ -9,7 +9,7 @@ namespace SmallestAI
     public enum WavesV1ModelGetVoicesGetParametersModel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LightningV31,
     }

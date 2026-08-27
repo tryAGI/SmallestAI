@@ -14,23 +14,23 @@ namespace SmallestAI
     public enum TtsRequestOutputFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Alaw,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Mp3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pcm,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ulaw,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Wav,
     }

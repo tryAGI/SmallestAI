@@ -9,11 +9,11 @@ namespace SmallestAI
     public enum WavesV1SttPostParametersWebhookMethod
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Get,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Post,
     }

@@ -31,11 +31,11 @@ namespace SmallestAI
         /// </summary>
         Ar,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Bn,
         /// <summary>
@@ -55,11 +55,11 @@ namespace SmallestAI
         /// </summary>
         Es,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fi,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fr,
         /// <summary>
@@ -67,11 +67,11 @@ namespace SmallestAI
         /// </summary>
         Gu,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Hi,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Id,
         /// <summary>
@@ -79,27 +79,27 @@ namespace SmallestAI
         /// </summary>
         It,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ja,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Kn,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ko,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ml,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Mr,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ms,
         /// <summary>
@@ -107,7 +107,7 @@ namespace SmallestAI
         /// </summary>
         Nl,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         No,
         /// <summary>
@@ -115,27 +115,27 @@ namespace SmallestAI
         /// </summary>
         Or,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pa,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pl,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pt,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ru,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sv,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ta,
         /// <summary>
@@ -143,15 +143,15 @@ namespace SmallestAI
         /// </summary>
         Te,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Tr,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Vi,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Zh,
     }

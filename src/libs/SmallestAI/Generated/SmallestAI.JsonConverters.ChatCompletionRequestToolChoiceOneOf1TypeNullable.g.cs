@@ -20,7 +20,7 @@ namespace SmallestAI.JsonConverters
                     {
                         return global::SmallestAI.ChatCompletionRequestToolChoiceOneOf1TypeExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

@@ -9,11 +9,11 @@ namespace SmallestAI
     public enum WavesV1SttPostParametersEmotionDetection
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         False,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         True,
     }
