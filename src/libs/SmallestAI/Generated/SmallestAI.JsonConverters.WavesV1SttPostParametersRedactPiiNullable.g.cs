@@ -20,7 +20,7 @@ namespace SmallestAI.JsonConverters
                     {
                         return global::SmallestAI.WavesV1SttPostParametersRedactPiiExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

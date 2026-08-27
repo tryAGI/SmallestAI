@@ -9,7 +9,7 @@ namespace SmallestAI
     public sealed partial class ChatCompletionRequestResponseFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("type")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.ChatCompletionRequestResponseFormatTypeJsonConverter))]

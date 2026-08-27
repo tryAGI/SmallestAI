@@ -40,7 +40,7 @@ namespace SmallestAI
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Bn,
         /// <summary>
@@ -60,11 +60,11 @@ namespace SmallestAI
         /// </summary>
         Es,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fi,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fr,
         /// <summary>
@@ -88,31 +88,31 @@ namespace SmallestAI
         /// </summary>
         Ja,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Kn,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ko,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ml,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Mr,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ms,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Nl,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         No,
         /// <summary>
@@ -128,15 +128,15 @@ namespace SmallestAI
         /// </summary>
         Pl,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pt,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ru,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sv,
         /// <summary>
@@ -148,15 +148,15 @@ namespace SmallestAI
         /// </summary>
         Te,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Tr,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Vi,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Zh,
     }

@@ -5,12 +5,12 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public readonly partial struct SpeechToTextTranscribeResponse200 : global::System.IEquatable<SpeechToTextTranscribeResponse200>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::SmallestAI.TranscriptionResponse? TranscriptionResponse { get; init; }
@@ -19,7 +19,7 @@ namespace SmallestAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(TranscriptionResponse))]
@@ -27,7 +27,7 @@ namespace SmallestAI
         public bool IsTranscriptionResponse => TranscriptionResponse != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickTranscriptionResponse(
 #if NET6_0_OR_GREATER
@@ -40,7 +40,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::SmallestAI.TranscriptionResponse PickTranscriptionResponse() => IsTranscriptionResponse
             ? TranscriptionResponse!
@@ -56,7 +56,7 @@ namespace SmallestAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(AsyncAccepted))]
@@ -64,7 +64,7 @@ namespace SmallestAI
         public bool IsAsyncAccepted => AsyncAccepted != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickAsyncAccepted(
 #if NET6_0_OR_GREATER
@@ -77,23 +77,23 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::SmallestAI.AsyncAccepted PickAsyncAccepted() => IsAsyncAccepted
             ? AsyncAccepted!
             : throw new global::System.InvalidOperationException($"Expected union variant 'AsyncAccepted' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator SpeechToTextTranscribeResponse200(global::SmallestAI.TranscriptionResponse value) => new SpeechToTextTranscribeResponse200((global::SmallestAI.TranscriptionResponse?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::SmallestAI.TranscriptionResponse?(SpeechToTextTranscribeResponse200 @this) => @this.TranscriptionResponse;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechToTextTranscribeResponse200(global::SmallestAI.TranscriptionResponse? value)
         {
@@ -101,22 +101,22 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static SpeechToTextTranscribeResponse200 FromTranscriptionResponse(global::SmallestAI.TranscriptionResponse? value) => new SpeechToTextTranscribeResponse200(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator SpeechToTextTranscribeResponse200(global::SmallestAI.AsyncAccepted value) => new SpeechToTextTranscribeResponse200((global::SmallestAI.AsyncAccepted?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::SmallestAI.AsyncAccepted?(SpeechToTextTranscribeResponse200 @this) => @this.AsyncAccepted;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechToTextTranscribeResponse200(global::SmallestAI.AsyncAccepted? value)
         {
@@ -124,12 +124,12 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static SpeechToTextTranscribeResponse200 FromAsyncAccepted(global::SmallestAI.AsyncAccepted? value) => new SpeechToTextTranscribeResponse200(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SpeechToTextTranscribeResponse200(
             global::SmallestAI.TranscriptionResponse? transcriptionResponse,
@@ -141,23 +141,23 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             AsyncAccepted as object ??
-            TranscriptionResponse as object 
+            TranscriptionResponse as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             TranscriptionResponse?.ToString() ??
-            AsyncAccepted?.ToString() 
+            AsyncAccepted?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -165,7 +165,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::SmallestAI.TranscriptionResponse, TResult>? transcriptionResponse = null,
@@ -190,7 +190,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<global::SmallestAI.TranscriptionResponse>? transcriptionResponse = null,
@@ -214,7 +214,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<global::SmallestAI.TranscriptionResponse>? transcriptionResponse = null,
@@ -237,7 +237,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -258,18 +258,18 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(SpeechToTextTranscribeResponse200 other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::SmallestAI.TranscriptionResponse?>.Default.Equals(TranscriptionResponse, other.TranscriptionResponse) &&
-                global::System.Collections.Generic.EqualityComparer<global::SmallestAI.AsyncAccepted?>.Default.Equals(AsyncAccepted, other.AsyncAccepted) 
+                global::System.Collections.Generic.EqualityComparer<global::SmallestAI.AsyncAccepted?>.Default.Equals(AsyncAccepted, other.AsyncAccepted)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(SpeechToTextTranscribeResponse200 obj1, SpeechToTextTranscribeResponse200 obj2)
         {
@@ -277,7 +277,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(SpeechToTextTranscribeResponse200 obj1, SpeechToTextTranscribeResponse200 obj2)
         {
@@ -285,7 +285,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

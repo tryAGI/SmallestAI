@@ -4,12 +4,12 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum WavesV1TtsPostParametersXExpireContent
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         True,
     }

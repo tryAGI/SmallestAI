@@ -287,7 +287,7 @@ namespace SmallestAI
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
@@ -485,7 +485,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Bad request — schema validation, unsupported parameter (`n > 1`, `prompt_logprobs`), context length exceeded, or invalid field value forwarded by the model. 
+                            // Bad request — schema validation, unsupported parameter (`n > 1`, `prompt_logprobs`), context length exceeded, or invalid field value forwarded by the model.
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -596,7 +596,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Rate limit (RPM) or concurrency cap hit. See [Concurrency and Limits](/models/api-reference/concurrency-and-limits). 
+                            // Rate limit (RPM) or concurrency cap hit. See [Concurrency and Limits](/models/api-reference/concurrency-and-limits).
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;

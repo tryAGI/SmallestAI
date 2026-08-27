@@ -5,12 +5,12 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public readonly partial struct ChatCompletionRequestStop : global::System.IEquatable<ChatCompletionRequestStop>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public string? ChatCompletionRequestStopVariant1 { get; init; }
@@ -19,7 +19,7 @@ namespace SmallestAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ChatCompletionRequestStopVariant1))]
@@ -27,7 +27,7 @@ namespace SmallestAI
         public bool IsChatCompletionRequestStopVariant1 => ChatCompletionRequestStopVariant1 != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickChatCompletionRequestStopVariant1(
 #if NET6_0_OR_GREATER
@@ -40,14 +40,14 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string PickChatCompletionRequestStopVariant1() => IsChatCompletionRequestStopVariant1
             ? ChatCompletionRequestStopVariant1!
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestStopVariant1' but the value was {ToString()}.");
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::System.Collections.Generic.IList<string>? ChatCompletionRequestStopVariant2 { get; init; }
@@ -56,7 +56,7 @@ namespace SmallestAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ChatCompletionRequestStopVariant2))]
@@ -64,7 +64,7 @@ namespace SmallestAI
         public bool IsChatCompletionRequestStopVariant2 => ChatCompletionRequestStopVariant2 != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickChatCompletionRequestStopVariant2(
 #if NET6_0_OR_GREATER
@@ -77,23 +77,23 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Collections.Generic.IList<string> PickChatCompletionRequestStopVariant2() => IsChatCompletionRequestStopVariant2
             ? ChatCompletionRequestStopVariant2!
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestStopVariant2' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator ChatCompletionRequestStop(string value) => new ChatCompletionRequestStop((string?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator string?(ChatCompletionRequestStop @this) => @this.ChatCompletionRequestStopVariant1;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ChatCompletionRequestStop(string? value)
         {
@@ -101,12 +101,12 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static ChatCompletionRequestStop FromChatCompletionRequestStopVariant1(string? value) => new ChatCompletionRequestStop(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ChatCompletionRequestStop(
             string? chatCompletionRequestStopVariant1,
@@ -118,23 +118,23 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             ChatCompletionRequestStopVariant2 as object ??
-            ChatCompletionRequestStopVariant1 as object 
+            ChatCompletionRequestStopVariant1 as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             ChatCompletionRequestStopVariant1?.ToString() ??
-            ChatCompletionRequestStopVariant2?.ToString() 
+            ChatCompletionRequestStopVariant2?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -142,7 +142,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<string, TResult>? chatCompletionRequestStopVariant1 = null,
@@ -167,7 +167,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<string>? chatCompletionRequestStopVariant1 = null,
@@ -191,7 +191,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<string>? chatCompletionRequestStopVariant1 = null,
@@ -214,7 +214,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -235,18 +235,18 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(ChatCompletionRequestStop other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<string?>.Default.Equals(ChatCompletionRequestStopVariant1, other.ChatCompletionRequestStopVariant1) &&
-                global::System.Collections.Generic.EqualityComparer<global::System.Collections.Generic.IList<string>?>.Default.Equals(ChatCompletionRequestStopVariant2, other.ChatCompletionRequestStopVariant2) 
+                global::System.Collections.Generic.EqualityComparer<global::System.Collections.Generic.IList<string>?>.Default.Equals(ChatCompletionRequestStopVariant2, other.ChatCompletionRequestStopVariant2)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(ChatCompletionRequestStop obj1, ChatCompletionRequestStop obj2)
         {
@@ -254,7 +254,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(ChatCompletionRequestStop obj1, ChatCompletionRequestStop obj2)
         {
@@ -262,7 +262,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

@@ -5,12 +5,12 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public readonly partial struct ChatCompletionRequestToolChoice : global::System.IEquatable<ChatCompletionRequestToolChoice>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::SmallestAI.ChatCompletionRequestToolChoice0? ChatCompletionRequestToolChoice0 { get; init; }
@@ -19,7 +19,7 @@ namespace SmallestAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ChatCompletionRequestToolChoice0))]
@@ -27,7 +27,7 @@ namespace SmallestAI
         public bool IsChatCompletionRequestToolChoice0 => ChatCompletionRequestToolChoice0 != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickChatCompletionRequestToolChoice0(
 #if NET6_0_OR_GREATER
@@ -40,14 +40,14 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::SmallestAI.ChatCompletionRequestToolChoice0 PickChatCompletionRequestToolChoice0() => IsChatCompletionRequestToolChoice0
             ? ChatCompletionRequestToolChoice0!.Value
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestToolChoice0' but the value was {ToString()}.");
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::SmallestAI.ChatCompletionRequestToolChoice1? ChatCompletionRequestToolChoice1 { get; init; }
@@ -56,7 +56,7 @@ namespace SmallestAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ChatCompletionRequestToolChoice1))]
@@ -64,7 +64,7 @@ namespace SmallestAI
         public bool IsChatCompletionRequestToolChoice1 => ChatCompletionRequestToolChoice1 != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickChatCompletionRequestToolChoice1(
 #if NET6_0_OR_GREATER
@@ -77,23 +77,23 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::SmallestAI.ChatCompletionRequestToolChoice1 PickChatCompletionRequestToolChoice1() => IsChatCompletionRequestToolChoice1
             ? ChatCompletionRequestToolChoice1!
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestToolChoice1' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator ChatCompletionRequestToolChoice(global::SmallestAI.ChatCompletionRequestToolChoice0 value) => new ChatCompletionRequestToolChoice((global::SmallestAI.ChatCompletionRequestToolChoice0?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::SmallestAI.ChatCompletionRequestToolChoice0?(ChatCompletionRequestToolChoice @this) => @this.ChatCompletionRequestToolChoice0;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ChatCompletionRequestToolChoice(global::SmallestAI.ChatCompletionRequestToolChoice0? value)
         {
@@ -101,22 +101,22 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static ChatCompletionRequestToolChoice FromChatCompletionRequestToolChoice0(global::SmallestAI.ChatCompletionRequestToolChoice0? value) => new ChatCompletionRequestToolChoice(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator ChatCompletionRequestToolChoice(global::SmallestAI.ChatCompletionRequestToolChoice1 value) => new ChatCompletionRequestToolChoice((global::SmallestAI.ChatCompletionRequestToolChoice1?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::SmallestAI.ChatCompletionRequestToolChoice1?(ChatCompletionRequestToolChoice @this) => @this.ChatCompletionRequestToolChoice1;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ChatCompletionRequestToolChoice(global::SmallestAI.ChatCompletionRequestToolChoice1? value)
         {
@@ -124,12 +124,12 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static ChatCompletionRequestToolChoice FromChatCompletionRequestToolChoice1(global::SmallestAI.ChatCompletionRequestToolChoice1? value) => new ChatCompletionRequestToolChoice(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ChatCompletionRequestToolChoice(
             global::SmallestAI.ChatCompletionRequestToolChoice0? chatCompletionRequestToolChoice0,
@@ -141,23 +141,23 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             ChatCompletionRequestToolChoice1 as object ??
-            ChatCompletionRequestToolChoice0 as object 
+            ChatCompletionRequestToolChoice0 as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             ChatCompletionRequestToolChoice0?.ToValueString() ??
-            ChatCompletionRequestToolChoice1?.ToString() 
+            ChatCompletionRequestToolChoice1?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -165,7 +165,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::SmallestAI.ChatCompletionRequestToolChoice0?, TResult>? chatCompletionRequestToolChoice0 = null,
@@ -190,7 +190,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<global::SmallestAI.ChatCompletionRequestToolChoice0?>? chatCompletionRequestToolChoice0 = null,
@@ -214,7 +214,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<global::SmallestAI.ChatCompletionRequestToolChoice0?>? chatCompletionRequestToolChoice0 = null,
@@ -237,7 +237,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -258,18 +258,18 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(ChatCompletionRequestToolChoice other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::SmallestAI.ChatCompletionRequestToolChoice0?>.Default.Equals(ChatCompletionRequestToolChoice0, other.ChatCompletionRequestToolChoice0) &&
-                global::System.Collections.Generic.EqualityComparer<global::SmallestAI.ChatCompletionRequestToolChoice1?>.Default.Equals(ChatCompletionRequestToolChoice1, other.ChatCompletionRequestToolChoice1) 
+                global::System.Collections.Generic.EqualityComparer<global::SmallestAI.ChatCompletionRequestToolChoice1?>.Default.Equals(ChatCompletionRequestToolChoice1, other.ChatCompletionRequestToolChoice1)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(ChatCompletionRequestToolChoice obj1, ChatCompletionRequestToolChoice obj2)
         {
@@ -277,7 +277,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(ChatCompletionRequestToolChoice obj1, ChatCompletionRequestToolChoice obj2)
         {
@@ -285,7 +285,7 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

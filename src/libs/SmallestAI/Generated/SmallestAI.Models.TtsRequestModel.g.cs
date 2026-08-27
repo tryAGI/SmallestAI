@@ -18,11 +18,11 @@ namespace SmallestAI
     public enum TtsRequestModel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LightningV31,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LightningV31Pro,
     }

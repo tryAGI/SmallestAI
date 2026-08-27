@@ -4,12 +4,12 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ChatCompletionRequestToolChoiceOneOf1Type
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Function,
     }

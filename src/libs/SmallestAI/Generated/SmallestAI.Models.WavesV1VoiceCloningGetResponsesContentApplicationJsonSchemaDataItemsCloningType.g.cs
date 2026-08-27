@@ -4,16 +4,16 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItemsCloningType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Instant,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Professional,
     }

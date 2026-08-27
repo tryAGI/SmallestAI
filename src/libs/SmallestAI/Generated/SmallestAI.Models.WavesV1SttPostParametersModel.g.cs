@@ -4,16 +4,16 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum WavesV1SttPostParametersModel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pulse,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PulsePro,
     }

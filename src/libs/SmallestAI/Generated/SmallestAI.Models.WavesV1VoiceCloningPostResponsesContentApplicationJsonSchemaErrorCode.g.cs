@@ -9,11 +9,11 @@ namespace SmallestAI
     public enum WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaErrorCode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         VoiceCloneError,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         VoiceCloneTimeout,
     }

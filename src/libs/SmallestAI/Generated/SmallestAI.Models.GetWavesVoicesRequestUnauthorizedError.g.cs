@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class GetWavesVoicesRequestUnauthorizedError
     {
