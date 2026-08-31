@@ -9,7 +9,7 @@ namespace SmallestAI
     public sealed partial class VoicesGetWavesVoicesResponse200
     {
         /// <summary>
-        /// List of available voices.
+        /// List of available voices for the chosen pool.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("voices")]
         public global::System.Collections.Generic.IList<global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>? Voices { get; set; }
@@ -24,7 +24,7 @@ namespace SmallestAI
         /// Initializes a new instance of the <see cref="VoicesGetWavesVoicesResponse200" /> class.
         /// </summary>
         /// <param name="voices">
-        /// List of available voices.
+        /// List of available voices for the chosen pool.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

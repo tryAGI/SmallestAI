@@ -12,6 +12,10 @@ namespace SmallestAI
         ///
         /// </summary>
         LightningV31,
+        /// <summary>
+        ///
+        /// </summary>
+        LightningV31Pro,
     }
 
     /// <summary>
@@ -27,6 +31,7 @@ namespace SmallestAI
             return value switch
             {
                 WavesV1ModelGetVoicesGetParametersModel.LightningV31 => "lightning-v3.1",
+                WavesV1ModelGetVoicesGetParametersModel.LightningV31Pro => "lightning-v3.1-pro",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -38,6 +43,7 @@ namespace SmallestAI
             return value switch
             {
                 "lightning-v3.1" => WavesV1ModelGetVoicesGetParametersModel.LightningV31,
+                "lightning-v3.1-pro" => WavesV1ModelGetVoicesGetParametersModel.LightningV31Pro,
                 _ => null,
             };
         }
