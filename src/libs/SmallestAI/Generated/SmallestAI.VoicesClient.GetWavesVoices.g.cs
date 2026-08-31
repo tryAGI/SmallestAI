@@ -42,8 +42,13 @@ namespace SmallestAI
             ref string content);
 
         /// <summary>
-        /// Get Voices<br/>
-        /// List voices available for Lightning v3.1. The response is the union of the standard and Pro voice catalogs — the API does not return a per-voice "is Pro" flag, so consult the [Lightning v3.1 Pro](/models/model-cards/text-to-speech/lightning-v-3-1-pro) and [Lightning v3.1](/models/model-cards/text-to-speech/lightning-v-3-1) model cards for the canonical per-pool voice lists. Use the `voice_id` from this response together with `"model": "lightning_v3.1"` (default) or `"model": "lightning_v3.1_pro"` on the unified `/waves/v1/tts` route to pick the pool.
+        /// Get voices for a pool<br/>
+        /// Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:<br/>
+        /// - `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.<br/>
+        /// - `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.<br/>
+        /// The endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.<br/>
+        /// Each voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/models/api-reference/text-to-speech/synthesize-speech) route, together with `"model": "lightning_v3.1"` (Standard) or `"model": "lightning_v3.1_pro"` (Pro).<br/>
+        /// To browse every voice across every model in one call, use [`GET /waves/v1/voice/get-all-models`](/models/api-reference/text-to-speech/get-all-voices) instead. For the canonical per-language voice list (with previews and recommended pairings), see the [Lightning v3.1](/models/model-cards/text-to-speech/lightning-v-3-1) and [Lightning v3.1 Pro](/models/model-cards/text-to-speech/lightning-v-3-1-pro) model cards.
         /// </summary>
         /// <param name="model">
         /// Default Value: lightning-v3.1
@@ -65,8 +70,13 @@ namespace SmallestAI
             return __response.Body;
         }
         /// <summary>
-        /// Get Voices<br/>
-        /// List voices available for Lightning v3.1. The response is the union of the standard and Pro voice catalogs — the API does not return a per-voice "is Pro" flag, so consult the [Lightning v3.1 Pro](/models/model-cards/text-to-speech/lightning-v-3-1-pro) and [Lightning v3.1](/models/model-cards/text-to-speech/lightning-v-3-1) model cards for the canonical per-pool voice lists. Use the `voice_id` from this response together with `"model": "lightning_v3.1"` (default) or `"model": "lightning_v3.1_pro"` on the unified `/waves/v1/tts` route to pick the pool.
+        /// Get voices for a pool<br/>
+        /// Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:<br/>
+        /// - `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.<br/>
+        /// - `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.<br/>
+        /// The endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.<br/>
+        /// Each voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/models/api-reference/text-to-speech/synthesize-speech) route, together with `"model": "lightning_v3.1"` (Standard) or `"model": "lightning_v3.1_pro"` (Pro).<br/>
+        /// To browse every voice across every model in one call, use [`GET /waves/v1/voice/get-all-models`](/models/api-reference/text-to-speech/get-all-voices) instead. For the canonical per-language voice list (with previews and recommended pairings), see the [Lightning v3.1](/models/model-cards/text-to-speech/lightning-v-3-1) and [Lightning v3.1 Pro](/models/model-cards/text-to-speech/lightning-v-3-1-pro) model cards.
         /// </summary>
         /// <param name="model">
         /// Default Value: lightning-v3.1
@@ -330,7 +340,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Bad request
+                            // Bad request. The most common cause is a `{model}` value outside the enum. Use `lightning-v3.1` or `lightning-v3.1-pro`.
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -367,7 +377,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Unauthorized
+                            // Missing or invalid API key.
                             if ((int)__response.StatusCode == 401)
                             {
                                 string? __content_401 = null;
@@ -404,7 +414,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Server error occurred
+                            // Server error.
                             if ((int)__response.StatusCode == 500)
                             {
                                 string? __content_500 = null;

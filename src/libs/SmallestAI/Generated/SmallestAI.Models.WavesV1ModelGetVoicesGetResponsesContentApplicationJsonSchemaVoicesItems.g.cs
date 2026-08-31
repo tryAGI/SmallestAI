@@ -9,21 +9,21 @@ namespace SmallestAI
     public sealed partial class WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems
     {
         /// <summary>
-        /// Unique Voice ID. Pass this value as `voice_id` on `POST /waves/v1/tts` (or the streaming route).
+        /// Unique voice identifier. Pass this value as `voice_id` on `POST /waves/v1/tts` (or the streaming route).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("voiceId")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string VoiceId { get; set; }
 
         /// <summary>
-        /// Display name for the voice.
+        /// Human-readable name for the voice.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("displayName")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string DisplayName { get; set; }
 
         /// <summary>
-        /// Tag metadata used to identify the voice's characteristics. Filter on these fields to find voices for a target language, accent, or use case. Fields may be empty on some voices.
+        /// Metadata describing the voice. Filter client-side to find voices for a target language, accent, or use case. Fields may be empty on some voices.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tags")]
         public global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItemsTags? Tags { get; set; }
@@ -38,13 +38,13 @@ namespace SmallestAI
         /// Initializes a new instance of the <see cref="WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems" /> class.
         /// </summary>
         /// <param name="voiceId">
-        /// Unique Voice ID. Pass this value as `voice_id` on `POST /waves/v1/tts` (or the streaming route).
+        /// Unique voice identifier. Pass this value as `voice_id` on `POST /waves/v1/tts` (or the streaming route).
         /// </param>
         /// <param name="displayName">
-        /// Display name for the voice.
+        /// Human-readable name for the voice.
         /// </param>
         /// <param name="tags">
-        /// Tag metadata used to identify the voice's characteristics. Filter on these fields to find voices for a target language, accent, or use case. Fields may be empty on some voices.
+        /// Metadata describing the voice. Filter client-side to find voices for a target language, accent, or use case. Fields may be empty on some voices.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
