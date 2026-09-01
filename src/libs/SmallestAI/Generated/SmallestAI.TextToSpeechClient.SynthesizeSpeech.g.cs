@@ -1338,7 +1338,7 @@ namespace SmallestAI
         /// </param>
         /// <param name="xExpireContent"></param>
         /// <param name="text">
-        /// The text to convert to speech.<br/>
+        /// The text to convert to speech. Max 8000 characters after trim; whitespace-only strings are rejected.<br/>
         /// Default Value: Hello from Waves TTS.
         /// </param>
         /// <param name="voiceId">
