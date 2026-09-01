@@ -129,7 +129,6 @@ namespace SmallestAI
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
         /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
         /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Async (webhook) mode is Pulse Pro only.** Pulse runs sync only on this endpoint.<br/>
         /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
         /// </summary>
         /// <param name="model"></param>
@@ -265,7 +264,6 @@ namespace SmallestAI
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
         /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
         /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Async (webhook) mode is Pulse Pro only.** Pulse runs sync only on this endpoint.<br/>
         /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
         /// </summary>
         /// <param name="model"></param>

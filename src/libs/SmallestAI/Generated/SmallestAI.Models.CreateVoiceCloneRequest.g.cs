@@ -60,12 +60,12 @@ namespace SmallestAI
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
-        /// unsupported codes with a 400.
+        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
+        /// The server validates and rejects unsupported codes with a 400.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
-        public string? Language { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguageJsonConverter))]
+        public global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage? Language { get; set; }
 
         /// <summary>
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
@@ -119,9 +119,8 @@ namespace SmallestAI
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
-        /// unsupported codes with a 400.
+        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
+        /// The server validates and rejects unsupported codes with a 400.
         /// </param>
         /// <param name="model">
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
@@ -141,7 +140,7 @@ namespace SmallestAI
             string? description,
             string? accent,
             string? tags,
-            string? language,
+            global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage? language,
             global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel? model)
         {
             this.DisplayName = displayName ?? throw new global::System.ArgumentNullException(nameof(displayName));

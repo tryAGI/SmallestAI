@@ -213,7 +213,7 @@ namespace SmallestAI
                             {
 
                                 __httpRequestContent.Add(
-                                    content: new global::System.Net.Http.StringContent(request.Language ?? string.Empty),
+                                    content: new global::System.Net.Http.StringContent((request.Language).HasValue ? (request.Language).GetValueOrDefault().ToValueString() : string.Empty),
                                     name: "\"language\"");
 
                             }
@@ -660,9 +660,8 @@ namespace SmallestAI
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
-        /// unsupported codes with a 400.
+        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
+        /// The server validates and rejects unsupported codes with a 400.
         /// </param>
         /// <param name="model">
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
@@ -682,7 +681,7 @@ namespace SmallestAI
             string? description = default,
             string? accent = default,
             string? tags = default,
-            string? language = default,
+            global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage? language = default,
             global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel? model = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
@@ -740,9 +739,8 @@ namespace SmallestAI
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
-        /// unsupported codes with a 400.
+        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
+        /// The server validates and rejects unsupported codes with a 400.
         /// </param>
         /// <param name="model">
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
@@ -762,7 +760,7 @@ namespace SmallestAI
             string? description = default,
             string? accent = default,
             string? tags = default,
-            string? language = default,
+            global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage? language = default,
             global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel? model = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
@@ -913,7 +911,7 @@ namespace SmallestAI
                             {
 
                                 __httpRequestContent.Add(
-                                    content: new global::System.Net.Http.StringContent(request.Language ?? string.Empty),
+                                    content: new global::System.Net.Http.StringContent((request.Language).HasValue ? (request.Language).GetValueOrDefault().ToValueString() : string.Empty),
                                     name: "\"language\"");
 
                             }
@@ -1352,9 +1350,8 @@ namespace SmallestAI
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`<br/>
-        /// (e.g. `en`, `hi`). The server validates and rejects<br/>
-        /// unsupported codes with a 400.
+        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
+        /// The server validates and rejects unsupported codes with a 400.
         /// </param>
         /// <param name="model">
         /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
@@ -1374,7 +1371,7 @@ namespace SmallestAI
             string? description = default,
             string? accent = default,
             string? tags = default,
-            string? language = default,
+            global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage? language = default,
             global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel? model = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
@@ -1525,7 +1522,7 @@ namespace SmallestAI
                             {
 
                                 __httpRequestContent.Add(
-                                    content: new global::System.Net.Http.StringContent(request.Language ?? string.Empty),
+                                    content: new global::System.Net.Http.StringContent((request.Language).HasValue ? (request.Language).GetValueOrDefault().ToValueString() : string.Empty),
                                     name: "\"language\"");
 
                             }

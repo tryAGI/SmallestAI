@@ -49,6 +49,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1ModelGetVoicesGetParametersModelNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguageJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguageNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModelJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModelNullableJsonConverter),
@@ -157,6 +161,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.GetWavesVoicesRequestBadRequestError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.GetWavesVoicesRequestUnauthorizedError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.GetWavesVoicesRequestInternalServerError))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage), TypeInfoPropertyName = "WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel), TypeInfoPropertyName = "WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataStatus), TypeInfoPropertyName = "WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems))]

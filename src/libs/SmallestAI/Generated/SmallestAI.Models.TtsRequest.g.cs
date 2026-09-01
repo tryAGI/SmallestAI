@@ -9,7 +9,7 @@ namespace SmallestAI
     public sealed partial class TtsRequest
     {
         /// <summary>
-        /// The text to convert to speech.<br/>
+        /// The text to convert to speech. Max 8000 characters after trim; whitespace-only strings are rejected.<br/>
         /// Default Value: Hello from Waves TTS.
         /// </summary>
         /// <default>"Hello from Waves TTS."</default>
@@ -194,7 +194,7 @@ namespace SmallestAI
         /// Initializes a new instance of the <see cref="TtsRequest" /> class.
         /// </summary>
         /// <param name="text">
-        /// The text to convert to speech.<br/>
+        /// The text to convert to speech. Max 8000 characters after trim; whitespace-only strings are rejected.<br/>
         /// Default Value: Hello from Waves TTS.
         /// </param>
         /// <param name="voiceId">
