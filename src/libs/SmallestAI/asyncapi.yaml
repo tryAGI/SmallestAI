@@ -1,0 +1,639 @@
+asyncapi: 3.0.0
+
+info:
+  title: Smallest AI Realtime API
+  version: 1.0.0
+  description: |
+    Handcrafted AsyncAPI description of the two Smallest AI WebSocket endpoints.
+
+    Smallest publishes no AsyncAPI document — both channels are described only
+    in prose inside the OpenAPI operation descriptions — so this file is
+    maintained by hand from the published documentation:
+
+      - Pulse STT realtime:
+        https://docs.smallest.ai/models/documentation/speech-to-text-pulse/realtime-web-socket/quickstart
+      - Pulse STT diarization:
+        https://docs.smallest.ai/waves/documentation/speech-to-text-pulse/features/diarization
+      - Lightning TTS WebSocket:
+        https://docs.smallest.ai/waves/api-reference/api-reference/text-to-speech/tts
+      - Lightning TTS word timestamps:
+        https://docs.smallest.ai/models/documentation/text-to-speech-lightning/word-timestamps
+
+    Raw binary audio frames are deliberately not modelled as messages. The
+    generated clients already expose
+    `SendAsync(ArraySegment<byte>, WebSocketMessageType, bool, CancellationToken)`,
+    which the hand-written session wrappers in `Extensions/` use to upload PCM.
+
+servers:
+  production:
+    host: api.smallest.ai
+    protocol: wss
+    description: Smallest AI production WebSocket endpoint.
+
+channels:
+  SttLive:
+    address: /waves/v1/stt/live
+    description: |
+      Pulse realtime speech-to-text. Audio is uploaded as raw binary frames
+      (~4096-byte PCM chunks); transcription results arrive as JSON frames.
+
+      Only `model=pulse` is served here. Pulse Pro has no streaming worker and
+      returns `400` before the WebSocket upgrade completes.
+
+      Speaker labels require `diarize=true`, and per-word speakers additionally
+      require `word_timestamps=true`. Only frames with `is_final: true` carry
+      the `words` array — never render speaker attribution from interim frames.
+      Speaker ids are zero-indexed and stable within a session only.
+    servers:
+      - $ref: '#/servers/production'
+    bindings:
+      ws:
+        query:
+          type: object
+          required:
+            - model
+          properties:
+            model:
+              $ref: '#/components/schemas/SttLiveModel'
+            language:
+              $ref: '#/components/schemas/SttLiveLanguage'
+            encoding:
+              $ref: '#/components/schemas/SttLiveEncoding'
+            sample_rate:
+              $ref: '#/components/schemas/SttLiveSampleRate'
+            word_timestamps:
+              $ref: '#/components/schemas/SttLiveWordTimestamps'
+            diarize:
+              $ref: '#/components/schemas/SttLiveDiarize'
+            sentence_timestamps:
+              $ref: '#/components/schemas/SttLiveSentenceTimestamps'
+            full_transcript:
+              $ref: '#/components/schemas/SttLiveFullTranscript'
+            punctuate:
+              $ref: '#/components/schemas/SttLivePunctuate'
+            capitalize:
+              $ref: '#/components/schemas/SttLiveCapitalize'
+            format:
+              $ref: '#/components/schemas/SttLiveFormat'
+            itn_normalize:
+              $ref: '#/components/schemas/SttLiveItnNormalize'
+            redact_pii:
+              $ref: '#/components/schemas/SttLiveRedactPii'
+            redact_pci:
+              $ref: '#/components/schemas/SttLiveRedactPci'
+            emotion_detection:
+              $ref: '#/components/schemas/SttLiveEmotionDetection'
+            gender_detection:
+              $ref: '#/components/schemas/SttLiveGenderDetection'
+            numerals:
+              $ref: '#/components/schemas/SttLiveNumerals'
+            keywords:
+              $ref: '#/components/schemas/SttLiveKeywords'
+            endpointing:
+              $ref: '#/components/schemas/SttLiveEndpointing'
+            eou_timeout_ms:
+              $ref: '#/components/schemas/SttLiveEouTimeoutMs'
+            max_words:
+              $ref: '#/components/schemas/SttLiveMaxWords'
+            finalize_on_words:
+              $ref: '#/components/schemas/SttLiveFinalizeOnWords'
+    messages:
+      SttTranscription:
+        name: SttTranscription
+        title: SttTranscription
+        description: A transcription frame emitted by the Pulse realtime worker.
+        payload:
+          $ref: '#/components/schemas/SttTranscriptionEvent'
+      SttFinalize:
+        name: SttFinalize
+        title: SttFinalize
+        description: Flush the current utterance and emit its final transcript.
+        payload:
+          $ref: '#/components/schemas/SttFinalizeRequest'
+      SttCloseStream:
+        name: SttCloseStream
+        title: SttCloseStream
+        description: 'End the session; the server flushes and emits a frame with `is_last: true`.'
+        payload:
+          $ref: '#/components/schemas/SttCloseStreamRequest'
+
+  TtsLive:
+    address: /waves/v1/tts/live
+    description: |
+      Lightning realtime text-to-speech. The same URL serves SSE over HTTP
+      `POST`; connecting with `wss://` selects the WebSocket protocol instead.
+
+      Send one JSON request per synthesis. Audio arrives as base64 `chunk`
+      frames, optionally interleaved with `word_timestamp` frames (English and
+      Hindi voices only), terminated by a `complete` frame. Within a
+      `context_id` continuation, `complete` ends one segment and the socket
+      stays open for the next.
+    servers:
+      - $ref: '#/servers/production'
+    bindings:
+      ws:
+        query:
+          type: object
+          properties:
+            timeout:
+              $ref: '#/components/schemas/TtsLiveTimeout'
+    messages:
+      TtsEvent:
+        name: TtsEvent
+        title: TtsEvent
+        description: An audio chunk, a word timestamp, or the completion marker.
+        payload:
+          $ref: '#/components/schemas/TtsLiveEvent'
+      TtsSynthesize:
+        name: TtsSynthesize
+        title: TtsSynthesize
+        description: Synthesize a piece of text, optionally as part of a buffered context.
+        payload:
+          $ref: '#/components/schemas/TtsSynthesizeRequest'
+
+operations:
+  SttTranscription:
+    description: Receive a Pulse realtime transcription frame.
+    action: receive
+    channel:
+      $ref: '#/channels/SttLive'
+    messages:
+      - $ref: '#/channels/SttLive/messages/SttTranscription'
+  SttFinalize:
+    description: Flush the current utterance and emit its final transcript.
+    action: send
+    channel:
+      $ref: '#/channels/SttLive'
+    messages:
+      - $ref: '#/channels/SttLive/messages/SttFinalize'
+  SttCloseStream:
+    description: 'End the session; the server flushes and emits a frame with `is_last: true`.'
+    action: send
+    channel:
+      $ref: '#/channels/SttLive'
+    messages:
+      - $ref: '#/channels/SttLive/messages/SttCloseStream'
+  TtsEvent:
+    description: Receive an audio chunk, a word timestamp, or the completion marker.
+    action: receive
+    channel:
+      $ref: '#/channels/TtsLive'
+    messages:
+      - $ref: '#/channels/TtsLive/messages/TtsEvent'
+  TtsSynthesize:
+    description: Synthesize a piece of text, optionally as part of a buffered context.
+    action: send
+    channel:
+      $ref: '#/channels/TtsLive'
+    messages:
+      - $ref: '#/channels/TtsLive/messages/TtsSynthesize'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+  schemas:
+    # ---------------------------------------------------------------------
+    # SttLive connection parameters
+    # ---------------------------------------------------------------------
+    SttLiveModel:
+      type: string
+      enum:
+        - pulse
+      default: pulse
+      description: |
+        Transcription model. Only `pulse` is served on this channel — Pulse Pro
+        has no streaming worker and returns `400` before the upgrade completes.
+    SttLiveLanguage:
+      type: string
+      default: en
+      description: |
+        Language code (for example `en`, `hi`, `de`, `es`, `ru`, `fr`, `ta`,
+        `te`) or a regional aggregator (`multi-eu`, `multi-asian`,
+        `multi-indic`). Left open rather than enumerated because the streaming
+        worker accepts codes the pre-recorded endpoint does not.
+    SttLiveEncoding:
+      type: string
+      enum:
+        - linear16
+        - linear32
+        - alaw
+        - mulaw
+        - opus
+        - ogg_opus
+      default: linear16
+      description: Encoding of the binary audio frames.
+    SttLiveSampleRate:
+      type: integer
+      enum:
+        - 8000
+        - 16000
+        - 22050
+        - 24000
+        - 44100
+        - 48000
+      default: 16000
+      description: Sample rate of the binary audio frames, in Hz.
+    SttLiveWordTimestamps:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Emit per-word timings on final frames. Required for per-word speaker labels.
+    SttLiveDiarize:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Emit speaker labels. Pair with `word_timestamps` for per-word attribution.
+    SttLiveSentenceTimestamps:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Emit sentence-level `utterances` on final frames.
+    SttLiveFullTranscript:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Include the cumulative session transcript on final frames.
+    SttLivePunctuate:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'true'
+      description: Insert punctuation.
+    SttLiveCapitalize:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'true'
+      description: Apply capitalization.
+    SttLiveFormat:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'true'
+      description: Apply punctuation and capitalization formatting to transcripts.
+    SttLiveItnNormalize:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Inverse text normalization, for example "twenty five" to "25".
+    SttLiveRedactPii:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Redact personally identifiable information from transcripts.
+    SttLiveRedactPci:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Redact payment card information from transcripts.
+    SttLiveEmotionDetection:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Emit emotion scores alongside transcripts.
+    SttLiveGenderDetection:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'false'
+      description: Emit a speaker gender label alongside transcripts.
+    SttLiveNumerals:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+        - auto
+      default: auto
+      description: Convert spoken numerals to digits.
+    SttLiveKeywords:
+      type: string
+      description: |
+        Comma-separated `KEYWORD:INTENSIFIER` pairs boosting domain-specific
+        terms, for example `NVIDIA:2,Kubernetes:1`. Omit the parameter entirely
+        when empty — an empty value registers a single empty keyword.
+    SttLiveEndpointing:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'true'
+      description: Finalize promptly on trailing silence.
+    SttLiveEouTimeoutMs:
+      type: integer
+      minimum: 100
+      maximum: 10000
+      description: End-of-utterance timeout, in milliseconds.
+    SttLiveMaxWords:
+      type: integer
+      minimum: 1
+      description: Force finalization after this many words.
+    SttLiveFinalizeOnWords:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
+      default: 'true'
+      description: Whether `max_words` forces finalization.
+
+    # ---------------------------------------------------------------------
+    # SttLive messages
+    # ---------------------------------------------------------------------
+    SttTranscriptionEvent:
+      type: object
+      description: |
+        A transcription frame. Interim frames carry only `transcript`; the
+        `words` and `utterances` arrays are populated on `is_final` frames.
+      properties:
+        session_id:
+          type: string
+          description: Identifier of this WebSocket session.
+        transcript:
+          type: string
+          description: Recognized text for this frame.
+        full_transcript:
+          type: string
+          description: Cumulative session transcript, when `full_transcript=true`.
+        is_final:
+          type: boolean
+          description: Whether this frame finalizes the current utterance.
+        is_last:
+          type: boolean
+          description: Whether this is the terminal frame of the session.
+        language:
+          type: string
+          description: Detected or configured language code.
+        languages:
+          type: array
+          description: Detected language codes when multiple were recognized.
+          items:
+            type: string
+        words:
+          type: array
+          description: Per-word timings and speaker labels. Present on final frames only.
+          items:
+            $ref: '#/components/schemas/SttWord'
+        utterances:
+          type: array
+          description: Sentence-level segments with speaker labels.
+          items:
+            $ref: '#/components/schemas/SttUtterance'
+        redacted_entities:
+          type: array
+          description: Entity categories removed by PII or PCI redaction.
+          items:
+            type: string
+        type:
+          type: string
+          description: Frame type identifier, when the server sends one.
+        message:
+          type: string
+          description: Human-readable server message.
+        error:
+          type: string
+          description: Error text, when the server reports a failure.
+    SttWord:
+      type: object
+      description: One recognized word with its timing and speaker attribution.
+      properties:
+        word:
+          type: string
+          description: The recognized word.
+        start:
+          type: number
+          format: double
+          description: Start offset in seconds from the beginning of the stream.
+        end:
+          type: number
+          format: double
+          description: End offset in seconds from the beginning of the stream.
+        confidence:
+          type: number
+          format: double
+          description: Recognition confidence between 0 and 1.
+        speaker:
+          type: integer
+          description: Zero-indexed speaker id, stable within this session only.
+        speaker_confidence:
+          type: number
+          format: double
+          description: Speaker attribution confidence between 0 and 1.
+    SttUtterance:
+      type: object
+      description: One sentence-level segment with its speaker attribution.
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start:
+          type: number
+          format: double
+          description: Start offset in seconds from the beginning of the stream.
+        end:
+          type: number
+          format: double
+          description: End offset in seconds from the beginning of the stream.
+        speaker:
+          type: integer
+          description: Zero-indexed speaker id, stable within this session only.
+    SttFinalizeRequest:
+      type: object
+      required:
+        - type
+      description: Control frame that flushes the current utterance.
+      properties:
+        type:
+          $ref: '#/components/schemas/SttFinalizeRequestType'
+    SttFinalizeRequestType:
+      type: string
+      enum:
+        - finalize
+      default: finalize
+      description: Message type identifier.
+    SttCloseStreamRequest:
+      type: object
+      required:
+        - type
+      description: Control frame that ends the session.
+      properties:
+        type:
+          $ref: '#/components/schemas/SttCloseStreamRequestType'
+    SttCloseStreamRequestType:
+      type: string
+      enum:
+        - close_stream
+      default: close_stream
+      description: Message type identifier.
+
+    # ---------------------------------------------------------------------
+    # TtsLive connection parameters and messages
+    # ---------------------------------------------------------------------
+    TtsLiveTimeout:
+      type: integer
+      minimum: 1
+      default: 60
+      description: Idle connection timeout in seconds before the server closes the socket.
+    TtsSynthesizeRequest:
+      type: object
+      required:
+        - voice_id
+        - text
+      description: One synthesis request.
+      properties:
+        voice_id:
+          type: string
+          description: Voice to synthesize with.
+        text:
+          type: string
+          description: Text to synthesize.
+        model:
+          type: string
+          description: Lightning model id, for example `lightning_v3.1` or `lightning_v3.1_pro`.
+        language:
+          type: string
+          description: Language code, or `auto` to detect.
+        number_pronunciation_language:
+          type: string
+          description: Language used when pronouncing numbers, or `auto`.
+        context_id:
+          type: string
+          maxLength: 128
+          description: |
+            Groups fragments of one utterance so prosody carries across
+            segments. Mutually exclusive with the legacy `flush` flag.
+        continue:
+          type: boolean
+          description: Buffer this fragment and wait; with `context_id`, hold until a sentence boundary.
+        context_close:
+          type: boolean
+          description: End the context and flush any buffered text.
+        flush:
+          type: boolean
+          description: Legacy buffer flush. Incompatible with `context_id`.
+        max_buffer_flush_ms:
+          type: integer
+          minimum: 0
+          maximum: 1000
+          default: 0
+          description: Maximum time to hold buffered text before flushing, in milliseconds.
+        max_buffer_delay_ms:
+          type: integer
+          minimum: 0
+          maximum: 5000
+          default: 3000
+          description: Maximum buffering delay, in milliseconds.
+        complete_backoff_ms:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 10000
+          default: 4000
+          description: Delay before emitting `complete` once the buffer drains, in milliseconds.
+        sample_rate:
+          $ref: '#/components/schemas/TtsSampleRate'
+        speed:
+          type: number
+          format: double
+          minimum: 0.5
+          maximum: 2
+          default: 1
+          description: Playback speed multiplier.
+        math_notation:
+          type: boolean
+          default: false
+          description: Read mathematical notation aloud.
+        word_timestamps:
+          type: boolean
+          default: false
+          description: Emit `word_timestamp` frames. English and Hindi voices only.
+        session_id:
+          type: string
+          maxLength: 128
+          description: Caller-supplied session identifier, echoed back as `external_session_id`.
+        request_id:
+          type: string
+          maxLength: 128
+          description: Caller-supplied request identifier, echoed back as `external_request_id`.
+    TtsSampleRate:
+      type: integer
+      enum:
+        - 8000
+        - 16000
+        - 24000
+        - 44100
+      default: 44100
+      description: Sample rate of the synthesized audio, in Hz.
+    TtsLiveEvent:
+      type: object
+      description: One server frame. The populated `data` fields depend on `status`.
+      properties:
+        session_id:
+          type: string
+          description: Server-assigned session identifier.
+        request_id:
+          type: string
+          description: Server-assigned request identifier.
+        external_session_id:
+          type: string
+          description: The caller-supplied `session_id`, echoed back.
+        external_request_id:
+          type: string
+          description: The caller-supplied `request_id`, echoed back.
+        status:
+          $ref: '#/components/schemas/TtsLiveEventStatus'
+        data:
+          $ref: '#/components/schemas/TtsLiveEventData'
+    TtsLiveEventStatus:
+      type: string
+      enum:
+        - chunk
+        - word_timestamp
+        - complete
+      description: |
+        Frame kind. `complete` is terminal, except inside a `context_id`
+        continuation where it ends one segment and the socket stays open.
+    TtsLiveEventData:
+      type: object
+      description: |
+        Frame payload. `audio` is populated on `chunk` frames; `id`, `word`,
+        `start` and `end` on `word_timestamp` frames.
+      properties:
+        audio:
+          type: string
+          description: Base64-encoded audio chunk.
+        id:
+          type: integer
+          description: Zero-indexed position of the word in the input text.
+        word:
+          type: string
+          description: The word, verbatim and un-normalized, as it appeared in the input.
+        start:
+          type: number
+          format: double
+          description: Start offset in seconds within the synthesized audio.
+        end:
+          type: number
+          format: double
+          description: End offset in seconds within the synthesized audio.

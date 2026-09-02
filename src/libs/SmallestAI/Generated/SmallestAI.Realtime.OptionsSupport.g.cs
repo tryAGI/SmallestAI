@@ -1,7 +1,7 @@
 
 #nullable enable
 
-namespace SmallestAI
+namespace SmallestAI.Realtime
 {
     /// <summary>
     /// Global defaults applied to generated SDK requests.
@@ -30,7 +30,7 @@ namespace SmallestAI
         /// <summary>
         /// Default retry behavior for generated HTTP requests.
         /// </summary>
-        public global::SmallestAI.AutoSDKRetryOptions Retry { get; set; } = new global::SmallestAI.AutoSDKRetryOptions();
+        public global::SmallestAI.Realtime.AutoSDKRetryOptions Retry { get; set; } = new global::SmallestAI.Realtime.AutoSDKRetryOptions();
 
         /// <summary>
         /// Overrides the client-wide response buffering mode when set.
@@ -40,16 +40,16 @@ namespace SmallestAI
         /// <summary>
         /// Reusable hooks invoked for every generated SDK request.
         /// </summary>
-        public global::System.Collections.Generic.List<global::SmallestAI.IAutoSDKHook> Hooks { get; } =
-            new global::System.Collections.Generic.List<global::SmallestAI.IAutoSDKHook>();
+        public global::System.Collections.Generic.List<global::SmallestAI.Realtime.IAutoSDKHook> Hooks { get; } =
+            new global::System.Collections.Generic.List<global::SmallestAI.Realtime.IAutoSDKHook>();
 
         /// <summary>
         /// Registers a hook for all requests issued by this client.
         /// </summary>
         /// <param name="hook"></param>
         /// <returns>The current options instance.</returns>
-        public global::SmallestAI.AutoSDKClientOptions AddHook(
-            global::SmallestAI.IAutoSDKHook hook)
+        public global::SmallestAI.Realtime.AutoSDKClientOptions AddHook(
+            global::SmallestAI.Realtime.IAutoSDKHook hook)
         {
             Hooks.Add(hook ?? throw new global::System.ArgumentNullException(nameof(hook)));
             return this;
@@ -61,7 +61,7 @@ namespace SmallestAI
         /// a fresh credential resolved from a provider, secret-store, or session — instead
         /// of mutating the shared <c>Authorizations</c> list at construction time.
         /// </summary>
-        public global::SmallestAI.IAutoSDKAuthorizationProvider? AuthorizationProvider { get; set; }
+        public global::SmallestAI.Realtime.IAutoSDKAuthorizationProvider? AuthorizationProvider { get; set; }
 
         /// <summary>
         /// Convenience helper that registers <see cref="AutoSDKAuthorizationProviderHook"/>
@@ -69,13 +69,13 @@ namespace SmallestAI
         /// touching shared client state.
         /// </summary>
         /// <param name="provider"></param>
-        public global::SmallestAI.AutoSDKClientOptions UseAuthorizationProvider(
-            global::SmallestAI.IAutoSDKAuthorizationProvider provider)
+        public global::SmallestAI.Realtime.AutoSDKClientOptions UseAuthorizationProvider(
+            global::SmallestAI.Realtime.IAutoSDKAuthorizationProvider provider)
         {
             AuthorizationProvider = provider ?? throw new global::System.ArgumentNullException(nameof(provider));
-            if (Hooks.Find(static x => x is global::SmallestAI.AutoSDKAuthorizationProviderHook) == null)
+            if (Hooks.Find(static x => x is global::SmallestAI.Realtime.AutoSDKAuthorizationProviderHook) == null)
             {
-                Hooks.Add(new global::SmallestAI.AutoSDKAuthorizationProviderHook());
+                Hooks.Add(new global::SmallestAI.Realtime.AutoSDKAuthorizationProviderHook());
             }
 
             return this;
@@ -127,10 +127,10 @@ namespace SmallestAI
         public string Type { get; }
 
         /// <summary>Convenience factory for a Bearer token.</summary>
-        public static global::SmallestAI.AutoSDKAuthorizationValue Bearer(string token) => new(value: token, scheme: "Bearer");
+        public static global::SmallestAI.Realtime.AutoSDKAuthorizationValue Bearer(string token) => new(value: token, scheme: "Bearer");
 
         /// <summary>Convenience factory for an API-key header.</summary>
-        public static global::SmallestAI.AutoSDKAuthorizationValue ApiKeyHeader(string name, string value) =>
+        public static global::SmallestAI.Realtime.AutoSDKAuthorizationValue ApiKeyHeader(string name, string value) =>
             new(value: value, headerName: name, location: "Header", type: "ApiKey");
     }
 
@@ -146,8 +146,8 @@ namespace SmallestAI
         /// the current request, or an empty list / <c>null</c> to leave the request as-is.
         /// </summary>
         /// <param name="context"></param>
-        global::System.Threading.Tasks.Task<global::System.Collections.Generic.IReadOnlyList<global::SmallestAI.AutoSDKAuthorizationValue>?> ResolveAsync(
-            global::SmallestAI.AutoSDKHookContext context);
+        global::System.Threading.Tasks.Task<global::System.Collections.Generic.IReadOnlyList<global::SmallestAI.Realtime.AutoSDKAuthorizationValue>?> ResolveAsync(
+            global::SmallestAI.Realtime.AutoSDKHookContext context);
     }
 
     /// <summary>
@@ -233,11 +233,11 @@ namespace SmallestAI
     /// <see cref="AutoSDKClientOptions.AuthorizationProvider"/> before every outgoing
     /// request and stamps the resolved values onto the <see cref="global::System.Net.Http.HttpRequestMessage"/>.
     /// </summary>
-    public sealed class AutoSDKAuthorizationProviderHook : global::SmallestAI.AutoSDKHook
+    public sealed class AutoSDKAuthorizationProviderHook : global::SmallestAI.Realtime.AutoSDKHook
     {
         /// <inheritdoc />
         public override async global::System.Threading.Tasks.Task OnBeforeRequestAsync(
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             context = context ?? throw new global::System.ArgumentNullException(nameof(context));
 
@@ -254,7 +254,7 @@ namespace SmallestAI
                     ApplyAuthorization(context.Request, perRequest[index]);
                 }
 
-                global::SmallestAI.AutoSDKHttpRequestOptions.StampAuthorizationOverride(context.Request);
+                global::SmallestAI.Realtime.AutoSDKHttpRequestOptions.StampAuthorizationOverride(context.Request);
                 return;
             }
 
@@ -275,12 +275,12 @@ namespace SmallestAI
                 ApplyAuthorization(context.Request, resolved[index]);
             }
 
-            global::SmallestAI.AutoSDKHttpRequestOptions.StampAuthorizationOverride(context.Request);
+            global::SmallestAI.Realtime.AutoSDKHttpRequestOptions.StampAuthorizationOverride(context.Request);
         }
 
         private static void ApplyAuthorization(
             global::System.Net.Http.HttpRequestMessage request,
-            global::SmallestAI.AutoSDKAuthorizationValue authorization)
+            global::SmallestAI.Realtime.AutoSDKAuthorizationValue authorization)
         {
             switch (authorization.Type)
             {
@@ -328,7 +328,7 @@ namespace SmallestAI
         /// <summary>
         /// Optional retry override for this request.
         /// </summary>
-        public global::SmallestAI.AutoSDKRetryOptions? Retry { get; set; }
+        public global::SmallestAI.Realtime.AutoSDKRetryOptions? Retry { get; set; }
 
         /// <summary>
         /// Overrides response buffering for this request when set.
@@ -342,7 +342,7 @@ namespace SmallestAI
         /// Useful for multi-tenant routing or "act-as" admin tooling that needs a different
         /// credential per call without mutating shared client state.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::SmallestAI.AutoSDKAuthorizationValue>? Authorizations { get; set; }
+        public global::System.Collections.Generic.IReadOnlyList<global::SmallestAI.Realtime.AutoSDKAuthorizationValue>? Authorizations { get; set; }
     }
 
     /// <summary>
@@ -354,7 +354,7 @@ namespace SmallestAI
         /// Total number of attempts, including the initial request.
         /// Values less than 1 are normalized to 1.
         /// </summary>
-        public int MaxAttempts { get; set; } = 3;
+        public int MaxAttempts { get; set; } = 1;
 
         /// <summary>
         /// Optional fixed delay between retry attempts. When set, this takes precedence over exponential backoff.
@@ -364,7 +364,7 @@ namespace SmallestAI
         /// <summary>
         /// Initial exponential backoff delay used when <see cref="Delay"/> is not set.
         /// </summary>
-        public global::System.TimeSpan InitialDelay { get; set; } = global::System.TimeSpan.FromMilliseconds(500);
+        public global::System.TimeSpan InitialDelay { get; set; } = global::System.TimeSpan.FromSeconds(1);
 
         /// <summary>
         /// Maximum retry delay after applying retry headers, backoff, and jitter.
@@ -409,45 +409,45 @@ namespace SmallestAI
         /// </summary>
         /// <param name="context"></param>
         global::System.Threading.Tasks.Task OnBeforeRequestAsync(
-            global::SmallestAI.AutoSDKHookContext context);
+            global::SmallestAI.Realtime.AutoSDKHookContext context);
 
         /// <summary>
         /// Runs after a successful HTTP response is received.
         /// </summary>
         /// <param name="context"></param>
         global::System.Threading.Tasks.Task OnAfterSuccessAsync(
-            global::SmallestAI.AutoSDKHookContext context);
+            global::SmallestAI.Realtime.AutoSDKHookContext context);
 
         /// <summary>
         /// Runs after an error response or transport failure is observed.
         /// </summary>
         /// <param name="context"></param>
         global::System.Threading.Tasks.Task OnAfterErrorAsync(
-            global::SmallestAI.AutoSDKHookContext context);
+            global::SmallestAI.Realtime.AutoSDKHookContext context);
     }
 
     /// <summary>
     /// Convenience base type for request hooks with no-op defaults.
     /// </summary>
-    public abstract class AutoSDKHook : global::SmallestAI.IAutoSDKHook
+    public abstract class AutoSDKHook : global::SmallestAI.Realtime.IAutoSDKHook
     {
         /// <inheritdoc />
         public virtual global::System.Threading.Tasks.Task OnBeforeRequestAsync(
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             return global::System.Threading.Tasks.Task.CompletedTask;
         }
 
         /// <inheritdoc />
         public virtual global::System.Threading.Tasks.Task OnAfterSuccessAsync(
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             return global::System.Threading.Tasks.Task.CompletedTask;
         }
 
         /// <inheritdoc />
         public virtual global::System.Threading.Tasks.Task OnAfterErrorAsync(
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             return global::System.Threading.Tasks.Task.CompletedTask;
         }
@@ -501,12 +501,12 @@ namespace SmallestAI
         /// <summary>
         /// The client-wide runtime options.
         /// </summary>
-        public global::SmallestAI.AutoSDKClientOptions ClientOptions { get; set; } = null!;
+        public global::SmallestAI.Realtime.AutoSDKClientOptions ClientOptions { get; set; } = null!;
 
         /// <summary>
         /// The per-request runtime options.
         /// </summary>
-        public global::SmallestAI.AutoSDKRequestOptions? RequestOptions { get; set; }
+        public global::SmallestAI.Realtime.AutoSDKRequestOptions? RequestOptions { get; set; }
 
         /// <summary>
         /// The current attempt number, starting at 1.
@@ -542,7 +542,7 @@ namespace SmallestAI
 
     internal static class AutoSDKRequestOptionsSupport
     {
-        internal static global::SmallestAI.AutoSDKHookContext CreateHookContext(
+        internal static global::SmallestAI.Realtime.AutoSDKHookContext CreateHookContext(
             string operationId,
             string methodName,
             string pathTemplate,
@@ -551,8 +551,8 @@ namespace SmallestAI
             global::System.Net.Http.HttpRequestMessage request,
             global::System.Net.Http.HttpResponseMessage? response,
             global::System.Exception? exception,
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKRequestOptions? requestOptions,
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKRequestOptions? requestOptions,
             int attempt,
             int maxAttempts,
             bool willRetry,
@@ -560,7 +560,7 @@ namespace SmallestAI
             string retryReason,
             global::System.Threading.CancellationToken cancellationToken)
         {
-            return new global::SmallestAI.AutoSDKHookContext
+            return new global::SmallestAI.Realtime.AutoSDKHookContext
             {
                 OperationId = operationId ?? string.Empty,
                 MethodName = methodName ?? string.Empty,
@@ -582,29 +582,29 @@ namespace SmallestAI
         }
 
         internal static global::System.Threading.Tasks.Task OnBeforeRequestAsync(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             return InvokeHooksAsync(clientOptions, static (hook, hookContext) => hook.OnBeforeRequestAsync(hookContext), context);
         }
 
         internal static global::System.Threading.Tasks.Task OnAfterSuccessAsync(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             return InvokeHooksAsync(clientOptions, static (hook, hookContext) => hook.OnAfterSuccessAsync(hookContext), context);
         }
 
         internal static global::System.Threading.Tasks.Task OnAfterErrorAsync(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             return InvokeHooksAsync(clientOptions, static (hook, hookContext) => hook.OnAfterErrorAsync(hookContext), context);
         }
 
         internal static bool GetReadResponseAsString(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKRequestOptions? requestOptions,
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKRequestOptions? requestOptions,
             bool fallbackValue)
         {
             return requestOptions?.ReadResponseAsString ??
@@ -613,8 +613,8 @@ namespace SmallestAI
         }
 
         internal static global::System.Threading.CancellationTokenSource? CreateTimeoutCancellationTokenSource(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKRequestOptions? requestOptions,
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKRequestOptions? requestOptions,
             global::System.Threading.CancellationToken cancellationToken)
         {
             var timeout = requestOptions?.Timeout ?? clientOptions.Timeout;
@@ -629,8 +629,8 @@ namespace SmallestAI
         }
 
         internal static int GetMaxAttempts(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKRequestOptions? requestOptions,
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKRequestOptions? requestOptions,
             bool supportsRetry)
         {
             if (!supportsRetry)
@@ -645,12 +645,12 @@ namespace SmallestAI
         }
 
         internal static global::System.TimeSpan GetRetryDelay(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::SmallestAI.AutoSDKRequestOptions? requestOptions,
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::SmallestAI.Realtime.AutoSDKRequestOptions? requestOptions,
             global::System.Net.Http.HttpResponseMessage? response,
             int attempt)
         {
-            var retryOptions = requestOptions?.Retry ?? clientOptions.Retry ?? new global::SmallestAI.AutoSDKRetryOptions();
+            var retryOptions = requestOptions?.Retry ?? clientOptions.Retry ?? new global::SmallestAI.Realtime.AutoSDKRetryOptions();
 
             if (retryOptions.UseRetryAfterHeader &&
                 TryGetRetryAfterDelay(response, out var retryAfterDelay))
@@ -812,7 +812,7 @@ namespace SmallestAI
 
         private static global::System.TimeSpan ClampRetryDelay(
             global::System.TimeSpan delay,
-            global::SmallestAI.AutoSDKRetryOptions retryOptions)
+            global::SmallestAI.Realtime.AutoSDKRetryOptions retryOptions)
         {
             if (delay <= global::System.TimeSpan.Zero)
             {
@@ -834,7 +834,6 @@ namespace SmallestAI
             return (int)statusCode switch
             {
                 408 => true,
-                409 => true,
                 429 => true,
                 500 => true,
                 502 => true,
@@ -918,9 +917,9 @@ namespace SmallestAI
         }
 
         private static async global::System.Threading.Tasks.Task InvokeHooksAsync(
-            global::SmallestAI.AutoSDKClientOptions clientOptions,
-            global::System.Func<global::SmallestAI.IAutoSDKHook, global::SmallestAI.AutoSDKHookContext, global::System.Threading.Tasks.Task> callback,
-            global::SmallestAI.AutoSDKHookContext context)
+            global::SmallestAI.Realtime.AutoSDKClientOptions clientOptions,
+            global::System.Func<global::SmallestAI.Realtime.IAutoSDKHook, global::SmallestAI.Realtime.AutoSDKHookContext, global::System.Threading.Tasks.Task> callback,
+            global::SmallestAI.Realtime.AutoSDKHookContext context)
         {
             if (clientOptions.Hooks == null || clientOptions.Hooks.Count == 0)
             {

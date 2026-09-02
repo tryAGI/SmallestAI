@@ -433,15 +433,19 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::SmallestAI.CreateVoiceCloneRequest? Type100 { get; set; }
+        public global::SmallestAI.TranscriptionUrlRequest? Type100 { get; set; }
         /// <summary>
         ///
         /// </summary>
-        public byte[]? Type101 { get; set; }
+        public global::SmallestAI.CreateVoiceCloneRequest? Type101 { get; set; }
         /// <summary>
         ///
         /// </summary>
-        public global::System.Collections.Generic.IList<global::SmallestAI.PronunciationDict>? Type102 { get; set; }
+        public byte[]? Type102 { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::SmallestAI.PronunciationDict>? Type103 { get; set; }
 
         /// <summary>
         ///
