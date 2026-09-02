@@ -11,6 +11,10 @@ nav:
 # EXAMPLES:START
 - Examples:
   - Generate: examples/generate.md
+  - Transcribe with speaker diarization: examples/transcribe-with-diarization.md
+  - Realtime transcription with diarization: examples/streaming-transcription-with-diarization.md
+  - Realtime speech with word timestamps: examples/streaming-speech-with-word-timestamps.md
+  - Microsoft.Extensions.AI speech-to-text: examples/speech-to-text-client.md
 # EXAMPLES:END
         
 theme:
