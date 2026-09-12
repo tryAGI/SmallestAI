@@ -437,7 +437,7 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::SmallestAI.CreateVoiceCloneRequest? Type101 { get; set; }
+        public global::SmallestAI.VoiceCloningCreateVoiceCloneRequest? Type101 { get; set; }
         /// <summary>
         ///
         /// </summary>
