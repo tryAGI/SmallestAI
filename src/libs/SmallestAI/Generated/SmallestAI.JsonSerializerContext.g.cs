@@ -240,7 +240,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.ErrorErrorDetailsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Error))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TranscriptionUrlRequest))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.VoiceCloningCreateVoiceCloneRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.CreateVoiceCloneRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.PronunciationDict>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]

@@ -14,7 +14,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200> CreateVoiceCloneAsync(
 
-            global::SmallestAI.VoiceCloningCreateVoiceCloneRequest request,
+            global::SmallestAI.CreateVoiceCloneRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -27,7 +27,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200>> CreateVoiceCloneAsResponseAsync(
 
-            global::SmallestAI.VoiceCloningCreateVoiceCloneRequest request,
+            global::SmallestAI.CreateVoiceCloneRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
