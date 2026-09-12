@@ -27,11 +27,11 @@ namespace SmallestAI
             };
         partial void PrepareCreateVoiceCloneArguments(
             global::System.Net.Http.HttpClient httpClient,
-            global::SmallestAI.CreateVoiceCloneRequest request);
+            global::SmallestAI.VoiceCloningCreateVoiceCloneRequest request);
         partial void PrepareCreateVoiceCloneRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            global::SmallestAI.CreateVoiceCloneRequest request);
+            global::SmallestAI.VoiceCloningCreateVoiceCloneRequest request);
         partial void ProcessCreateVoiceCloneResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
@@ -51,7 +51,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200> CreateVoiceCloneAsync(
 
-            global::SmallestAI.CreateVoiceCloneRequest request,
+            global::SmallestAI.VoiceCloningCreateVoiceCloneRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -74,7 +74,7 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200>> CreateVoiceCloneAsResponseAsync(
 
-            global::SmallestAI.CreateVoiceCloneRequest request,
+            global::SmallestAI.VoiceCloningCreateVoiceCloneRequest request,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -686,7 +686,7 @@ namespace SmallestAI
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __request = new global::SmallestAI.CreateVoiceCloneRequest
+            var __request = new global::SmallestAI.VoiceCloningCreateVoiceCloneRequest
             {
                 DisplayName = displayName,
                 File = file,
@@ -767,7 +767,7 @@ namespace SmallestAI
         {
 
             file = file ?? throw new global::System.ArgumentNullException(nameof(file));
-            var request = new global::SmallestAI.CreateVoiceCloneRequest
+            var request = new global::SmallestAI.VoiceCloningCreateVoiceCloneRequest
             {
                 DisplayName = displayName,
                 File = global::System.Array.Empty<byte>(),
@@ -1378,7 +1378,7 @@ namespace SmallestAI
         {
 
             file = file ?? throw new global::System.ArgumentNullException(nameof(file));
-            var request = new global::SmallestAI.CreateVoiceCloneRequest
+            var request = new global::SmallestAI.VoiceCloningCreateVoiceCloneRequest
             {
                 DisplayName = displayName,
                 File = global::System.Array.Empty<byte>(),

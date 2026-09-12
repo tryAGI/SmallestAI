@@ -7,7 +7,7 @@
   "paths": {
     "/waves/v1/tts": {
       "post": {
-        "operationId": "synthesize-speech",
+        "operationId": "textToSpeech_synthesizeSpeech",
         "summary": "Synthesize speech",
         "description": "Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.\n\nPick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.\n\n**Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian & Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.\n\n## When to use this\n\n- **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).\n- **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).\n- **Use `/waves/v1/tts/live`** (WebSocket) when text arrives incrementally (LLM token streams, live captioning).\n\n## Key features\n\n- 44 kHz natural, expressive synthesis\n- Model selectable per request via `model` body parameter\n- Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices\n- 20 accepted language codes on `lightning_v3.1` (12 with trained voices, 8 additional routed via English/Hindi voices). On `lightning_v3.1_pro`: 31 languages with dedicated voices (10 Indic, 8 Asian & Middle Eastern, 13 European); `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`. Both models accept `language: auto` for cross-language routing.\n- Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`\n- Sample rates: 8 kHz – 44.1 kHz\n- Speed: 0.5× – 2×\n- Per-call pronunciation dictionaries via `pronunciation_dicts`\n\n## Examples\n\n**cURL — Lightning v3.1 (default)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Hello from Waves TTS.\",\n    \"voice_id\": \"magnus\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro (omit `language` → defaults to `en + hi`)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Hello from the Lightning v3.1 Pro pool.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro with explicit `language: en` (UK + American accented English)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Good morning, this is a Pro voice speaking.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"language\": \"en\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro with explicit `language: hi` (Indian accented English + Hindi)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Namaste, this is an Indian-accented Pro voice.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"language\": \"hi\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n## Common gotchas\n\n- **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.\n- **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).\n- **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.\n- **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.\n",
         "tags": [
@@ -97,7 +97,7 @@
     },
     "/waves/v1/tts/live": {
       "post": {
-        "operationId": "synthesize-speech-sse",
+        "operationId": "textToSpeech_synthesizeSpeechSse",
         "summary": "Stream speech (SSE)",
         "description": "Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.\n\nPick the model with the `model` body parameter, same as the sync route.\n\n<Note>\n  **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/models/api-reference/text-to-speech/stream-speech-web-socket).\n</Note>\n\n## When to use this\n\n- **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.\n- **Use sync `/waves/v1/tts`** when total latency doesn't matter and you'd rather get one buffer.\n- **Use `/waves/v1/tts/live`** (WebSocket) when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.\n\n## How it works\n\n1. POST your text + voice settings — same payload as `/waves/v1/tts`, plus optional `model`.\n2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\\n` followed by `data: {\"audio\": \"<base64-pcm>\", \"done\": false, \"status\": \"206\"}\\n\\n`.\n3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).\n4. A final `data: {\"status\": \"200\", \"done\": true}\\n\\n` frame marks end of stream. Detect the terminator with `done == true`; every chunk frame also carries `done: false`, so `\"done\" in msg` matches every frame.\n\n## Examples\n\n**cURL**\n```bash\ncurl -N -X POST \"https://api.smallest.ai/waves/v1/tts/live\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"text\": \"Streaming this paragraph chunk by chunk so playback can start sooner.\",\n    \"voice_id\": \"magnus\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"pcm\"\n  }'\n```\n\n## Common gotchas\n\n- **Use a streaming-friendly client.** `curl -N`, Python `iter_lines`, or a `fetch` `ReadableStream` reader. Buffering clients will hide the latency win.\n- **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.\n- **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.\n",
         "tags": [
@@ -177,7 +177,7 @@
     },
     "/waves/v1/{model}/get_voices": {
       "get": {
-        "operationId": "get-waves-voices",
+        "operationId": "voices_getWavesVoices",
         "summary": "Get voices for a pool",
         "description": "Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:\n\n- `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.\n- `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.\n\nThe endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.\n\nEach voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/models/api-reference/text-to-speech/synthesize-speech) route, together with `\"model\": \"lightning_v3.1\"` (Standard) or `\"model\": \"lightning_v3.1_pro\"` (Pro).\n\nFor the canonical per-language voice list (with previews and recommended pairings), see the [Lightning v3.1](/models/model-cards/text-to-speech/lightning-v-3-1) and [Lightning v3.1 Pro](/models/model-cards/text-to-speech/lightning-v-3-1-pro) model cards.\n",
         "tags": [
@@ -240,7 +240,7 @@
     },
     "/waves/v1/voice-cloning": {
       "post": {
-        "operationId": "create-voice-clone",
+        "operationId": "voiceCloning_createVoiceClone",
         "summary": "Create a Voice Clone",
         "description": "Create an instant voice clone in a single call. Defaults to `lightning-v3.1`.\n",
         "tags": [
@@ -347,7 +347,7 @@
         }
       },
       "get": {
-        "operationId": "list-voice-clones",
+        "operationId": "voiceCloning_listVoiceClones",
         "summary": "List Voice Clones",
         "description": "Retrieve all voice clones in your organization.\n",
         "tags": [
@@ -399,7 +399,7 @@
     },
     "/waves/v1/pronunciation-dicts": {
       "get": {
-        "operationId": "get-pronunciation-dicts",
+        "operationId": "pronunciationDictionaries_getPronunciationDicts",
         "summary": "List",
         "description": "Retrieve all pronunciation dictionaries for the authenticated user",
         "tags": [
@@ -452,7 +452,7 @@
         }
       },
       "post": {
-        "operationId": "create-pronunciation-dict",
+        "operationId": "pronunciationDictionaries_createPronunciationDict",
         "summary": "Create",
         "description": "Create a new pronunciation dictionary for the authenticated user",
         "tags": [
@@ -521,7 +521,7 @@
         }
       },
       "put": {
-        "operationId": "update-pronunciation-dict",
+        "operationId": "pronunciationDictionaries_updatePronunciationDict",
         "summary": "Update",
         "description": "Update an existing pronunciation dictionary for the authenticated user",
         "tags": [
@@ -590,7 +590,7 @@
         }
       },
       "delete": {
-        "operationId": "delete-pronunciation-dict",
+        "operationId": "pronunciationDictionaries_deletePronunciationDict",
         "summary": "Delete",
         "description": "Delete an existing pronunciation dictionary for the authenticated user",
         "tags": [
@@ -661,7 +661,7 @@
     },
     "/waves/v1/stt/": {
       "post": {
-        "operationId": "transcribe",
+        "operationId": "speechToText_transcribe",
         "summary": "Transcribe (Pre-recorded)",
         "description": "Transcribe an audio file. The model is chosen via `?model=`:\n\n- `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.\n- `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.\n\n## When to use this\n\nUse this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.\n\nPulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.\n\n## Input methods\n\n- **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.\n- **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{\"url\": \"...\"}` in the body.\n\n## Examples\n\n**cURL**: Pulse Pro, sync\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&word_timestamps=true\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/octet-stream\" \\\n  --data-binary \"@./call.wav\"\n```\n\n**cURL**: Pulse Pro, async via webhook\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&webhook_url=https://your.app/cb\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/octet-stream\" \\\n  --data-binary \"@./call.wav\"\n```\nReturns `200 { \"status\": \"processing\", \"request_id\": \"...\" }` immediately. The webhook receives the full transcription when ready.\n\n**cURL**: Pulse, audio-by-URL\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse&language=en\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\": \"https://your-bucket.s3.amazonaws.com/call.wav\"}'\n```\n\n**Python**\n```python\nimport requests\n\nwith open(\"./call.wav\", \"rb\") as f:\n    audio = f.read()\n\nr = requests.post(\n    \"https://api.smallest.ai/waves/v1/stt/\",\n    params={\"model\": \"pulse-pro\", \"language\": \"en\", \"word_timestamps\": \"true\"},\n    headers={\"Authorization\": f\"Bearer {API_KEY}\", \"Content-Type\": \"application/octet-stream\"},\n    data=audio,\n)\nr.raise_for_status()\nprint(r.json()[\"transcription\"])\n```\n\n**JavaScript / TypeScript**\n```typescript\nimport { readFileSync } from \"node:fs\";\n\nconst audio = readFileSync(\"./call.wav\");\nconst params = new URLSearchParams({ model: \"pulse-pro\", language: \"en\", word_timestamps: \"true\" });\n\nconst res = await fetch(`https://api.smallest.ai/waves/v1/stt/?${params}`, {\n  method: \"POST\",\n  headers: { Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`, \"Content-Type\": \"application/octet-stream\" },\n  body: audio,\n});\nconsole.log((await res.json()).transcription);\n```\n\n## Common gotchas\n\n- **`model` is required.** Missing or invalid values return `400` with an enum-validation error.\n- **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.\n- **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.\n- **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.\n",
         "tags": [
@@ -884,7 +884,7 @@
     },
     "/waves/v1/chat/completions": {
       "post": {
-        "operationId": "complete",
+        "operationId": "electron_complete",
         "summary": "Chat Completions (Electron)",
         "description": "Generate a chat completion with Electron. OpenAI-compatible\nrequest/response shape — point any OpenAI SDK at\n`https://api.smallest.ai/waves/v1` and it just works.\n\nSet `stream: true` to receive tokens via Server-Sent Events. With\n`stream_options: { include_usage: true }`, the final SSE chunk\ncarries the `usage` block so token accounting is exact even on\nclient disconnects.\n\nTool calling follows OpenAI's `tools` array convention. When you\nprovide a voice-agent-style system prompt, Electron emits a short\nfiller phrase in the assistant message `content` field alongside\n`tool_calls` — see the [Tool Calling guide](/models/documentation/llm-electron/tool-function-calling)\nfor the voice-agent pattern.\n\n## Examples\n\n**cURL**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/chat/completions\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"electron\",\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ]\n  }'\n```\n\n**Python** (`pip install openai`)\n```python\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://api.smallest.ai/waves/v1\",\n    api_key=os.environ[\"SMALLEST_API_KEY\"],\n)\n\nresponse = client.chat.completions.create(\n    model=\"electron\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ],\n)\n\nprint(response.choices[0].message.content)\n```\n\n**JavaScript / TypeScript** (`npm install openai`)\n```typescript\nimport OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  baseURL: \"https://api.smallest.ai/waves/v1\",\n  apiKey: process.env.SMALLEST_API_KEY,\n});\n\nconst response = await client.chat.completions.create({\n  model: \"electron\",\n  messages: [\n    { role: \"user\", content: \"Write one sentence about why the sky is blue.\" },\n  ],\n});\n\nconsole.log(response.choices[0].message.content);\n```\n\n**Streaming with usage** (Python)\n```python\nstream = client.chat.completions.create(\n    model=\"electron\",\n    messages=[{\"role\": \"user\", \"content\": \"Tell me a one-sentence fun fact.\"}],\n    stream=True,\n    stream_options={\"include_usage\": True},\n)\nfor chunk in stream:\n    if chunk.choices and chunk.choices[0].delta.content:\n        print(chunk.choices[0].delta.content, end=\"\", flush=True)\n    if chunk.usage:\n        print(f\"\\n\\nTokens: {chunk.usage.total_tokens}\")\n```\n\n## Common gotchas\n\n- **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.\n- **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.\n- **`n > 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.\n- **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).\n",
         "tags": [
