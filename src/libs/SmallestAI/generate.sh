@@ -57,6 +57,7 @@ autosdk generate openapi.yaml \
   --clientClassName SmallestAIClient \
   --targetFramework net10.0 \
   --output Generated \
+  --strip-redundant-operation-id-tag-prefixes \
   --security-scheme Http:Header:Bearer \
   --generate-http-exception-hierarchy \
   --generate-retry-handler \
