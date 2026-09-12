@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     ///
     /// </summary>
-    public sealed partial class VoiceCloningCreateVoiceCloneRequest
+    public sealed partial class CreateVoiceCloneRequest
     {
         /// <summary>
         /// Human-readable name for the voice clone.
@@ -86,7 +86,7 @@ namespace SmallestAI
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VoiceCloningCreateVoiceCloneRequest" /> class.
+        /// Initializes a new instance of the <see cref="CreateVoiceCloneRequest" /> class.
         /// </summary>
         /// <param name="displayName">
         /// Human-readable name for the voice clone.
@@ -133,7 +133,7 @@ namespace SmallestAI
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public VoiceCloningCreateVoiceCloneRequest(
+        public CreateVoiceCloneRequest(
             string displayName,
             byte[] file,
             string filename,
@@ -154,9 +154,9 @@ namespace SmallestAI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VoiceCloningCreateVoiceCloneRequest" /> class.
+        /// Initializes a new instance of the <see cref="CreateVoiceCloneRequest" /> class.
         /// </summary>
-        public VoiceCloningCreateVoiceCloneRequest()
+        public CreateVoiceCloneRequest()
         {
         }
 

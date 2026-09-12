@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     /// Any type
     /// </summary>
-    public sealed partial class VoiceCloningListVoiceClonesResponse
+    public sealed partial class ListVoiceClonesResponse
     {
 
         /// <summary>
