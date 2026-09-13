@@ -34,7 +34,7 @@ namespace SmallestAI
         /// <inheritdoc/>
         public global::SmallestAI.AutoSDKClientOptions Options { get; }
 
-        internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::SmallestAI.SourceGenerationContext.Default);
+        internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::SmallestAI.ElectronSourceGenerationContext.Default);
 
         /// <summary>
         ///
