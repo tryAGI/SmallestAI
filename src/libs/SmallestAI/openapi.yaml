@@ -15,14 +15,6 @@
         ],
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Accept",
             "in": "header",
             "description": "Must be `audio/wav` to receive binary audio. Required for proper playback.",
@@ -92,7 +84,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/waves/v1/tts/live": {
@@ -104,14 +101,6 @@
           "textToSpeech"
         ],
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "x-expire-content",
             "in": "header",
@@ -172,7 +161,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/waves/v1/{model}/get_voices": {
@@ -246,23 +240,13 @@
         "tags": [
           "voiceCloning"
         ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Voice clone created. Includes pre-generated sample clips of the new voice.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Voice Cloning_createVoiceClone_Response_200"
+                  "$ref": "#/components/schemas/Voice_Cloning_createVoiceClone_Response_200"
                 }
               }
             }
@@ -344,7 +328,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "get": {
         "operationId": "voiceCloning_listVoiceClones",
@@ -353,23 +342,13 @@
         "tags": [
           "voiceCloning"
         ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "List of voice clones.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Voice Cloning_listVoiceClones_Response_200"
+                  "$ref": "#/components/schemas/Voice_Cloning_listVoiceClones_Response_200"
                 }
               }
             }
@@ -394,7 +373,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/waves/v1/pronunciation-dicts": {
@@ -404,16 +388,6 @@
         "description": "Retrieve all pronunciation dictionaries for the authenticated user",
         "tags": [
           "pronunciationDictionaries"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -449,7 +423,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "post": {
         "operationId": "pronunciationDictionaries_createPronunciationDict",
@@ -457,16 +436,6 @@
         "description": "Create a new pronunciation dictionary for the authenticated user",
         "tags": [
           "pronunciationDictionaries"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -518,7 +487,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "put": {
         "operationId": "pronunciationDictionaries_updatePronunciationDict",
@@ -526,16 +500,6 @@
         "description": "Update an existing pronunciation dictionary for the authenticated user",
         "tags": [
           "pronunciationDictionaries"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -587,7 +551,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "delete": {
         "operationId": "pronunciationDictionaries_deletePronunciationDict",
@@ -595,16 +564,6 @@
         "description": "Delete an existing pronunciation dictionary for the authenticated user",
         "tags": [
           "pronunciationDictionaries"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -656,7 +615,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/waves/v1/stt/": {
@@ -776,14 +740,6 @@
             }
           },
           {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "x-expire-content",
             "in": "header",
             "description": "**Enterprise plans only.** Opt in if you want this request's content\ndeleted after 7 days. Omit it to retain content, which is the default.\n",
@@ -799,7 +755,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Speech to Text_transcribe_Response_200"
+                  "$ref": "#/components/schemas/Speech_to_Text_transcribe_Response_200"
                 }
               }
             }
@@ -879,7 +835,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/waves/v1/chat/completions": {
@@ -889,16 +850,6 @@
         "description": "Generate a chat completion with Electron. OpenAI-compatible\nrequest/response shape — point any OpenAI SDK at\n`https://api.smallest.ai/waves/v1` and it just works.\n\nSet `stream: true` to receive tokens via Server-Sent Events. With\n`stream_options: { include_usage: true }`, the final SSE chunk\ncarries the `usage` block so token accounting is exact even on\nclient disconnects.\n\nTool calling follows OpenAI's `tools` array convention. When you\nprovide a voice-agent-style system prompt, Electron emits a short\nfiller phrase in the assistant message `content` field alongside\n`tool_calls` — see the [Tool Calling guide](/models/documentation/llm-electron/tool-function-calling)\nfor the voice-agent pattern.\n\n## Examples\n\n**cURL**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/chat/completions\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"electron\",\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ]\n  }'\n```\n\n**Python** (`pip install openai`)\n```python\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://api.smallest.ai/waves/v1\",\n    api_key=os.environ[\"SMALLEST_API_KEY\"],\n)\n\nresponse = client.chat.completions.create(\n    model=\"electron\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ],\n)\n\nprint(response.choices[0].message.content)\n```\n\n**JavaScript / TypeScript** (`npm install openai`)\n```typescript\nimport OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  baseURL: \"https://api.smallest.ai/waves/v1\",\n  apiKey: process.env.SMALLEST_API_KEY,\n});\n\nconst response = await client.chat.completions.create({\n  model: \"electron\",\n  messages: [\n    { role: \"user\", content: \"Write one sentence about why the sky is blue.\" },\n  ],\n});\n\nconsole.log(response.choices[0].message.content);\n```\n\n**Streaming with usage** (Python)\n```python\nstream = client.chat.completions.create(\n    model=\"electron\",\n    messages=[{\"role\": \"user\", \"content\": \"Tell me a one-sentence fun fact.\"}],\n    stream=True,\n    stream_options={\"include_usage\": True},\n)\nfor chunk in stream:\n    if chunk.choices and chunk.choices[0].delta.content:\n        print(chunk.choices[0].delta.content, end=\"\", flush=True)\n    if chunk.usage:\n        print(f\"\\n\\nTokens: {chunk.usage.total_tokens}\")\n```\n\n## Common gotchas\n\n- **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.\n- **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.\n- **`n > 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.\n- **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).\n",
         "tags": [
           "electron"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -980,10 +931,35 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     }
   },
+  "tags": [
+    {
+      "name": "textToSpeech"
+    },
+    {
+      "name": "voices"
+    },
+    {
+      "name": "voiceCloning"
+    },
+    {
+      "name": "pronunciationDictionaries"
+    },
+    {
+      "name": "speechToText"
+    },
+    {
+      "name": "electron"
+    }
+  ],
   "servers": [
     {
       "url": "https://api.smallest.ai",
@@ -1454,7 +1430,7 @@
         },
         "title": "WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaData"
       },
-      "Voice Cloning_createVoiceClone_Response_200": {
+      "Voice_Cloning_createVoiceClone_Response_200": {
         "type": "object",
         "properties": {
           "message": {
@@ -1572,7 +1548,7 @@
         },
         "title": "WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems"
       },
-      "Voice Cloning_listVoiceClones_Response_200": {
+      "Voice_Cloning_listVoiceClones_Response_200": {
         "type": "object",
         "properties": {
           "data": {
@@ -2002,7 +1978,7 @@
         "description": "Returned by Pulse Pro when `webhook_url` is set. The transcription arrives on the webhook when ready.",
         "title": "AsyncAccepted"
       },
-      "Speech to Text_transcribe_Response_200": {
+      "Speech_to_Text_transcribe_Response_200": {
         "oneOf": [
           {
             "$ref": "#/components/schemas/TranscriptionResponse"
