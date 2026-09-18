@@ -78,6 +78,7 @@ namespace SmallestAI
         /// <param name="diarize">
         /// Default Value: false
         /// </param>
+        /// <param name="keywords"></param>
         /// <param name="webhookUrl"></param>
         /// <param name="webhookMethod">
         /// Default Value: POST
@@ -107,6 +108,7 @@ namespace SmallestAI
             byte[] request,
             bool? wordTimestamps = default,
             bool? diarize = default,
+            string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
             string? webhookExtra = default,
@@ -191,6 +193,7 @@ namespace SmallestAI
         /// <param name="diarize">
         /// Default Value: false
         /// </param>
+        /// <param name="keywords"></param>
         /// <param name="webhookUrl"></param>
         /// <param name="webhookMethod">
         /// Default Value: POST
@@ -220,6 +223,7 @@ namespace SmallestAI
             byte[] request,
             bool? wordTimestamps = default,
             bool? diarize = default,
+            string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
             string? webhookExtra = default,
