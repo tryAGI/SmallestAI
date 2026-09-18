@@ -671,6 +671,15 @@
             }
           },
           {
+            "name": "keywords",
+            "in": "query",
+            "description": "Pulse only. Boost recognition of specific words or phrases for\nthis request. The same parameter works on the realtime WebSocket\nendpoint.\n\n**Entry format:** `KEYWORD` or `KEYWORD:INTENSIFIER`, where\n`INTENSIFIER` is a number that defaults to `1`. Example:\n`Blackwell:2,Jensen Huang:2`. Matching is case-sensitive.\nDuplicates: last-wins (`NVIDIA:1,NVIDIA:5` is equivalent to\n`NVIDIA:5`). Max 100 keywords per request; sending more returns\n`400` with `keywords too large (max 100)` in `errors[]`.\n\n**Encodings.** Comma-string (recommended), repeated key\n(`keywords=a&keywords=b`), and bracketed array (`keywords[]=a`)\nare all accepted. A JSON-array literal (`[\"a\",\"b\"]`) does not\nboost. Pass the raw string.\n\n**Intensifier.** Default `1`, recommended `1` to `3`. Above\n`10` is not recommended: higher values increase the chance\nof hallucinating the keyword when it was not spoken. Reuse\nthe same keyword list across requests when the vocabulary\nis stable.\n\nSee [Keyword Boosting](/models/documentation/speech-to-text-pulse/features/keyword-boosting)\nfor the full contract and worked examples.\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "webhook_url",
             "in": "query",
             "description": "If set, the response is `200` with `{\"status\": \"processing\", \"request_id\": \"...\"}` immediately, and the full transcription is delivered to this URL when ready. Use for long files where you do not want to hold an HTTP connection open.\n",
