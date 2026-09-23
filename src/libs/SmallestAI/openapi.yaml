@@ -5,6 +5,92 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/waves/v1/auth/token": {
+      "post": {
+        "operationId": "auth_create_access_token",
+        "summary": "Create access token",
+        "description": "Mint a short-lived access token from your API key. Call this from your server,\nthen hand the returned `access_token` to a browser or mobile client. The client\nsends it as `Authorization: Bearer <access_token>` on TTS and STT requests. On\nWebSocket connections it can also go in the `api_key` query parameter. HTTP\nrequests must use the header.\n\nA token works any number of times until it expires. It is accepted only on\nTTS, STT and speech-to-speech inference routes: `POST /waves/v1/stt/`, `WSS /waves/v1/stt/live`,\n`POST /waves/v1/tts`, `POST /waves/v1/tts/live`, `WSS /waves/v1/tts/live`, the\ndedicated Lightning v3.1 routes (`POST /waves/v1/lightning-v3.1/get_speech`,\n`POST /waves/v1/lightning-v3.1/stream`, `WSS /waves/v1/lightning-v3.1/get_speech/stream`),\n`WSS /waves/v1/s2s`, and the voice-listing routes. Every other\nroute, including this one and `POST /waves/v1/pulse/get_text`, returns `403`\nto a token.\n\nRequests made with a token are billed to the API key that minted it. Deleting\nthat key invalidates its tokens. A token is valid only in the region that\nminted it. If your server and your users can be in different regions, mint and\ncall through the same region-pinned hostname (for example `api.us.smallest.ai`).\n\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/auth/token\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"ttl_seconds\": 300}'\n```\n\nSee the [Authentication guide](/models/api-reference/token-based-authentication)\nfor the end-to-end server and client flow.\n",
+        "tags": [
+          "auth"
+        ],
+        "responses": {
+          "201": {
+            "description": "Token created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`ttl_seconds` is not an integer between 30 and 900.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The request was authenticated with an access token. Only an API key can mint tokens.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many mint requests. Mint one token per client session and retry after a short wait.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Temporarily unavailable. Retry with backoff.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccessTokenRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
     "/waves/v1/tts": {
       "post": {
         "operationId": "textToSpeech_synthesizeSpeech",
@@ -951,6 +1037,9 @@
   },
   "tags": [
     {
+      "name": "auth"
+    },
+    {
       "name": "textToSpeech"
     },
     {
@@ -977,6 +1066,109 @@
   ],
   "components": {
     "schemas": {
+      "CreateAccessTokenRequest": {
+        "type": "object",
+        "properties": {
+          "ttl_seconds": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 900,
+            "default": 300,
+            "description": "How long the token stays valid, in seconds. Between 30 and 900. Defaults to 300 when omitted."
+          }
+        },
+        "title": "CreateAccessTokenRequest"
+      },
+      "AccessTokenResponseTokenType": {
+        "type": "string",
+        "enum": [
+          "Bearer"
+        ],
+        "description": "Always `Bearer`.",
+        "title": "AccessTokenResponseTokenType"
+      },
+      "AccessTokenResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "The short-lived token. Always starts with `wat_`. Send it as `Authorization: Bearer <access_token>`."
+          },
+          "token_type": {
+            "$ref": "#/components/schemas/AccessTokenResponseTokenType",
+            "description": "Always `Bearer`."
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Seconds until the token expires, equal to the `ttl_seconds` that was applied."
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Expiry time in UTC (ISO 8601)."
+          }
+        },
+        "required": [
+          "access_token",
+          "token_type",
+          "expires_in",
+          "expires_at"
+        ],
+        "title": "AccessTokenResponse"
+      },
+      "ValidationErrorResponseStatus": {
+        "type": "string",
+        "enum": [
+          "error"
+        ],
+        "title": "ValidationErrorResponseStatus"
+      },
+      "ValidationErrorResponseErrorsItems": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "title": "ValidationErrorResponseErrorsItems"
+      },
+      "ValidationErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ValidationErrorResponseStatus"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorResponseErrorsItems"
+            },
+            "description": "One entry per failed field."
+          }
+        },
+        "title": "ValidationErrorResponse"
+      },
+      "SimpleErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "title": "SimpleErrorResponse"
+      },
       "WavesV1TtsPostParametersAccept": {
         "type": "string",
         "enum": [
@@ -2464,7 +2656,8 @@
       "BearerAuth": {
         "type": "apiKey",
         "in": "header",
-        "name": "Authorization"
+        "name": "Authorization",
+        "description": "API key authentication. Include your key as `Authorization: Bearer YOUR_API_KEY`. Access tokens are not accepted on this endpoint."
       }
     }
   }

@@ -13,6 +13,14 @@ namespace SmallestAI
         DefaultIgnoreCondition = global::System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         Converters = new global::System.Type[]
         {
+            typeof(global::SmallestAI.JsonConverters.AccessTokenResponseTokenTypeJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.AccessTokenResponseTokenTypeNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.ValidationErrorResponseStatusJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.ValidationErrorResponseStatusNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.WavesV1TtsPostParametersAcceptJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1TtsPostParametersAcceptNullableJsonConverter),
@@ -139,6 +147,18 @@ namespace SmallestAI
         })]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.JsonSerializerContextTypes))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<object>), TypeInfoPropertyName = "SystemCollectionsGeneric_ObjectList")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.CreateAccessTokenRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AccessTokenResponseTokenType), TypeInfoPropertyName = "AccessTokenResponseTokenType2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AccessTokenResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.DateTime))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ValidationErrorResponseStatus), TypeInfoPropertyName = "ValidationErrorResponseStatus2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ValidationErrorResponseErrorsItems))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<string>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ValidationErrorResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.ValidationErrorResponseErrorsItems>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SimpleErrorResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsPostParametersAccept), TypeInfoPropertyName = "WavesV1TtsPostParametersAccept2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsPostParametersXExpireContent), TypeInfoPropertyName = "WavesV1TtsPostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestModel), TypeInfoPropertyName = "TtsRequestModel2")]
@@ -147,10 +167,8 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage), TypeInfoPropertyName = "TtsRequestNumberPronunciationLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestOutputFormat), TypeInfoPropertyName = "TtsRequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequest))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<string>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent), TypeInfoPropertyName = "WavesV1TtsLivePostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetParametersModel), TypeInfoPropertyName = "WavesV1ModelGetVoicesGetParametersModel2")]
@@ -166,7 +184,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataStatus), TypeInfoPropertyName = "WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaData))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.DateTime))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.VoiceCloningCreateVoiceCloneResponse200))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.CreateVoiceCloneRequestBadRequestError))]
@@ -198,7 +215,6 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersGenderDetection), TypeInfoPropertyName = "WavesV1SttPostParametersGenderDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersXExpireContent), TypeInfoPropertyName = "WavesV1SttPostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Word))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.Utterance))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TranscriptionResponseMetadata))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TranscriptionResponse))]
@@ -244,6 +260,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.PronunciationDict>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ValidationErrorResponseErrorsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1ModelGetVoicesGetResponsesContentApplicationJsonSchemaVoicesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1VoiceCloningPostResponsesContentApplicationJsonSchemaDataSamplesItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.WavesV1VoiceCloningGetResponsesContentApplicationJsonSchemaDataItems>))]
