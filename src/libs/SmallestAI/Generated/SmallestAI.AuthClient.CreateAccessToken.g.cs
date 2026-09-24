@@ -45,7 +45,8 @@ namespace SmallestAI
         /// Create access token<br/>
         /// Mint a short-lived access token from your API key. Call this from your server,<br/>
         /// then hand the returned `access_token` to a browser or mobile client. The client<br/>
-        /// sends it as `Authorization: Bearer &lt;access_token&gt;` on TTS and STT requests. On<br/>
+        /// sends it as `Authorization: Bearer &lt;access_token&gt;` on TTS, STT and speech-to-speech<br/>
+        /// requests. On<br/>
         /// WebSocket connections it can also go in the `api_key` query parameter. HTTP<br/>
         /// requests must use the header.<br/>
         /// A token works any number of times until it expires. It is accepted only on<br/>
@@ -53,13 +54,15 @@ namespace SmallestAI
         /// `POST /waves/v1/tts`, `POST /waves/v1/tts/live`, `WSS /waves/v1/tts/live`, the<br/>
         /// dedicated Lightning v3.1 routes (`POST /waves/v1/lightning-v3.1/get_speech`,<br/>
         /// `POST /waves/v1/lightning-v3.1/stream`, `WSS /waves/v1/lightning-v3.1/get_speech/stream`),<br/>
-        /// `WSS /waves/v1/s2s`, and the voice-listing routes. Every other<br/>
-        /// route, including this one and `POST /waves/v1/pulse/get_text`, returns `403`<br/>
-        /// to a token.<br/>
+        /// `WSS /waves/v1/s2s`, and the voice-listing routes (public catalog, no cloned<br/>
+        /// voices). Treat any route not listed as unavailable to tokens. This endpoint,<br/>
+        /// `POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,<br/>
+        /// analytics and chat completions return `403` to a token.<br/>
         /// Requests made with a token are billed to the API key that minted it. Deleting<br/>
         /// that key invalidates its tokens. A token is valid only in the region that<br/>
         /// minted it. If your server and your users can be in different regions, mint and<br/>
-        /// call through the same region-pinned hostname (for example `api.us.smallest.ai`).<br/>
+        /// call through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or<br/>
+        /// `api.us.smallest.ai` (Oregon).<br/>
         /// ```bash<br/>
         /// curl -X POST "https://api.smallest.ai/waves/v1/auth/token" \<br/>
         ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
@@ -92,7 +95,8 @@ namespace SmallestAI
         /// Create access token<br/>
         /// Mint a short-lived access token from your API key. Call this from your server,<br/>
         /// then hand the returned `access_token` to a browser or mobile client. The client<br/>
-        /// sends it as `Authorization: Bearer &lt;access_token&gt;` on TTS and STT requests. On<br/>
+        /// sends it as `Authorization: Bearer &lt;access_token&gt;` on TTS, STT and speech-to-speech<br/>
+        /// requests. On<br/>
         /// WebSocket connections it can also go in the `api_key` query parameter. HTTP<br/>
         /// requests must use the header.<br/>
         /// A token works any number of times until it expires. It is accepted only on<br/>
@@ -100,13 +104,15 @@ namespace SmallestAI
         /// `POST /waves/v1/tts`, `POST /waves/v1/tts/live`, `WSS /waves/v1/tts/live`, the<br/>
         /// dedicated Lightning v3.1 routes (`POST /waves/v1/lightning-v3.1/get_speech`,<br/>
         /// `POST /waves/v1/lightning-v3.1/stream`, `WSS /waves/v1/lightning-v3.1/get_speech/stream`),<br/>
-        /// `WSS /waves/v1/s2s`, and the voice-listing routes. Every other<br/>
-        /// route, including this one and `POST /waves/v1/pulse/get_text`, returns `403`<br/>
-        /// to a token.<br/>
+        /// `WSS /waves/v1/s2s`, and the voice-listing routes (public catalog, no cloned<br/>
+        /// voices). Treat any route not listed as unavailable to tokens. This endpoint,<br/>
+        /// `POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,<br/>
+        /// analytics and chat completions return `403` to a token.<br/>
         /// Requests made with a token are billed to the API key that minted it. Deleting<br/>
         /// that key invalidates its tokens. A token is valid only in the region that<br/>
         /// minted it. If your server and your users can be in different regions, mint and<br/>
-        /// call through the same region-pinned hostname (for example `api.us.smallest.ai`).<br/>
+        /// call through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or<br/>
+        /// `api.us.smallest.ai` (Oregon).<br/>
         /// ```bash<br/>
         /// curl -X POST "https://api.smallest.ai/waves/v1/auth/token" \<br/>
         ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
@@ -670,7 +676,8 @@ namespace SmallestAI
         /// Create access token<br/>
         /// Mint a short-lived access token from your API key. Call this from your server,<br/>
         /// then hand the returned `access_token` to a browser or mobile client. The client<br/>
-        /// sends it as `Authorization: Bearer &lt;access_token&gt;` on TTS and STT requests. On<br/>
+        /// sends it as `Authorization: Bearer &lt;access_token&gt;` on TTS, STT and speech-to-speech<br/>
+        /// requests. On<br/>
         /// WebSocket connections it can also go in the `api_key` query parameter. HTTP<br/>
         /// requests must use the header.<br/>
         /// A token works any number of times until it expires. It is accepted only on<br/>
@@ -678,13 +685,15 @@ namespace SmallestAI
         /// `POST /waves/v1/tts`, `POST /waves/v1/tts/live`, `WSS /waves/v1/tts/live`, the<br/>
         /// dedicated Lightning v3.1 routes (`POST /waves/v1/lightning-v3.1/get_speech`,<br/>
         /// `POST /waves/v1/lightning-v3.1/stream`, `WSS /waves/v1/lightning-v3.1/get_speech/stream`),<br/>
-        /// `WSS /waves/v1/s2s`, and the voice-listing routes. Every other<br/>
-        /// route, including this one and `POST /waves/v1/pulse/get_text`, returns `403`<br/>
-        /// to a token.<br/>
+        /// `WSS /waves/v1/s2s`, and the voice-listing routes (public catalog, no cloned<br/>
+        /// voices). Treat any route not listed as unavailable to tokens. This endpoint,<br/>
+        /// `POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,<br/>
+        /// analytics and chat completions return `403` to a token.<br/>
         /// Requests made with a token are billed to the API key that minted it. Deleting<br/>
         /// that key invalidates its tokens. A token is valid only in the region that<br/>
         /// minted it. If your server and your users can be in different regions, mint and<br/>
-        /// call through the same region-pinned hostname (for example `api.us.smallest.ai`).<br/>
+        /// call through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or<br/>
+        /// `api.us.smallest.ai` (Oregon).<br/>
         /// ```bash<br/>
         /// curl -X POST "https://api.smallest.ai/waves/v1/auth/token" \<br/>
         ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
