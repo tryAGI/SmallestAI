@@ -42,8 +42,8 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public string PickChatCompletionRequestStopVariant1() => IsChatCompletionRequestStopVariant1
-            ? ChatCompletionRequestStopVariant1!
+        public string PickChatCompletionRequestStopVariant1() => ChatCompletionRequestStopVariant1 is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestStopVariant1' but the value was {ToString()}.");
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::System.Collections.Generic.IList<string> PickChatCompletionRequestStopVariant2() => IsChatCompletionRequestStopVariant2
-            ? ChatCompletionRequestStopVariant2!
+        public global::System.Collections.Generic.IList<string> PickChatCompletionRequestStopVariant2() => ChatCompletionRequestStopVariant2 is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestStopVariant2' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -154,13 +154,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsChatCompletionRequestStopVariant1 && chatCompletionRequestStopVariant1 != null)
+            if (ChatCompletionRequestStopVariant1 is { } __value0 && chatCompletionRequestStopVariant1 != null)
             {
-                return chatCompletionRequestStopVariant1(ChatCompletionRequestStopVariant1!);
+                return chatCompletionRequestStopVariant1(__value0);
             }
-            else if (IsChatCompletionRequestStopVariant2 && chatCompletionRequestStopVariant2 != null)
+            else if (ChatCompletionRequestStopVariant2 is { } __value1 && chatCompletionRequestStopVariant2 != null)
             {
-                return chatCompletionRequestStopVariant2(ChatCompletionRequestStopVariant2!);
+                return chatCompletionRequestStopVariant2(__value1);
             }
 
             return default(TResult);
@@ -180,13 +180,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsChatCompletionRequestStopVariant1)
+            if (ChatCompletionRequestStopVariant1 is { } __value0)
             {
-                chatCompletionRequestStopVariant1?.Invoke(ChatCompletionRequestStopVariant1!);
+                chatCompletionRequestStopVariant1?.Invoke(__value0);
             }
-            else if (IsChatCompletionRequestStopVariant2)
+            else if (ChatCompletionRequestStopVariant2 is { } __value1)
             {
-                chatCompletionRequestStopVariant2?.Invoke(ChatCompletionRequestStopVariant2!);
+                chatCompletionRequestStopVariant2?.Invoke(__value1);
             }
         }
 
@@ -203,13 +203,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsChatCompletionRequestStopVariant1)
+            if (ChatCompletionRequestStopVariant1 is { } __value0)
             {
-                chatCompletionRequestStopVariant1?.Invoke(ChatCompletionRequestStopVariant1!);
+                chatCompletionRequestStopVariant1?.Invoke(__value0);
             }
-            else if (IsChatCompletionRequestStopVariant2)
+            else if (ChatCompletionRequestStopVariant2 is { } __value1)
             {
-                chatCompletionRequestStopVariant2?.Invoke(ChatCompletionRequestStopVariant2!);
+                chatCompletionRequestStopVariant2?.Invoke(__value1);
             }
         }
 

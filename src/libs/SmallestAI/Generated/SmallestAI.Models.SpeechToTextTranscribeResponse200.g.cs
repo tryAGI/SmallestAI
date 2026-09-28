@@ -42,8 +42,8 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::SmallestAI.TranscriptionResponse PickTranscriptionResponse() => IsTranscriptionResponse
-            ? TranscriptionResponse!
+        public global::SmallestAI.TranscriptionResponse PickTranscriptionResponse() => TranscriptionResponse is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'TranscriptionResponse' but the value was {ToString()}.");
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::SmallestAI.AsyncAccepted PickAsyncAccepted() => IsAsyncAccepted
-            ? AsyncAccepted!
+        public global::SmallestAI.AsyncAccepted PickAsyncAccepted() => AsyncAccepted is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'AsyncAccepted' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -177,13 +177,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsTranscriptionResponse && transcriptionResponse != null)
+            if (TranscriptionResponse is { } __value0 && transcriptionResponse != null)
             {
-                return transcriptionResponse(TranscriptionResponse!);
+                return transcriptionResponse(__value0);
             }
-            else if (IsAsyncAccepted && asyncAccepted != null)
+            else if (AsyncAccepted is { } __value1 && asyncAccepted != null)
             {
-                return asyncAccepted(AsyncAccepted!);
+                return asyncAccepted(__value1);
             }
 
             return default(TResult);
@@ -203,13 +203,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsTranscriptionResponse)
+            if (TranscriptionResponse is { } __value0)
             {
-                transcriptionResponse?.Invoke(TranscriptionResponse!);
+                transcriptionResponse?.Invoke(__value0);
             }
-            else if (IsAsyncAccepted)
+            else if (AsyncAccepted is { } __value1)
             {
-                asyncAccepted?.Invoke(AsyncAccepted!);
+                asyncAccepted?.Invoke(__value1);
             }
         }
 
@@ -226,13 +226,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsTranscriptionResponse)
+            if (TranscriptionResponse is { } __value0)
             {
-                transcriptionResponse?.Invoke(TranscriptionResponse!);
+                transcriptionResponse?.Invoke(__value0);
             }
-            else if (IsAsyncAccepted)
+            else if (AsyncAccepted is { } __value1)
             {
-                asyncAccepted?.Invoke(AsyncAccepted!);
+                asyncAccepted?.Invoke(__value1);
             }
         }
 

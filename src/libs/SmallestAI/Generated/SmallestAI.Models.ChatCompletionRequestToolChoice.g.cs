@@ -42,8 +42,8 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::SmallestAI.ChatCompletionRequestToolChoice0 PickChatCompletionRequestToolChoice0() => IsChatCompletionRequestToolChoice0
-            ? ChatCompletionRequestToolChoice0!.Value
+        public global::SmallestAI.ChatCompletionRequestToolChoice0 PickChatCompletionRequestToolChoice0() => ChatCompletionRequestToolChoice0 is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestToolChoice0' but the value was {ToString()}.");
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
-        public global::SmallestAI.ChatCompletionRequestToolChoice1 PickChatCompletionRequestToolChoice1() => IsChatCompletionRequestToolChoice1
-            ? ChatCompletionRequestToolChoice1!
+        public global::SmallestAI.ChatCompletionRequestToolChoice1 PickChatCompletionRequestToolChoice1() => ChatCompletionRequestToolChoice1 is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'ChatCompletionRequestToolChoice1' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -177,13 +177,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsChatCompletionRequestToolChoice0 && chatCompletionRequestToolChoice0 != null)
+            if (ChatCompletionRequestToolChoice0 is { } __value0 && chatCompletionRequestToolChoice0 != null)
             {
-                return chatCompletionRequestToolChoice0(ChatCompletionRequestToolChoice0!);
+                return chatCompletionRequestToolChoice0(__value0);
             }
-            else if (IsChatCompletionRequestToolChoice1 && chatCompletionRequestToolChoice1 != null)
+            else if (ChatCompletionRequestToolChoice1 is { } __value1 && chatCompletionRequestToolChoice1 != null)
             {
-                return chatCompletionRequestToolChoice1(ChatCompletionRequestToolChoice1!);
+                return chatCompletionRequestToolChoice1(__value1);
             }
 
             return default(TResult);
@@ -203,13 +203,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsChatCompletionRequestToolChoice0)
+            if (ChatCompletionRequestToolChoice0 is { } __value0)
             {
-                chatCompletionRequestToolChoice0?.Invoke(ChatCompletionRequestToolChoice0!);
+                chatCompletionRequestToolChoice0?.Invoke(__value0);
             }
-            else if (IsChatCompletionRequestToolChoice1)
+            else if (ChatCompletionRequestToolChoice1 is { } __value1)
             {
-                chatCompletionRequestToolChoice1?.Invoke(ChatCompletionRequestToolChoice1!);
+                chatCompletionRequestToolChoice1?.Invoke(__value1);
             }
         }
 
@@ -226,13 +226,13 @@ namespace SmallestAI
                 Validate();
             }
 
-            if (IsChatCompletionRequestToolChoice0)
+            if (ChatCompletionRequestToolChoice0 is { } __value0)
             {
-                chatCompletionRequestToolChoice0?.Invoke(ChatCompletionRequestToolChoice0!);
+                chatCompletionRequestToolChoice0?.Invoke(__value0);
             }
-            else if (IsChatCompletionRequestToolChoice1)
+            else if (ChatCompletionRequestToolChoice1 is { } __value1)
             {
-                chatCompletionRequestToolChoice1?.Invoke(ChatCompletionRequestToolChoice1!);
+                chatCompletionRequestToolChoice1?.Invoke(__value1);
             }
         }
 
