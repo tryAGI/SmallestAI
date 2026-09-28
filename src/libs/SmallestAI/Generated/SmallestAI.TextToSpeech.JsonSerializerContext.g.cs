@@ -21,10 +21,12 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestSampleRate), TypeInfoPropertyName = "TtsRequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestLanguage), TypeInfoPropertyName = "TtsRequestLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage), TypeInfoPropertyName = "TtsRequestNumberPronunciationLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilterAction), TypeInfoPropertyName = "TtsRequestContentFilterAction2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilter))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestOutputFormat), TypeInfoPropertyName = "TtsRequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent), TypeInfoPropertyName = "WavesV1TtsLivePostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
@@ -34,9 +36,10 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestSampleRate?), TypeInfoPropertyName = "NullableTtsRequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestLanguage?), TypeInfoPropertyName = "NullableTtsRequestLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage?), TypeInfoPropertyName = "NullableTtsRequestNumberPronunciationLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilterAction?), TypeInfoPropertyName = "NullableTtsRequestContentFilterAction2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestOutputFormat?), TypeInfoPropertyName = "NullableTtsRequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double?))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent?), TypeInfoPropertyName = "NullableWavesV1TtsLivePostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]
     internal sealed partial class TextToSpeechSourceGenerationContextChunk0 : global::System.Text.Json.Serialization.JsonSerializerContext
@@ -132,6 +135,10 @@ namespace SmallestAI
 
                     || typeToConvert == typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage?)
 
+                    || typeToConvert == typeof(global::SmallestAI.TtsRequestContentFilterAction)
+
+                    || typeToConvert == typeof(global::SmallestAI.TtsRequestContentFilterAction?)
+
                     || typeToConvert == typeof(global::SmallestAI.TtsRequestOutputFormat)
 
                     || typeToConvert == typeof(global::SmallestAI.TtsRequestOutputFormat?)
@@ -203,6 +210,16 @@ namespace SmallestAI
                 if (typeToConvert == typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage?))
                 {
                     return new global::SmallestAI.JsonConverters.TtsRequestNumberPronunciationLanguageNullableJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.TtsRequestContentFilterAction))
+                {
+                    return new global::SmallestAI.JsonConverters.TtsRequestContentFilterActionJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.TtsRequestContentFilterAction?))
+                {
+                    return new global::SmallestAI.JsonConverters.TtsRequestContentFilterActionNullableJsonConverter();
                 }
 
                 if (typeToConvert == typeof(global::SmallestAI.TtsRequestOutputFormat))

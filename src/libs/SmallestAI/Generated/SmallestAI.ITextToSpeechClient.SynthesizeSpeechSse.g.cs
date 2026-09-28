@@ -191,6 +191,19 @@ namespace SmallestAI
         /// localizations.<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="contentFilter">
+        /// Opt-in profanity filter for the submitted text. Off by default;<br/>
+        /// passing this object is the only way to turn it on. The filter<br/>
+        /// never rewrites your text — it either lets the request through or<br/>
+        /// rejects it before synthesis.<br/>
+        /// `action: "reject"` returns HTTP 400 with `error_code:<br/>
+        /// "CONTENT_FILTER_BLOCKED"`, the `language` checked and a<br/>
+        /// `match_count`; the matched terms are never returned or logged.<br/>
+        /// `action: "flag"` synthesizes normally and records the match.<br/>
+        /// Matching is whole-word, not substring. If no verdict is returned<br/>
+        /// the request fails open and the audio is synthesized unfiltered.<br/>
+        /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+        /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
@@ -225,6 +238,7 @@ namespace SmallestAI
             global::SmallestAI.TtsRequestLanguage? language = default,
             global::SmallestAI.TtsRequestNumberPronunciationLanguage? numberPronunciationLanguage = default,
             bool? mathNotation = default,
+            global::SmallestAI.TtsRequestContentFilter? contentFilter = default,
             global::SmallestAI.TtsRequestOutputFormat? outputFormat = default,
             global::System.Collections.Generic.IList<string>? pronunciationDicts = default,
             bool? wordTimestamps = default,
