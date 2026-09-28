@@ -150,13 +150,13 @@ namespace SmallestAI.JsonConverters
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::SmallestAI.TranscriptionResponse), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::SmallestAI.TranscriptionResponse?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::SmallestAI.TranscriptionResponse).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.TranscriptionResponse!, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickTranscriptionResponse(), typeInfo);
             }
             else if (value.IsAsyncAccepted)
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::SmallestAI.AsyncAccepted), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::SmallestAI.AsyncAccepted?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::SmallestAI.AsyncAccepted).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.AsyncAccepted!, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickAsyncAccepted(), typeInfo);
             }
         }
     }

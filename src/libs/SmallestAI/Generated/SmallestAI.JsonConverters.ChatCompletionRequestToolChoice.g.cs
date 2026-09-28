@@ -136,13 +136,13 @@ namespace SmallestAI.JsonConverters
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::SmallestAI.ChatCompletionRequestToolChoice0), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::SmallestAI.ChatCompletionRequestToolChoice0> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::SmallestAI.ChatCompletionRequestToolChoice0).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.ChatCompletionRequestToolChoice0!.Value, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickChatCompletionRequestToolChoice0(), typeInfo);
             }
             else if (value.IsChatCompletionRequestToolChoice1)
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::SmallestAI.ChatCompletionRequestToolChoice1), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::SmallestAI.ChatCompletionRequestToolChoice1?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::SmallestAI.ChatCompletionRequestToolChoice1).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.ChatCompletionRequestToolChoice1!, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickChatCompletionRequestToolChoice1(), typeInfo);
             }
         }
     }
