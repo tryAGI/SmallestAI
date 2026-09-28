@@ -43,6 +43,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestNumberPronunciationLanguageNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.TtsRequestContentFilterActionJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestContentFilterActionNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestOutputFormatNullableJsonConverter),
@@ -164,10 +168,12 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestSampleRate), TypeInfoPropertyName = "TtsRequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestLanguage), TypeInfoPropertyName = "TtsRequestLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage), TypeInfoPropertyName = "TtsRequestNumberPronunciationLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilterAction), TypeInfoPropertyName = "TtsRequestContentFilterAction2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilter))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestOutputFormat), TypeInfoPropertyName = "TtsRequestOutputFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsError))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1TtsLivePostParametersXExpireContent), TypeInfoPropertyName = "WavesV1TtsLivePostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ModelGetVoicesGetParametersModel), TypeInfoPropertyName = "WavesV1ModelGetVoicesGetParametersModel2")]

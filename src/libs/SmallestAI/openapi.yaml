@@ -1283,6 +1283,33 @@
         "description": "Optional. Sets the language used to read out numeric content —\nnumbers, currency amounts, times, and the numeric parts of dates\nand years — independently of the synthesis voice. Ordinary words\nare not translated.\n\n- If you **omit `language`**, this value also becomes the\n  synthesis language: model selection and voice routing follow it.\n- If you **set `language` explicitly**, `language` always wins for\n  synthesis and `number_pronunciation_language` only changes how\n  numeric content is normalized. It works both ways — read numbers\n  in Hindi under an English voice, or in English under a Hindi\n  voice (tuned for Indian, often mixed-script, use cases).\n- Omit this field to keep the existing behaviour — normalization\n  follows `language`.\n\nNote: only numeric tokens are re-spoken; the words around them\nstay in the text language. On a cross-language request names may\nalso render in the target script (e.g. \"Smith\" → \"स्मिथ\"), which\nis generally the desired reading for native-language voices.\n\nAccepts the same language codes as `language` (including `auto`,\n`nl`, `sv`).\n",
         "title": "TtsRequestNumberPronunciationLanguage"
       },
+      "TtsRequestContentFilterAction": {
+        "type": "string",
+        "enum": [
+          "reject",
+          "flag"
+        ],
+        "default": "reject",
+        "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match.",
+        "title": "TtsRequestContentFilterAction"
+      },
+      "TtsRequestContentFilter": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": false,
+            "description": "Must be the literal `true` to enable the filter. Any other value leaves it off."
+          },
+          "action": {
+            "$ref": "#/components/schemas/TtsRequestContentFilterAction",
+            "default": "reject",
+            "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match."
+          }
+        },
+        "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/documentation/text-to-speech-lightning/content-filter).\n",
+        "title": "TtsRequestContentFilter"
+      },
       "TtsRequestOutputFormat": {
         "type": "string",
         "enum": [
@@ -1341,6 +1368,10 @@
             "type": "boolean",
             "default": false,
             "description": "Opt-in flag that reads digit-flanked math operators (`5 x 3`,\n`2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the\ndefault number reader. Off by default because in real traffic\ndigit-flanked `NxN` is more often a product dimension, the\n`24x7` idiom, or a vehicle-registration code than an actual\nmultiplication.\n\nWhen `true`, the normalizer replaces the operator with the\nspoken word matched to `number_pronunciation_language`:\n\n| Glyphs | en (default / fallback) | hi | mr |\n|---|---|---|---|\n| `×` `x` `X` `*` | times | गुणा | गुणिले |\n| `÷` and spaced `/` | divided by | बटा | भागिले |\n| `+` | plus | प्लस | अधिक |\n| spaced `-` `–` `−` | minus | माइनस | वजा |\n| `=` | equals | बराबर | बरोबर |\n| `^` `**` | to the power of | की घात | ची घात |\n\nLocalized only for `hi` and `mr`; every other language falls\nback to the English words. The operator word follows\n`number_pronunciation_language`, not the synthesis\n`language`, so `language=en, number_pronunciation_language=hi`\nreads `6 x 7` as \"छः गुणा सात\".\n\nMatching rules: unambiguous glyphs (`× ÷ * ^ ** = +` and the\nwrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).\nThe ambiguous `-` `–` `−` and `/` fire only when\nspace-padded, so `5-3` stays a range and `1/2` stays a\nfraction. See [Math notation](/models/documentation/text-to-speech-lightning/math-notation)\nfor the full lexicon, known limitations (product dimensions,\n`24x7` idiom, vehicle-reg codes), and EU-language\nlocalizations.\n"
+          },
+          "content_filter": {
+            "$ref": "#/components/schemas/TtsRequestContentFilter",
+            "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/documentation/text-to-speech-lightning/content-filter).\n"
           },
           "output_format": {
             "$ref": "#/components/schemas/TtsRequestOutputFormat",

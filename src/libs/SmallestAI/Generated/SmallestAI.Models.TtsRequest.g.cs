@@ -148,6 +148,22 @@ namespace SmallestAI
         public bool? MathNotation { get; set; }
 
         /// <summary>
+        /// Opt-in profanity filter for the submitted text. Off by default;<br/>
+        /// passing this object is the only way to turn it on. The filter<br/>
+        /// never rewrites your text — it either lets the request through or<br/>
+        /// rejects it before synthesis.<br/>
+        /// `action: "reject"` returns HTTP 400 with `error_code:<br/>
+        /// "CONTENT_FILTER_BLOCKED"`, the `language` checked and a<br/>
+        /// `match_count`; the matched terms are never returned or logged.<br/>
+        /// `action: "flag"` synthesizes normally and records the match.<br/>
+        /// Matching is whole-word, not substring. If no verdict is returned<br/>
+        /// the request fails open and the audio is synthesized unfiltered.<br/>
+        /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("content_filter")]
+        public global::SmallestAI.TtsRequestContentFilter? ContentFilter { get; set; }
+
+        /// <summary>
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
         /// playable in browsers and most media players. The server default<br/>
@@ -300,6 +316,19 @@ namespace SmallestAI
         /// localizations.<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="contentFilter">
+        /// Opt-in profanity filter for the submitted text. Off by default;<br/>
+        /// passing this object is the only way to turn it on. The filter<br/>
+        /// never rewrites your text — it either lets the request through or<br/>
+        /// rejects it before synthesis.<br/>
+        /// `action: "reject"` returns HTTP 400 with `error_code:<br/>
+        /// "CONTENT_FILTER_BLOCKED"`, the `language` checked and a<br/>
+        /// `match_count`; the matched terms are never returned or logged.<br/>
+        /// `action: "flag"` synthesizes normally and records the match.<br/>
+        /// Matching is whole-word, not substring. If no verdict is returned<br/>
+        /// the request fails open and the audio is synthesized unfiltered.<br/>
+        /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+        /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
         /// but requires a decoder to play; `mp3` and `wav` are directly<br/>
@@ -333,6 +362,7 @@ namespace SmallestAI
             global::SmallestAI.TtsRequestLanguage? language,
             global::SmallestAI.TtsRequestNumberPronunciationLanguage? numberPronunciationLanguage,
             bool? mathNotation,
+            global::SmallestAI.TtsRequestContentFilter? contentFilter,
             global::SmallestAI.TtsRequestOutputFormat? outputFormat,
             global::System.Collections.Generic.IList<string>? pronunciationDicts,
             bool? wordTimestamps,
@@ -347,6 +377,7 @@ namespace SmallestAI
             this.Language = language;
             this.NumberPronunciationLanguage = numberPronunciationLanguage;
             this.MathNotation = mathNotation;
+            this.ContentFilter = contentFilter;
             this.OutputFormat = outputFormat;
             this.PronunciationDicts = pronunciationDicts;
             this.WordTimestamps = wordTimestamps;
