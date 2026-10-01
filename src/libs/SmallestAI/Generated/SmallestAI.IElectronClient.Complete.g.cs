@@ -16,7 +16,7 @@ namespace SmallestAI
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
-        /// `tool_calls` — see the [Tool Calling guide](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// `tool_calls` — see the [Tool Calling guide](/models/llm/tool-function-calling)<br/>
         /// for the voice-agent pattern.<br/>
         /// ## Examples<br/>
         /// **cURL**<br/>
@@ -103,7 +103,7 @@ namespace SmallestAI
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
-        /// `tool_calls` — see the [Tool Calling guide](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// `tool_calls` — see the [Tool Calling guide](/models/llm/tool-function-calling)<br/>
         /// for the voice-agent pattern.<br/>
         /// ## Examples<br/>
         /// **cURL**<br/>
@@ -190,7 +190,7 @@ namespace SmallestAI
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
-        /// `tool_calls` — see the [Tool Calling guide](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// `tool_calls` — see the [Tool Calling guide](/models/llm/tool-function-calling)<br/>
         /// for the voice-agent pattern.<br/>
         /// ## Examples<br/>
         /// **cURL**<br/>
@@ -276,7 +276,7 @@ namespace SmallestAI
         /// </param>
         /// <param name="stream">
         /// When true, response is `text/event-stream`. See the<br/>
-        /// [Streaming guide](/models/documentation/llm-electron/streaming).<br/>
+        /// [Streaming guide](/models/llm/streaming).<br/>
         /// Default Value: false
         /// </param>
         /// <param name="streamOptions"></param>
@@ -286,7 +286,7 @@ namespace SmallestAI
         /// (`{type: "function", function: {name, description, parameters}}`)<br/>
         /// is the recommended form and is what the examples below use.<br/>
         /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
-        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/llm/tool-function-calling)<br/>
         /// for details.
         /// </param>
         /// <param name="toolChoice"></param>

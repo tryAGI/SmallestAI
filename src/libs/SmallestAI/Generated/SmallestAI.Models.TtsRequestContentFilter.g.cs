@@ -14,7 +14,7 @@ namespace SmallestAI
     /// `action: "flag"` synthesizes normally and records the match.<br/>
     /// Matching is whole-word, not substring. If no verdict is returned<br/>
     /// the request fails open and the audio is synthesized unfiltered.<br/>
-    /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+    /// See [Content filter](/models/text-to-speech/content-filter).
     /// </summary>
     public sealed partial class TtsRequestContentFilter
     {

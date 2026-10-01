@@ -15,10 +15,11 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Text.Json.JsonElement?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersModel), TypeInfoPropertyName = "WavesV1SttPostParametersModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersLanguage), TypeInfoPropertyName = "WavesV1SttPostParametersLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps), TypeInfoPropertyName = "WavesV1SttPostParametersWordTimestamps2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersDiarize), TypeInfoPropertyName = "WavesV1SttPostParametersDiarize2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod), TypeInfoPropertyName = "WavesV1SttPostParametersWebhookMethod2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPii), TypeInfoPropertyName = "WavesV1SttPostParametersRedactPii2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPci), TypeInfoPropertyName = "WavesV1SttPostParametersRedactPci2")]
@@ -34,16 +35,19 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, double>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AsyncAccepted))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextTranscribeResponse200), TypeInfoPropertyName = "SpeechToTextTranscribeResponse2002")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseDetailsItems))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseStatus), TypeInfoPropertyName = "SttErrorResponseStatus2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseErrorsOneOf0Items))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseErrorsOneOf0Items>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseErrors), TypeInfoPropertyName = "SttErrorResponseErrors2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponse))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseDetailsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TranscriptionUrlRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int?))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersModel?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersLanguage?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersWordTimestamps2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersDiarize?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersDiarize2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersWebhookMethod2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPii?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersRedactPii2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPci?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersRedactPci2")]
@@ -51,9 +55,11 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersGenderDetection?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersGenderDetection2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersXExpireContent?), TypeInfoPropertyName = "NullableWavesV1SttPostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextTranscribeResponse200?), TypeInfoPropertyName = "NullableSpeechToTextTranscribeResponse2002")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseStatus?), TypeInfoPropertyName = "NullableSttErrorResponseStatus2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseErrors?), TypeInfoPropertyName = "NullableSttErrorResponseErrors2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.Word>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.Utterance>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.SttErrorResponseDetailsItems>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.SttErrorResponseErrorsOneOf0Items>))]
     internal sealed partial class SpeechToTextSourceGenerationContextChunk0 : global::System.Text.Json.Serialization.JsonSerializerContext
     {
     }
@@ -102,6 +108,7 @@ namespace SmallestAI
         public static void AddConverters(global::System.Text.Json.JsonSerializerOptions options)
         {
             options.Converters.Add(new global::SmallestAI.JsonConverters.SpeechToTextTranscribeResponse200JsonConverter());
+            options.Converters.Add(new global::SmallestAI.JsonConverters.SttErrorResponseErrorsJsonConverter());
             options.Converters.Add(new global::SmallestAI.JsonConverters.UnixTimestampJsonConverter());
             options.Converters.Add(new LazyEnumJsonConverterFactory());
         }
@@ -132,6 +139,14 @@ namespace SmallestAI
 
                     || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersLanguage?)
 
+                    || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps)
+
+                    || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps?)
+
+                    || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersDiarize)
+
+                    || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersDiarize?)
+
                     || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod)
 
                     || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod?)
@@ -154,7 +169,11 @@ namespace SmallestAI
 
                     || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersXExpireContent)
 
-                    || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersXExpireContent?);
+                    || typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersXExpireContent?)
+
+                    || typeToConvert == typeof(global::SmallestAI.SttErrorResponseStatus)
+
+                    || typeToConvert == typeof(global::SmallestAI.SttErrorResponseStatus?);
             }
 
             public override global::System.Text.Json.Serialization.JsonConverter CreateConverter(
@@ -179,6 +198,26 @@ namespace SmallestAI
                 if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersLanguage?))
                 {
                     return new global::SmallestAI.JsonConverters.WavesV1SttPostParametersLanguageNullableJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps))
+                {
+                    return new global::SmallestAI.JsonConverters.WavesV1SttPostParametersWordTimestampsJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps?))
+                {
+                    return new global::SmallestAI.JsonConverters.WavesV1SttPostParametersWordTimestampsNullableJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersDiarize))
+                {
+                    return new global::SmallestAI.JsonConverters.WavesV1SttPostParametersDiarizeJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersDiarize?))
+                {
+                    return new global::SmallestAI.JsonConverters.WavesV1SttPostParametersDiarizeNullableJsonConverter();
                 }
 
                 if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod))
@@ -239,6 +278,16 @@ namespace SmallestAI
                 if (typeToConvert == typeof(global::SmallestAI.WavesV1SttPostParametersXExpireContent?))
                 {
                     return new global::SmallestAI.JsonConverters.WavesV1SttPostParametersXExpireContentNullableJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.SttErrorResponseStatus))
+                {
+                    return new global::SmallestAI.JsonConverters.SttErrorResponseStatusJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.SttErrorResponseStatus?))
+                {
+                    return new global::SmallestAI.JsonConverters.SttErrorResponseStatusNullableJsonConverter();
                 }
                 throw new global::System.NotSupportedException($"No generated enum converter is registered for '{typeToConvert}'.");
             }

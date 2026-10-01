@@ -28,9 +28,9 @@ namespace SmallestAI
         partial void PrepareTranscribeWithJsonArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::SmallestAI.WavesV1SttPostParametersModel model,
-            ref global::SmallestAI.WavesV1SttPostParametersLanguage language,
-            ref bool? wordTimestamps,
-            ref bool? diarize,
+            ref global::SmallestAI.WavesV1SttPostParametersLanguage? language,
+            ref global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps,
+            ref global::SmallestAI.WavesV1SttPostParametersDiarize? diarize,
             ref string? keywords,
             ref string? webhookUrl,
             ref global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod,
@@ -45,9 +45,9 @@ namespace SmallestAI
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
-            bool? wordTimestamps,
-            bool? diarize,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize,
             string? keywords,
             string? webhookUrl,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod,
@@ -71,10 +71,10 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
-        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
-        /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
+        /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
         /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
@@ -129,9 +129,8 @@ namespace SmallestAI
         /// ```<br/>
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
-        /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
+        /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
+        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -166,11 +165,11 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeWithJsonAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             global::SmallestAI.TranscriptionUrlRequest request,
-            bool? wordTimestamps = default,
-            bool? diarize = default,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps = default,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize = default,
             string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
@@ -185,9 +184,9 @@ namespace SmallestAI
         {
             var __response = await TranscribeWithJsonAsResponseAsync(
                 model: model,
-                language: language,
 
                 request: request,
+                language: language,
                 wordTimestamps: wordTimestamps,
                 diarize: diarize,
                 keywords: keywords,
@@ -209,10 +208,10 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
-        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
-        /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
+        /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
         /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
@@ -267,9 +266,8 @@ namespace SmallestAI
         /// ```<br/>
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
-        /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
+        /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
+        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -304,11 +302,11 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextTranscribeResponse200>> TranscribeWithJsonAsResponseAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             global::SmallestAI.TranscriptionUrlRequest request,
-            bool? wordTimestamps = default,
-            bool? diarize = default,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps = default,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize = default,
             string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
@@ -370,9 +368,9 @@ namespace SmallestAI
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddRequiredParameter("model", model.ToValueString())
-                                .AddRequiredParameter("language", language.ToValueString())
-                                .AddOptionalParameter("word_timestamps", wordTimestamps?.ToString().ToLowerInvariant())
-                                .AddOptionalParameter("diarize", diarize?.ToString().ToLowerInvariant())
+                                .AddOptionalParameter("language", language?.ToValueString())
+                                .AddOptionalParameter("word_timestamps", wordTimestamps?.ToValueString())
+                                .AddOptionalParameter("diarize", diarize?.ToValueString())
                                 .AddOptionalParameter("keywords", keywords)
                                 .AddOptionalParameter("webhook_url", webhookUrl)
                                 .AddOptionalParameter("webhook_method", webhookMethod?.ToValueString())
@@ -626,7 +624,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Missing or invalid `model` query parameter, invalid params, or unsupported feature combination (e.g. `?model=pulse-pro` on the WS endpoint, audio-by-URL with `?model=pulse-pro`).
+                            // Invalid query parameters, empty audio, a language the model does not support, or a language not enabled in this region.
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -663,7 +661,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // API key missing or invalid.
+                            // API key missing, invalid, or revoked.
                             if ((int)__response.StatusCode == 401)
                             {
                                 string? __content_401 = null;
@@ -737,44 +735,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Payload exceeds 250 MB.
-                            if ((int)__response.StatusCode == 413)
-                            {
-                                string? __content_413 = null;
-                                global::System.Exception? __exception_413 = null;
-                                global::SmallestAI.SttErrorResponse? __value_413 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_413 = global::SmallestAI.SttErrorResponse.FromJson(__content_413, JsonSerializerContext);
-                                    }
-                                    else
-                                    {
-                                        __content_413 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-
-                                        __value_413 = global::SmallestAI.SttErrorResponse.FromJson(__content_413, JsonSerializerContext);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_413 = __ex;
-                                }
-
-
-                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_413 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_413,
-                                    responseBody: __content_413,
-                                    responseObject: __value_413,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // RPM cap exceeded (Standard plan default 25/min per model).
+                            // RPM cap exceeded (Standard plan default 25/min per model). Retry with exponential backoff.
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;
@@ -811,7 +772,44 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Worker temporarily unavailable.
+                            // Unexpected server-side failure. Retry with exponential backoff.
+                            if ((int)__response.StatusCode == 500)
+                            {
+                                string? __content_500 = null;
+                                global::System.Exception? __exception_500 = null;
+                                global::SmallestAI.SttErrorResponse? __value_500 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_500 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __value_500 = global::SmallestAI.SttErrorResponse.FromJson(__content_500, JsonSerializerContext);
+                                    }
+                                    else
+                                    {
+                                        __content_500 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+
+                                        __value_500 = global::SmallestAI.SttErrorResponse.FromJson(__content_500, JsonSerializerContext);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_500 = __ex;
+                                }
+
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.SttErrorResponse>.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_500,
+                                    responseBody: __content_500,
+                                    responseObject: __value_500,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+                            // Transcription service temporarily unavailable. Retry after a short backoff.
                             if ((int)__response.StatusCode == 503)
                             {
                                 string? __content_503 = null;
@@ -948,10 +946,10 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
-        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
-        /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
+        /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
         /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
@@ -1006,9 +1004,8 @@ namespace SmallestAI
         /// ```<br/>
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
-        /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
+        /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
+        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -1045,10 +1042,10 @@ namespace SmallestAI
         /// <exception cref="global::System.InvalidOperationException"></exception>
         public async global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeWithJsonAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
             string url,
-            bool? wordTimestamps = default,
-            bool? diarize = default,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps = default,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize = default,
             string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
