@@ -28,8 +28,8 @@ public partial class Tests
             model: WavesV1SttPostParametersModel.Pulse,
             language: WavesV1SttPostParametersLanguage.En,
             request: audio,
-            wordTimestamps: true,
-            diarize: true,
+            wordTimestamps: WavesV1SttPostParametersWordTimestamps.True,
+            diarize: WavesV1SttPostParametersDiarize.True,
             cancellationToken: TestContext.CancellationToken);
 
         var transcription = result.TranscriptionResponse;

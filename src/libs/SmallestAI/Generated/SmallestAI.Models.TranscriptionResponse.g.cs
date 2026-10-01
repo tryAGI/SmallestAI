@@ -65,7 +65,7 @@ namespace SmallestAI
         public string? Gender { get; set; }
 
         /// <summary>
-        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request. Current known keys: `anger`, `disgust`, `fear`, `sadness`, `happiness`.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("emotions")]
         public global::System.Collections.Generic.Dictionary<string, double>? Emotions { get; set; }
@@ -103,7 +103,7 @@ namespace SmallestAI
         /// Detected speaker gender label. Present when `gender_detection=true` was set on the request.
         /// </param>
         /// <param name="emotions">
-        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+        /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request. Current known keys: `anger`, `disgust`, `fear`, `sadness`, `happiness`.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

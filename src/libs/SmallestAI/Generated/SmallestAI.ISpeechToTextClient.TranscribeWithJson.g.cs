@@ -8,10 +8,10 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
-        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
-        /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
+        /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
         /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
@@ -66,9 +66,8 @@ namespace SmallestAI
         /// ```<br/>
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
-        /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
+        /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
+        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -103,11 +102,11 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeWithJsonAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             global::SmallestAI.TranscriptionUrlRequest request,
-            bool? wordTimestamps = default,
-            bool? diarize = default,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps = default,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize = default,
             string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
@@ -123,10 +122,10 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
-        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
-        /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
+        /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
         /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
@@ -181,9 +180,8 @@ namespace SmallestAI
         /// ```<br/>
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
-        /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
+        /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
+        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -218,11 +216,11 @@ namespace SmallestAI
         /// <exception cref="global::SmallestAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.SpeechToTextTranscribeResponse200>> TranscribeWithJsonAsResponseAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
 
             global::SmallestAI.TranscriptionUrlRequest request,
-            bool? wordTimestamps = default,
-            bool? diarize = default,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps = default,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize = default,
             string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,
@@ -238,10 +236,10 @@ namespace SmallestAI
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
         /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
-        /// - `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
+        /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
-        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.<br/>
-        /// Pulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.<br/>
+        /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
+        /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
         /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
@@ -296,9 +294,8 @@ namespace SmallestAI
         /// ```<br/>
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
-        /// - **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.<br/>
-        /// - **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.
+        /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
+        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -335,10 +332,10 @@ namespace SmallestAI
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::SmallestAI.SpeechToTextTranscribeResponse200> TranscribeWithJsonAsync(
             global::SmallestAI.WavesV1SttPostParametersModel model,
-            global::SmallestAI.WavesV1SttPostParametersLanguage language,
             string url,
-            bool? wordTimestamps = default,
-            bool? diarize = default,
+            global::SmallestAI.WavesV1SttPostParametersLanguage? language = default,
+            global::SmallestAI.WavesV1SttPostParametersWordTimestamps? wordTimestamps = default,
+            global::SmallestAI.WavesV1SttPostParametersDiarize? diarize = default,
             string? keywords = default,
             string? webhookUrl = default,
             global::SmallestAI.WavesV1SttPostParametersWebhookMethod? webhookMethod = default,

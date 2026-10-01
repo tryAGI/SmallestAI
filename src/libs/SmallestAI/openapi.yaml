@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "API Reference",
+    "title": "Models API",
     "version": "1.0.0"
   },
   "paths": {
@@ -9,7 +9,7 @@
       "post": {
         "operationId": "auth_create_access_token",
         "summary": "Create access token",
-        "description": "Mint a short-lived access token from your API key. Call this from your server,\nthen hand the returned `access_token` to a browser or mobile client. The client\nsends it as `Authorization: Bearer <access_token>` on TTS, STT and speech-to-speech\nrequests. On\nWebSocket connections it can also go in the `api_key` query parameter. HTTP\nrequests must use the header.\n\nA token works any number of times until it expires. It is accepted only on\nTTS, STT and speech-to-speech inference routes: `POST /waves/v1/stt/`, `WSS /waves/v1/stt/live`,\n`POST /waves/v1/tts`, `POST /waves/v1/tts/live`, `WSS /waves/v1/tts/live`, the\ndedicated Lightning v3.1 routes (`POST /waves/v1/lightning-v3.1/get_speech`,\n`POST /waves/v1/lightning-v3.1/stream`, `WSS /waves/v1/lightning-v3.1/get_speech/stream`),\n`WSS /waves/v1/s2s`, and the voice-listing routes (public catalog, no cloned\nvoices). Treat any route not listed as unavailable to tokens. This endpoint,\n`POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,\nanalytics and chat completions return `403` to a token.\n\nRequests made with a token are billed to the API key that minted it. Deleting\nthat key invalidates its tokens. A token is valid only in the region that\nminted it. If your server and your users can be in different regions, mint and\ncall through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or\n`api.us.smallest.ai` (Oregon).\n\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/auth/token\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"ttl_seconds\": 300}'\n```\n\nSee the [Authentication guide](/models/api-reference/token-based-authentication)\nfor the end-to-end server and client flow.\n",
+        "description": "Mint a short-lived access token from your API key. Call this from your server,\nthen hand the returned `access_token` to a browser or mobile client. The client\nsends it as `Authorization: Bearer <access_token>` on TTS, STT and speech-to-speech\nrequests. On\nWebSocket connections it can also go in the `api_key` query parameter. HTTP\nrequests must use the header.\n\nA token works any number of times until it expires. It is accepted only on\nTTS, STT and speech-to-speech inference routes: `POST /waves/v1/stt/`, `WSS /waves/v1/stt/live`,\n`POST /waves/v1/tts`, `POST /waves/v1/tts/live`, `WSS /waves/v1/tts/live`, the\ndedicated Lightning v3.1 routes (`POST /waves/v1/lightning-v3.1/get_speech`,\n`POST /waves/v1/lightning-v3.1/stream`, `WSS /waves/v1/lightning-v3.1/get_speech/stream`),\n`WSS /waves/v1/s2s`, and the voice-listing routes (public catalog, no cloned\nvoices). Treat any route not listed as unavailable to tokens. This endpoint,\n`POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,\nanalytics and chat completions return `403` to a token.\n\nRequests made with a token are billed to the API key that minted it. Deleting\nthat key invalidates its tokens. A token is valid only in the region that\nminted it. If your server and your users can be in different regions, mint and\ncall through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or\n`api.us.smallest.ai` (Oregon).\n\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/auth/token\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"ttl_seconds\": 300}'\n```\n\nSee the [Authentication guide](/api-reference/token-based-authentication)\nfor the end-to-end server and client flow.\n",
         "tags": [
           "auth"
         ],
@@ -95,7 +95,7 @@
       "post": {
         "operationId": "textToSpeech_synthesizeSpeech",
         "summary": "Synthesize speech",
-        "description": "Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.\n\nPick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.\n\n**Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian & Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.\n\n## When to use this\n\n- **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).\n- **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).\n- **Use `/waves/v1/tts/live`** (WebSocket) when text arrives incrementally (LLM token streams, live captioning).\n\n## Key features\n\n- 44 kHz natural, expressive synthesis\n- Model selectable per request via `model` body parameter\n- Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices\n- 20 accepted language codes on `lightning_v3.1` (12 with trained voices, 8 additional routed via English/Hindi voices). On `lightning_v3.1_pro`: 31 languages with dedicated voices (10 Indic, 8 Asian & Middle Eastern, 13 European); `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`. Both models accept `language: auto` for cross-language routing.\n- Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`\n- Sample rates: 8 kHz – 44.1 kHz\n- Speed: 0.5× – 2×\n- Per-call pronunciation dictionaries via `pronunciation_dicts`\n\n## Examples\n\n**cURL — Lightning v3.1 (default)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Hello from Waves TTS.\",\n    \"voice_id\": \"magnus\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro (omit `language` → defaults to `en + hi`)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Hello from the Lightning v3.1 Pro pool.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro with explicit `language: en` (UK + American accented English)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Good morning, this is a Pro voice speaking.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"language\": \"en\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro with explicit `language: hi` (Indian accented English + Hindi)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Namaste, this is an Indian-accented Pro voice.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"language\": \"hi\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n## Common gotchas\n\n- **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.\n- **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).\n- **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.\n- **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.\n",
+        "description": "Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.\n\nPick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.\n\n**Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian & Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.\n\n## When to use this\n\n- **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).\n- **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).\n- **Use `/waves/v1/tts/live`** (WebSocket) when text arrives incrementally (LLM token streams, live captioning).\n\n## Key features\n\n- 44 kHz natural, expressive synthesis\n- Model selectable per request via `model` body parameter\n- Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices\n- 20 accepted language codes on `lightning_v3.1` (12 with trained voices, 8 additional routed via English/Hindi voices). On `lightning_v3.1_pro`: 31 languages with dedicated voices (10 Indic, 8 Asian & Middle Eastern, 13 European); `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`. Both models accept `language: auto` for cross-language routing.\n- Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`\n- Sample rates: 8 kHz – 44.1 kHz\n- Speed: 0.5× – 2×\n- Per-call pronunciation dictionaries via `pronunciation_dicts`\n\n## Examples\n\n**cURL — Lightning v3.1 (default)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Hello from Waves TTS.\",\n    \"voice_id\": \"magnus\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro (omit `language` → defaults to `en + hi`)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Hello from the Lightning v3.1 Pro pool.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro with explicit `language: en` (UK + American accented English)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Good morning, this is a Pro voice speaking.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"language\": \"en\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n**cURL — Lightning v3.1 Pro with explicit `language: hi` (Indian accented English + Hindi)**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/tts\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: audio/wav\" \\\n  -d '{\n    \"text\": \"Namaste, this is an Indian-accented Pro voice.\",\n    \"voice_id\": \"meher\",\n    \"model\": \"lightning_v3.1_pro\",\n    \"language\": \"hi\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"wav\"\n  }' --output speech.wav\n```\n\n## Common gotchas\n\n- **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.\n- **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).\n- **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.\n- **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.\n",
         "tags": [
           "textToSpeech"
         ],
@@ -182,7 +182,7 @@
       "post": {
         "operationId": "textToSpeech_synthesizeSpeechSse",
         "summary": "Stream speech (SSE)",
-        "description": "Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.\n\nPick the model with the `model` body parameter, same as the sync route.\n\n<Note>\n  **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/models/documentation/text-to-speech-lightning/streaming).\n</Note>\n\n## When to use this\n\n- **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.\n- **Use sync `/waves/v1/tts`** when total latency doesn't matter and you'd rather get one buffer.\n- **Use `/waves/v1/tts/live`** (WebSocket) when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.\n\n## How it works\n\n1. POST your text + voice settings — same payload as `/waves/v1/tts`, plus optional `model`.\n2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\\n` followed by `data: {\"audio\": \"<base64-pcm>\", \"done\": false, \"status\": \"206\"}\\n\\n`.\n3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).\n4. A final `data: {\"status\": \"200\", \"done\": true}\\n\\n` frame marks end of stream. Detect the terminator with `done == true`; every chunk frame also carries `done: false`, so `\"done\" in msg` matches every frame.\n\n## Examples\n\n**cURL**\n```bash\ncurl -N -X POST \"https://api.smallest.ai/waves/v1/tts/live\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"text\": \"Streaming this paragraph chunk by chunk so playback can start sooner.\",\n    \"voice_id\": \"magnus\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"pcm\"\n  }'\n```\n\n## Common gotchas\n\n- **Use a streaming-friendly client.** `curl -N`, Python `iter_lines`, or a `fetch` `ReadableStream` reader. Buffering clients will hide the latency win.\n- **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.\n- **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.\n",
+        "description": "Synthesize speech and stream the audio back over Server-Sent Events. Same body as `/waves/v1/tts` — the only difference is the response is a stream of base64-encoded PCM chunks instead of one binary blob.\n\nPick the model with the `model` body parameter, same as the sync route.\n\n<Note>\n  **The same URL serves the WebSocket endpoint.** `wss://api.smallest.ai/waves/v1/tts/live` accepts a WebSocket upgrade for streaming-text scenarios (LLM token streams, live captioning). The HTTP `POST` documented on this page returns SSE; use `wss://` to use the WebSocket protocol instead. See the [WebSocket reference](/models/text-to-speech/streaming).\n</Note>\n\n## When to use this\n\n- **Use this** when you want playback to start before synthesis is complete — long passages, latency-sensitive UI, live narration.\n- **Use sync `/waves/v1/tts`** when total latency doesn't matter and you'd rather get one buffer.\n- **Use `/waves/v1/tts/live`** (WebSocket) when the *text* arrives incrementally (LLM token stream). SSE assumes you have the full text up front.\n\n## How it works\n\n1. POST your text + voice settings — same payload as `/waves/v1/tts`, plus optional `model`.\n2. The response is `Content-Type: text/event-stream`. Each chunk frame is `event: audio\\n` followed by `data: {\"audio\": \"<base64-pcm>\", \"done\": false, \"status\": \"206\"}\\n\\n`.\n3. Decode each chunk's `audio` field with base64 and feed the PCM bytes to your audio pipeline (browser `MediaSource`, ffmpeg pipe, raw PCM player, etc.).\n4. A final `data: {\"status\": \"200\", \"done\": true}\\n\\n` frame marks end of stream. Detect the terminator with `done == true`; every chunk frame also carries `done: false`, so `\"done\" in msg` matches every frame.\n\n## Examples\n\n**cURL**\n```bash\ncurl -N -X POST \"https://api.smallest.ai/waves/v1/tts/live\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"text\": \"Streaming this paragraph chunk by chunk so playback can start sooner.\",\n    \"voice_id\": \"magnus\",\n    \"sample_rate\": 24000,\n    \"output_format\": \"pcm\"\n  }'\n```\n\n## Common gotchas\n\n- **Use a streaming-friendly client.** `curl -N`, Python `iter_lines`, or a `fetch` `ReadableStream` reader. Buffering clients will hide the latency win.\n- **Audio is base64 inside the event payload**, not the raw event bytes. Decode the `data.audio` field per event.\n- **`output_format=pcm`** gives the lowest overhead for streaming playback. `wav`/`mp3` work but add per-chunk framing bytes.\n",
         "tags": [
           "textToSpeech"
         ],
@@ -259,7 +259,7 @@
       "get": {
         "operationId": "voices_getWavesVoices",
         "summary": "Get voices for a pool",
-        "description": "Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:\n\n- `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.\n- `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.\n\nThe endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.\n\nEach voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/models/api-reference/text-to-speech/synthesize-speech) route, together with `\"model\": \"lightning_v3.1\"` (Standard) or `\"model\": \"lightning_v3.1_pro\"` (Pro).\n\nFor the canonical per-language voice list (with previews and recommended pairings), see the [Lightning v3.1](/models/model-cards/text-to-speech/lightning-v-3-1) and [Lightning v3.1 Pro](/models/model-cards/text-to-speech/lightning-v-3-1-pro) model cards.\n",
+        "description": "Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:\n\n- `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.\n- `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.\n\nThe endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.\n\nEach voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/api-reference/models/text-to-speech/synthesize-speech) route, together with `\"model\": \"lightning_v3.1\"` (Standard) or `\"model\": \"lightning_v3.1_pro\"` (Pro).\n\nFor the canonical per-language voice list (with previews and recommended pairings), see the [Lightning v3.1](/model-cards/text-to-speech/lightning-v-3-1) and [Lightning v3.1 Pro](/model-cards/text-to-speech/lightning-v-3-1-pro) model cards.\n",
         "tags": [
           "voices"
         ],
@@ -713,7 +713,7 @@
       "post": {
         "operationId": "speechToText_transcribe",
         "summary": "Transcribe (Pre-recorded)",
-        "description": "Transcribe an audio file. The model is chosen via `?model=`:\n\n- `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.\n- `?model=pulse`: multilingual transcription (21 streaming + 26 pre-recorded languages), supports both raw bytes and audio-by-URL.\n\n## When to use this\n\nUse this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live`) instead.\n\nPulse Pro has no streaming worker today; calls to `WS /waves/v1/stt/live?model=pulse-pro` return `400` before the WebSocket upgrades.\n\n## Input methods\n\n- **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.\n- **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{\"url\": \"...\"}` in the body.\n\n## Examples\n\n**cURL**: Pulse Pro, sync\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&word_timestamps=true\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/octet-stream\" \\\n  --data-binary \"@./call.wav\"\n```\n\n**cURL**: Pulse Pro, async via webhook\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&webhook_url=https://your.app/cb\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/octet-stream\" \\\n  --data-binary \"@./call.wav\"\n```\nReturns `200 { \"status\": \"processing\", \"request_id\": \"...\" }` immediately. The webhook receives the full transcription when ready.\n\n**cURL**: Pulse, audio-by-URL\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse&language=en\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\": \"https://your-bucket.s3.amazonaws.com/call.wav\"}'\n```\n\n**Python**\n```python\nimport requests\n\nwith open(\"./call.wav\", \"rb\") as f:\n    audio = f.read()\n\nr = requests.post(\n    \"https://api.smallest.ai/waves/v1/stt/\",\n    params={\"model\": \"pulse-pro\", \"language\": \"en\", \"word_timestamps\": \"true\"},\n    headers={\"Authorization\": f\"Bearer {API_KEY}\", \"Content-Type\": \"application/octet-stream\"},\n    data=audio,\n)\nr.raise_for_status()\nprint(r.json()[\"transcription\"])\n```\n\n**JavaScript / TypeScript**\n```typescript\nimport { readFileSync } from \"node:fs\";\n\nconst audio = readFileSync(\"./call.wav\");\nconst params = new URLSearchParams({ model: \"pulse-pro\", language: \"en\", word_timestamps: \"true\" });\n\nconst res = await fetch(`https://api.smallest.ai/waves/v1/stt/?${params}`, {\n  method: \"POST\",\n  headers: { Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`, \"Content-Type\": \"application/octet-stream\" },\n  body: audio,\n});\nconsole.log((await res.json()).transcription);\n```\n\n## Common gotchas\n\n- **`model` is required.** Missing or invalid values return `400` with an enum-validation error.\n- **Pulse Pro is English only.** Pass `language=en`. Other language codes are accepted at the wire level but produce unpredictable output.\n- **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.\n- **Max payload 250 MB.** Larger requests return `413`. Compress to mono 16 kHz PCM if you are close to the limit; quality is unaffected.\n",
+        "description": "Transcribe an audio file. The model is chosen via `?model=`:\n\n- `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.\n- `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.\n\n## When to use this\n\nUse this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).\n\nPulse Pro is HTTP-only.\n\n## Input methods\n\n- **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.\n- **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{\"url\": \"...\"}` in the body.\n\n## Examples\n\n**cURL**: Pulse Pro, sync\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&word_timestamps=true\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/octet-stream\" \\\n  --data-binary \"@./call.wav\"\n```\n\n**cURL**: Pulse Pro, async via webhook\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse-pro&language=en&webhook_url=https://your.app/cb\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/octet-stream\" \\\n  --data-binary \"@./call.wav\"\n```\nReturns `200 { \"status\": \"processing\", \"request_id\": \"...\" }` immediately. The webhook receives the full transcription when ready.\n\n**cURL**: Pulse, audio-by-URL\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/stt/?model=pulse&language=en\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\": \"https://your-bucket.s3.amazonaws.com/call.wav\"}'\n```\n\n**Python**\n```python\nimport requests\n\nwith open(\"./call.wav\", \"rb\") as f:\n    audio = f.read()\n\nr = requests.post(\n    \"https://api.smallest.ai/waves/v1/stt/\",\n    params={\"model\": \"pulse-pro\", \"language\": \"en\", \"word_timestamps\": \"true\"},\n    headers={\"Authorization\": f\"Bearer {API_KEY}\", \"Content-Type\": \"application/octet-stream\"},\n    data=audio,\n)\nr.raise_for_status()\nprint(r.json()[\"transcription\"])\n```\n\n**JavaScript / TypeScript**\n```typescript\nimport { readFileSync } from \"node:fs\";\n\nconst audio = readFileSync(\"./call.wav\");\nconst params = new URLSearchParams({ model: \"pulse-pro\", language: \"en\", word_timestamps: \"true\" });\n\nconst res = await fetch(`https://api.smallest.ai/waves/v1/stt/?${params}`, {\n  method: \"POST\",\n  headers: { Authorization: `Bearer ${process.env.SMALLEST_API_KEY}`, \"Content-Type\": \"application/octet-stream\" },\n  body: audio,\n});\nconsole.log((await res.json()).transcription);\n```\n\n## Common gotchas\n\n- **`model` is required.** Missing or invalid values return `400` with an enum-validation error.\n- **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '<x>'`).\n- **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.\n",
         "tags": [
           "speechToText"
         ],
@@ -721,7 +721,7 @@
           {
             "name": "model",
             "in": "query",
-            "description": "Selects which ASR model handles the request. Required; missing or invalid values return `400`.\n\n- `pulse-pro`: English only, leaderboard-ranked accuracy, raw bytes only; supports async via `webhook_url`.\n- `pulse`: multilingual (39 languages), raw bytes OR URL.\n",
+            "description": "Selects which ASR model handles the request. Required; missing or invalid values return `400`.\n\n- `pulse-pro`: English only, leaderboard-ranked accuracy, raw bytes only; supports async via `webhook_url`.\n- `pulse`: multilingual (21 streaming + 12 pre-recorded languages), raw bytes OR URL.\n",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/WavesV1SttPostParametersModel"
@@ -730,8 +730,8 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language of the audio file. This endpoint is **Pre-Recorded (HTTP)** — for streaming, switch to `WSS /waves/v1/stt/live` (different supported language set).\n\n**26 single-language codes:** `en`, `hi`, `de`, `es`, `ru`, `it`, `fr`, `nl`, `pt`, `uk`, `pl`, `cs`, `sk`, `lv`, `et`, `ro`, `fi`, `sv`, `bg`, `hu`, `da`, `lt`, `mt`, `zh`, `ja`, `ko`.\n\n**Regional auto-detect aggregators** for unknown audio:\n- `multi-eu` — auto-detects across all 21 European codes plus `en`.\n- `multi-asian` — auto-detects across `zh`, `ko`, `ja`, `en`.\n- `multi-indic`: auto-detects across `en`, `hi`, `gu`, `mr`, `bn`, `or`. India region only.\n\n- **Pulse Pro**: pass `en`.\n- **Pulse**: pass any of the single-language codes above, or use the `multi-eu` / `multi-asian` / `multi-indic` aggregator for unknown audio. See the [Pulse model card](/models/model-cards/speech-to-text/pulse) for the full table with language names.\n",
-            "required": true,
+            "description": "Language of the audio file. This endpoint is **Pre-Recorded (HTTP)**. For streaming, use `WSS /waves/v1/stt/live` (different supported-language set).\n\nAlways pass `language`. To auto-detect, pass one of the regional aggregators in the enum. On Pulse Pro, only `en` is accepted; any other value returns HTTP 400.\n\n**Single-language codes:** `en`, `hi`, `de`, `es`, `ru`, `it`, `fr`, `nl`, `pt`, `zh`, `ja`, `ko`.\n\n**Regional auto-detect aggregators** for unknown audio:\n- `multi-eu` auto-detects across the European codes plus `en`.\n- `multi-asian` auto-detects across `zh`, `ko`, `ja`, `en`.\n- `multi-indic` auto-detects across `en`, `hi`, `gu`, `mr`, `bn`, `or`. India region only.\n\n**Region gating.** Indic single-language codes and `multi-indic` are enabled in the India region only. East Asian codes and `multi-asian` are enabled in the US region only. Set `language` explicitly when you know the audio language; omission may return `LANGUAGE_NOT_ENABLED_IN_REGION` if the auto-detect aggregator is not enabled for your region.\n\n- **Pulse Pro**: pass `en`. Any other value returns HTTP 400 at validation.\n- **Pulse**: pass any code above. See the [Pulse model card](/model-cards/speech-to-text/pulse) for the full table with language names.\n",
+            "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1SttPostParametersLanguage"
             }
@@ -739,27 +739,27 @@
           {
             "name": "word_timestamps",
             "in": "query",
-            "description": "Include the per-word `words[]` array in the response — each entry carries the recognized `word`, its `start`/`end` timestamps, and a per-word `confidence` score (0.0–1.0). With `diarize=true`, entries also include `speaker`. On Pulse Pro this costs roughly one-third of throughput.",
+            "description": "Include the per-word `words[]` array in the response. Each entry carries the recognized `word`, its `start`/`end` timestamps, and a per-word `confidence` score (0.0 to 1.0). With `diarize=true`, entries also include `speaker`.\n\nMust be the lowercase string `\"true\"` or `\"false\"`. Any other value (including integer or capitalized variants) returns HTTP 400.\n",
             "required": false,
             "schema": {
-              "type": "boolean",
-              "default": false
+              "$ref": "#/components/schemas/WavesV1SttPostParametersWordTimestamps",
+              "default": "false"
             }
           },
           {
             "name": "diarize",
             "in": "query",
-            "description": "Multi-speaker identification; adds per-word and per-utterance speaker labels.",
+            "description": "Multi-speaker identification. Adds per-word and per-utterance speaker labels.\n\nMust be the lowercase string `\"true\"` or `\"false\"`. Any other value (including integer or capitalized variants) returns HTTP 400.\n",
             "required": false,
             "schema": {
-              "type": "boolean",
-              "default": false
+              "$ref": "#/components/schemas/WavesV1SttPostParametersDiarize",
+              "default": "false"
             }
           },
           {
             "name": "keywords",
             "in": "query",
-            "description": "Pulse only. Boost recognition of specific words or phrases for\nthis request. The same parameter works on the realtime WebSocket\nendpoint.\n\n**Entry format:** `KEYWORD` or `KEYWORD:INTENSIFIER`, where\n`INTENSIFIER` is a number that defaults to `1`. Example:\n`Blackwell:2,Jensen Huang:2`. Matching is case-sensitive.\nDuplicates: last-wins (`NVIDIA:1,NVIDIA:5` is equivalent to\n`NVIDIA:5`). Max 100 keywords per request; sending more returns\n`400` with `keywords too large (max 100)` in `errors[]`.\n\n**Encodings.** Comma-string (recommended), repeated key\n(`keywords=a&keywords=b`), and bracketed array (`keywords[]=a`)\nare all accepted. A JSON-array literal (`[\"a\",\"b\"]`) does not\nboost. Pass the raw string.\n\n**Intensifier.** Default `1`, recommended `1` to `3`. Above\n`10` is not recommended: higher values increase the chance\nof hallucinating the keyword when it was not spoken. Reuse\nthe same keyword list across requests when the vocabulary\nis stable.\n\nSee [Keyword Boosting](/models/documentation/speech-to-text-pulse/features/keyword-boosting)\nfor the full contract and worked examples.\n",
+            "description": "Pulse only. Boost recognition of specific words or phrases for this request. The same parameter works on the realtime WebSocket endpoint.\n\n**Entry format:** `KEYWORD` or `KEYWORD:INTENSIFIER`, where `INTENSIFIER` is a number that defaults to `1`. Example: `Blackwell:2,Jensen Huang:2`. Matching is case-sensitive. Duplicates: last-wins (`NVIDIA:1,NVIDIA:5` is equivalent to `NVIDIA:5`). Max 100 keywords per request; sending more returns `400` with `keywords too large (max 100)` in `errors[]`.\n\n**Encodings.** Comma-string (recommended), repeated key (`keywords=a&keywords=b`), and bracketed array (`keywords[]=a`) are all accepted. A JSON-array literal (`[\"a\",\"b\"]`) does not boost. Pass the raw string.\n\n**Intensifier.** Default `1`, recommended `1` to `3`. Above `10` is not recommended: higher values increase the chance of hallucinating the keyword when it was not spoken. Reuse the same keyword list across requests when the vocabulary is stable.\n\nSee [Keyword Boosting](/models/speech-to-text/features/keyword-boosting) for the full contract and worked examples.\n",
             "required": false,
             "schema": {
               "type": "string"
@@ -797,7 +797,7 @@
           {
             "name": "redact_pii",
             "in": "query",
-            "description": "Redact personally identifiable information from the transcript.\nNames → `[FIRSTNAME_*]` / `[LASTNAME_*]`, phone numbers →\n`[PHONENUMBER_*]`, addresses → `[ADDRESS_*]`, etc. The redaction\ntokens use sequential indices so multiple occurrences of the same\nentity get distinct labels (`[FIRSTNAME_1]`, `[FIRSTNAME_2]`).\n\n**Language support:** currently effective only on `en` and `hi`.\nSetting `redact_pii=true` on other language codes is accepted\nbut does not redact.\n",
+            "description": "Redact personally identifiable information from the transcript. Tokens use the shape `[ENTITYTYPE_N]` where N is a per-entity sequential index (e.g. `[FIRSTNAME_1]`). Entity types include `FIRSTNAME`, `LASTNAME`, `PHONENUMBER`, `ADDRESS`, `EMAIL`.\n\n**Language support:** effective on `en` and `hi`. Accepted on other codes but redaction is not reliable.\n",
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1SttPostParametersRedactPii",
@@ -807,7 +807,7 @@
           {
             "name": "redact_pci",
             "in": "query",
-            "description": "Redact payment card information (credit-card numbers, CVV, account\nnumbers, etc.). Replaces matches with `[ACCOUNTNUMBER_*]` tokens.\nUse alongside `redact_pii=true` for full PCI-compliant transcript\nhandling.\n\n**Language support:** currently effective only on `en` and `hi`.\nSetting `redact_pci=true` on other language codes is accepted\nbut does not redact.\n",
+            "description": "Redact payment card information. Tokens use the shape `[ENTITYTYPE_N]`. Known entity types include `ACCOUNTNAME` (cardholder name), `CREDITCARDNUMBER` (card PAN), `CREDITCARDCVV`, `ZIPCODE`, `ACCOUNTNUMBER`. Use alongside `redact_pii=true` for combined PII + PCI redaction.\n\n**Language support:** currently effective only on `en` and `hi`. Setting `redact_pci=true` on other language codes is accepted but does not redact.\n",
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1SttPostParametersRedactPci",
@@ -856,7 +856,7 @@
             }
           },
           "400": {
-            "description": "Missing or invalid `model` query parameter, invalid params, or unsupported feature combination (e.g. `?model=pulse-pro` on the WS endpoint, audio-by-URL with `?model=pulse-pro`).",
+            "description": "Invalid query parameters, empty audio, a language the model does not support, or a language not enabled in this region.",
             "content": {
               "application/json": {
                 "schema": {
@@ -866,7 +866,7 @@
             }
           },
           "401": {
-            "description": "API key missing or invalid.",
+            "description": "API key missing, invalid, or revoked.",
             "content": {
               "application/json": {
                 "schema": {
@@ -885,8 +885,8 @@
               }
             }
           },
-          "413": {
-            "description": "Payload exceeds 250 MB.",
+          "429": {
+            "description": "RPM cap exceeded (Standard plan default 25/min per model). Retry with exponential backoff.",
             "content": {
               "application/json": {
                 "schema": {
@@ -895,8 +895,8 @@
               }
             }
           },
-          "429": {
-            "description": "RPM cap exceeded (Standard plan default 25/min per model).",
+          "500": {
+            "description": "Unexpected server-side failure. Retry with exponential backoff.",
             "content": {
               "application/json": {
                 "schema": {
@@ -906,7 +906,7 @@
             }
           },
           "503": {
-            "description": "Worker temporarily unavailable.",
+            "description": "Transcription service temporarily unavailable. Retry after a short backoff.",
             "content": {
               "application/json": {
                 "schema": {
@@ -942,7 +942,7 @@
       "post": {
         "operationId": "electron_complete",
         "summary": "Chat Completions (Electron)",
-        "description": "Generate a chat completion with Electron. OpenAI-compatible\nrequest/response shape — point any OpenAI SDK at\n`https://api.smallest.ai/waves/v1` and it just works.\n\nSet `stream: true` to receive tokens via Server-Sent Events. With\n`stream_options: { include_usage: true }`, the final SSE chunk\ncarries the `usage` block so token accounting is exact even on\nclient disconnects.\n\nTool calling follows OpenAI's `tools` array convention. When you\nprovide a voice-agent-style system prompt, Electron emits a short\nfiller phrase in the assistant message `content` field alongside\n`tool_calls` — see the [Tool Calling guide](/models/documentation/llm-electron/tool-function-calling)\nfor the voice-agent pattern.\n\n## Examples\n\n**cURL**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/chat/completions\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"electron\",\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ]\n  }'\n```\n\n**Python** (`pip install openai`)\n```python\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://api.smallest.ai/waves/v1\",\n    api_key=os.environ[\"SMALLEST_API_KEY\"],\n)\n\nresponse = client.chat.completions.create(\n    model=\"electron\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ],\n)\n\nprint(response.choices[0].message.content)\n```\n\n**JavaScript / TypeScript** (`npm install openai`)\n```typescript\nimport OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  baseURL: \"https://api.smallest.ai/waves/v1\",\n  apiKey: process.env.SMALLEST_API_KEY,\n});\n\nconst response = await client.chat.completions.create({\n  model: \"electron\",\n  messages: [\n    { role: \"user\", content: \"Write one sentence about why the sky is blue.\" },\n  ],\n});\n\nconsole.log(response.choices[0].message.content);\n```\n\n**Streaming with usage** (Python)\n```python\nstream = client.chat.completions.create(\n    model=\"electron\",\n    messages=[{\"role\": \"user\", \"content\": \"Tell me a one-sentence fun fact.\"}],\n    stream=True,\n    stream_options={\"include_usage\": True},\n)\nfor chunk in stream:\n    if chunk.choices and chunk.choices[0].delta.content:\n        print(chunk.choices[0].delta.content, end=\"\", flush=True)\n    if chunk.usage:\n        print(f\"\\n\\nTokens: {chunk.usage.total_tokens}\")\n```\n\n## Common gotchas\n\n- **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.\n- **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.\n- **`n > 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.\n- **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).\n",
+        "description": "Generate a chat completion with Electron. OpenAI-compatible\nrequest/response shape — point any OpenAI SDK at\n`https://api.smallest.ai/waves/v1` and it just works.\n\nSet `stream: true` to receive tokens via Server-Sent Events. With\n`stream_options: { include_usage: true }`, the final SSE chunk\ncarries the `usage` block so token accounting is exact even on\nclient disconnects.\n\nTool calling follows OpenAI's `tools` array convention. When you\nprovide a voice-agent-style system prompt, Electron emits a short\nfiller phrase in the assistant message `content` field alongside\n`tool_calls` — see the [Tool Calling guide](/models/llm/tool-function-calling)\nfor the voice-agent pattern.\n\n## Examples\n\n**cURL**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/chat/completions\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"electron\",\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ]\n  }'\n```\n\n**Python** (`pip install openai`)\n```python\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://api.smallest.ai/waves/v1\",\n    api_key=os.environ[\"SMALLEST_API_KEY\"],\n)\n\nresponse = client.chat.completions.create(\n    model=\"electron\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ],\n)\n\nprint(response.choices[0].message.content)\n```\n\n**JavaScript / TypeScript** (`npm install openai`)\n```typescript\nimport OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  baseURL: \"https://api.smallest.ai/waves/v1\",\n  apiKey: process.env.SMALLEST_API_KEY,\n});\n\nconst response = await client.chat.completions.create({\n  model: \"electron\",\n  messages: [\n    { role: \"user\", content: \"Write one sentence about why the sky is blue.\" },\n  ],\n});\n\nconsole.log(response.choices[0].message.content);\n```\n\n**Streaming with usage** (Python)\n```python\nstream = client.chat.completions.create(\n    model=\"electron\",\n    messages=[{\"role\": \"user\", \"content\": \"Tell me a one-sentence fun fact.\"}],\n    stream=True,\n    stream_options={\"include_usage\": True},\n)\nfor chunk in stream:\n    if chunk.choices and chunk.choices[0].delta.content:\n        print(chunk.choices[0].delta.content, end=\"\", flush=True)\n    if chunk.usage:\n        print(f\"\\n\\nTokens: {chunk.usage.total_tokens}\")\n```\n\n## Common gotchas\n\n- **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.\n- **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.\n- **`n > 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.\n- **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).\n",
         "tags": [
           "electron"
         ],
@@ -988,7 +988,7 @@
             }
           },
           "429": {
-            "description": "Rate limit (RPM) or concurrency cap hit. See\n[Concurrency and Limits](/models/api-reference/concurrency-and-limits).\n",
+            "description": "Rate limit (RPM) or concurrency cap hit. See\n[Concurrency and Limits](/api-reference/concurrency-and-limits).\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -1191,7 +1191,7 @@
           "lightning_v3.1_pro"
         ],
         "default": "lightning_v3.1",
-        "description": "TTS model to route the request to. Controls which model pool serves\nthis synthesis.\n\n- `lightning_v3.1` (default) — standard Lightning v3.1.\n- `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio\n  quality and naturalness, with a curated voice catalog. See the\n  [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)\n  for supported voice IDs.\n\nSame concurrency and latency profile across both. Other request\nparameters behave identically.\n",
+        "description": "TTS model to route the request to. Controls which model pool serves\nthis synthesis.\n\n- `lightning_v3.1` (default) — standard Lightning v3.1.\n- `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio\n  quality and naturalness, with a curated voice catalog. See the\n  [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)\n  for supported voice IDs.\n\nSame concurrency and latency profile across both. Other request\nparameters behave identically.\n",
         "title": "TtsRequestModel"
       },
       "TtsRequestSampleRate": {
@@ -1307,7 +1307,7 @@
             "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match."
           }
         },
-        "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/documentation/text-to-speech-lightning/content-filter).\n",
+        "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/text-to-speech/content-filter).\n",
         "title": "TtsRequestContentFilter"
       },
       "TtsRequestOutputFormat": {
@@ -1341,7 +1341,7 @@
           "model": {
             "$ref": "#/components/schemas/TtsRequestModel",
             "default": "lightning_v3.1",
-            "description": "TTS model to route the request to. Controls which model pool serves\nthis synthesis.\n\n- `lightning_v3.1` (default) — standard Lightning v3.1.\n- `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio\n  quality and naturalness, with a curated voice catalog. See the\n  [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)\n  for supported voice IDs.\n\nSame concurrency and latency profile across both. Other request\nparameters behave identically.\n"
+            "description": "TTS model to route the request to. Controls which model pool serves\nthis synthesis.\n\n- `lightning_v3.1` (default) — standard Lightning v3.1.\n- `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio\n  quality and naturalness, with a curated voice catalog. See the\n  [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)\n  for supported voice IDs.\n\nSame concurrency and latency profile across both. Other request\nparameters behave identically.\n"
           },
           "sample_rate": {
             "$ref": "#/components/schemas/TtsRequestSampleRate",
@@ -1367,11 +1367,11 @@
           "math_notation": {
             "type": "boolean",
             "default": false,
-            "description": "Opt-in flag that reads digit-flanked math operators (`5 x 3`,\n`2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the\ndefault number reader. Off by default because in real traffic\ndigit-flanked `NxN` is more often a product dimension, the\n`24x7` idiom, or a vehicle-registration code than an actual\nmultiplication.\n\nWhen `true`, the normalizer replaces the operator with the\nspoken word matched to `number_pronunciation_language`:\n\n| Glyphs | en (default / fallback) | hi | mr |\n|---|---|---|---|\n| `×` `x` `X` `*` | times | गुणा | गुणिले |\n| `÷` and spaced `/` | divided by | बटा | भागिले |\n| `+` | plus | प्लस | अधिक |\n| spaced `-` `–` `−` | minus | माइनस | वजा |\n| `=` | equals | बराबर | बरोबर |\n| `^` `**` | to the power of | की घात | ची घात |\n\nLocalized only for `hi` and `mr`; every other language falls\nback to the English words. The operator word follows\n`number_pronunciation_language`, not the synthesis\n`language`, so `language=en, number_pronunciation_language=hi`\nreads `6 x 7` as \"छः गुणा सात\".\n\nMatching rules: unambiguous glyphs (`× ÷ * ^ ** = +` and the\nwrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).\nThe ambiguous `-` `–` `−` and `/` fire only when\nspace-padded, so `5-3` stays a range and `1/2` stays a\nfraction. See [Math notation](/models/documentation/text-to-speech-lightning/math-notation)\nfor the full lexicon, known limitations (product dimensions,\n`24x7` idiom, vehicle-reg codes), and EU-language\nlocalizations.\n"
+            "description": "Opt-in flag that reads digit-flanked math operators (`5 x 3`,\n`2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the\ndefault number reader. Off by default because in real traffic\ndigit-flanked `NxN` is more often a product dimension, the\n`24x7` idiom, or a vehicle-registration code than an actual\nmultiplication.\n\nWhen `true`, the normalizer replaces the operator with the\nspoken word matched to `number_pronunciation_language`:\n\n| Glyphs | en (default / fallback) | hi | mr |\n|---|---|---|---|\n| `×` `x` `X` `*` | times | गुणा | गुणिले |\n| `÷` and spaced `/` | divided by | बटा | भागिले |\n| `+` | plus | प्लस | अधिक |\n| spaced `-` `–` `−` | minus | माइनस | वजा |\n| `=` | equals | बराबर | बरोबर |\n| `^` `**` | to the power of | की घात | ची घात |\n\nLocalized only for `hi` and `mr`; every other language falls\nback to the English words. The operator word follows\n`number_pronunciation_language`, not the synthesis\n`language`, so `language=en, number_pronunciation_language=hi`\nreads `6 x 7` as \"छः गुणा सात\".\n\nMatching rules: unambiguous glyphs (`× ÷ * ^ ** = +` and the\nwrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).\nThe ambiguous `-` `–` `−` and `/` fire only when\nspace-padded, so `5-3` stays a range and `1/2` stays a\nfraction. See [Math notation](/models/text-to-speech/math-notation)\nfor the full lexicon, known limitations (product dimensions,\n`24x7` idiom, vehicle-reg codes), and EU-language\nlocalizations.\n"
           },
           "content_filter": {
             "$ref": "#/components/schemas/TtsRequestContentFilter",
-            "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/documentation/text-to-speech-lightning/content-filter).\n"
+            "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/text-to-speech/content-filter).\n"
           },
           "output_format": {
             "$ref": "#/components/schemas/TtsRequestOutputFormat",
@@ -1388,7 +1388,7 @@
           "word_timestamps": {
             "type": "boolean",
             "default": false,
-            "description": "**WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: \"word_timestamp\"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/documentation/text-to-speech-lightning/word-timestamps).\n"
+            "description": "**WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: \"word_timestamp\"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/text-to-speech/word-timestamps).\n"
           },
           "session_id": {
             "type": "string",
@@ -1975,20 +1975,6 @@
           "fr",
           "nl",
           "pt",
-          "uk",
-          "pl",
-          "cs",
-          "sk",
-          "lv",
-          "et",
-          "ro",
-          "fi",
-          "sv",
-          "bg",
-          "hu",
-          "da",
-          "lt",
-          "mt",
           "zh",
           "ja",
           "ko",
@@ -1997,6 +1983,24 @@
           "multi-indic"
         ],
         "title": "WavesV1SttPostParametersLanguage"
+      },
+      "WavesV1SttPostParametersWordTimestamps": {
+        "type": "string",
+        "enum": [
+          "true",
+          "false"
+        ],
+        "default": "false",
+        "title": "WavesV1SttPostParametersWordTimestamps"
+      },
+      "WavesV1SttPostParametersDiarize": {
+        "type": "string",
+        "enum": [
+          "true",
+          "false"
+        ],
+        "default": "false",
+        "title": "WavesV1SttPostParametersDiarize"
       },
       "WavesV1SttPostParametersWebhookMethod": {
         "type": "string",
@@ -2184,7 +2188,7 @@
               "type": "number",
               "format": "double"
             },
-            "description": "Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request."
+            "description": "Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request. Current known keys: `anger`, `disgust`, `fear`, `sadness`, `happiness`."
           }
         },
         "required": [
@@ -2221,33 +2225,79 @@
         ],
         "title": "Speech to Text_transcribe_Response_200"
       },
-      "SttErrorResponseDetailsItems": {
+      "SttErrorResponseStatus": {
+        "type": "string",
+        "enum": [
+          "error"
+        ],
+        "description": "Set to `error` on validation and transcription errors.",
+        "title": "SttErrorResponseStatus"
+      },
+      "SttErrorResponseErrorsOneOf0Items": {
         "type": "object",
         "properties": {},
-        "title": "SttErrorResponseDetailsItems"
+        "title": "SttErrorResponseErrorsOneOf0Items"
+      },
+      "SttErrorResponseErrors0": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SttErrorResponseErrorsOneOf0Items"
+        },
+        "title": "SttErrorResponseErrors0"
+      },
+      "SttErrorResponseErrors": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SttErrorResponseErrors0"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "Validation detail. On query-parameter failures, an array of entries with the parameter `path` and a `message`. On request-body failures, a string.",
+        "title": "SttErrorResponseErrors"
       },
       "SttErrorResponse": {
         "type": "object",
         "properties": {
           "error": {
             "type": "string",
-            "description": "Error message."
+            "description": "Human-readable error message on authentication, plan, credit, and rate-limit errors."
+          },
+          "status": {
+            "$ref": "#/components/schemas/SttErrorResponseStatus",
+            "description": "Set to `error` on validation and transcription errors."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message on validation and transcription errors, and on a missing `Authorization` header."
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`."
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`."
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code echoed on `LANGUAGE_NOT_ENABLED_IN_REGION` responses."
+          },
+          "region": {
+            "type": "string",
+            "description": "Region that served the request on `LANGUAGE_NOT_ENABLED_IN_REGION` responses (for example `ap-south-1` or `us-west-2`)."
           },
           "request_id": {
             "type": "string",
-            "description": "Correlation ID for support / logs"
+            "description": "Correlation ID for support"
           },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SttErrorResponseDetailsItems"
-            },
-            "description": "Additional error details (validation errors)."
+          "errors": {
+            "$ref": "#/components/schemas/SttErrorResponseErrors",
+            "description": "Validation detail. On query-parameter failures, an array of entries with the parameter `path` and a `message`. On request-body failures, a string."
           }
         },
-        "required": [
-          "error"
-        ],
+        "description": "Error body returned by `POST /waves/v1/stt/`. The shape depends on where the request fails:\n\n- A request with no `Authorization` header returns `{ \"message\": \"Unauthorized: No tokens provided\" }`.\n- Other authentication errors, and plan, credit, and rate-limit errors, return `{ \"error\": \"<message>\" }`.\n- Request validation and transcription errors return `{ \"status\": \"error\", \"message\": \"<message>\" }`, with optional `errors`, `error_code`, `code`, `language`, `region`, and `request_id` fields.\n\nRead `error` first and fall back to `message`. Branch on the HTTP status and on `error_code` / `code` when present, not on the message text.\n",
         "title": "SttErrorResponse"
       },
       "ElectronToolCallType": {
@@ -2459,7 +2509,7 @@
           "stream": {
             "type": "boolean",
             "default": false,
-            "description": "When true, response is `text/event-stream`. See the\n[Streaming guide](/models/documentation/llm-electron/streaming).\n"
+            "description": "When true, response is `text/event-stream`. See the\n[Streaming guide](/models/llm/streaming).\n"
           },
           "stream_options": {
             "$ref": "#/components/schemas/ChatCompletionRequestStreamOptions"
@@ -2472,7 +2522,7 @@
                 "description": "Any type"
               }
             },
-            "description": "Tool / function calling definitions. Forwarded verbatim to the\nOpenAI-compatible upstream, so the standard OpenAI shape\n(`{type: \"function\", function: {name, description, parameters}}`)\nis the recommended form and is what the examples below use.\nThe wire schema is permissive (`array<object>`) — any tools payload\nthe upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)\nfor details.\n"
+            "description": "Tool / function calling definitions. Forwarded verbatim to the\nOpenAI-compatible upstream, so the standard OpenAI shape\n(`{type: \"function\", function: {name, description, parameters}}`)\nis the recommended form and is what the examples below use.\nThe wire schema is permissive (`array<object>`) — any tools payload\nthe upstream accepts will work. See [Tool Calling](/models/llm/tool-function-calling)\nfor details.\n"
           },
           "tool_choice": {
             "$ref": "#/components/schemas/ChatCompletionRequestToolChoice"

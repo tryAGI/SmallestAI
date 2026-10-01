@@ -32,7 +32,7 @@ namespace SmallestAI
         ///   -H "Content-Type: application/json" \<br/>
         ///   -d '{"ttl_seconds": 300}'<br/>
         /// ```<br/>
-        /// See the [Authentication guide](/models/api-reference/token-based-authentication)<br/>
+        /// See the [Authentication guide](/api-reference/token-based-authentication)<br/>
         /// for the end-to-end server and client flow.
         /// </summary>
         /// <param name="request"></param>
@@ -72,7 +72,7 @@ namespace SmallestAI
         ///   -H "Content-Type: application/json" \<br/>
         ///   -d '{"ttl_seconds": 300}'<br/>
         /// ```<br/>
-        /// See the [Authentication guide](/models/api-reference/token-based-authentication)<br/>
+        /// See the [Authentication guide](/api-reference/token-based-authentication)<br/>
         /// for the end-to-end server and client flow.
         /// </summary>
         /// <param name="request"></param>
@@ -112,7 +112,7 @@ namespace SmallestAI
         ///   -H "Content-Type: application/json" \<br/>
         ///   -d '{"ttl_seconds": 300}'<br/>
         /// ```<br/>
-        /// See the [Authentication guide](/models/api-reference/token-based-authentication)<br/>
+        /// See the [Authentication guide](/api-reference/token-based-authentication)<br/>
         /// for the end-to-end server and client flow.
         /// </summary>
         /// <param name="ttlSeconds">

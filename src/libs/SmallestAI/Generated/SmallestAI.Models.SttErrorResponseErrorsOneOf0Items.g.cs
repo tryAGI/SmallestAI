@@ -6,7 +6,7 @@ namespace SmallestAI
     /// <summary>
     ///
     /// </summary>
-    public sealed partial class SttErrorResponseDetailsItems
+    public sealed partial class SttErrorResponseErrorsOneOf0Items
     {
 
         /// <summary>

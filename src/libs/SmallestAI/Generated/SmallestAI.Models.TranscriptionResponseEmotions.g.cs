@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request.
+    /// Detected emotion labels mapped to confidence scores. Present when `emotion_detection=true` was set on the request. Current known keys: `anger`, `disgust`, `fear`, `sadness`, `happiness`.
     /// </summary>
     public sealed partial class TranscriptionResponseEmotions
     {

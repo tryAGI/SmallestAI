@@ -32,7 +32,7 @@ namespace SmallestAI
         /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
-        ///   [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+        ///   [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
         ///   for supported voice IDs.<br/>
         /// Same concurrency and latency profile across both. Other request<br/>
         /// parameters behave identically.<br/>
@@ -138,7 +138,7 @@ namespace SmallestAI
         /// wrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).<br/>
         /// The ambiguous `-` `–` `−` and `/` fire only when<br/>
         /// space-padded, so `5-3` stays a range and `1/2` stays a<br/>
-        /// fraction. See [Math notation](/models/documentation/text-to-speech-lightning/math-notation)<br/>
+        /// fraction. See [Math notation](/models/text-to-speech/math-notation)<br/>
         /// for the full lexicon, known limitations (product dimensions,<br/>
         /// `24x7` idiom, vehicle-reg codes), and EU-language<br/>
         /// localizations.<br/>
@@ -158,7 +158,7 @@ namespace SmallestAI
         /// `action: "flag"` synthesizes normally and records the match.<br/>
         /// Matching is whole-word, not substring. If no verdict is returned<br/>
         /// the request fails open and the audio is synthesized unfiltered.<br/>
-        /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+        /// See [Content filter](/models/text-to-speech/content-filter).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("content_filter")]
         public global::SmallestAI.TtsRequestContentFilter? ContentFilter { get; set; }
@@ -182,7 +182,7 @@ namespace SmallestAI
         public global::System.Collections.Generic.IList<string>? PronunciationDicts { get; set; }
 
         /// <summary>
-        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/documentation/text-to-speech-lightning/word-timestamps).<br/>
+        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/text-to-speech/word-timestamps).<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("word_timestamps")]
@@ -223,7 +223,7 @@ namespace SmallestAI
         /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
-        ///   [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+        ///   [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
         ///   for supported voice IDs.<br/>
         /// Same concurrency and latency profile across both. Other request<br/>
         /// parameters behave identically.<br/>
@@ -310,7 +310,7 @@ namespace SmallestAI
         /// wrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).<br/>
         /// The ambiguous `-` `–` `−` and `/` fire only when<br/>
         /// space-padded, so `5-3` stays a range and `1/2` stays a<br/>
-        /// fraction. See [Math notation](/models/documentation/text-to-speech-lightning/math-notation)<br/>
+        /// fraction. See [Math notation](/models/text-to-speech/math-notation)<br/>
         /// for the full lexicon, known limitations (product dimensions,<br/>
         /// `24x7` idiom, vehicle-reg codes), and EU-language<br/>
         /// localizations.<br/>
@@ -327,7 +327,7 @@ namespace SmallestAI
         /// `action: "flag"` synthesizes normally and records the match.<br/>
         /// Matching is whole-word, not substring. If no verdict is returned<br/>
         /// the request fails open and the audio is synthesized unfiltered.<br/>
-        /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+        /// See [Content filter](/models/text-to-speech/content-filter).
         /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
@@ -341,7 +341,7 @@ namespace SmallestAI
         /// The IDs of the pronunciation dictionaries to use for speech generation. Available on both `lightning_v3.1` and `lightning_v3.1_pro`.
         /// </param>
         /// <param name="wordTimestamps">
-        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/documentation/text-to-speech-lightning/word-timestamps).<br/>
+        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/text-to-speech/word-timestamps).<br/>
         /// Default Value: false
         /// </param>
         /// <param name="sessionId">

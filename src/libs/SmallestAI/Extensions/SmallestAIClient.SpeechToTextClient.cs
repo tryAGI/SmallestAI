@@ -78,8 +78,10 @@ public sealed partial class SmallestAIClient : Meai.ISpeechToTextClient
             model: ResolveBatchModel(options?.ModelId),
             language: ResolveBatchLanguage(options?.SpeechLanguage),
             request: buffer.ToArray(),
-            wordTimestamps: GetBoolean(properties, SmallestAISpeechToTextPropertyNames.WordTimestamps) ?? true,
-            diarize: GetBoolean(properties, SmallestAISpeechToTextPropertyNames.Diarize),
+            wordTimestamps: ToWireFlag<WavesV1SttPostParametersWordTimestamps>(
+                GetBoolean(properties, SmallestAISpeechToTextPropertyNames.WordTimestamps) ?? true),
+            diarize: ToWireFlag<WavesV1SttPostParametersDiarize>(
+                GetBoolean(properties, SmallestAISpeechToTextPropertyNames.Diarize)),
             webhookUrl: GetString(properties, SmallestAISpeechToTextPropertyNames.WebhookUrl),
             redactPii: ToWireFlag<WavesV1SttPostParametersRedactPii>(
                 GetBoolean(properties, SmallestAISpeechToTextPropertyNames.RedactPii)),

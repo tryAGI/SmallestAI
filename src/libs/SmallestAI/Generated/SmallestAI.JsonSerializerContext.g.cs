@@ -91,6 +91,14 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersLanguageNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWordTimestampsJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWordTimestampsNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersDiarizeJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersDiarizeNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWebhookMethodJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersWebhookMethodNullableJsonConverter),
@@ -114,6 +122,10 @@ namespace SmallestAI
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersXExpireContentJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.WavesV1SttPostParametersXExpireContentNullableJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.SttErrorResponseStatusJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.SttErrorResponseStatusNullableJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.ElectronToolCallTypeJsonConverter),
 
@@ -140,6 +152,8 @@ namespace SmallestAI
             typeof(global::SmallestAI.JsonConverters.ChatCompletionChoicesItemsFinishReasonNullableJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.SpeechToTextTranscribeResponse200JsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.SttErrorResponseErrorsJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.ChatCompletionRequestToolChoiceJsonConverter),
 
@@ -213,6 +227,8 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.DeletePronunciationDictResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersModel), TypeInfoPropertyName = "WavesV1SttPostParametersModel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersLanguage), TypeInfoPropertyName = "WavesV1SttPostParametersLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWordTimestamps), TypeInfoPropertyName = "WavesV1SttPostParametersWordTimestamps2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersDiarize), TypeInfoPropertyName = "WavesV1SttPostParametersDiarize2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersWebhookMethod), TypeInfoPropertyName = "WavesV1SttPostParametersWebhookMethod2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPii), TypeInfoPropertyName = "WavesV1SttPostParametersRedactPii2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1SttPostParametersRedactPci), TypeInfoPropertyName = "WavesV1SttPostParametersRedactPci2")]
@@ -228,9 +244,11 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, double>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.AsyncAccepted))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SpeechToTextTranscribeResponse200), TypeInfoPropertyName = "SpeechToTextTranscribeResponse2002")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseDetailsItems))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseStatus), TypeInfoPropertyName = "SttErrorResponseStatus2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseErrorsOneOf0Items))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseErrorsOneOf0Items>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseErrors), TypeInfoPropertyName = "SttErrorResponseErrors2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponse))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseDetailsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallType), TypeInfoPropertyName = "ElectronToolCallType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallFunction))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCall))]
@@ -273,7 +291,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ErrorResponseDetailsItems>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.Word>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.Utterance>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.SttErrorResponseDetailsItems>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.SttErrorResponseErrorsOneOf0Items>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ElectronToolCall>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ElectronMessage>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::SmallestAI.ChatCompletionChoicesItems>))]

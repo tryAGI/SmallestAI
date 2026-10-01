@@ -8,7 +8,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -105,7 +105,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -202,7 +202,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -299,7 +299,7 @@ namespace SmallestAI
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
         /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
-        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
         /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
@@ -395,7 +395,7 @@ namespace SmallestAI
         /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
-        ///   [Lightning v3.1 Pro model card](/models/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
+        ///   [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
         ///   for supported voice IDs.<br/>
         /// Same concurrency and latency profile across both. Other request<br/>
         /// parameters behave identically.<br/>
@@ -482,7 +482,7 @@ namespace SmallestAI
         /// wrong-glyph `x`/`X`) fire glued or spaced (`5x3`, `5 x 3`).<br/>
         /// The ambiguous `-` `–` `−` and `/` fire only when<br/>
         /// space-padded, so `5-3` stays a range and `1/2` stays a<br/>
-        /// fraction. See [Math notation](/models/documentation/text-to-speech-lightning/math-notation)<br/>
+        /// fraction. See [Math notation](/models/text-to-speech/math-notation)<br/>
         /// for the full lexicon, known limitations (product dimensions,<br/>
         /// `24x7` idiom, vehicle-reg codes), and EU-language<br/>
         /// localizations.<br/>
@@ -499,7 +499,7 @@ namespace SmallestAI
         /// `action: "flag"` synthesizes normally and records the match.<br/>
         /// Matching is whole-word, not substring. If no verdict is returned<br/>
         /// the request fails open and the audio is synthesized unfiltered.<br/>
-        /// See [Content filter](/models/documentation/text-to-speech-lightning/content-filter).
+        /// See [Content filter](/models/text-to-speech/content-filter).
         /// </param>
         /// <param name="outputFormat">
         /// Format of the returned audio. `pcm` is the lowest-latency option<br/>
@@ -513,7 +513,7 @@ namespace SmallestAI
         /// The IDs of the pronunciation dictionaries to use for speech generation. Available on both `lightning_v3.1` and `lightning_v3.1_pro`.
         /// </param>
         /// <param name="wordTimestamps">
-        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/documentation/text-to-speech-lightning/word-timestamps).<br/>
+        /// **WebSocket-only feature.** Accepted on this endpoint but ignored — no per-word timing information is returned in the sync HTTP or SSE response shape. To receive `status: "word_timestamp"` frames with per-word `{ id, word, start, end }` data, use the WebSocket endpoint `wss://api.smallest.ai/waves/v1/tts/live`. See [Word-level timestamps](/models/text-to-speech/word-timestamps).<br/>
         /// Default Value: false
         /// </param>
         /// <param name="sessionId">

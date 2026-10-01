@@ -46,7 +46,7 @@ namespace SmallestAI
 
         /// <summary>
         /// When true, response is `text/event-stream`. See the<br/>
-        /// [Streaming guide](/models/documentation/llm-electron/streaming).<br/>
+        /// [Streaming guide](/models/llm/streaming).<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("stream")]
@@ -64,7 +64,7 @@ namespace SmallestAI
         /// (`{type: "function", function: {name, description, parameters}}`)<br/>
         /// is the recommended form and is what the examples below use.<br/>
         /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
-        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/llm/tool-function-calling)<br/>
         /// for details.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tools")]
@@ -161,7 +161,7 @@ namespace SmallestAI
         /// </param>
         /// <param name="stream">
         /// When true, response is `text/event-stream`. See the<br/>
-        /// [Streaming guide](/models/documentation/llm-electron/streaming).<br/>
+        /// [Streaming guide](/models/llm/streaming).<br/>
         /// Default Value: false
         /// </param>
         /// <param name="streamOptions"></param>
@@ -171,7 +171,7 @@ namespace SmallestAI
         /// (`{type: "function", function: {name, description, parameters}}`)<br/>
         /// is the recommended form and is what the examples below use.<br/>
         /// The wire schema is permissive (`array&lt;object&gt;`) — any tools payload<br/>
-        /// the upstream accepts will work. See [Tool Calling](/models/documentation/llm-electron/tool-function-calling)<br/>
+        /// the upstream accepts will work. See [Tool Calling](/models/llm/tool-function-calling)<br/>
         /// for details.
         /// </param>
         /// <param name="toolChoice"></param>
