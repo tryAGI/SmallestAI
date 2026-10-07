@@ -82,6 +82,7 @@ namespace SmallestAI
         /// - **`n &gt; 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.<br/>
         /// - **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -89,6 +90,7 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> CompleteAsync(
 
             global::SmallestAI.ChatCompletionRequest request,
+            global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -169,6 +171,7 @@ namespace SmallestAI
         /// - **`n &gt; 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.<br/>
         /// - **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -176,6 +179,7 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::SmallestAI.ChatCompletion>> CompleteAsResponseAsync(
 
             global::SmallestAI.ChatCompletionRequest request,
+            global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -256,6 +260,7 @@ namespace SmallestAI
         /// - **`n &gt; 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.<br/>
         /// - **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).
         /// </summary>
+        /// <param name="xExpireContent"></param>
         /// <param name="model">
         /// Model ID. Currently only `"electron"`.
         /// </param>
@@ -317,6 +322,7 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<global::SmallestAI.ChatCompletion> CompleteAsync(
             string model,
             global::System.Collections.Generic.IList<global::SmallestAI.ElectronMessage> messages,
+            global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent? xExpireContent = default,
             double? temperature = default,
             double? topP = default,
             int? maxTokens = default,

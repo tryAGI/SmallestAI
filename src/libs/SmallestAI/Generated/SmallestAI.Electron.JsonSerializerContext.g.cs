@@ -19,6 +19,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, double>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent), TypeInfoPropertyName = "WavesV1ChatCompletionsPostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallType), TypeInfoPropertyName = "ElectronToolCallType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallFunction))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCall))]
@@ -51,6 +52,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double?))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent?), TypeInfoPropertyName = "NullableWavesV1ChatCompletionsPostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallType?), TypeInfoPropertyName = "NullableElectronToolCallType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionRequestToolChoice0?), TypeInfoPropertyName = "NullableChatCompletionRequestToolChoice02")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ChatCompletionRequestToolChoiceOneOf1Type?), TypeInfoPropertyName = "NullableChatCompletionRequestToolChoiceOneOf1Type2")]
@@ -135,7 +137,11 @@ namespace SmallestAI
             public override bool CanConvert(global::System.Type typeToConvert)
             {
                 return
-                    typeToConvert == typeof(global::SmallestAI.ElectronToolCallType)
+                    typeToConvert == typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent)
+
+                    || typeToConvert == typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent?)
+
+                    || typeToConvert == typeof(global::SmallestAI.ElectronToolCallType)
 
                     || typeToConvert == typeof(global::SmallestAI.ElectronToolCallType?)
 
@@ -164,6 +170,16 @@ namespace SmallestAI
                 global::System.Type typeToConvert,
                 global::System.Text.Json.JsonSerializerOptions options)
             {
+                if (typeToConvert == typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent))
+                {
+                    return new global::SmallestAI.JsonConverters.WavesV1ChatCompletionsPostParametersXExpireContentJsonConverter();
+                }
+
+                if (typeToConvert == typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent?))
+                {
+                    return new global::SmallestAI.JsonConverters.WavesV1ChatCompletionsPostParametersXExpireContentNullableJsonConverter();
+                }
+
                 if (typeToConvert == typeof(global::SmallestAI.ElectronToolCallType))
                 {
                     return new global::SmallestAI.JsonConverters.ElectronToolCallTypeJsonConverter();
