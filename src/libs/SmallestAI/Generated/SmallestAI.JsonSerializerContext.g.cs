@@ -127,6 +127,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.SttErrorResponseStatusNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.WavesV1ChatCompletionsPostParametersXExpireContentJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.WavesV1ChatCompletionsPostParametersXExpireContentNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.ElectronToolCallTypeJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.ElectronToolCallTypeNullableJsonConverter),
@@ -249,6 +253,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::SmallestAI.SttErrorResponseErrorsOneOf0Items>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponseErrors), TypeInfoPropertyName = "SttErrorResponseErrors2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.SttErrorResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.WavesV1ChatCompletionsPostParametersXExpireContent), TypeInfoPropertyName = "WavesV1ChatCompletionsPostParametersXExpireContent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallType), TypeInfoPropertyName = "ElectronToolCallType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCallFunction))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.ElectronToolCall))]

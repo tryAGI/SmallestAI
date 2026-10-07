@@ -112,7 +112,7 @@
           {
             "name": "x-expire-content",
             "in": "header",
-            "description": "**Enterprise plans only.** Opt in if you want this request's content\ndeleted after 7 days. Omit it to retain content, which is the default.\n",
+            "description": "**Enterprise plans only.** Set to `true` to expire this request's\ncontent. The input text is deleted within 7 days; the usage record\n(credits, character count, model, latency) is kept. Omit the\nheader to keep content. On other plans the header is ignored and\nthe request is processed normally.\nSee [Zero Data Retention](/models/enterprise/zero-data-retention).\n",
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1TtsPostParametersXExpireContent"
@@ -190,7 +190,7 @@
           {
             "name": "x-expire-content",
             "in": "header",
-            "description": "**Enterprise plans only.** Opt in if you want this request's content\ndeleted after 7 days. Omit it to retain content, which is the default.\n",
+            "description": "**Enterprise plans only.** Set to `true` to expire this request's\ncontent. The input text is deleted within 7 days; the usage record\n(credits, character count, model, latency) is kept. Omit the\nheader to keep content. On other plans the header is ignored and\nthe request is processed normally.\nSee [Zero Data Retention](/models/enterprise/zero-data-retention).\n",
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1TtsLivePostParametersXExpireContent"
@@ -837,7 +837,7 @@
           {
             "name": "x-expire-content",
             "in": "header",
-            "description": "**Enterprise plans only.** Opt in if you want this request's content\ndeleted after 7 days. Omit it to retain content, which is the default.\n",
+            "description": "**Enterprise plans only.** Set to `true` to expire this request's\ncontent. The uploaded audio and the transcript are deleted within\n7 days; the usage record (duration, model, latency) is kept. Omit\nthe header to keep content. On other plans the header is ignored\nand the request is processed normally.\nSee [Zero Data Retention](/models/enterprise/zero-data-retention).\n",
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1SttPostParametersXExpireContent"
@@ -945,6 +945,17 @@
         "description": "Generate a chat completion with Electron. OpenAI-compatible\nrequest/response shape — point any OpenAI SDK at\n`https://api.smallest.ai/waves/v1` and it just works.\n\nSet `stream: true` to receive tokens via Server-Sent Events. With\n`stream_options: { include_usage: true }`, the final SSE chunk\ncarries the `usage` block so token accounting is exact even on\nclient disconnects.\n\nTool calling follows OpenAI's `tools` array convention. When you\nprovide a voice-agent-style system prompt, Electron emits a short\nfiller phrase in the assistant message `content` field alongside\n`tool_calls` — see the [Tool Calling guide](/models/llm/tool-function-calling)\nfor the voice-agent pattern.\n\n## Examples\n\n**cURL**\n```bash\ncurl -X POST \"https://api.smallest.ai/waves/v1/chat/completions\" \\\n  -H \"Authorization: Bearer $SMALLEST_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"electron\",\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ]\n  }'\n```\n\n**Python** (`pip install openai`)\n```python\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://api.smallest.ai/waves/v1\",\n    api_key=os.environ[\"SMALLEST_API_KEY\"],\n)\n\nresponse = client.chat.completions.create(\n    model=\"electron\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Write one sentence about why the sky is blue.\"}\n    ],\n)\n\nprint(response.choices[0].message.content)\n```\n\n**JavaScript / TypeScript** (`npm install openai`)\n```typescript\nimport OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  baseURL: \"https://api.smallest.ai/waves/v1\",\n  apiKey: process.env.SMALLEST_API_KEY,\n});\n\nconst response = await client.chat.completions.create({\n  model: \"electron\",\n  messages: [\n    { role: \"user\", content: \"Write one sentence about why the sky is blue.\" },\n  ],\n});\n\nconsole.log(response.choices[0].message.content);\n```\n\n**Streaming with usage** (Python)\n```python\nstream = client.chat.completions.create(\n    model=\"electron\",\n    messages=[{\"role\": \"user\", \"content\": \"Tell me a one-sentence fun fact.\"}],\n    stream=True,\n    stream_options={\"include_usage\": True},\n)\nfor chunk in stream:\n    if chunk.choices and chunk.choices[0].delta.content:\n        print(chunk.choices[0].delta.content, end=\"\", flush=True)\n    if chunk.usage:\n        print(f\"\\n\\nTokens: {chunk.usage.total_tokens}\")\n```\n\n## Common gotchas\n\n- **Base URL is `/waves/v1`**, not `/v1`. The OpenAI SDK appends `/chat/completions` for you.\n- **`stream_options.include_usage: true`** is required for exact token accounting on streaming calls — the final SSE chunk carries the `usage` block.\n- **`n > 1` and `prompt_logprobs` are rejected.** Use multiple requests if you need parallel completions.\n- **Auth header is `Authorization: Bearer $SMALLEST_API_KEY`** — get the key from the [Smallest AI Console](https://app.smallest.ai/dashboard/api-keys).\n",
         "tags": [
           "electron"
+        ],
+        "parameters": [
+          {
+            "name": "x-expire-content",
+            "in": "header",
+            "description": "**Enterprise plans only.** Set to `true` to expire this request's\ncontent. Prompts and completions are deleted within 7 days; the\nusage record (token counts, model, latency) is kept. Omit the\nheader to keep content. On other plans the header is ignored and\nthe request is processed normally.\nSee [Zero Data Retention](/models/enterprise/zero-data-retention).\n",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/WavesV1ChatCompletionsPostParametersXExpireContent"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -2299,6 +2310,13 @@
         },
         "description": "Error body returned by `POST /waves/v1/stt/`. The shape depends on where the request fails:\n\n- A request with no `Authorization` header returns `{ \"message\": \"Unauthorized: No tokens provided\" }`.\n- Other authentication errors, and plan, credit, and rate-limit errors, return `{ \"error\": \"<message>\" }`.\n- Request validation and transcription errors return `{ \"status\": \"error\", \"message\": \"<message>\" }`, with optional `errors`, `error_code`, `code`, `language`, `region`, and `request_id` fields.\n\nRead `error` first and fall back to `message`. Branch on the HTTP status and on `error_code` / `code` when present, not on the message text.\n",
         "title": "SttErrorResponse"
+      },
+      "WavesV1ChatCompletionsPostParametersXExpireContent": {
+        "type": "string",
+        "enum": [
+          "true"
+        ],
+        "title": "WavesV1ChatCompletionsPostParametersXExpireContent"
       },
       "ElectronToolCallType": {
         "type": "string",
