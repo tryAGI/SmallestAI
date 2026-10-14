@@ -528,6 +528,18 @@ namespace SmallestAI
         /// Accepts the same language codes as `language` (including `auto`,<br/>
         /// `nl`, `sv`).
         /// </param>
+        /// <param name="dateFormat">
+        /// Optional. Controls how all-numeric dates (e.g. `05/03/2024`) are<br/>
+        /// read out, independent of the synthesis voice:<br/>
+        /// - `EU` — day/month order (`DD/MM`): `05/03/2024` → "fifth March,<br/>
+        ///   twenty twenty four".<br/>
+        /// - `US` — month/day order (`MM/DD`): `05/03/2024` → "May third,<br/>
+        ///   twenty twenty four".<br/>
+        /// Omit this field to keep the existing behaviour: English dates<br/>
+        /// default to `US` (`MM/DD`). Applies across all languages, so you can<br/>
+        /// force day-first (`DD/MM`) reading — e.g. the Indian convention — on<br/>
+        /// any voice.
+        /// </param>
         /// <param name="mathNotation">
         /// Opt-in flag that reads digit-flanked math operators (`5 x 3`,<br/>
         /// `2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the<br/>
@@ -606,6 +618,7 @@ namespace SmallestAI
             double? speed = default,
             global::SmallestAI.TtsRequestLanguage? language = default,
             global::SmallestAI.TtsRequestNumberPronunciationLanguage? numberPronunciationLanguage = default,
+            global::SmallestAI.TtsRequestDateFormat? dateFormat = default,
             bool? mathNotation = default,
             global::SmallestAI.TtsRequestContentFilter? contentFilter = default,
             global::SmallestAI.TtsRequestOutputFormat? outputFormat = default,
@@ -625,6 +638,7 @@ namespace SmallestAI
                 Speed = speed,
                 Language = language,
                 NumberPronunciationLanguage = numberPronunciationLanguage,
+                DateFormat = dateFormat,
                 MathNotation = mathNotation,
                 ContentFilter = contentFilter,
                 OutputFormat = outputFormat,

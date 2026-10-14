@@ -1294,6 +1294,15 @@
         "description": "Optional. Sets the language used to read out numeric content —\nnumbers, currency amounts, times, and the numeric parts of dates\nand years — independently of the synthesis voice. Ordinary words\nare not translated.\n\n- If you **omit `language`**, this value also becomes the\n  synthesis language: model selection and voice routing follow it.\n- If you **set `language` explicitly**, `language` always wins for\n  synthesis and `number_pronunciation_language` only changes how\n  numeric content is normalized. It works both ways — read numbers\n  in Hindi under an English voice, or in English under a Hindi\n  voice (tuned for Indian, often mixed-script, use cases).\n- Omit this field to keep the existing behaviour — normalization\n  follows `language`.\n\nNote: only numeric tokens are re-spoken; the words around them\nstay in the text language. On a cross-language request names may\nalso render in the target script (e.g. \"Smith\" → \"स्मिथ\"), which\nis generally the desired reading for native-language voices.\n\nAccepts the same language codes as `language` (including `auto`,\n`nl`, `sv`).\n",
         "title": "TtsRequestNumberPronunciationLanguage"
       },
+      "TtsRequestDateFormat": {
+        "type": "string",
+        "enum": [
+          "EU",
+          "US"
+        ],
+        "description": "Optional. Controls how all-numeric dates (e.g. `05/03/2024`) are\nread out, independent of the synthesis voice:\n\n- `EU` — day/month order (`DD/MM`): `05/03/2024` → \"fifth March,\n  twenty twenty four\".\n- `US` — month/day order (`MM/DD`): `05/03/2024` → \"May third,\n  twenty twenty four\".\n\nOmit this field to keep the existing behaviour: English dates\ndefault to `US` (`MM/DD`). Applies across all languages, so you can\nforce day-first (`DD/MM`) reading — e.g. the Indian convention — on\nany voice.\n",
+        "title": "TtsRequestDateFormat"
+      },
       "TtsRequestContentFilterAction": {
         "type": "string",
         "enum": [
@@ -1374,6 +1383,10 @@
           "number_pronunciation_language": {
             "$ref": "#/components/schemas/TtsRequestNumberPronunciationLanguage",
             "description": "Optional. Sets the language used to read out numeric content —\nnumbers, currency amounts, times, and the numeric parts of dates\nand years — independently of the synthesis voice. Ordinary words\nare not translated.\n\n- If you **omit `language`**, this value also becomes the\n  synthesis language: model selection and voice routing follow it.\n- If you **set `language` explicitly**, `language` always wins for\n  synthesis and `number_pronunciation_language` only changes how\n  numeric content is normalized. It works both ways — read numbers\n  in Hindi under an English voice, or in English under a Hindi\n  voice (tuned for Indian, often mixed-script, use cases).\n- Omit this field to keep the existing behaviour — normalization\n  follows `language`.\n\nNote: only numeric tokens are re-spoken; the words around them\nstay in the text language. On a cross-language request names may\nalso render in the target script (e.g. \"Smith\" → \"स्मिथ\"), which\nis generally the desired reading for native-language voices.\n\nAccepts the same language codes as `language` (including `auto`,\n`nl`, `sv`).\n"
+          },
+          "date_format": {
+            "$ref": "#/components/schemas/TtsRequestDateFormat",
+            "description": "Optional. Controls how all-numeric dates (e.g. `05/03/2024`) are\nread out, independent of the synthesis voice:\n\n- `EU` — day/month order (`DD/MM`): `05/03/2024` → \"fifth March,\n  twenty twenty four\".\n- `US` — month/day order (`MM/DD`): `05/03/2024` → \"May third,\n  twenty twenty four\".\n\nOmit this field to keep the existing behaviour: English dates\ndefault to `US` (`MM/DD`). Applies across all languages, so you can\nforce day-first (`DD/MM`) reading — e.g. the Indian convention — on\nany voice.\n"
           },
           "math_notation": {
             "type": "boolean",

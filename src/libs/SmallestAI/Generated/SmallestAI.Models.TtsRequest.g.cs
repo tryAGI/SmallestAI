@@ -113,6 +113,22 @@ namespace SmallestAI
         public global::SmallestAI.TtsRequestNumberPronunciationLanguage? NumberPronunciationLanguage { get; set; }
 
         /// <summary>
+        /// Optional. Controls how all-numeric dates (e.g. `05/03/2024`) are<br/>
+        /// read out, independent of the synthesis voice:<br/>
+        /// - `EU` — day/month order (`DD/MM`): `05/03/2024` → "fifth March,<br/>
+        ///   twenty twenty four".<br/>
+        /// - `US` — month/day order (`MM/DD`): `05/03/2024` → "May third,<br/>
+        ///   twenty twenty four".<br/>
+        /// Omit this field to keep the existing behaviour: English dates<br/>
+        /// default to `US` (`MM/DD`). Applies across all languages, so you can<br/>
+        /// force day-first (`DD/MM`) reading — e.g. the Indian convention — on<br/>
+        /// any voice.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("date_format")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.TtsRequestDateFormatJsonConverter))]
+        public global::SmallestAI.TtsRequestDateFormat? DateFormat { get; set; }
+
+        /// <summary>
         /// Opt-in flag that reads digit-flanked math operators (`5 x 3`,<br/>
         /// `2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the<br/>
         /// default number reader. Off by default because in real traffic<br/>
@@ -284,6 +300,18 @@ namespace SmallestAI
         /// Accepts the same language codes as `language` (including `auto`,<br/>
         /// `nl`, `sv`).
         /// </param>
+        /// <param name="dateFormat">
+        /// Optional. Controls how all-numeric dates (e.g. `05/03/2024`) are<br/>
+        /// read out, independent of the synthesis voice:<br/>
+        /// - `EU` — day/month order (`DD/MM`): `05/03/2024` → "fifth March,<br/>
+        ///   twenty twenty four".<br/>
+        /// - `US` — month/day order (`MM/DD`): `05/03/2024` → "May third,<br/>
+        ///   twenty twenty four".<br/>
+        /// Omit this field to keep the existing behaviour: English dates<br/>
+        /// default to `US` (`MM/DD`). Applies across all languages, so you can<br/>
+        /// force day-first (`DD/MM`) reading — e.g. the Indian convention — on<br/>
+        /// any voice.
+        /// </param>
         /// <param name="mathNotation">
         /// Opt-in flag that reads digit-flanked math operators (`5 x 3`,<br/>
         /// `2 ^ 10`, `6 ÷ 2`) as words instead of leaving them for the<br/>
@@ -361,6 +389,7 @@ namespace SmallestAI
             double? speed,
             global::SmallestAI.TtsRequestLanguage? language,
             global::SmallestAI.TtsRequestNumberPronunciationLanguage? numberPronunciationLanguage,
+            global::SmallestAI.TtsRequestDateFormat? dateFormat,
             bool? mathNotation,
             global::SmallestAI.TtsRequestContentFilter? contentFilter,
             global::SmallestAI.TtsRequestOutputFormat? outputFormat,
@@ -376,6 +405,7 @@ namespace SmallestAI
             this.Speed = speed;
             this.Language = language;
             this.NumberPronunciationLanguage = numberPronunciationLanguage;
+            this.DateFormat = dateFormat;
             this.MathNotation = mathNotation;
             this.ContentFilter = contentFilter;
             this.OutputFormat = outputFormat;
