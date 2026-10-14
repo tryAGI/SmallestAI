@@ -43,6 +43,10 @@ namespace SmallestAI
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestNumberPronunciationLanguageNullableJsonConverter),
 
+            typeof(global::SmallestAI.JsonConverters.TtsRequestDateFormatJsonConverter),
+
+            typeof(global::SmallestAI.JsonConverters.TtsRequestDateFormatNullableJsonConverter),
+
             typeof(global::SmallestAI.JsonConverters.TtsRequestContentFilterActionJsonConverter),
 
             typeof(global::SmallestAI.JsonConverters.TtsRequestContentFilterActionNullableJsonConverter),
@@ -186,6 +190,7 @@ namespace SmallestAI
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestSampleRate), TypeInfoPropertyName = "TtsRequestSampleRate2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestLanguage), TypeInfoPropertyName = "TtsRequestLanguage2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestNumberPronunciationLanguage), TypeInfoPropertyName = "TtsRequestNumberPronunciationLanguage2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestDateFormat), TypeInfoPropertyName = "TtsRequestDateFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilterAction), TypeInfoPropertyName = "TtsRequestContentFilterAction2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::SmallestAI.TtsRequestContentFilter))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool))]
