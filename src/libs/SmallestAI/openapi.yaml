@@ -1307,10 +1307,11 @@
         "type": "string",
         "enum": [
           "reject",
-          "flag"
+          "flag",
+          "redact"
         ],
         "default": "reject",
-        "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match.",
+        "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match; `redact` removes the matched term and synthesizes the rest.",
         "title": "TtsRequestContentFilterAction"
       },
       "TtsRequestContentFilter": {
@@ -1324,10 +1325,10 @@
           "action": {
             "$ref": "#/components/schemas/TtsRequestContentFilterAction",
             "default": "reject",
-            "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match."
+            "description": "What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match; `redact` removes the matched term and synthesizes the rest."
           }
         },
-        "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/text-to-speech/content-filter).\n",
+        "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nrewrites your text only with `action: redact`; otherwise it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/text-to-speech/content-filter).\n",
         "title": "TtsRequestContentFilter"
       },
       "TtsRequestOutputFormat": {
@@ -1395,7 +1396,7 @@
           },
           "content_filter": {
             "$ref": "#/components/schemas/TtsRequestContentFilter",
-            "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nnever rewrites your text — it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/text-to-speech/content-filter).\n"
+            "description": "Opt-in profanity filter for the submitted text. Off by default;\npassing this object is the only way to turn it on. The filter\nrewrites your text only with `action: redact`; otherwise it either lets the request through or\nrejects it before synthesis.\n\n`action: \"reject\"` returns HTTP 400 with `error_code:\n\"CONTENT_FILTER_BLOCKED\"`, the `language` checked and a\n`match_count`; the matched terms are never returned or logged.\n`action: \"flag\"` synthesizes normally and records the match.\n\nMatching is whole-word, not substring. If no verdict is returned\nthe request fails open and the audio is synthesized unfiltered.\n\nSee [Content filter](/models/text-to-speech/content-filter).\n"
           },
           "output_format": {
             "$ref": "#/components/schemas/TtsRequestOutputFormat",
