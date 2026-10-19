@@ -206,7 +206,7 @@ namespace SmallestAI
         /// <param name="contentFilter">
         /// Opt-in profanity filter for the submitted text. Off by default;<br/>
         /// passing this object is the only way to turn it on. The filter<br/>
-        /// never rewrites your text — it either lets the request through or<br/>
+        /// rewrites your text only with `action: redact`; otherwise it either lets the request through or<br/>
         /// rejects it before synthesis.<br/>
         /// `action: "reject"` returns HTTP 400 with `error_code:<br/>
         /// "CONTENT_FILTER_BLOCKED"`, the `language` checked and a<br/>

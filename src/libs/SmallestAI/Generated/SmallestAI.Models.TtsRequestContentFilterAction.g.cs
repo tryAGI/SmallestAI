@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match.<br/>
+    /// What happens on a match. `reject` fails the request with HTTP 400; `flag` synthesizes normally and records the match; `redact` removes the matched term and synthesizes the rest.<br/>
     /// Default Value: reject
     /// </summary>
     public enum TtsRequestContentFilterAction
@@ -13,6 +13,10 @@ namespace SmallestAI
         ///
         /// </summary>
         Flag,
+        /// <summary>
+        ///
+        /// </summary>
+        Redact,
         /// <summary>
         ///
         /// </summary>
@@ -32,6 +36,7 @@ namespace SmallestAI
             return value switch
             {
                 TtsRequestContentFilterAction.Flag => "flag",
+                TtsRequestContentFilterAction.Redact => "redact",
                 TtsRequestContentFilterAction.Reject => "reject",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -44,6 +49,7 @@ namespace SmallestAI
             return value switch
             {
                 "flag" => TtsRequestContentFilterAction.Flag,
+                "redact" => TtsRequestContentFilterAction.Redact,
                 "reject" => TtsRequestContentFilterAction.Reject,
                 _ => null,
             };
