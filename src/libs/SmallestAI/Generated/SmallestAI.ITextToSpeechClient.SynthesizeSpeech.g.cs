@@ -285,6 +285,104 @@ namespace SmallestAI
         /// </param>
         /// <param name="xExpireContent"></param>
         /// <param name="request"></param>
+        /// <returns>The response metadata and an unbuffered body stream. The caller must dispose Body to release the HTTP response.</returns>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::SmallestAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::System.IO.Stream>> SynthesizeSpeechAsStreamAsResponseAsync(
+
+            global::SmallestAI.TtsRequest request,
+            global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
+            global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Synthesize speech<br/>
+        /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
+        /// Pick the model with the `model` body parameter: default `lightning_v3.1`, or `lightning_v3.1_pro` for the Pro pool. Other request parameters are identical across models.<br/>
+        /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
+        /// ## When to use this<br/>
+        /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
+        /// - **Use `/waves/v1/tts/live`** when you want playback to start before the full audio is ready (long passages, latency-sensitive apps).<br/>
+        /// - **Use `/waves/v1/tts/live`** (WebSocket) when text arrives incrementally (LLM token streams, live captioning).<br/>
+        /// ## Key features<br/>
+        /// - 44 kHz natural, expressive synthesis<br/>
+        /// - Model selectable per request via `model` body parameter<br/>
+        /// - Cloned voice IDs (`voice_*`) work on `lightning_v3.1` — same param as catalog voices<br/>
+        /// - 20 accepted language codes on `lightning_v3.1` (12 with trained voices, 8 additional routed via English/Hindi voices). On `lightning_v3.1_pro`: 31 languages with dedicated voices (10 Indic, 8 Asian &amp; Middle Eastern, 13 European); `language: en` → UK + American accented English; `language: hi` → Indian accented English + Hindi; omit `language` → defaults to `en + hi`. Both models accept `language: auto` for cross-language routing.<br/>
+        /// - Output formats: `pcm`, `mp3`, `wav`, `ulaw`, `alaw`<br/>
+        /// - Sample rates: 8 kHz – 44.1 kHz<br/>
+        /// - Speed: 0.5× – 2×<br/>
+        /// - Per-call pronunciation dictionaries via `pronunciation_dicts`<br/>
+        /// ## Examples<br/>
+        /// **cURL — Lightning v3.1 (default)**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/tts" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Hello from Waves TTS.",<br/>
+        ///     "voice_id": "magnus",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **cURL — Lightning v3.1 Pro (omit `language` → defaults to `en + hi`)**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/tts" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Hello from the Lightning v3.1 Pro pool.",<br/>
+        ///     "voice_id": "meher",<br/>
+        ///     "model": "lightning_v3.1_pro",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **cURL — Lightning v3.1 Pro with explicit `language: en` (UK + American accented English)**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/tts" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Good morning, this is a Pro voice speaking.",<br/>
+        ///     "voice_id": "meher",<br/>
+        ///     "model": "lightning_v3.1_pro",<br/>
+        ///     "language": "en",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// **cURL — Lightning v3.1 Pro with explicit `language: hi` (Indian accented English + Hindi)**<br/>
+        /// ```bash<br/>
+        /// curl -X POST "https://api.smallest.ai/waves/v1/tts" \<br/>
+        ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
+        ///   -H "Content-Type: application/json" \<br/>
+        ///   -H "Accept: audio/wav" \<br/>
+        ///   -d '{<br/>
+        ///     "text": "Namaste, this is an Indian-accented Pro voice.",<br/>
+        ///     "voice_id": "meher",<br/>
+        ///     "model": "lightning_v3.1_pro",<br/>
+        ///     "language": "hi",<br/>
+        ///     "sample_rate": 24000,<br/>
+        ///     "output_format": "wav"<br/>
+        ///   }' --output speech.wav<br/>
+        /// ```<br/>
+        /// ## Common gotchas<br/>
+        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
+        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).<br/>
+        /// - **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.<br/>
+        /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.
+        /// </summary>
+        /// <param name="accept">
+        /// Default Value: audio/wav
+        /// </param>
+        /// <param name="xExpireContent"></param>
+        /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::SmallestAI.ApiException"></exception>
