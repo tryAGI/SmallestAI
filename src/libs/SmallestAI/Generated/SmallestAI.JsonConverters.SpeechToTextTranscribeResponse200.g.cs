@@ -35,15 +35,18 @@ namespace SmallestAI.JsonConverters
             }
 
             var __score0 = 0;
+            if (__jsonProps.Contains("detected_language")) __score0++;
             if (__jsonProps.Contains("emotions")) __score0++;
             if (__jsonProps.Contains("gender")) __score0++;
             if (__jsonProps.Contains("language")) __score0++;
+            if (__jsonProps.Contains("language_confidence")) __score0++;
             if (__jsonProps.Contains("metadata")) __score0++;
             if (__jsonProps.Contains("metadata.duration")) __score0++;
             if (__jsonProps.Contains("metadata.fileSize")) __score0++;
             if (__jsonProps.Contains("metadata.num_chunks")) __score0++;
             if (__jsonProps.Contains("metadata.processing_time_ms")) __score0++;
             if (__jsonProps.Contains("metadata.rtfx")) __score0++;
+            if (__jsonProps.Contains("mixed_language_detected")) __score0++;
             if (__jsonProps.Contains("request_id")) __score0++;
             if (__jsonProps.Contains("status")) __score0++;
             if (__jsonProps.Contains("totalBytes")) __score0++;

@@ -32,13 +32,13 @@ namespace SmallestAI
         public string? Message { get; set; }
 
         /// <summary>
-        /// Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`.
+        /// Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`, `NO_SPEECH_DETECTED`, `LANGUAGE_DETECTION_LOW_CONFIDENCE`, `DETECTED_LANGUAGE_NOT_SUPPORTED`, `LID_UNAVAILABLE`.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("error_code")]
         public string? ErrorCode { get; set; }
 
         /// <summary>
-        /// Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`.
+        /// Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`, `AudioTooLong`; with `language=auto` also `EmptyBody` and `AudioTooLarge` (400/413, from language detection).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("code")]
         public string? Code { get; set; }
@@ -48,6 +48,18 @@ namespace SmallestAI
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
         public string? Language { get; set; }
+
+        /// <summary>
+        /// Language detected from the audio, on `language=auto` errors that have one.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("detected_language")]
+        public string? DetectedLanguage { get; set; }
+
+        /// <summary>
+        /// Confidence of `detected_language`, on `language=auto` errors that have one.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("language_confidence")]
+        public double? LanguageConfidence { get; set; }
 
         /// <summary>
         /// Region that served the request on `LANGUAGE_NOT_ENABLED_IN_REGION` responses (for example `ap-south-1` or `us-west-2`).
@@ -87,13 +99,19 @@ namespace SmallestAI
         /// Human-readable error message on validation and transcription errors, and on a missing `Authorization` header.
         /// </param>
         /// <param name="errorCode">
-        /// Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`.
+        /// Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`, `NO_SPEECH_DETECTED`, `LANGUAGE_DETECTION_LOW_CONFIDENCE`, `DETECTED_LANGUAGE_NOT_SUPPORTED`, `LID_UNAVAILABLE`.
         /// </param>
         /// <param name="code">
-        /// Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`.
+        /// Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`, `AudioTooLong`; with `language=auto` also `EmptyBody` and `AudioTooLarge` (400/413, from language detection).
         /// </param>
         /// <param name="language">
         /// Language code echoed on `LANGUAGE_NOT_ENABLED_IN_REGION` responses.
+        /// </param>
+        /// <param name="detectedLanguage">
+        /// Language detected from the audio, on `language=auto` errors that have one.
+        /// </param>
+        /// <param name="languageConfidence">
+        /// Confidence of `detected_language`, on `language=auto` errors that have one.
         /// </param>
         /// <param name="region">
         /// Region that served the request on `LANGUAGE_NOT_ENABLED_IN_REGION` responses (for example `ap-south-1` or `us-west-2`).
@@ -114,6 +132,8 @@ namespace SmallestAI
             string? errorCode,
             string? code,
             string? language,
+            string? detectedLanguage,
+            double? languageConfidence,
             string? region,
             string? requestId,
             global::SmallestAI.SttErrorResponseErrors? errors)
@@ -124,6 +144,8 @@ namespace SmallestAI
             this.ErrorCode = errorCode;
             this.Code = code;
             this.Language = language;
+            this.DetectedLanguage = detectedLanguage;
+            this.LanguageConfidence = languageConfidence;
             this.Region = region;
             this.RequestId = requestId;
             this.Errors = errors;

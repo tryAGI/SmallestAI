@@ -11,6 +11,10 @@ namespace SmallestAI
         /// <summary>
         ///
         /// </summary>
+        Auto,
+        /// <summary>
+        ///
+        /// </summary>
         De,
         /// <summary>
         ///
@@ -82,6 +86,7 @@ namespace SmallestAI
         {
             return value switch
             {
+                WavesV1SttPostParametersLanguage.Auto => "auto",
                 WavesV1SttPostParametersLanguage.De => "de",
                 WavesV1SttPostParametersLanguage.En => "en",
                 WavesV1SttPostParametersLanguage.Es => "es",
@@ -107,6 +112,7 @@ namespace SmallestAI
         {
             return value switch
             {
+                "auto" => WavesV1SttPostParametersLanguage.Auto,
                 "de" => WavesV1SttPostParametersLanguage.De,
                 "en" => WavesV1SttPostParametersLanguage.En,
                 "es" => WavesV1SttPostParametersLanguage.Es,

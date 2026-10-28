@@ -730,7 +730,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language of the audio file. This endpoint is **Pre-Recorded (HTTP)**. For streaming, use `WSS /waves/v1/stt/live` (different supported-language set).\n\nAlways pass `language`. To auto-detect, pass one of the regional aggregators in the enum. On Pulse Pro, only `en` is accepted; any other value returns HTTP 400.\n\n**Single-language codes:** `en`, `hi`, `de`, `es`, `ru`, `it`, `fr`, `nl`, `pt`, `zh`, `ja`, `ko`.\n\n**Regional auto-detect aggregators** for unknown audio:\n- `multi-eu` auto-detects across the European codes plus `en`.\n- `multi-asian` auto-detects across `zh`, `ko`, `ja`, `en`.\n- `multi-indic` auto-detects across `en`, `hi`, `gu`, `mr`, `bn`, `or`. India region only.\n\n**Region gating.** Indic single-language codes and `multi-indic` are enabled in the India region only. `zh`, `ja`, `ko`, and `multi-asian` are enabled in every region. Set `language` explicitly when you know the audio language; omission may return `LANGUAGE_NOT_ENABLED_IN_REGION` if the auto-detect aggregator is not enabled for your region.\n\n- **Pulse Pro**: pass `en`. Any other value returns HTTP 400 at validation.\n- **Pulse**: pass any code above. See the [Pulse model card](/model-cards/speech-to-text/pulse) for the full table with language names.\n",
+            "description": "Language of the audio file. This endpoint is **Pre-Recorded (HTTP)**. For streaming, use `WSS /waves/v1/stt/live` (different supported-language set).\n\nAlways pass `language`. To auto-detect, pass one of the regional aggregators in the enum. On Pulse Pro, only `en` is accepted; any other value returns HTTP 400.\n\n**Single-language codes:** `en`, `hi`, `de`, `es`, `ru`, `it`, `fr`, `nl`, `pt`, `zh`, `ja`, `ko`.\n\n**Regional auto-detect aggregators** for unknown audio:\n- `multi-eu` auto-detects across the European codes plus `en`.\n- `multi-asian` auto-detects across `zh`, `ko`, `ja`, `en`.\n- `multi-indic` auto-detects across `en`, `hi`, `gu`, `mr`, `bn`, `or`. India region only.\n\n**Automatic detection (`auto`, beta, US region only).** Pass `language=auto` on `model=pulse` and the\nspoken language is detected from the audio, then transcribed with that language's model. The response adds\n`detected_language`, `language_confidence` and `mixed_language_detected`. One language is picked per file;\nif several languages are spoken, the dominant one is used and `mixed_language_detected` is `true`.\nDetection fails with an error instead of guessing: `NO_SPEECH_DETECTED` (422),\n`LANGUAGE_DETECTION_LOW_CONFIDENCE` (422, also returned when the audio has no identifiable language, such as music or noise),\n`DETECTED_LANGUAGE_NOT_SUPPORTED` (400), `LANGUAGE_NOT_ENABLED_IN_REGION` (400; includes `detected_language` when the detected language is not deployed in the region, and omits it when `auto` itself is not enabled, for example outside the US region),\n`LID_UNAVAILABLE` (503). On these errors, retry with `language` set explicitly. Not available on `pulse-pro` or on streaming.\nDetection works best with at least about 10 seconds of speech; on clips of a few seconds it is less reliable and more\noften returns `LANGUAGE_DETECTION_LOW_CONFIDENCE`, so pass `language` explicitly for short clips when you know it.\n\n**Region gating.** Indic single-language codes and `multi-indic` are enabled in the India region only. `zh`, `ja`, `ko`, and `multi-asian` are enabled in every region. Set `language` explicitly when you know the audio language; omission may return `LANGUAGE_NOT_ENABLED_IN_REGION` if the `multi-*` auto-detect aggregator (not `language=auto`) is not enabled for your region.\n\n- **Pulse Pro**: pass `en`. Any other value returns HTTP 400 at validation.\n- **Pulse**: pass any code above. See the [Pulse model card](/model-cards/speech-to-text/pulse) for the full table with language names.\n",
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/WavesV1SttPostParametersLanguage"
@@ -877,6 +877,26 @@
           },
           "403": {
             "description": "Plan does not include access to the requested model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SttErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Audio too long (over the duration limit) or, with `language=auto`, rejected as too large or too long by language detection. The body has `status`, `code` and `message`; `request_id` is included on the duration-limit error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SttErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`language=auto` could not determine the spoken language: no speech, or not enough confidence.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2005,7 +2025,8 @@
           "ko",
           "multi-eu",
           "multi-asian",
-          "multi-indic"
+          "multi-indic",
+          "auto"
         ],
         "title": "WavesV1SttPostParametersLanguage"
       },
@@ -2186,6 +2207,19 @@
             },
             "description": "Sentence-level segments. Returned by `?model=pulse` only; Pulse Pro responses omit this field entirely. **Empty on Pulse unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`)."
           },
+          "detected_language": {
+            "type": "string",
+            "description": "Language detected from the audio. Present only when the request used `language=auto`."
+          },
+          "language_confidence": {
+            "type": "number",
+            "format": "double",
+            "description": "Confidence of `detected_language`, 0–1. Present only with `language=auto`."
+          },
+          "mixed_language_detected": {
+            "type": "boolean",
+            "description": "True when parts of the file looked like languages served by different models. Present only with `language=auto`."
+          },
           "language": {
             "type": "string",
             "description": "Language of the transcription. Present on Pulse Pro responses; Pulse responses omit this field."
@@ -2299,15 +2333,24 @@
           },
           "error_code": {
             "type": "string",
-            "description": "Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`."
+            "description": "Machine-readable error code. Known values: `LANGUAGE_NOT_ENABLED_IN_REGION`, `NO_SPEECH_DETECTED`, `LANGUAGE_DETECTION_LOW_CONFIDENCE`, `DETECTED_LANGUAGE_NOT_SUPPORTED`, `LID_UNAVAILABLE`."
           },
           "code": {
             "type": "string",
-            "description": "Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`."
+            "description": "Machine-readable error code on some transcription failures. Known values: `AudioDecodeError`, `NoAudio`, `AudioTooLong`; with `language=auto` also `EmptyBody` and `AudioTooLarge` (400/413, from language detection)."
           },
           "language": {
             "type": "string",
             "description": "Language code echoed on `LANGUAGE_NOT_ENABLED_IN_REGION` responses."
+          },
+          "detected_language": {
+            "type": "string",
+            "description": "Language detected from the audio, on `language=auto` errors that have one."
+          },
+          "language_confidence": {
+            "type": "number",
+            "format": "double",
+            "description": "Confidence of `detected_language`, on `language=auto` errors that have one."
           },
           "region": {
             "type": "string",
