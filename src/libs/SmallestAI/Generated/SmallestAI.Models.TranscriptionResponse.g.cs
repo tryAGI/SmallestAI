@@ -35,6 +35,24 @@ namespace SmallestAI
         public global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? Utterances { get; set; }
 
         /// <summary>
+        /// Language detected from the audio. Present only when the request used `language=auto`.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("detected_language")]
+        public string? DetectedLanguage { get; set; }
+
+        /// <summary>
+        /// Confidence of `detected_language`, 0–1. Present only with `language=auto`.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("language_confidence")]
+        public double? LanguageConfidence { get; set; }
+
+        /// <summary>
+        /// True when parts of the file looked like languages served by different models. Present only with `language=auto`.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("mixed_language_detected")]
+        public bool? MixedLanguageDetected { get; set; }
+
+        /// <summary>
         /// Language of the transcription. Present on Pulse Pro responses; Pulse responses omit this field.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
@@ -87,6 +105,15 @@ namespace SmallestAI
         /// <param name="utterances">
         /// Sentence-level segments. Returned by `?model=pulse` only; Pulse Pro responses omit this field entirely. **Empty on Pulse unless the request sets `word_timestamps=true`** (the same flag turns on both `words[]` and `utterances[]`).
         /// </param>
+        /// <param name="detectedLanguage">
+        /// Language detected from the audio. Present only when the request used `language=auto`.
+        /// </param>
+        /// <param name="languageConfidence">
+        /// Confidence of `detected_language`, 0–1. Present only with `language=auto`.
+        /// </param>
+        /// <param name="mixedLanguageDetected">
+        /// True when parts of the file looked like languages served by different models. Present only with `language=auto`.
+        /// </param>
         /// <param name="language">
         /// Language of the transcription. Present on Pulse Pro responses; Pulse responses omit this field.
         /// </param>
@@ -113,6 +140,9 @@ namespace SmallestAI
             string transcription,
             global::System.Collections.Generic.IList<global::SmallestAI.Word>? words,
             global::System.Collections.Generic.IList<global::SmallestAI.Utterance>? utterances,
+            string? detectedLanguage,
+            double? languageConfidence,
+            bool? mixedLanguageDetected,
             string? language,
             global::SmallestAI.TranscriptionResponseMetadata? metadata,
             string? requestId,
@@ -124,6 +154,9 @@ namespace SmallestAI
             this.Transcription = transcription ?? throw new global::System.ArgumentNullException(nameof(transcription));
             this.Words = words;
             this.Utterances = utterances;
+            this.DetectedLanguage = detectedLanguage;
+            this.LanguageConfidence = languageConfidence;
+            this.MixedLanguageDetected = mixedLanguageDetected;
             this.Language = language;
             this.Metadata = metadata;
             this.RequestId = requestId;
