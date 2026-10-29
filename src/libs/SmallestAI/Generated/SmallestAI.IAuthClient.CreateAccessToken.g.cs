@@ -22,12 +22,12 @@ namespace SmallestAI
         /// `POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,<br/>
         /// analytics and chat completions return `403` to a token.<br/>
         /// Requests made with a token are billed to the API key that minted it. Deleting<br/>
-        /// that key invalidates its tokens. A token is valid only in the region that<br/>
-        /// minted it. If your server and your users can be in different regions, mint and<br/>
-        /// call through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or<br/>
-        /// `api.us.smallest.ai` (Oregon).<br/>
+        /// that key invalidates its tokens. A token works in every region:<br/>
+        /// `api.smallest.ai`, `api.india.smallest.ai` (Mumbai) and `api.us.smallest.ai` (Oregon).<br/>
+        /// Send the API key as exactly `Authorization: Bearer &lt;API key&gt;`. This endpoint replaces<br/>
+        /// `POST /waves/v1/auth/token`, whose tokens work only in the region that minted them.<br/>
         /// ```bash<br/>
-        /// curl -X POST "https://api.smallest.ai/waves/v1/auth/token" \<br/>
+        /// curl -X POST "https://api.smallest.ai/console/v1/auth/token" \<br/>
         ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
         ///   -H "Content-Type: application/json" \<br/>
         ///   -d '{"ttl_seconds": 300}'<br/>
@@ -62,12 +62,12 @@ namespace SmallestAI
         /// `POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,<br/>
         /// analytics and chat completions return `403` to a token.<br/>
         /// Requests made with a token are billed to the API key that minted it. Deleting<br/>
-        /// that key invalidates its tokens. A token is valid only in the region that<br/>
-        /// minted it. If your server and your users can be in different regions, mint and<br/>
-        /// call through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or<br/>
-        /// `api.us.smallest.ai` (Oregon).<br/>
+        /// that key invalidates its tokens. A token works in every region:<br/>
+        /// `api.smallest.ai`, `api.india.smallest.ai` (Mumbai) and `api.us.smallest.ai` (Oregon).<br/>
+        /// Send the API key as exactly `Authorization: Bearer &lt;API key&gt;`. This endpoint replaces<br/>
+        /// `POST /waves/v1/auth/token`, whose tokens work only in the region that minted them.<br/>
         /// ```bash<br/>
-        /// curl -X POST "https://api.smallest.ai/waves/v1/auth/token" \<br/>
+        /// curl -X POST "https://api.smallest.ai/console/v1/auth/token" \<br/>
         ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
         ///   -H "Content-Type: application/json" \<br/>
         ///   -d '{"ttl_seconds": 300}'<br/>
@@ -102,12 +102,12 @@ namespace SmallestAI
         /// `POST /waves/v1/pulse/get_text`, voice cloning, pronunciation dictionaries,<br/>
         /// analytics and chat completions return `403` to a token.<br/>
         /// Requests made with a token are billed to the API key that minted it. Deleting<br/>
-        /// that key invalidates its tokens. A token is valid only in the region that<br/>
-        /// minted it. If your server and your users can be in different regions, mint and<br/>
-        /// call through the same region-pinned hostname: `api.india.smallest.ai` (Mumbai) or<br/>
-        /// `api.us.smallest.ai` (Oregon).<br/>
+        /// that key invalidates its tokens. A token works in every region:<br/>
+        /// `api.smallest.ai`, `api.india.smallest.ai` (Mumbai) and `api.us.smallest.ai` (Oregon).<br/>
+        /// Send the API key as exactly `Authorization: Bearer &lt;API key&gt;`. This endpoint replaces<br/>
+        /// `POST /waves/v1/auth/token`, whose tokens work only in the region that minted them.<br/>
         /// ```bash<br/>
-        /// curl -X POST "https://api.smallest.ai/waves/v1/auth/token" \<br/>
+        /// curl -X POST "https://api.smallest.ai/console/v1/auth/token" \<br/>
         ///   -H "Authorization: Bearer $SMALLEST_API_KEY" \<br/>
         ///   -H "Content-Type: application/json" \<br/>
         ///   -d '{"ttl_seconds": 300}'<br/>

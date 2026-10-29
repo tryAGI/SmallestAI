@@ -11,7 +11,13 @@ namespace SmallestAI
     ///   quality and naturalness, with a curated voice catalog. See the<br/>
     ///   [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
     ///   for supported voice IDs.<br/>
-    /// Same concurrency and latency profile across both. Other request<br/>
+    /// - `lightning_v3.1_pro_10_26` — [preview] New Lightning v3.1 Pro<br/>
+    ///   checkpoint for English, Spanish and Hindi. Accepts every Pro<br/>
+    ///   voice. On 2026-11-28, it becomes the stable `lightning_v3.1_pro`<br/>
+    ///   for these three languages only; all other languages are<br/>
+    ///   unchanged. `lightning_v3.1_pro_10_26` remains available until<br/>
+    ///   2026-12-28. See [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints).<br/>
+    /// Same concurrency and latency profile across all three. Other request<br/>
     /// parameters behave identically.<br/>
     /// Default Value: lightning_v3.1
     /// </summary>
@@ -25,6 +31,10 @@ namespace SmallestAI
         ///
         /// </summary>
         LightningV31Pro,
+        /// <summary>
+        ///
+        /// </summary>
+        LightningV31Pro1026,
     }
 
     /// <summary>
@@ -41,6 +51,7 @@ namespace SmallestAI
             {
                 TtsRequestModel.LightningV31 => "lightning_v3.1",
                 TtsRequestModel.LightningV31Pro => "lightning_v3.1_pro",
+                TtsRequestModel.LightningV31Pro1026 => "lightning_v3.1_pro_10_26",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -53,6 +64,7 @@ namespace SmallestAI
             {
                 "lightning_v3.1" => TtsRequestModel.LightningV31,
                 "lightning_v3.1_pro" => TtsRequestModel.LightningV31Pro,
+                "lightning_v3.1_pro_10_26" => TtsRequestModel.LightningV31Pro1026,
                 _ => null,
             };
         }

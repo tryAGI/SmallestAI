@@ -100,7 +100,13 @@ namespace SmallestAI
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
         ///   [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
         ///   for supported voice IDs.<br/>
-        /// Same concurrency and latency profile across both. Other request<br/>
+        /// - `lightning_v3.1_pro_10_26` — [preview] New Lightning v3.1 Pro<br/>
+        ///   checkpoint for English, Spanish and Hindi. Accepts every Pro<br/>
+        ///   voice. On 2026-11-28, it becomes the stable `lightning_v3.1_pro`<br/>
+        ///   for these three languages only; all other languages are<br/>
+        ///   unchanged. `lightning_v3.1_pro_10_26` remains available until<br/>
+        ///   2026-12-28. See [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints).<br/>
+        /// Same concurrency and latency profile across all three. Other request<br/>
         /// parameters behave identically.<br/>
         /// Default Value: lightning_v3.1
         /// </param>
@@ -136,7 +142,8 @@ namespace SmallestAI
         /// - 10 Indic: same as base<br/>
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
-        /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).
+        /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).<br/>
+        /// On `lightning_v3.1_pro_10_26`, use `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching).
         /// </param>
         /// <param name="numberPronunciationLanguage">
         /// Optional. Sets the language used to read out numeric content —<br/>
