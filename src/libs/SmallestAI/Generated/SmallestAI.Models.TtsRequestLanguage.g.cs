@@ -27,7 +27,8 @@ namespace SmallestAI
     /// - 10 Indic: same as base<br/>
     /// - Pass `en` → UK + American accented English.<br/>
     /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
-    /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).
+    /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).<br/>
+    /// On `lightning_v3.1_pro_10_26`, use `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching).
     /// </summary>
     public enum TtsRequestLanguage
     {
