@@ -2717,6 +2717,10 @@
           "user": {
             "type": "string",
             "description": "Opaque end-user identifier. Not interpreted by Electron."
+          },
+          "prompt_cache_key": {
+            "type": "string",
+            "description": "Groups the requests of one conversation so every turn reuses the\ncache. Create a new key (for example a UUID) when a conversation\nstarts, send it on every turn, and never share it between\nconversations. Affects speed only, never the reply. See\n[Optimizing Latency](/models/llm/optimizing-latency).\n"
           }
         },
         "required": [
@@ -2763,7 +2767,7 @@
         "properties": {
           "cached_tokens": {
             "type": "integer",
-            "description": "Subset of `prompt_tokens` served from prefix cache. Billed at\nthe discounted rate ($0.10 / 1M vs $0.40 / 1M for fresh input).\n"
+            "description": "Subset of `prompt_tokens` served from prefix cache. Billed at\nthe discounted rate.\n"
           }
         },
         "title": "UsagePromptTokensDetails"

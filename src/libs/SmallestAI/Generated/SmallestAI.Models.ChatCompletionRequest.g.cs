@@ -133,6 +133,16 @@ namespace SmallestAI
         public string? User { get; set; }
 
         /// <summary>
+        /// Groups the requests of one conversation so every turn reuses the<br/>
+        /// cache. Create a new key (for example a UUID) when a conversation<br/>
+        /// starts, send it on every turn, and never share it between<br/>
+        /// conversations. Affects speed only, never the reply. See<br/>
+        /// [Optimizing Latency](/models/llm/optimizing-latency).
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("prompt_cache_key")]
+        public string? PromptCacheKey { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -196,6 +206,13 @@ namespace SmallestAI
         /// <param name="user">
         /// Opaque end-user identifier. Not interpreted by Electron.
         /// </param>
+        /// <param name="promptCacheKey">
+        /// Groups the requests of one conversation so every turn reuses the<br/>
+        /// cache. Create a new key (for example a UUID) when a conversation<br/>
+        /// starts, send it on every turn, and never share it between<br/>
+        /// conversations. Affects speed only, never the reply. See<br/>
+        /// [Optimizing Latency](/models/llm/optimizing-latency).
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -217,7 +234,8 @@ namespace SmallestAI
             int? topLogprobs,
             double? presencePenalty,
             double? frequencyPenalty,
-            string? user)
+            string? user,
+            string? promptCacheKey)
         {
             this.Model = model ?? throw new global::System.ArgumentNullException(nameof(model));
             this.Messages = messages ?? throw new global::System.ArgumentNullException(nameof(messages));
@@ -237,6 +255,7 @@ namespace SmallestAI
             this.PresencePenalty = presencePenalty;
             this.FrequencyPenalty = frequencyPenalty;
             this.User = user;
+            this.PromptCacheKey = promptCacheKey;
         }
 
         /// <summary>
