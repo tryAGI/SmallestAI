@@ -952,6 +952,13 @@ namespace SmallestAI
         /// <param name="user">
         /// Opaque end-user identifier. Not interpreted by Electron.
         /// </param>
+        /// <param name="promptCacheKey">
+        /// Groups the requests of one conversation so every turn reuses the<br/>
+        /// cache. Create a new key (for example a UUID) when a conversation<br/>
+        /// starts, send it on every turn, and never share it between<br/>
+        /// conversations. Affects speed only, never the reply. See<br/>
+        /// [Optimizing Latency](/models/llm/optimizing-latency).
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -975,6 +982,7 @@ namespace SmallestAI
             double? presencePenalty = default,
             double? frequencyPenalty = default,
             string? user = default,
+            string? promptCacheKey = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -998,6 +1006,7 @@ namespace SmallestAI
                 PresencePenalty = presencePenalty,
                 FrequencyPenalty = frequencyPenalty,
                 User = user,
+                PromptCacheKey = promptCacheKey,
             };
 
             return await CompleteAsync(

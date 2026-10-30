@@ -10,7 +10,7 @@ namespace SmallestAI
     {
         /// <summary>
         /// Subset of `prompt_tokens` served from prefix cache. Billed at<br/>
-        /// the discounted rate ($0.10 / 1M vs $0.40 / 1M for fresh input).
+        /// the discounted rate.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("cached_tokens")]
         public int? CachedTokens { get; set; }
@@ -26,7 +26,7 @@ namespace SmallestAI
         /// </summary>
         /// <param name="cachedTokens">
         /// Subset of `prompt_tokens` served from prefix cache. Billed at<br/>
-        /// the discounted rate ($0.10 / 1M vs $0.40 / 1M for fresh input).
+        /// the discounted rate.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
