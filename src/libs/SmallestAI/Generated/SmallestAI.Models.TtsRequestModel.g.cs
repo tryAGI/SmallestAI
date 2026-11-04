@@ -6,7 +6,8 @@ namespace SmallestAI
     /// <summary>
     /// TTS model to route the request to. Controls which model pool serves<br/>
     /// this synthesis.<br/>
-    /// - `lightning_v3.1` (default) — standard Lightning v3.1.<br/>
+    /// - `lightning_v3.1` (default): standard Lightning v3.1. Retiring on Nov<br/>
+    ///   30, 2026; use `lightning_v3.1_pro`.<br/>
     /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
     ///   quality and naturalness, with a curated voice catalog. See the<br/>
     ///   [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro)<br/>
@@ -24,7 +25,7 @@ namespace SmallestAI
     public enum TtsRequestModel
     {
         /// <summary>
-        ///
+        /// standard Lightning v3.1. Retiring on Nov
         /// </summary>
         LightningV31,
         /// <summary>
