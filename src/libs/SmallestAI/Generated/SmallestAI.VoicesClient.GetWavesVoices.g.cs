@@ -44,7 +44,7 @@ namespace SmallestAI
         /// <summary>
         /// Get voices for a pool<br/>
         /// Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:<br/>
-        /// - `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.<br/>
+        /// - `lightning-v3.1`: the Standard catalog. Retiring on Nov 30, 2026; use `lightning-v3.1-pro`.<br/>
         /// - `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.<br/>
         /// The endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.<br/>
         /// Each voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/api-reference/models/text-to-speech/synthesize-speech) route, together with `"model": "lightning_v3.1"` (Standard), `"model": "lightning_v3.1_pro"` (Pro) or `"model": "lightning_v3.1_pro_10_26"` (Pro voices on the [preview checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi).<br/>
@@ -72,7 +72,7 @@ namespace SmallestAI
         /// <summary>
         /// Get voices for a pool<br/>
         /// Return the voice catalog for the chosen Lightning v3.1 pool. Two pools:<br/>
-        /// - `lightning-v3.1` — the Standard catalog. Supports voice cloning; 20 language codes.<br/>
+        /// - `lightning-v3.1`: the Standard catalog. Retiring on Nov 30, 2026; use `lightning-v3.1-pro`.<br/>
         /// - `lightning-v3.1-pro` — the Pro catalog. Curated set across American, British, and Indian accents plus 29 additional languages. Same latency and concurrency as Standard, on dedicated inference.<br/>
         /// The endpoint is pool-scoped: `/waves/v1/lightning-v3.1/get_voices` returns Standard voices only; `/waves/v1/lightning-v3.1-pro/get_voices` returns Pro voices only. Call one or both depending on which pool you plan to use.<br/>
         /// Each voice carries tags (`language`, `accent`, `gender`, `age`, `emotions`, `usecases`). Filter client-side to find the voices that match a target language, accent, or use case. Pass the returned `voiceId` as `voice_id` on the unified [`POST /waves/v1/tts`](/api-reference/models/text-to-speech/synthesize-speech) route, together with `"model": "lightning_v3.1"` (Standard), `"model": "lightning_v3.1_pro"` (Pro) or `"model": "lightning_v3.1_pro_10_26"` (Pro voices on the [preview checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi).<br/>
