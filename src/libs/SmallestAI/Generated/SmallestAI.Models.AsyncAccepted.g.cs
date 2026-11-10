@@ -4,7 +4,7 @@
 namespace SmallestAI
 {
     /// <summary>
-    /// Returned by Pulse Pro when `webhook_url` is set. The transcription arrives on the webhook when ready.
+    /// Returned when `webhook_url` is set (`pulse` or `pulse-pro`). The transcription arrives on the webhook when ready.
     /// </summary>
     public sealed partial class AsyncAccepted
     {

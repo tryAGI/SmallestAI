@@ -35,6 +35,19 @@ namespace SmallestAI
         public string? RequestId { get; set; }
 
         /// <summary>
+        /// The request field at fault, such as `model`, when there is one.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("param")]
+        public string? Param { get; set; }
+
+        /// <summary>
+        /// `rate_limit_exceeded` on rate-limit errors, `insufficient_quota`<br/>
+        /// when credits run out. Otherwise `null`.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("code")]
+        public string? Code { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -55,6 +68,13 @@ namespace SmallestAI
         /// <param name="requestId">
         /// Echo in support tickets so the request can be traced.
         /// </param>
+        /// <param name="param">
+        /// The request field at fault, such as `model`, when there is one.
+        /// </param>
+        /// <param name="code">
+        /// `rate_limit_exceeded` on rate-limit errors, `insufficient_quota`<br/>
+        /// when credits run out. Otherwise `null`.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -62,12 +82,16 @@ namespace SmallestAI
             string? message,
             string? type,
             global::System.Collections.Generic.IList<global::SmallestAI.ErrorErrorDetailsItems>? details,
-            string? requestId)
+            string? requestId,
+            string? param,
+            string? code)
         {
             this.Message = message;
             this.Type = type;
             this.Details = details;
             this.RequestId = requestId;
+            this.Param = param;
+            this.Code = code;
         }
 
         /// <summary>

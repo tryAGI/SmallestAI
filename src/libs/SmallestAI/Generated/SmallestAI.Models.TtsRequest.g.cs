@@ -28,8 +28,8 @@ namespace SmallestAI
 
         /// <summary>
         /// TTS model to route the request to. Controls which model pool serves<br/>
-        /// this synthesis.<br/>
-        /// - `lightning_v3.1` (default): standard Lightning v3.1. Retiring on Nov<br/>
+        /// this synthesis. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`.<br/>
+        /// - `lightning_v3.1`: standard Lightning v3.1. Retiring on Nov<br/>
         ///   30, 2026; use `lightning_v3.1_pro`.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
@@ -42,8 +42,7 @@ namespace SmallestAI
         ///   unchanged. `lightning_v3.1_pro_10_26` remains available until<br/>
         ///   2026-12-28. See [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints).<br/>
         /// Same concurrency and latency profile across all three. Other request<br/>
-        /// parameters behave identically.<br/>
-        /// Default Value: lightning_v3.1
+        /// parameters behave identically.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("model")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.TtsRequestModelJsonConverter))]
@@ -243,8 +242,8 @@ namespace SmallestAI
         /// </param>
         /// <param name="model">
         /// TTS model to route the request to. Controls which model pool serves<br/>
-        /// this synthesis.<br/>
-        /// - `lightning_v3.1` (default): standard Lightning v3.1. Retiring on Nov<br/>
+        /// this synthesis. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`.<br/>
+        /// - `lightning_v3.1`: standard Lightning v3.1. Retiring on Nov<br/>
         ///   30, 2026; use `lightning_v3.1_pro`.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
@@ -257,8 +256,7 @@ namespace SmallestAI
         ///   unchanged. `lightning_v3.1_pro_10_26` remains available until<br/>
         ///   2026-12-28. See [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints).<br/>
         /// Same concurrency and latency profile across all three. Other request<br/>
-        /// parameters behave identically.<br/>
-        /// Default Value: lightning_v3.1
+        /// parameters behave identically.
         /// </param>
         /// <param name="sampleRate">
         /// The sample rate for the generated audio.<br/>
