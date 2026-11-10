@@ -50,8 +50,9 @@ namespace SmallestAI
         /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
-        /// carries the `usage` block so token accounting is exact even on<br/>
-        /// client disconnects.<br/>
+        /// carries the `usage` block. Add `continuous_usage_stats: true` to<br/>
+        /// get the counts so far on every chunk, which you still have if the<br/>
+        /// stream is cut short.<br/>
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
@@ -150,8 +151,9 @@ namespace SmallestAI
         /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
-        /// carries the `usage` block so token accounting is exact even on<br/>
-        /// client disconnects.<br/>
+        /// carries the `usage` block. Add `continuous_usage_stats: true` to<br/>
+        /// get the counts so far on every chunk, which you still have if the<br/>
+        /// stream is cut short.<br/>
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
@@ -500,7 +502,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Bad request — schema validation, unsupported parameter (`n > 1`, `prompt_logprobs`), context length exceeded, or invalid field value forwarded by the model.
+                            // Bad request: schema validation, unsupported parameter (`n > 1`, `prompt_logprobs`), context length exceeded, or invalid field value forwarded by the model (`type: invalid_request_error`). Also returned when your credits are used up (`type` and `code`: `insufficient_quota`).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -537,24 +539,24 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Missing or invalid API key.
+                            // Missing or invalid API key. Returned by authentication before the request reaches Electron, so the body is a short JSON object such as `{"error": "unauthorized"}`, not the error envelope.
                             if ((int)__response.StatusCode == 401)
                             {
                                 string? __content_401 = null;
                                 global::System.Exception? __exception_401 = null;
-                                global::SmallestAI.Error? __value_401 = null;
+                                string? __value_401 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_401 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_401 = global::SmallestAI.Error.FromJson(__content_401, JsonSerializerContext);
+                                        __value_401 = (string?)global::System.Text.Json.JsonSerializer.Deserialize(__content_401, typeof(string), JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_401 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_401 = global::SmallestAI.Error.FromJson(__content_401, JsonSerializerContext);
+                                        __value_401 = (string?)global::System.Text.Json.JsonSerializer.Deserialize(__content_401, typeof(string), JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -563,7 +565,7 @@ namespace SmallestAI
                                 }
 
 
-                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                throw global::SmallestAI.ApiException<string>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_401 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_401,
@@ -574,7 +576,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // API key valid but no access to Electron on this plan.
+                            // Your plan doesn't include Electron, or your organization's billing is blocked (`type: permission_error`). An access token (`wat_…`) instead of an API key is also refused with `403`, by authentication, with the body `{"error": "forbidden"}`.
                             if ((int)__response.StatusCode == 403)
                             {
                                 string? __content_403 = null;
@@ -611,7 +613,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Rate limit (RPM) or concurrency cap hit. See [Concurrency and Limits](/api-reference/concurrency-and-limits).
+                            // Requests-per-minute limit (`type: requests`) or concurrency cap (`type: concurrency`) hit. `code` is `rate_limit_exceeded`. Wait for the seconds in the `Retry-After` header before retrying. No `Retry-After` means your plan doesn't include this API.
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;
@@ -648,7 +650,44 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Upstream model unavailable. Retry with backoff.
+                            // Unexpected server error (`type: server_error`). Retry with backoff.
+                            if ((int)__response.StatusCode == 500)
+                            {
+                                string? __content_500 = null;
+                                global::System.Exception? __exception_500 = null;
+                                global::SmallestAI.Error? __value_500 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_500 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __value_500 = global::SmallestAI.Error.FromJson(__content_500, JsonSerializerContext);
+                                    }
+                                    else
+                                    {
+                                        __content_500 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+
+                                        __value_500 = global::SmallestAI.Error.FromJson(__content_500, JsonSerializerContext);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_500 = __ex;
+                                }
+
+
+                                throw global::SmallestAI.ApiException<global::SmallestAI.Error>.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_500,
+                                    responseBody: __content_500,
+                                    responseObject: __value_500,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+                            // Upstream model unavailable (`type: upstream_error`). Retry with backoff.
                             if ((int)__response.StatusCode == 502)
                             {
                                 string? __content_502 = null;
@@ -685,7 +724,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Endpoint temporarily disabled, or upstream model overloaded.
+                            // Model overloaded (`type: upstream_overloaded`), or Electron temporarily unavailable (`type: service_unavailable`, sometimes with `Retry-After: 1`). Retry with backoff.
                             if ((int)__response.StatusCode == 503)
                             {
                                 string? __content_503 = null;
@@ -825,8 +864,9 @@ namespace SmallestAI
         /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
-        /// carries the `usage` block so token accounting is exact even on<br/>
-        /// client disconnects.<br/>
+        /// carries the `usage` block. Add `continuous_usage_stats: true` to<br/>
+        /// get the counts so far on every chunk, which you still have if the<br/>
+        /// stream is cut short.<br/>
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>

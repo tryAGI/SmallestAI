@@ -11,8 +11,9 @@ namespace SmallestAI
         /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
-        /// carries the `usage` block so token accounting is exact even on<br/>
-        /// client disconnects.<br/>
+        /// carries the `usage` block. Add `continuous_usage_stats: true` to<br/>
+        /// get the counts so far on every chunk, which you still have if the<br/>
+        /// stream is cut short.<br/>
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
@@ -100,8 +101,9 @@ namespace SmallestAI
         /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
-        /// carries the `usage` block so token accounting is exact even on<br/>
-        /// client disconnects.<br/>
+        /// carries the `usage` block. Add `continuous_usage_stats: true` to<br/>
+        /// get the counts so far on every chunk, which you still have if the<br/>
+        /// stream is cut short.<br/>
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>
@@ -189,8 +191,9 @@ namespace SmallestAI
         /// `https://api.smallest.ai/waves/v1` and it just works.<br/>
         /// Set `stream: true` to receive tokens via Server-Sent Events. With<br/>
         /// `stream_options: { include_usage: true }`, the final SSE chunk<br/>
-        /// carries the `usage` block so token accounting is exact even on<br/>
-        /// client disconnects.<br/>
+        /// carries the `usage` block. Add `continuous_usage_stats: true` to<br/>
+        /// get the counts so far on every chunk, which you still have if the<br/>
+        /// stream is cut short.<br/>
         /// Tool calling follows OpenAI's `tools` array convention. When you<br/>
         /// provide a voice-agent-style system prompt, Electron emits a short<br/>
         /// filler phrase in the assistant message `content` field alongside<br/>

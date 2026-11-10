@@ -47,7 +47,7 @@ namespace SmallestAI
             : throw new global::System.InvalidOperationException($"Expected union variant 'TranscriptionResponse' but the value was {ToString()}.");
 
         /// <summary>
-        /// Returned by Pulse Pro when `webhook_url` is set. The transcription arrives on the webhook when ready.
+        /// Returned when `webhook_url` is set (`pulse` or `pulse-pro`). The transcription arrives on the webhook when ready.
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::SmallestAI.AsyncAccepted? AsyncAccepted { get; init; }

@@ -70,14 +70,14 @@ namespace SmallestAI
         /// <summary>
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
-        /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
+        /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes or audio-by-URL; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
         /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
         /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
         /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
-        /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
+        /// - **URL**: `Content-Type: application/json` with `{"url": "..."}` in the body. Works with both `?model=pulse` and `?model=pulse-pro`.<br/>
         /// ## Examples<br/>
         /// **cURL**: Pulse Pro, sync<br/>
         /// ```bash<br/>
@@ -130,7 +130,7 @@ namespace SmallestAI
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
         /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
+        /// - **Pulse Pro caps audio at 250 MB, or 50 MB with `webhook_url`.** Larger audio returns `413`.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -207,14 +207,14 @@ namespace SmallestAI
         /// <summary>
         /// Transcribe (Pre-recorded)<br/>
         /// Transcribe an audio file. The model is chosen via `?model=`:<br/>
-        /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes only; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
+        /// - `?model=pulse-pro`: English-only, leaderboard-ranked accuracy. Raw bytes or audio-by-URL; pass `webhook_url` to receive transcription asynchronously on long files.<br/>
         /// - `?model=pulse`: multilingual transcription (21 streaming + 12 pre-recorded languages), supports both raw bytes and audio-by-URL.<br/>
         /// ## When to use this<br/>
         /// Use this endpoint when you have a complete audio file (call recording, voicemail, podcast episode) and want the transcript back in one response. For live transcription as audio arrives, use the realtime WebSocket endpoint (`WS /waves/v1/stt/live?model=pulse`).<br/>
         /// Pulse Pro is HTTP-only.<br/>
         /// ## Input methods<br/>
         /// - **Raw bytes**: `Content-Type: application/octet-stream` with the audio in the body. All knobs are query parameters.<br/>
-        /// - **URL (`?model=pulse` only)**: `Content-Type: application/json` with `{"url": "..."}` in the body.<br/>
+        /// - **URL**: `Content-Type: application/json` with `{"url": "..."}` in the body. Works with both `?model=pulse` and `?model=pulse-pro`.<br/>
         /// ## Examples<br/>
         /// **cURL**: Pulse Pro, sync<br/>
         /// ```bash<br/>
@@ -267,7 +267,7 @@ namespace SmallestAI
         /// ## Common gotchas<br/>
         /// - **`model` is required.** Missing or invalid values return `400` with an enum-validation error.<br/>
         /// - **Pulse Pro is English only.** Pass `language=en`. Any other value returns `400 invalid_enum_value` (`Expected 'en', received '&lt;x&gt;'`).<br/>
-        /// - **Pulse Pro does not support audio-by-URL.** Send raw bytes or use `?model=pulse` for the URL flow.
+        /// - **Pulse Pro caps audio at 250 MB, or 50 MB with `webhook_url`.** Larger audio returns `413`.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="language"></param>
@@ -733,7 +733,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Audio too long (over the duration limit) or, with `language=auto`, rejected as too large or too long by language detection. The body has `status`, `code` and `message`; `request_id` is included on the duration-limit error.
+                            // Audio too long (over the duration limit); too large for Pulse Pro (see the examples); or, with `language=auto`, rejected as too large or too long by language detection. The body has `status` and `message`, plus `code` on the duration and language-detection errors; `request_id` is included on the duration-limit error.
                             if ((int)__response.StatusCode == 413)
                             {
                                 string? __content_413 = null;

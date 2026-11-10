@@ -7,7 +7,7 @@ namespace SmallestAI
         /// <summary>
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
-        /// Pick the model with the `model` body parameter: default `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
+        /// Pick the model with the `model` body parameter (if omitted, it's picked from the voice): `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On the preview checkpoint `lightning_v3.1_pro_10_26`, pass `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching); see [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints). On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -81,8 +81,7 @@ namespace SmallestAI
         ///   }' --output speech.wav<br/>
         /// ```<br/>
         /// ## Common gotchas<br/>
-        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
-        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).<br/>
+        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`, and a mismatched pair returns `400` (for example `Voice '&lt;id&gt;' is not available on the lightning_v3.1_pro model`). Pair Pro voices with `model=lightning_v3.1_pro` and standard catalog voices with `model=lightning_v3.1`. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`. `lightning_v3.1` retires on Nov 30, 2026, so move to `lightning_v3.1_pro` and its voices; see [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// - **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.<br/>
         /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.
         /// </summary>
@@ -97,14 +96,14 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<byte[]> SynthesizeSpeechAsync(
 
             global::SmallestAI.TtsRequest request,
-            global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersAccept? accept = default,
             global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
-        /// Pick the model with the `model` body parameter: default `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
+        /// Pick the model with the `model` body parameter (if omitted, it's picked from the voice): `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On the preview checkpoint `lightning_v3.1_pro_10_26`, pass `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching); see [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints). On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -178,8 +177,7 @@ namespace SmallestAI
         ///   }' --output speech.wav<br/>
         /// ```<br/>
         /// ## Common gotchas<br/>
-        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
-        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).<br/>
+        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`, and a mismatched pair returns `400` (for example `Voice '&lt;id&gt;' is not available on the lightning_v3.1_pro model`). Pair Pro voices with `model=lightning_v3.1_pro` and standard catalog voices with `model=lightning_v3.1`. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`. `lightning_v3.1` retires on Nov 30, 2026, so move to `lightning_v3.1_pro` and its voices; see [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// - **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.<br/>
         /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.
         /// </summary>
@@ -194,14 +192,14 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<global::System.IO.Stream> SynthesizeSpeechAsStreamAsync(
 
             global::SmallestAI.TtsRequest request,
-            global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersAccept? accept = default,
             global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
-        /// Pick the model with the `model` body parameter: default `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
+        /// Pick the model with the `model` body parameter (if omitted, it's picked from the voice): `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On the preview checkpoint `lightning_v3.1_pro_10_26`, pass `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching); see [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints). On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -275,8 +273,7 @@ namespace SmallestAI
         ///   }' --output speech.wav<br/>
         /// ```<br/>
         /// ## Common gotchas<br/>
-        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
-        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).<br/>
+        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`, and a mismatched pair returns `400` (for example `Voice '&lt;id&gt;' is not available on the lightning_v3.1_pro model`). Pair Pro voices with `model=lightning_v3.1_pro` and standard catalog voices with `model=lightning_v3.1`. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`. `lightning_v3.1` retires on Nov 30, 2026, so move to `lightning_v3.1_pro` and its voices; see [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// - **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.<br/>
         /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.
         /// </summary>
@@ -292,14 +289,14 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<global::System.IO.Stream>> SynthesizeSpeechAsStreamAsResponseAsync(
 
             global::SmallestAI.TtsRequest request,
-            global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersAccept? accept = default,
             global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
-        /// Pick the model with the `model` body parameter: default `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
+        /// Pick the model with the `model` body parameter (if omitted, it's picked from the voice): `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On the preview checkpoint `lightning_v3.1_pro_10_26`, pass `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching); see [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints). On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -373,8 +370,7 @@ namespace SmallestAI
         ///   }' --output speech.wav<br/>
         /// ```<br/>
         /// ## Common gotchas<br/>
-        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
-        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).<br/>
+        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`, and a mismatched pair returns `400` (for example `Voice '&lt;id&gt;' is not available on the lightning_v3.1_pro model`). Pair Pro voices with `model=lightning_v3.1_pro` and standard catalog voices with `model=lightning_v3.1`. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`. `lightning_v3.1` retires on Nov 30, 2026, so move to `lightning_v3.1_pro` and its voices; see [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// - **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.<br/>
         /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.
         /// </summary>
@@ -389,14 +385,14 @@ namespace SmallestAI
         global::System.Threading.Tasks.Task<global::SmallestAI.AutoSDKHttpResponse<byte[]>> SynthesizeSpeechAsResponseAsync(
 
             global::SmallestAI.TtsRequest request,
-            global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersAccept? accept = default,
             global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             global::SmallestAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Synthesize speech<br/>
         /// Synthesize speech from text in a single request. Pass `text` + `voice_id`, get back binary audio.<br/>
-        /// Pick the model with the `model` body parameter: default `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
+        /// Pick the model with the `model` body parameter (if omitted, it's picked from the voice): `lightning_v3.1`, `lightning_v3.1_pro` for the Pro pool, or `lightning_v3.1_pro_10_26` for the [preview Pro checkpoint](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints) for English, Spanish and Hindi. Other request parameters are identical across models. `lightning_v3.1` will be retired on Nov 30, 2026 (18:30 UTC); use `lightning_v3.1_pro`. See [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// **Language behaviour on `lightning_v3.1_pro`:** pass `language: en` for UK + American accented English, pass `language: hi` for Indian accented English + Hindi (code-switching), or omit `language` to default to `en + hi` (mixed Indian + Western English coverage). Pro supports 31 languages total (10 Indic, 8 Asian &amp; Middle Eastern, 13 European including Dutch and Swedish). Pass the matching ISO 639-1 code (e.g. `ta`, `de`, `ja`) with a Pro voice from that language, or use `auto` to route across all supported languages with any English or Hindi voice. See the [Lightning v3.1 Pro model card](/model-cards/text-to-speech/lightning-v-3-1-pro#supported-languages) for the full list. On the preview checkpoint `lightning_v3.1_pro_10_26`, pass `en` (English), `es` (Spanish with English code-switching) or `hi` (Hindi with English code-switching); see [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints). On `lightning_v3.1` the model accepts 20 language codes (10 European + 10 Indic) plus `auto`; the trained voice catalog covers 12 of those directly.<br/>
         /// ## When to use this<br/>
         /// - **Use this** for short utterances you can render before playback (notifications, prompts, batch jobs, audio file generation).<br/>
@@ -470,8 +466,7 @@ namespace SmallestAI
         ///   }' --output speech.wav<br/>
         /// ```<br/>
         /// ## Common gotchas<br/>
-        /// - **Set `Accept: audio/wav`.** Omitting it can return an empty or unplayable response.<br/>
-        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`. The API does not reject mismatched pairings, but using a Pro-only `voice_id` with `model=lightning_v3.1` (or omitting `model`) can return wrong or hallucinated audio. Pair Pro voices with `model=lightning_v3.1_pro`; standard catalog voices with `model=lightning_v3.1` (the default).<br/>
+        /// - **Pair voice IDs with the right model.** Voice catalogs differ between `lightning_v3.1` and `lightning_v3.1_pro`, and a mismatched pair returns `400` (for example `Voice '&lt;id&gt;' is not available on the lightning_v3.1_pro model`). Pair Pro voices with `model=lightning_v3.1_pro` and standard catalog voices with `model=lightning_v3.1`. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`. `lightning_v3.1` retires on Nov 30, 2026, so move to `lightning_v3.1_pro` and its voices; see [Deprecation notices](/api-reference/deprecations/models).<br/>
         /// - **Cloned voices** (`voice_*`) work with the pool they were cloned onto. The voice-cloning API accepts `model: lightning-v3.1` (default) or `lightning-v3.1-pro`; pair the resulting `voice_id` with the matching TTS `model` (`lightning_v3.1` or `lightning_v3.1_pro`). Check the clone's `modelIds` if unsure.<br/>
         /// - **44.1 kHz output** is supported but most playback environments are happy with 24 kHz — drop the sample rate if bandwidth matters.
         /// </summary>
@@ -489,8 +484,8 @@ namespace SmallestAI
         /// </param>
         /// <param name="model">
         /// TTS model to route the request to. Controls which model pool serves<br/>
-        /// this synthesis.<br/>
-        /// - `lightning_v3.1` (default): standard Lightning v3.1. Retiring on Nov<br/>
+        /// this synthesis. If you omit `model`, it's picked from the voice: Pro catalog voices use `lightning_v3.1_pro`, all others `lightning_v3.1`.<br/>
+        /// - `lightning_v3.1`: standard Lightning v3.1. Retiring on Nov<br/>
         ///   30, 2026; use `lightning_v3.1_pro`.<br/>
         /// - `lightning_v3.1_pro` — Lightning v3.1 Pro pool. Improved audio<br/>
         ///   quality and naturalness, with a curated voice catalog. See the<br/>
@@ -503,8 +498,7 @@ namespace SmallestAI
         ///   unchanged. `lightning_v3.1_pro_10_26` remains available until<br/>
         ///   2026-12-28. See [Checkpoints](/model-cards/text-to-speech/lightning-v-3-1-pro#checkpoints).<br/>
         /// Same concurrency and latency profile across all three. Other request<br/>
-        /// parameters behave identically.<br/>
-        /// Default Value: lightning_v3.1
+        /// parameters behave identically.
         /// </param>
         /// <param name="sampleRate">
         /// The sample rate for the generated audio.<br/>
@@ -644,7 +638,7 @@ namespace SmallestAI
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<byte[]> SynthesizeSpeechAsync(
-            global::SmallestAI.WavesV1TtsPostParametersAccept accept = global::SmallestAI.WavesV1TtsPostParametersAccept.AudioWav,
+            global::SmallestAI.WavesV1TtsPostParametersAccept? accept = default,
             global::SmallestAI.WavesV1TtsPostParametersXExpireContent? xExpireContent = default,
             string text = "Hello from Waves TTS.",
             string voiceId = "magnus",
