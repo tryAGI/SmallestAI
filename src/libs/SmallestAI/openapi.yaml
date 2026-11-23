@@ -2916,7 +2916,7 @@
         "type": "apiKey",
         "in": "header",
         "name": "Authorization",
-        "description": "API key authentication. Include your key as `Authorization: Bearer YOUR_API_KEY`. `POST /waves/v1/stt`, the text-to-speech endpoints and the speech WebSockets also accept short-lived access tokens; other endpoints need an API key. See [Token-based authentication](/api-reference/token-based-authentication)."
+        "description": "Your Smallest AI API key, sent as `Authorization: Bearer YOUR_API_KEY`. Create a key on the [API Keys page](https://app.smallest.ai/dashboard/api-keys?utm_source=documentation&utm_medium=api-reference). `POST /waves/v1/stt`, the text-to-speech endpoints and the speech WebSockets also accept short-lived access tokens; other endpoints need the key. Missing or invalid credentials return `401 Unauthorized`. See [Token-based authentication](/api-reference/token-based-authentication)."
       }
     }
   }
