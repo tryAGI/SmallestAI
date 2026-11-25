@@ -1937,9 +1937,10 @@ namespace SmallestAI
         /// - 10 European: English, Spanish, French, German, Italian, Dutch, Swedish, Portuguese, Polish, Russian<br/>
         /// - 10 Indic: Hindi, Marathi, Gujarati, Punjabi, Bengali, Odia, Tamil, Telugu, Kannada, Malayalam<br/>
         /// **On `lightning_v3.1_pro`** — 31 supported languages (adds 11 over base):<br/>
-        /// - 13 European: base 10 plus Greek, Finnish, Norwegian<br/>
-        /// - 8 Asian &amp; Middle Eastern: Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Turkish, Arabic<br/>
+        /// - 13 European: base 10 plus Greek (`el`), Finnish (`fi`), Norwegian (`no`)<br/>
+        /// - 8 Asian &amp; Middle Eastern: Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)<br/>
         /// - 10 Indic: same as base<br/>
+        /// - `el`, `fi`, `no`, `zh`, `ja`, `ko`, `id`, `ms`, `vi` and `tr` work only on `lightning_v3.1_pro`. `lightning_v3.1` rejects them with `Language '&lt;code&gt;' is not supported on the lightning_v3.1 model`.<br/>
         /// - Pass `en` → UK + American accented English.<br/>
         /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
         /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).<br/>
@@ -1964,7 +1965,9 @@ namespace SmallestAI
         /// also render in the target script (e.g. "Smith" → "स्मिथ"), which<br/>
         /// is generally the desired reading for native-language voices.<br/>
         /// Accepts the same language codes as `language` (including `auto`,<br/>
-        /// `nl`, `sv`).
+        /// `nl`, `sv`). The same per-model rules apply:<br/>
+        /// `el`, `fi`, `no`, `zh`, `ja`, `ko`, `id`, `ms`, `vi` and `tr` work only on<br/>
+        /// `lightning_v3.1_pro`.
         /// </param>
         /// <param name="dateFormat">
         /// Optional. Controls how all-numeric dates (e.g. `05/03/2024`) are<br/>

@@ -43,7 +43,7 @@ namespace SmallestAI
 
         /// <summary>
         /// Create a Voice Clone<br/>
-        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`.
+        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026: pass `model=lightning-v3.1-pro` for new clones. See [Deprecation notices](/api-reference/deprecations/models).
         /// </summary>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -66,7 +66,7 @@ namespace SmallestAI
         }
         /// <summary>
         /// Create a Voice Clone<br/>
-        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`.
+        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026: pass `model=lightning-v3.1-pro` for new clones. See [Deprecation notices](/api-reference/deprecations/models).
         /// </summary>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -418,7 +418,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated).
+                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, a language the chosen `model` doesn't support, or `model=lightning-v2` (deprecated).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -627,7 +627,7 @@ namespace SmallestAI
         }
         /// <summary>
         /// Create a Voice Clone<br/>
-        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`.
+        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026: pass `model=lightning-v3.1-pro` for new clones. See [Deprecation notices](/api-reference/deprecations/models).
         /// </summary>
         /// <param name="displayName">
         /// Human-readable name for the voice clone.
@@ -656,18 +656,20 @@ namespace SmallestAI
         /// </param>
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
-        /// **strongly recommended** — set it to the language of your<br/>
+        /// **strongly recommended**: set it to the language of your<br/>
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
-        /// The server validates and rejects unsupported codes with a 400.
+        /// Accepted codes depend on `model`:<br/>
+        /// - `lightning-v3.1`: `en`, `hi`, `mr`, `kn`, `ta`, `bn`, `gu`, `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `ar`, `he`, `sv`, `ml`, `te`, `pt`, `pa`, `or`.<br/>
+        /// - `lightning-v3.1-pro`: the same codes except `he`, plus `el`, `fi`, `no`, `zh`, `id`, `ja`, `ko`, `ms`, `tr`, `vi`.<br/>
+        /// A code the model doesn't support returns 400 `Invalid language. Supported: ...` with that model's list.
         /// </param>
         /// <param name="model">
-        /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Voice cloning model. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026, and clones made on it stop working then.<br/>
         /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated - the server returns 400 with<br/>
+        /// reasons but is deprecated: the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </param>
@@ -706,7 +708,7 @@ namespace SmallestAI
 
         /// <summary>
         /// Create a Voice Clone<br/>
-        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`.
+        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026: pass `model=lightning-v3.1-pro` for new clones. See [Deprecation notices](/api-reference/deprecations/models).
         /// </summary>
         /// <param name="displayName">
         /// Human-readable name for the voice clone.
@@ -735,18 +737,20 @@ namespace SmallestAI
         /// </param>
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
-        /// **strongly recommended** — set it to the language of your<br/>
+        /// **strongly recommended**: set it to the language of your<br/>
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
-        /// The server validates and rejects unsupported codes with a 400.
+        /// Accepted codes depend on `model`:<br/>
+        /// - `lightning-v3.1`: `en`, `hi`, `mr`, `kn`, `ta`, `bn`, `gu`, `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `ar`, `he`, `sv`, `ml`, `te`, `pt`, `pa`, `or`.<br/>
+        /// - `lightning-v3.1-pro`: the same codes except `he`, plus `el`, `fi`, `no`, `zh`, `id`, `ja`, `ko`, `ms`, `tr`, `vi`.<br/>
+        /// A code the model doesn't support returns 400 `Invalid language. Supported: ...` with that model's list.
         /// </param>
         /// <param name="model">
-        /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Voice cloning model. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026, and clones made on it stop working then.<br/>
         /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated - the server returns 400 with<br/>
+        /// reasons but is deprecated: the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </param>
@@ -1116,7 +1120,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated).
+                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, a language the chosen `model` doesn't support, or `model=lightning-v2` (deprecated).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -1317,7 +1321,7 @@ namespace SmallestAI
         }
         /// <summary>
         /// Create a Voice Clone<br/>
-        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`.
+        /// Create an instant voice clone in a single call. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026: pass `model=lightning-v3.1-pro` for new clones. See [Deprecation notices](/api-reference/deprecations/models).
         /// </summary>
         /// <param name="displayName">
         /// Human-readable name for the voice clone.
@@ -1346,18 +1350,20 @@ namespace SmallestAI
         /// </param>
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
-        /// **strongly recommended** — set it to the language of your<br/>
+        /// **strongly recommended**: set it to the language of your<br/>
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
-        /// The server validates and rejects unsupported codes with a 400.
+        /// Accepted codes depend on `model`:<br/>
+        /// - `lightning-v3.1`: `en`, `hi`, `mr`, `kn`, `ta`, `bn`, `gu`, `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `ar`, `he`, `sv`, `ml`, `te`, `pt`, `pa`, `or`.<br/>
+        /// - `lightning-v3.1-pro`: the same codes except `he`, plus `el`, `fi`, `no`, `zh`, `id`, `ja`, `ko`, `ms`, `tr`, `vi`.<br/>
+        /// A code the model doesn't support returns 400 `Invalid language. Supported: ...` with that model's list.
         /// </param>
         /// <param name="model">
-        /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Voice cloning model. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026, and clones made on it stop working then.<br/>
         /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated - the server returns 400 with<br/>
+        /// reasons but is deprecated: the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </param>
@@ -1727,7 +1733,7 @@ namespace SmallestAI
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, invalid language, or `model=lightning-v2` (deprecated).
+                            // Validation error. Common causes: no file provided, invalid MIME type, file too large, clone limit exceeded, a language the chosen `model` doesn't support, or `model=lightning-v2` (deprecated).
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;

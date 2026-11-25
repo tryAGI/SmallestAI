@@ -465,7 +465,7 @@ namespace SmallestAI
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // The request was authenticated with an access token or an admin `X-API-Key` (only an API key can mint tokens), or the account, its email domain or its organization is blocked.
+                            // The request was authenticated with an access token or an admin `X-API-Key` (only an API key can mint tokens), the account, its email domain or its organization is blocked, or the API key is restricted to none of the model products (`error_type` `scope-denied`).
                             if ((int)__response.StatusCode == 403)
                             {
                                 string? __content_403 = null;
