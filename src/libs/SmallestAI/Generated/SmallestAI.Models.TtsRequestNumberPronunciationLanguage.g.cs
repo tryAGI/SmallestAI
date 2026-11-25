@@ -22,7 +22,9 @@ namespace SmallestAI
     /// also render in the target script (e.g. "Smith" → "स्मिथ"), which<br/>
     /// is generally the desired reading for native-language voices.<br/>
     /// Accepts the same language codes as `language` (including `auto`,<br/>
-    /// `nl`, `sv`).
+    /// `nl`, `sv`). The same per-model rules apply:<br/>
+    /// `el`, `fi`, `no`, `zh`, `ja`, `ko`, `id`, `ms`, `vi` and `tr` work only on<br/>
+    /// `lightning_v3.1_pro`.
     /// </summary>
     public enum TtsRequestNumberPronunciationLanguage
     {

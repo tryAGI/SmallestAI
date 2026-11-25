@@ -22,9 +22,10 @@ namespace SmallestAI
     /// - 10 European: English, Spanish, French, German, Italian, Dutch, Swedish, Portuguese, Polish, Russian<br/>
     /// - 10 Indic: Hindi, Marathi, Gujarati, Punjabi, Bengali, Odia, Tamil, Telugu, Kannada, Malayalam<br/>
     /// **On `lightning_v3.1_pro`** — 31 supported languages (adds 11 over base):<br/>
-    /// - 13 European: base 10 plus Greek, Finnish, Norwegian<br/>
-    /// - 8 Asian &amp; Middle Eastern: Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Turkish, Arabic<br/>
+    /// - 13 European: base 10 plus Greek (`el`), Finnish (`fi`), Norwegian (`no`)<br/>
+    /// - 8 Asian &amp; Middle Eastern: Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)<br/>
     /// - 10 Indic: same as base<br/>
+    /// - `el`, `fi`, `no`, `zh`, `ja`, `ko`, `id`, `ms`, `vi` and `tr` work only on `lightning_v3.1_pro`. `lightning_v3.1` rejects them with `Language '&lt;code&gt;' is not supported on the lightning_v3.1 model`.<br/>
     /// - Pass `en` → UK + American accented English.<br/>
     /// - Pass `hi` → Indian accented English + Hindi (code-switching).<br/>
     /// - Omit `language` → defaults to `en + hi` (mixed Indian + Western English coverage, auto-detected from input text).<br/>
@@ -61,7 +62,7 @@ namespace SmallestAI
         /// </summary>
         Es,
         /// <summary>
-        ///
+        /// base 10 plus Greek (`el`), Finnish (`fi`), Norwegian (`no`)
         /// </summary>
         Fi,
         /// <summary>
@@ -77,7 +78,7 @@ namespace SmallestAI
         /// </summary>
         Hi,
         /// <summary>
-        /// Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Turkish, Arabic
+        /// Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)
         /// </summary>
         Id,
         /// <summary>
@@ -93,7 +94,7 @@ namespace SmallestAI
         /// </summary>
         Kn,
         /// <summary>
-        ///
+        /// Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)
         /// </summary>
         Ko,
         /// <summary>
@@ -105,7 +106,7 @@ namespace SmallestAI
         /// </summary>
         Mr,
         /// <summary>
-        ///
+        /// Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)
         /// </summary>
         Ms,
         /// <summary>
@@ -113,7 +114,7 @@ namespace SmallestAI
         /// </summary>
         Nl,
         /// <summary>
-        ///
+        /// base 10 plus Greek (`el`), Finnish (`fi`), Norwegian (`no`)
         /// </summary>
         No,
         /// <summary>
@@ -125,7 +126,7 @@ namespace SmallestAI
         /// </summary>
         Pa,
         /// <summary>
-        /// base 10 plus Greek, Finnish, Norwegian
+        /// base 10 plus Greek (`el`), Finnish (`fi`), Norwegian (`no`)
         /// </summary>
         Pl,
         /// <summary>
@@ -149,15 +150,15 @@ namespace SmallestAI
         /// </summary>
         Te,
         /// <summary>
-        ///
+        /// Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)
         /// </summary>
         Tr,
         /// <summary>
-        ///
+        /// Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)
         /// </summary>
         Vi,
         /// <summary>
-        ///
+        /// Chinese (`zh`), Japanese (`ja`), Korean (`ko`), Indonesian (`id`), Malay (`ms`), Vietnamese (`vi`), Turkish (`tr`), Arabic (`ar`)
         /// </summary>
         Zh,
     }

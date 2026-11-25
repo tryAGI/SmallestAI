@@ -56,22 +56,24 @@ namespace SmallestAI
 
         /// <summary>
         /// Primary language the clone will be used for. Optional, but<br/>
-        /// **strongly recommended** — set it to the language of your<br/>
+        /// **strongly recommended**: set it to the language of your<br/>
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
-        /// The server validates and rejects unsupported codes with a 400.
+        /// Accepted codes depend on `model`:<br/>
+        /// - `lightning-v3.1`: `en`, `hi`, `mr`, `kn`, `ta`, `bn`, `gu`, `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `ar`, `he`, `sv`, `ml`, `te`, `pt`, `pa`, `or`.<br/>
+        /// - `lightning-v3.1-pro`: the same codes except `he`, plus `el`, `fi`, `no`, `zh`, `id`, `ja`, `ko`, `ms`, `tr`, `vi`.<br/>
+        /// A code the model doesn't support returns 400 `Invalid language. Supported: ...` with that model's list.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("language")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::SmallestAI.JsonConverters.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguageJsonConverter))]
         public global::SmallestAI.WavesV1VoiceCloningPostRequestBodyContentMultipartFormDataSchemaLanguage? Language { get; set; }
 
         /// <summary>
-        /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Voice cloning model. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026, and clones made on it stop working then.<br/>
         /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated - the server returns 400 with<br/>
+        /// reasons but is deprecated: the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </summary>
@@ -115,18 +117,20 @@ namespace SmallestAI
         /// </param>
         /// <param name="language">
         /// Primary language the clone will be used for. Optional, but<br/>
-        /// **strongly recommended** — set it to the language of your<br/>
+        /// **strongly recommended**: set it to the language of your<br/>
         /// reference audio. The TTS request's `language` should also<br/>
         /// match this code; setting it now avoids silent language<br/>
         /// mismatches at inference time.<br/>
-        /// Must be one of the languages supported by `lightning-v3.1`.<br/>
-        /// The server validates and rejects unsupported codes with a 400.
+        /// Accepted codes depend on `model`:<br/>
+        /// - `lightning-v3.1`: `en`, `hi`, `mr`, `kn`, `ta`, `bn`, `gu`, `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `ar`, `he`, `sv`, `ml`, `te`, `pt`, `pa`, `or`.<br/>
+        /// - `lightning-v3.1-pro`: the same codes except `he`, plus `el`, `fi`, `no`, `zh`, `id`, `ja`, `ko`, `ms`, `tr`, `vi`.<br/>
+        /// A code the model doesn't support returns 400 `Invalid language. Supported: ...` with that model's list.
         /// </param>
         /// <param name="model">
-        /// Voice cloning model. Defaults to `lightning-v3.1`.<br/>
+        /// Voice cloning model. Defaults to `lightning-v3.1`, which retires on Nov 30, 2026, and clones made on it stop working then.<br/>
         /// Pass `lightning-v3.1-pro` to clone onto the premium Pro pool.<br/>
         /// `lightning-v2` is accepted by the schema for historical<br/>
-        /// reasons but is deprecated - the server returns 400 with<br/>
+        /// reasons but is deprecated: the server returns 400 with<br/>
         /// `"Voice cloning for lightning-v2 is deprecated. Please use lightning-v3.1"`.<br/>
         /// Default Value: lightning-v3.1
         /// </param>
