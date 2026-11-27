@@ -953,7 +953,7 @@ namespace SmallestAI
         /// </param>
         /// <param name="maxTokens">
         /// Maximum output tokens. Combined input + output context ceiling<br/>
-        /// is 32,768.
+        /// is 49,152.
         /// </param>
         /// <param name="stream">
         /// When true, response is `text/event-stream`. See the<br/>

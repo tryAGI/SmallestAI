@@ -2674,7 +2674,7 @@
           "max_tokens": {
             "type": "integer",
             "minimum": 1,
-            "description": "Maximum output tokens. Combined input + output context ceiling\nis 32,768.\n"
+            "description": "Maximum output tokens. Combined input + output context ceiling\nis 49,152.\n"
           },
           "stream": {
             "type": "boolean",
